@@ -1,17 +1,40 @@
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button'
-  // Placeholder shell. The real vertical-slice UI lands in M3 (#14 onward).
+  import Header from './components/Header.svelte'
+  import TargetSection from './components/TargetSection.svelte'
+  import SourceSection from './components/SourceSection.svelte'
+  import SaltsSection from './components/SaltsSection.svelte'
+  import BatchSection from './components/BatchSection.svelte'
+  import RecipePanel from './components/RecipePanel.svelte'
+  import ReadoutsPanel from './components/ReadoutsPanel.svelte'
+  import { computeResult } from './state.svelte'
+  import { applyTheme } from './theme.svelte'
+
+  const result = $derived(computeResult())
+
+  // Keep the document theme class in sync with the theme store.
+  $effect(() => {
+    applyTheme()
+  })
 </script>
 
-<main
-  class="mx-auto flex min-h-svh max-w-2xl flex-col items-center justify-center gap-6 p-8 text-center"
->
-  <h1 class="text-4xl font-semibold tracking-tight">Waterforge</h1>
-  <p class="text-muted-foreground max-w-prose text-balance">
-    Clone bottled mineral waters from distilled (or known-source) water and
-    food-grade salts. The recipe builder is on the way.
-  </p>
-  <Button href="https://github.com/cacack/waterforge" variant="outline">
-    View the source
-  </Button>
-</main>
+<div class="bg-background text-foreground min-h-svh">
+  <Header />
+
+  <main class="@container mx-auto max-w-6xl px-4 py-6">
+    <div class="grid gap-6 @3xl:grid-cols-[minmax(0,1fr)_24rem]">
+      <!-- Inputs -->
+      <div class="flex flex-col gap-5">
+        <TargetSection />
+        <SourceSection />
+        <SaltsSection />
+        <BatchSection />
+      </div>
+
+      <!-- Live recipe + readouts -->
+      <div class="flex flex-col gap-5 @3xl:sticky @3xl:top-20 @3xl:self-start">
+        <RecipePanel {result} />
+        <ReadoutsPanel {result} />
+      </div>
+    </div>
+  </main>
+</div>
