@@ -12,27 +12,29 @@
   } from '$lib/components/ui/select'
   import type { VolumeUnit } from '$lib'
 
-  // Local string state so the input can hold intermediate values while typing.
-  let rawVolume = $state(String(app.batch.volume))
+  // While the user is typing, `typed` holds their raw string (so intermediate
+  // values like "1." survive). When not editing (`typed === null`) the field
+  // shows the canonical app.batch.volume — so external changes (import, reload
+  // restore, shared links) are reflected in the input, not just the recipe.
+  let typed = $state<string | null>(null)
+  const rawVolume = $derived(typed ?? String(app.batch.volume))
 
   function handleVolumeInput(event: Event) {
-    const input = event.target as HTMLInputElement
-    rawVolume = input.value
-    const parsed = parseFloat(input.value)
+    const value = (event.target as HTMLInputElement).value
+    typed = value
+    const parsed = parseFloat(value)
     if (Number.isFinite(parsed) && parsed > 0) {
       app.batch.volume = parsed
     }
   }
 
   function handleVolumeBlur() {
-    // On blur, clamp / reset to current valid value.
-    const parsed = parseFloat(rawVolume)
-    if (!Number.isFinite(parsed) || parsed <= 0) {
-      rawVolume = String(app.batch.volume)
-    } else {
+    const parsed = parseFloat(typed ?? '')
+    if (Number.isFinite(parsed) && parsed > 0) {
       app.batch.volume = parsed
-      rawVolume = String(parsed)
     }
+    // Revert to the canonical value (also discards invalid input).
+    typed = null
   }
 
   const UNIT_OPTIONS: { value: VolumeUnit; label: string }[] = [
