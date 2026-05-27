@@ -163,6 +163,23 @@ solver.
 | Palettes           | Any                   | Fixed SALT_ORDER         |
 | Purpose            | Production answer     | Golden test reference    |
 
+### Recipe-selection policy
+
+When several salts can source the same ion (gypsum and Epsom both supply SO₄;
+NaCl, CaCl₂ and MgCl₂ all supply Cl), the system is **underdetermined** — many
+non-negative recipes hit the same target, and plain NNLS returns the minimum-
+L2-norm one, which splits the dose across redundant salts and depends on the
+palette's column order.
+
+The production `solve()` resolves this with a deterministic, priority-ordered
+greedy support selection layered on NNLS (a **lexicographic objective: best fit
+first, then priority/sparsity**): NNLS fixes the optimal residual `r*`, then the
+solver walks `SALT_ORDER` adding salts only until `r*` is reached and prunes any
+salt whose removal does not raise the residual above `r*`. The result is the
+highest-priority _minimal_ salt set that still attains the optimal fit —
+deterministic regardless of input ordering, and still exact when the target is
+achievable. See **ADR 0009**.
+
 ---
 
 ## 5. Ion Profile Data Model
