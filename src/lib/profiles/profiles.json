@@ -501,11 +501,11 @@
     "alkalinity_unit": "as_HCO3",
     "ph": 5.5,
     "tds": 456,
-    "comment": "NO₃ 7.3 mg/L.",
-    "url": "https://prike.ee/en/products/perrier-mineral-water/",
+    "comment": "NO₃ 7.3 mg/L. Current product label (Vergèze). Nestlé's corporate fact sheet differs (Ca 155, Mg 6.8, SO₄ 33, Cl 22, HCO₃ 430) — Perrier's published composition varies by source/period.",
+    "url": "https://www.nestle.com/sites/default/files/asset-library/documents/investors/fact-sheets/perrier%20facts%20and%20figures.pdf",
     "provenance": {
       "verified": true,
-      "source": "Perrier official label / Nestlé (via prike.ee product page)",
+      "source": "Perrier current product label, cross-checked against the Nestlé Perrier fact sheet",
       "source_date": "2026-05-27"
     }
   },
