@@ -10,17 +10,11 @@
   type AlkUnit = 'hco3' | 'caco3'
   let alkUnit = $state<AlkUnit>('hco3')
 
-  // Display values for each ion — stored as strings to handle empty/partial input.
-  // HCO3 is stored in the user's chosen unit; all others are in mg/L as-is.
-  let displayValues = $state<Record<IonId, string>>({
-    Ca: '',
-    Mg: '',
-    Na: '',
-    K: '',
-    HCO3: '',
-    SO4: '',
-    Cl: '',
-  })
+  // Per-ion "typed" overrides: while the user edits a field we hold their raw
+  // string here; otherwise each field is derived from app.source, so external
+  // changes (import, reload restore, shared links) show up in the inputs — not
+  // just in the recipe.
+  let typed = $state<Partial<Record<IonId, string>>>({})
 
   // Human-readable ion labels with subscripts for display.
   const ION_LABELS: Record<IonId, string> = {
@@ -33,55 +27,54 @@
     Cl: 'Cl',
   }
 
-  // Write a parsed mg/L value into app.source, clamping negatives to zero.
+  // The value shown in an ion input: the user's in-progress text if editing,
+  // otherwise the engine value (HCO3 expressed in the active alkalinity unit).
+  function displayFor(ion: IonId): string {
+    const override = typed[ion]
+    if (override != null) return override
+    const v = app.source[ion]
+    if (!v) return '' // undefined or 0 → empty (placeholder shows 0)
+    if (ion === 'HCO3' && alkUnit === 'caco3') {
+      return String(parseFloat(hco3ToCaco3(v).toFixed(2)))
+    }
+    return String(v)
+  }
+
+  // Write a parsed value into app.source, always stored as-HCO3 / mg/L.
   function writeIon(ion: IonId, raw: string) {
     const parsed = parseFloat(raw)
     const mgPerL = isNaN(parsed) || parsed < 0 ? 0 : parsed
-
-    if (ion === 'HCO3') {
-      // Always store as-HCO3 in the engine regardless of display unit.
-      app.source[ion] = alkUnit === 'caco3' ? caco3ToHco3(mgPerL) : mgPerL
-    } else {
-      app.source[ion] = mgPerL
-    }
-  }
-
-  // When the user switches alkalinity units, convert the displayed HCO3 value
-  // so it represents the same physical quantity in the new unit. The engine
-  // value in app.source.HCO3 is unchanged (always as-HCO3).
-  function switchAlkUnit(newUnit: AlkUnit) {
-    if (newUnit === alkUnit) return
-    const currentDisplay = parseFloat(displayValues.HCO3)
-    if (!isNaN(currentDisplay) && currentDisplay > 0) {
-      if (newUnit === 'caco3') {
-        // was as-HCO3, convert displayed value to as-CaCO3
-        displayValues.HCO3 = String(
-          parseFloat(hco3ToCaco3(currentDisplay).toFixed(2)),
-        )
-      } else {
-        // was as-CaCO3, convert displayed value back to as-HCO3
-        displayValues.HCO3 = String(
-          parseFloat(caco3ToHco3(currentDisplay).toFixed(2)),
-        )
-      }
-    }
-    alkUnit = newUnit
+    app.source[ion] =
+      ion === 'HCO3' && alkUnit === 'caco3' ? caco3ToHco3(mgPerL) : mgPerL
   }
 
   function handleInput(ion: IonId, value: string) {
-    displayValues[ion] = value
+    typed[ion] = value
     writeIon(ion, value)
   }
 
-  // Toggle the source mode and zero out source when switching back to distilled.
+  function handleBlur(ion: IonId) {
+    // Drop the edit override so the field reflects the canonical engine value.
+    typed[ion] = undefined
+  }
+
+  // Switching alkalinity units changes only how HCO3 is *displayed*; the engine
+  // value (app.source.HCO3, always as-HCO3) is unchanged. Clearing the HCO3
+  // override lets displayFor() re-render it in the new unit.
+  function switchAlkUnit(newUnit: AlkUnit) {
+    if (newUnit === alkUnit) return
+    typed.HCO3 = undefined
+    alkUnit = newUnit
+  }
+
+  // Toggle source mode; zero source + clear edits when reverting to distilled.
   function toggleSourceMode(checked: boolean) {
     if (checked) {
       app.sourceMode = 'known'
     } else {
       app.sourceMode = 'distilled'
-      // Clear display values and engine state when reverting to distilled.
       for (const ion of ION_ORDER) {
-        displayValues[ion] = ''
+        typed[ion as IonId] = undefined
         app.source[ion as IonId] = 0
       }
     }
@@ -146,9 +139,10 @@
               min="0"
               step="0.1"
               placeholder="0"
-              value={displayValues[ion as IonId]}
+              value={displayFor(ion as IonId)}
               oninput={(e) =>
                 handleInput(ion as IonId, (e.target as HTMLInputElement).value)}
+              onblur={() => handleBlur(ion as IonId)}
               class="h-7 pr-8 text-xs"
             />
             <span
