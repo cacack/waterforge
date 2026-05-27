@@ -1,0 +1,57 @@
+import { describe, expect, it } from 'vitest'
+import {
+  CACO3_EQUIVALENT_WEIGHT,
+  CACO3_WEIGHT,
+  HCO3_WEIGHT,
+  IONS,
+  SALTS,
+  SO4_WEIGHT,
+} from './constants'
+
+describe('derived group weights', () => {
+  it('SO4 weight is summed from S and O', () => {
+    // S + 4*O = 96.056; the commonly quoted 96.06 rounds the same sum.
+    expect(SO4_WEIGHT).toBeCloseTo(96.056, 3)
+  })
+
+  it('HCO3 weight is summed from H, C and O', () => {
+    // H + C + 3*O = 61.016; the commonly quoted 61.017 rounds the same sum.
+    expect(HCO3_WEIGHT).toBeCloseTo(61.016, 3)
+  })
+
+  it('CaCO3 weight and its equivalent weight', () => {
+    // Ca + C + 3*O = 100.086; equivalent weight is half (two charge equivalents).
+    expect(CACO3_WEIGHT).toBeCloseTo(100.086, 3)
+    expect(CACO3_EQUIVALENT_WEIGHT).toBeCloseTo(50.043, 3)
+  })
+})
+
+describe('ion charges', () => {
+  it('matches the expected valences', () => {
+    expect(IONS.Ca.charge).toBe(+2)
+    expect(IONS.Mg.charge).toBe(+2)
+    expect(IONS.Na.charge).toBe(+1)
+    expect(IONS.K.charge).toBe(+1)
+    expect(IONS.HCO3.charge).toBe(-1)
+    expect(IONS.SO4.charge).toBe(-2)
+    expect(IONS.Cl.charge).toBe(-1)
+  })
+})
+
+describe('salt molar masses include water of hydration', () => {
+  it('matches the documented constants', () => {
+    expect(SALTS.gypsum.molarMass).toBe(172.17)
+    expect(SALTS.epsom.molarMass).toBe(246.47)
+    expect(SALTS.tableSalt.molarMass).toBe(58.44)
+    expect(SALTS.calciumChloride.molarMass).toBe(147.01)
+    expect(SALTS.bakingSoda.molarMass).toBe(84.007)
+    expect(SALTS.chalk.molarMass).toBe(100.087)
+    expect(SALTS.magnesiumChloride.molarMass).toBe(203.3)
+    expect(SALTS.potassiumBicarbonate.molarMass).toBe(100.115)
+  })
+
+  it('chloride salts release two chloride ions per mole', () => {
+    expect(SALTS.calciumChloride.stoichiometry.Cl).toBe(2)
+    expect(SALTS.magnesiumChloride.stoichiometry.Cl).toBe(2)
+  })
+})
