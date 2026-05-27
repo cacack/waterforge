@@ -1,0 +1,849 @@
+[
+  {
+    "name": "Acqua Panna",
+    "ions": {
+      "Ca": 30.2,
+      "Mg": 6.9,
+      "Na": 6.5,
+      "K": 0.9,
+      "HCO3": 100,
+      "SO4": 21.4,
+      "Cl": 7.1
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 0.008,
+    "ph": 8.2,
+    "tds": 137,
+    "comment": "NO₃ 5.7 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Antipodes",
+    "ions": {
+      "Ca": 3.5,
+      "Mg": 1.8,
+      "Na": 11,
+      "K": 3.3,
+      "HCO3": 35,
+      "SO4": 4.5,
+      "Cl": 7
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.5,
+    "tds": 130,
+    "comment": "NO₃ 1.5 mg/L. Used for strong, pale, bitter ales",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Apollinaris",
+    "ions": {
+      "Ca": 100,
+      "Mg": 130,
+      "Na": 410,
+      "K": 20,
+      "HCO3": 1810,
+      "SO4": 80,
+      "Cl": 100
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": 2767,
+    "comment": "NO₃ 1.6 mg/L. Used for dark, soft flavored beers",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Aquarel Birken",
+    "ions": { "Ca": 106, "Mg": 23.3, "Na": 19.7, "HCO3": 423, "Cl": 32.2 },
+    "alkalinity_unit": "as_HCO3",
+    "tds": 613,
+    "comment": "Used for dark, soft flavored beers",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Artificial mineral water",
+    "ions": {
+      "Ca": 100,
+      "Mg": 100,
+      "Na": 125,
+      "K": 0,
+      "HCO3": 670,
+      "SO4": 300,
+      "Cl": 50
+    },
+    "alkalinity_unit": "as_HCO3",
+    "comment": "Ca:Mg 1:1, Na at 125 mg/L according to    Kulhavy, T; Cuta, J. Vodni Hospodarstvi:  B  1973,  23(9),  222-6 \"Effects of  mineral  content on the  taste  of water\"",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Badoit",
+    "ions": {
+      "Ca": 190,
+      "Mg": 85,
+      "Na": 165,
+      "K": 10,
+      "HCO3": 1300,
+      "SO4": 38,
+      "Cl": 44
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 2500,
+    "ph": 6,
+    "tds": 1200,
+    "comment": "Used for pale lager beer",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Borsec",
+    "ions": {
+      "Ca": 317.5,
+      "Mg": 106.6,
+      "Na": 76.6,
+      "K": 12,
+      "HCO3": 1660,
+      "SO4": 22.2,
+      "Cl": 20.5
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.45,
+    "tds": 1402,
+    "comment": "bicarbonate adjusted to achieve neutral charge",
+    "url": "http://fg.geo.uu.nl/perk/mineralwaters/mineralwater.php?Country_id=1061&Brand=Borsec-Carbogazoasa",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Burton (beer brewing)",
+    "ions": {
+      "Ca": 268,
+      "Mg": 62,
+      "Na": 30,
+      "HCO3": 141,
+      "SO4": 638,
+      "Cl": 36
+    },
+    "alkalinity_unit": "as_HCO3",
+    "comment": "NO₃ 31 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Calistoga",
+    "ions": {
+      "Ca": 3.6,
+      "Mg": 0,
+      "Na": 170,
+      "K": 14,
+      "HCO3": 22,
+      "SO4": 110,
+      "Cl": 210
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 4.75,
+    "tds": 580,
+    "comment": "Calistoga Brand Mineral water",
+    "url": "http://www.calistogawater.com/Mineral.aspx",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Calistoga Premium",
+    "ions": {
+      "Ca": 4.5,
+      "Mg": 2,
+      "Na": 41,
+      "K": 6.4,
+      "HCO3": 56,
+      "SO4": 21,
+      "Cl": 41
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7,
+    "tds": 172,
+    "comment": "Calistoga Brand Premium water",
+    "url": "http://www.calistogawater.com/Mineral.aspx",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Carola Rouge",
+    "ions": {
+      "Ca": 103,
+      "Mg": 52.2,
+      "Na": 103,
+      "K": 22.2,
+      "HCO3": 505,
+      "SO4": 205,
+      "Cl": 76.6
+    },
+    "alkalinity_unit": "as_HCO3",
+    "url": "http://www.carola.fr",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Contrex",
+    "ions": {
+      "Ca": 468,
+      "Mg": 74.5,
+      "Na": 9.4,
+      "K": 3.2,
+      "HCO3": 372,
+      "SO4": 1121,
+      "Cl": 10
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 0,
+    "tds": 2078,
+    "comment": "NO₃ 2.9 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Dorna",
+    "ions": {
+      "Ca": 287.1,
+      "Mg": 8.61,
+      "Na": 23.5,
+      "K": 2.7,
+      "HCO3": 0,
+      "SO4": 25.5,
+      "Cl": 10.9
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 4300,
+    "ph": 5.6,
+    "comment": "NO₃ 1.66 mg/L. bicarbonate adjusted to achieve neutral charge",
+    "url": "http://www.dorna.ro/thewater.aspx",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Evian",
+    "ions": {
+      "Ca": 78,
+      "Mg": 24,
+      "Na": 5,
+      "K": 1,
+      "HCO3": 357,
+      "SO4": 10,
+      "Cl": 4.5
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 0,
+    "ph": 7.2,
+    "tds": 357,
+    "comment": "NO₃ 3.8 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Farris",
+    "ions": {
+      "Ca": 26,
+      "Mg": 30,
+      "Na": 400,
+      "HCO3": 300,
+      "SO4": 15,
+      "Cl": 590
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 5.5,
+    "tds": 1400,
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Fiuggi",
+    "ions": {
+      "Ca": 15.9,
+      "Mg": 6.3,
+      "Na": 6.4,
+      "K": 4.4,
+      "HCO3": 81.7,
+      "SO4": 6,
+      "Cl": 13.9
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 8,
+    "ph": 6.8,
+    "tds": 122,
+    "comment": "NO₃ 7 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Gerolsteiner",
+    "ions": {
+      "Ca": 348,
+      "Mg": 108,
+      "Na": 118,
+      "K": 10.8,
+      "HCO3": 1816,
+      "SO4": 38.3,
+      "Cl": 39.7
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 7000,
+    "ph": 5.9,
+    "tds": 2488,
+    "comment": "NO₃ 5.1 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Harghita",
+    "ions": {
+      "Ca": 113.4,
+      "Mg": 69.4,
+      "Na": 68.3,
+      "K": 11.1,
+      "HCO3": 854,
+      "Cl": 2
+    },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Hassia Sprudel",
+    "ions": {
+      "Ca": 190,
+      "Mg": 34,
+      "Na": 197,
+      "K": 21.9,
+      "HCO3": 1098,
+      "SO4": 37,
+      "Cl": 109
+    },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Henniez",
+    "ions": {
+      "Ca": 106,
+      "Mg": 19,
+      "Na": 7,
+      "K": 1,
+      "HCO3": 392,
+      "SO4": 13,
+      "Cl": 8
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": 581,
+    "comment": "NO₃ 16 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Kessel",
+    "ions": {
+      "Ca": 40.8,
+      "Mg": 13.3,
+      "Na": 770.4,
+      "K": 5.4,
+      "HCO3": 2123,
+      "SO4": 5.35,
+      "Cl": 97.4
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.2,
+    "tds": 4626,
+    "comment": "NO₃ 0.1 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "London (beer brewing)",
+    "ions": { "Ca": 90, "Mg": 4, "Na": 24, "HCO3": 123, "SO4": 58, "Cl": 18 },
+    "alkalinity_unit": "as_HCO3",
+    "comment": "NO₃ 3 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Mountain Valley Spring",
+    "ions": {
+      "Ca": 68,
+      "Mg": 8,
+      "Na": 2.8,
+      "K": 1,
+      "HCO3": 238,
+      "SO4": 9.72,
+      "Cl": 0
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 0,
+    "ph": 7.8,
+    "tds": 230,
+    "comment": "NO₃ 0 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Munich (beer brewing)",
+    "ions": { "Ca": 80, "Mg": 19, "Na": 1, "HCO3": 164, "SO4": 5, "Cl": 1 },
+    "alkalinity_unit": "as_HCO3",
+    "comment": "NO₃ 3 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Neuselters",
+    "ions": {
+      "Ca": 100,
+      "Mg": 27,
+      "Na": 90,
+      "K": 6,
+      "HCO3": 570,
+      "SO4": 6,
+      "Cl": 60
+    },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Perrier",
+    "ions": {
+      "Ca": 147.3,
+      "Mg": 3.4,
+      "Na": 9,
+      "K": 0.6,
+      "HCO3": 390,
+      "SO4": 33,
+      "Cl": 21.5
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 5.46,
+    "tds": 475,
+    "comment": "NO₃ 18 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Pilsen (beer brewing)",
+    "ions": { "Ca": 7, "Mg": 1, "Na": 3, "HCO3": 9, "SO4": 6, "Cl": 5 },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "PurPur (coffee brewing)",
+    "ions": {
+      "Ca": 24,
+      "Mg": 7.3,
+      "Na": 25.6,
+      "K": 5.6,
+      "HCO3": 151,
+      "SO4": 28.5,
+      "Cl": 1.8
+    },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Rosbacher Klassich",
+    "ions": {
+      "Ca": 206,
+      "Mg": 100,
+      "Na": 72.7,
+      "K": 4.4,
+      "HCO3": 1095,
+      "SO4": 19,
+      "Cl": 112
+    },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Saint-Yorre",
+    "ions": {
+      "Ca": 78.8,
+      "Mg": 9,
+      "Na": 1744,
+      "K": 115,
+      "HCO3": 4263,
+      "SO4": 182,
+      "Cl": 329
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.6,
+    "tds": 4774,
+    "url": "http://fg.geo.uu.nl/perk/mineralwaters/mineralwater.php?Country_id=1013&Brand=St-Yorre",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Salvus",
+    "ions": {
+      "Ca": 99,
+      "Mg": 5.7,
+      "Na": 18.5,
+      "K": 1,
+      "HCO3": 211,
+      "SO4": 69,
+      "Cl": 42.4
+    },
+    "alkalinity_unit": "as_HCO3",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "San Benedetto",
+    "ions": {
+      "Ca": 46,
+      "Mg": 30,
+      "Na": 6.8,
+      "K": 1.1,
+      "HCO3": 293,
+      "SO4": 4.9,
+      "Cl": 2.8
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 0,
+    "ph": 7.68,
+    "tds": 250,
+    "comment": "NO₃ 6.8 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "San Narciso",
+    "ions": {
+      "Ca": 55,
+      "Mg": 9,
+      "Na": 1138,
+      "K": 53.4,
+      "HCO3": 2196,
+      "SO4": 54,
+      "Cl": 596
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": 4090,
+    "comment": "NO₃ 0 mg/L. CO₂ reported as \"little gas\" — omitted; re-source needed.",
+    "url": "http://www.aguainfant.com/ENGLISH/AGUAS-ESP/S/s-narciso.htm",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "San Pellegrino",
+    "ions": {
+      "Ca": 208.08,
+      "Mg": 56.9,
+      "Na": 44.6,
+      "K": 3.7,
+      "HCO3": 220.6,
+      "SO4": 549.2,
+      "Cl": 74.3
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.7,
+    "tds": 1109,
+    "comment": "NO₃ 1.5 mg/L.",
+    "url": "http://fg.geo.uu.nl/perk/mineralwaters/mineralwater.php?Country_id=1017&Brand=San-Pellegrino",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "SCAA target (coffee brewing)",
+    "ions": { "Ca": 68, "Mg": 0, "Na": 10, "K": 0, "HCO3": 233, "Cl": 0 },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7,
+    "comment": "NO₃ 0 mg/L. Ideal water for coffee according to Specialty Coffee Association of America (SCAA). HCO3 added to balance charge.",
+    "url": "http://scaa.org/PDF/ST%20-%20WATER%20STANDARD%20V.21NOV2009A.pdf",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Selters",
+    "ions": {
+      "Ca": 110,
+      "Mg": 38,
+      "Na": 299,
+      "K": 13,
+      "HCO3": 850,
+      "SO4": 20,
+      "Cl": 269
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 8200,
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Tea brewing (max)",
+    "ions": {
+      "Ca": 11.1,
+      "Mg": 2.2,
+      "Na": 28,
+      "K": 10.5,
+      "HCO3": 36.5,
+      "SO4": 8.8,
+      "Cl": 55.1
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": 152.5,
+    "comment": "\"Functional water 2\" from US 2006/0286263",
+    "url": "http://www.google.com/patents/US20060286263",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Tea brewing (min)",
+    "ions": {
+      "Ca": 4.3,
+      "Mg": 6.8,
+      "Na": 12.7,
+      "K": 4.3,
+      "HCO3": 10.5,
+      "SO4": 3.3,
+      "Cl": 23.7
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": 60.3,
+    "comment": "\"Functional water 1\" from US 2006/0286263",
+    "url": "http://www.google.com/patents/US20060286263",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Tesanjski Dijamant",
+    "ions": {
+      "Ca": 64.92,
+      "Mg": 47.62,
+      "Na": 15,
+      "K": 0.78,
+      "HCO3": 429,
+      "SO4": 34,
+      "Cl": 9
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 5.5,
+    "tds": 4578,
+    "comment": "NO₃ 0.88 mg/L.",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Topo chico",
+    "ions": { "Ca": 29, "Mg": 9, "Na": 35, "HCO3": 115, "SO4": 40, "Cl": 35 },
+    "alkalinity_unit": "as_HCO3",
+    "comment": "Data from Google books via John Chamberlain",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Ty Nant",
+    "ions": {
+      "Ca": 22.5,
+      "Mg": 11.5,
+      "Na": 22,
+      "K": 1,
+      "HCO3": 116,
+      "SO4": 3.7,
+      "Cl": 14
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.8,
+    "tds": 165,
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Vittel",
+    "ions": {
+      "Ca": 202,
+      "Mg": 36,
+      "Na": 3.8,
+      "HCO3": 402,
+      "SO4": 306,
+      "Cl": 0
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.5,
+    "tds": 841,
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Volvic",
+    "ions": {
+      "Ca": 11.5,
+      "Mg": 8,
+      "Na": 11.6,
+      "K": 6.2,
+      "HCO3": 71,
+      "SO4": 6.9,
+      "Cl": 13.5
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7,
+    "tds": 109,
+    "comment": "NO₃ 6.3 mg/L.",
+    "url": "http://en.wikipedia.org/wiki/Volvic_(mineral_water)",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Voss",
+    "ions": { "Ca": 3.46, "Mg": 0.78, "SO4": 5 },
+    "ph": 6.4,
+    "tds": 22,
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  },
+  {
+    "name": "Waiwera",
+    "ions": { "Ca": 12, "Mg": 2.6, "Na": 1.6, "HCO3": 20, "Cl": 30 },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 8.6,
+    "comment": "Claimed to be good for brewing coffee",
+    "url": "http://www.purpur-premiumwasser.de/characteristics-of-the-perfect-water.html",
+    "provenance": {
+      "verified": false,
+      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
+      "source_date": "2015-01-01"
+    }
+  }
+]
