@@ -18,7 +18,9 @@
   import DownloadIcon from '@lucide/svelte/icons/download'
   import UploadIcon from '@lucide/svelte/icons/upload'
   import CopyIcon from '@lucide/svelte/icons/copy'
+  import Share2Icon from '@lucide/svelte/icons/share-2'
   import { snapshotState, applySnapshot } from '../persist.svelte'
+  import { encodeHash, buildShareUrl } from '../share'
   import { app } from '../state.svelte'
   import { validateProfile, profileToIonProfile, type Profile } from '$lib'
 
@@ -61,6 +63,24 @@
     clearTimeout(copyTimer)
     copyTimer = setTimeout(() => {
       copyLabel = 'copy'
+    }, 2000)
+  }
+
+  // ---------------------------------------------------------------------------
+  // Share link
+  // ---------------------------------------------------------------------------
+
+  let shareLabel = $state<'share' | 'copied'>('share')
+  let shareTimer: ReturnType<typeof setTimeout> | undefined
+
+  async function handleShare() {
+    const hash = encodeHash(snapshotState())
+    const url = buildShareUrl(location.origin, location.pathname, hash)
+    await navigator.clipboard.writeText(url)
+    shareLabel = 'copied'
+    clearTimeout(shareTimer)
+    shareTimer = setTimeout(() => {
+      shareLabel = 'share'
     }, 2000)
   }
 
@@ -200,6 +220,21 @@
       <span class="text-xs font-medium">✓</span>
     {:else}
       <CopyIcon class="size-4" />
+    {/if}
+  </Button>
+
+  <!-- Share link — copies a base64url-encoded URL to clipboard -->
+  <Button
+    variant="ghost"
+    size="icon"
+    onclick={handleShare}
+    aria-label="Copy shareable link to clipboard"
+    title="Copy shareable link to clipboard"
+  >
+    {#if shareLabel === 'copied'}
+      <span class="text-xs font-medium">✓</span>
+    {:else}
+      <Share2Icon class="size-4" />
     {/if}
   </Button>
 

@@ -8,12 +8,32 @@
   import ReadoutsPanel from './components/ReadoutsPanel.svelte'
   import { computeResult } from './state.svelte'
   import { applyTheme } from './theme.svelte'
-  import { loadFromStorage, initPersistence } from './persist.svelte'
+  import {
+    loadFromStorage,
+    initPersistence,
+    applySnapshot,
+  } from './persist.svelte'
+  import { decodeHash } from './share'
 
   const result = $derived(computeResult())
 
   // Restore persisted state before first render.
+  // URL hash wins over localStorage: if the hash decodes to a valid snapshot,
+  // it is applied after loadFromStorage() so the shared link always takes
+  // precedence. The hash is then cleared so subsequent manual edits are not
+  // "stuck" on the shared URL.
   loadFromStorage()
+
+  const rawHash = location.hash.slice(1) // strip leading '#'
+  if (rawHash) {
+    const decoded = decodeHash(rawHash)
+    if (decoded !== null) {
+      applySnapshot(decoded)
+      // Remove the hash from the address bar without creating a history entry
+      // so the back-button still works as expected.
+      history.replaceState(null, '', location.pathname + location.search)
+    }
+  }
 
   // Keep the document theme class in sync with the theme store.
   $effect(() => {
@@ -21,6 +41,8 @@
   })
 
   // Wire localStorage persistence (writes on every state change).
+  // This runs after any URL-hash snapshot has been applied, so the shared
+  // state is immediately persisted for future visits (no hash needed).
   initPersistence()
 </script>
 
