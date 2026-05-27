@@ -143,16 +143,17 @@
       "Ca": 268,
       "Mg": 62,
       "Na": 30,
-      "HCO3": 141,
+      "HCO3": 320,
       "SO4": 638,
       "Cl": 36
     },
     "alkalinity_unit": "as_HCO3",
-    "comment": "NO₃ 31 mg/L.",
+    "comment": "NO₃ 31 mg/L. HCO₃ corrected from Khymos 141 to 320 mg/L per John Palmer 'How to Brew' Table 21 (Burton-on-Trent IPA profile). Ca/Mg/SO4 retain Khymos values; historical well analyses vary widely.",
+    "url": "https://howtobrew.com/section-3/chapter-15/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "John Palmer — How to Brew (4th ed.), Table 21 (Burton-on-Trent IPA water)",
+      "source_date": "2026-05-27"
     }
   },
   {
@@ -264,23 +265,24 @@
   {
     "name": "Evian",
     "ions": {
-      "Ca": 78,
-      "Mg": 24,
-      "Na": 5,
+      "Ca": 80,
+      "Mg": 26,
+      "Na": 6.5,
       "K": 1,
-      "HCO3": 357,
-      "SO4": 10,
-      "Cl": 4.5
+      "HCO3": 360,
+      "SO4": 15,
+      "Cl": 10
     },
     "alkalinity_unit": "as_HCO3",
     "co2": 0,
     "ph": 7.2,
-    "tds": 357,
+    "tds": 345,
     "comment": "NO₃ 3.8 mg/L.",
+    "url": "https://www.evian.com/en_int/what-is-mineral-water/water-quality/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Evian official water quality page (evian.com/en_int)",
+      "source_date": "2026-05-27"
     }
   },
   {
@@ -340,10 +342,11 @@
     "ph": 5.9,
     "tds": 2488,
     "comment": "NO₃ 5.1 mg/L.",
+    "url": "https://assets.ctfassets.net/l6w8pczwr290/7qgVW2RZD4K9WWtoTk8u9N/6f5ccd5de826115e945d59e74fc9f90a/analyseblatt-sprudel_international_2024.pdf",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Gerolsteiner official analysis sheet 2024 (Analyseblatt Sprudel International)",
+      "source_date": "2026-05-27"
     }
   },
   {
@@ -487,22 +490,23 @@
   {
     "name": "Perrier",
     "ions": {
-      "Ca": 147.3,
-      "Mg": 3.4,
-      "Na": 9,
+      "Ca": 150,
+      "Mg": 3.9,
+      "Na": 9.6,
       "K": 0.6,
-      "HCO3": 390,
-      "SO4": 33,
-      "Cl": 21.5
+      "HCO3": 420,
+      "SO4": 25.3,
+      "Cl": 19.5
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 5.46,
-    "tds": 475,
-    "comment": "NO₃ 18 mg/L.",
+    "ph": 5.5,
+    "tds": 456,
+    "comment": "NO₃ 7.3 mg/L.",
+    "url": "https://prike.ee/en/products/perrier-mineral-water/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Perrier official label / Nestlé (via prike.ee product page)",
+      "source_date": "2026-05-27"
     }
   },
   {
@@ -636,23 +640,23 @@
   {
     "name": "San Pellegrino",
     "ions": {
-      "Ca": 208.08,
-      "Mg": 56.9,
-      "Na": 44.6,
-      "K": 3.7,
-      "HCO3": 220.6,
-      "SO4": 549.2,
-      "Cl": 74.3
+      "Ca": 164,
+      "Mg": 49.5,
+      "Na": 31.2,
+      "K": 2.2,
+      "HCO3": 243,
+      "SO4": 402,
+      "Cl": 49.4
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 7.7,
-    "tds": 1109,
-    "comment": "NO₃ 1.5 mg/L.",
-    "url": "http://fg.geo.uu.nl/perk/mineralwaters/mineralwater.php?Country_id=1017&Brand=San-Pellegrino",
+    "ph": 5.7,
+    "tds": 854,
+    "comment": "NO₃ 2.9 mg/L. pH 5.7 as sold (7.6 at source). Previous 2015 Khymos values ran ~14–32% high.",
+    "url": "https://en.wikipedia.org/wiki/S.Pellegrino",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "S.Pellegrino Water Analysis Report 2021 (via Wikipedia / S.Pellegrino US)",
+      "source_date": "2026-05-27"
     }
   },
   {
