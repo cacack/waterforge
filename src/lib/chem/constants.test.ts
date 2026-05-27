@@ -4,6 +4,7 @@ import {
   CACO3_WEIGHT,
   HCO3_WEIGHT,
   IONS,
+  SALT_ORDER,
   SALTS,
   SO4_WEIGHT,
 } from './constants'
@@ -53,5 +54,20 @@ describe('salt molar masses include water of hydration', () => {
   it('chloride salts release two chloride ions per mole', () => {
     expect(SALTS.calciumChloride.stoichiometry.Cl).toBe(2)
     expect(SALTS.magnesiumChloride.stoichiometry.Cl).toBe(2)
+  })
+})
+
+describe('salt charge balance', () => {
+  // A dissolved salt is electrically neutral: the signed charges of the ions it
+  // releases must sum to zero. This invariant guards every salt's stoichiometry
+  // — e.g. it catches modelling CaCO3 as Ca + 1 HCO3 rather than Ca + 2 HCO3.
+  it('every salt releases ions that sum to zero net charge', () => {
+    for (const id of SALT_ORDER) {
+      let charge = 0
+      for (const [ion, moles] of Object.entries(SALTS[id].stoichiometry)) {
+        charge += IONS[ion as keyof typeof IONS].charge * (moles ?? 0)
+      }
+      expect(charge, `${id} should be charge-balanced`).toBe(0)
+    }
   })
 })

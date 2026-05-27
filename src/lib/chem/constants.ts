@@ -133,8 +133,10 @@ export const SALTS: Record<SaltId, Salt> = {
     name: 'Chalk',
     formula: 'CaCO3',
     molarMass: 100.087,
-    // Dissolves to Ca plus carbonate alkalinity, tracked here as HCO3.
-    stoichiometry: { Ca: 1, HCO3: 1 },
+    // Dissolves (in CO2-charged water) to calcium plus carbonate alkalinity:
+    // CaCO3 + CO2 + H2O -> Ca(2+) + 2 HCO3(-). Tracked as 2 HCO3, which keeps
+    // the salt charge-balanced and matches standard alkalinity accounting.
+    stoichiometry: { Ca: 1, HCO3: 2 },
   },
   magnesiumChloride: {
     id: 'magnesiumChloride',
