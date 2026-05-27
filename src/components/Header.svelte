@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button'
   import { theme, toggleTheme } from '../theme.svelte'
+  import Actions from './Actions.svelte'
 </script>
 
 <header
@@ -16,6 +17,8 @@
       </span>
     </div>
     <div class="flex items-center gap-1">
+      <!-- Recipe import/export actions (#22); share link will join here (#23) -->
+      <Actions />
       <Button
         variant="ghost"
         size="icon"
