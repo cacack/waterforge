@@ -8,13 +8,20 @@
   import ReadoutsPanel from './components/ReadoutsPanel.svelte'
   import { computeResult } from './state.svelte'
   import { applyTheme } from './theme.svelte'
+  import { loadFromStorage, initPersistence } from './persist.svelte'
 
   const result = $derived(computeResult())
+
+  // Restore persisted state before first render.
+  loadFromStorage()
 
   // Keep the document theme class in sync with the theme store.
   $effect(() => {
     applyTheme()
   })
+
+  // Wire localStorage persistence (writes on every state change).
+  initPersistence()
 </script>
 
 <div class="bg-background text-foreground min-h-svh">
