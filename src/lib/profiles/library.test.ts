@@ -61,13 +61,13 @@ describe('Evian — exact values from TSV', () => {
   })
 
   it('has correct ion values', () => {
-    expect(evian!.ions.Ca).toBe(78)
-    expect(evian!.ions.Mg).toBe(24)
-    expect(evian!.ions.Na).toBe(5)
+    expect(evian!.ions.Ca).toBe(80)
+    expect(evian!.ions.Mg).toBe(26)
+    expect(evian!.ions.Na).toBe(6.5)
     expect(evian!.ions.K).toBe(1)
-    expect(evian!.ions.HCO3).toBe(357)
-    expect(evian!.ions.SO4).toBe(10)
-    expect(evian!.ions.Cl).toBe(4.5)
+    expect(evian!.ions.HCO3).toBe(360)
+    expect(evian!.ions.SO4).toBe(15)
+    expect(evian!.ions.Cl).toBe(10)
   })
 
   it('alkalinity_unit is as_HCO3', () => {
@@ -78,20 +78,20 @@ describe('Evian — exact values from TSV', () => {
     expect(evian!.ph).toBe(7.2)
   })
 
-  it('tds is 357', () => {
-    expect(evian!.tds).toBe(357)
+  it('tds is 345', () => {
+    expect(evian!.tds).toBe(345)
   })
 
   it('co2 is 0 (source: "no gas")', () => {
     expect(evian!.co2).toBe(0)
   })
 
-  it('provenance is unverified with correct source string', () => {
-    expect(evian!.provenance.verified).toBe(false)
+  it('provenance is verified with correct source string', () => {
+    expect(evian!.provenance.verified).toBe(true)
     expect(evian!.provenance.source).toBe(
-      'Martin Lersch — Mineral Water Calculator v6 (Khymos)',
+      'Evian official water quality page (evian.com/en_int)',
     )
-    expect(evian!.provenance.source_date).toBe('2015-01-01')
+    expect(evian!.provenance.source_date).toBe('2026-05-27')
   })
 
   it('NO3 value from TSV (3.8 mg/L) is preserved in comment', () => {
@@ -111,29 +111,29 @@ describe('Perrier — exact values from TSV', () => {
   })
 
   it('has correct ion values', () => {
-    expect(perrier!.ions.Ca).toBe(147.3)
-    expect(perrier!.ions.Mg).toBe(3.4)
-    expect(perrier!.ions.Na).toBe(9)
+    expect(perrier!.ions.Ca).toBe(150)
+    expect(perrier!.ions.Mg).toBe(3.9)
+    expect(perrier!.ions.Na).toBe(9.6)
     expect(perrier!.ions.K).toBe(0.6)
-    expect(perrier!.ions.HCO3).toBe(390)
-    expect(perrier!.ions.SO4).toBe(33)
-    expect(perrier!.ions.Cl).toBe(21.5)
+    expect(perrier!.ions.HCO3).toBe(420)
+    expect(perrier!.ions.SO4).toBe(25.3)
+    expect(perrier!.ions.Cl).toBe(19.5)
   })
 
   it('alkalinity_unit is as_HCO3', () => {
     expect(perrier!.alkalinity_unit).toBe('as_HCO3')
   })
 
-  it('ph is 5.46', () => {
-    expect(perrier!.ph).toBe(5.46)
+  it('ph is 5.5', () => {
+    expect(perrier!.ph).toBe(5.5)
   })
 
-  it('tds is 475', () => {
-    expect(perrier!.tds).toBe(475)
+  it('tds is 456', () => {
+    expect(perrier!.tds).toBe(456)
   })
 
-  it('NO3 value from TSV (18 mg/L) is preserved in comment', () => {
-    expect(perrier!.comment).toContain('NO₃ 18 mg/L')
+  it('NO3 value (7.3 mg/L) is preserved in comment', () => {
+    expect(perrier!.comment).toContain('NO₃ 7.3 mg/L')
   })
 })
 
