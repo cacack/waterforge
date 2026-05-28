@@ -5,9 +5,7 @@ food-grade salts. Waterforge is a static, client-side web app: pick a target
 profile, set your source water, toggle the salts you own, and get a precise,
 batch-scaled recipe.
 
-**Try it:** [waterforge.app](https://waterforge.app) — v1.0 shipped
-([release notes](https://github.com/cacack/waterforge/releases/tag/v1.0)). See
-[CONSTITUTION.md](CONSTITUTION.md) for mission, scope, and non-goals.
+**Try it:** [waterforge.app](https://waterforge.app)
 
 ![Waterforge — desktop, light theme](docs/operations/release-assets/v1.0/desktop-light.png)
 
