@@ -21,8 +21,10 @@ Each step is separate so a failure points directly at the offending tool.
 
 ## Deploy (`deploy.yml`)
 
-Triggers on every push to `main` and can be triggered manually via
-`workflow_dispatch`.
+Triggers on a published GitHub release (`release: types: [published]`) and can
+be triggered manually via `workflow_dispatch` (for re-deploys or rollback).
+The release event is emitted when release-please's release PR merges (see
+[Release automation](#release-automation-release-pleaseyml) below).
 
 Flow:
 
@@ -33,6 +35,21 @@ Flow:
 
 The `concurrency` group `pages` with `cancel-in-progress: false` ensures
 in-flight deployments finish before a new one starts.
+
+## Release automation (`release-please.yml`)
+
+Triggers on every push to `main`. Runs `googleapis/release-please-action@v4`
+in manifest mode (`release-please-config.json` + `.release-please-manifest.json`)
+to open or maintain a release PR derived from conventional-commit messages.
+On merge of that release PR, release-please bumps `package.json`, prepends to
+`CHANGELOG.md`, creates a `vX.Y.Z` tag, and publishes a GitHub release — which
+in turn triggers `deploy.yml`.
+
+`CHANGELOG.md` on `main` is the canonical "what shipped" surface; the
+generated GitHub release mirrors the same notes.
+
+See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
+[`release.md`](./release.md) for the operator procedure.
 
 ## One-time manual step (repo owner)
 
@@ -50,3 +67,8 @@ Checks" status check. To make the `check` job from `ci.yml` a required gate,
 the repo owner must edit the ruleset under **Settings → Rules → Rulesets** and
 add `CI / check` to the required status checks. This is an owner-only operation
 and is out of scope for this PR.
+
+release-please needs `contents: write` and `pull-requests: write` permissions
+to open release PRs and create tags/releases; these are granted in the
+workflow itself (`permissions:` block in `release-please.yml`) — no ruleset
+change is required.
