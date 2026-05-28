@@ -3,8 +3,12 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { encodeHash, decodeHash, buildShareUrl } from './share'
 import { app } from './state.svelte'
-import { snapshotState, SNAPSHOT_VERSION } from './persist.svelte'
-import { PROFILES, SALT_ORDER } from '$lib'
+import {
+  snapshotState,
+  applySnapshot,
+  SNAPSHOT_VERSION,
+} from './persist.svelte'
+import { PROFILES, SALT_ORDER, findProfile } from '$lib'
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -98,6 +102,47 @@ describe('encodeHash / decodeHash — round-trips', () => {
     const hash = encodeHash(snap)
     const decoded = decodeHash(hash) as Record<string, unknown>
     expect(decoded?.['version']).toBe(SNAPSHOT_VERSION)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Regression coverage for issue #63 — share/restore round-trip for the
+// "Artificial mineral water" profile. The issue reported that the share
+// button captured the wrong target (defaulting to Evian) when "Artificial
+// mineral water" was selected. Lowercase 'm' in the name is significant —
+// findProfile is case-sensitive exact-match.
+// ---------------------------------------------------------------------------
+
+describe('issue #63 — share/restore round-trip for "Artificial mineral water"', () => {
+  beforeEach(resetApp)
+
+  it('finds the profile by its exact name (case-sensitive)', () => {
+    expect(findProfile('Artificial mineral water')).toBeDefined()
+  })
+
+  it('snapshotState captures the selected target name verbatim', () => {
+    const profile = findProfile('Artificial mineral water')
+    expect(profile).toBeDefined()
+    app.target = profile ?? null
+    const snap = snapshotState()
+    expect(snap.targetName).toBe('Artificial mineral water')
+  })
+
+  it('round-trips "Artificial mineral water" through encode → decode → apply', () => {
+    const profile = findProfile('Artificial mineral water')
+    app.target = profile ?? null
+
+    const snap = snapshotState()
+    const hash = encodeHash(snap)
+    const decoded = decodeHash(hash)
+    expect(decoded).toEqual(snap)
+
+    // Reset to a different target to prove apply actually restores.
+    app.target = PROFILES.find((p) => p.name === 'Evian') ?? null
+    expect(app.target?.name).toBe('Evian')
+
+    applySnapshot(decoded)
+    expect(app.target?.name).toBe('Artificial mineral water')
   })
 })
 
