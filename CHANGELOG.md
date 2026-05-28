@@ -9,6 +9,24 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.1.0](https://github.com/cacack/waterforge/compare/v1.0.1...v1.1.0) (2026-05-28)
+
+
+### Features
+
+* **ui:** downloaded recipe JSON now includes target profile and doses ([#64](https://github.com/cacack/waterforge/issues/64)) ([e4907a1](https://github.com/cacack/waterforge/commit/e4907a1bb3d990ce44520e8ddab7ba3ee7fc241e))
+* **ui:** downloaded recipe JSON now includes target profile and doses ([#64](https://github.com/cacack/waterforge/issues/64)) ([084d97e](https://github.com/cacack/waterforge/commit/084d97effc51df060eee178b178551e35311bd38))
+
+
+### Bug Fixes
+
+* **ci:** pin release-please tag format to vX.Y.Z ([058e1a7](https://github.com/cacack/waterforge/commit/058e1a75ac8c2cb53b7aa918dad1914a28c712ec))
+* **ci:** pin release-please tag format to vX.Y.Z ([094b7c6](https://github.com/cacack/waterforge/commit/094b7c62037f172bb6de40f5970859c4312e9c36))
+* **ui:** re-apply share URL on same-tab paste ([#63](https://github.com/cacack/waterforge/issues/63)) ([f5833b0](https://github.com/cacack/waterforge/commit/f5833b02bbcefbae591df9a311e515fdbea5094e))
+* **ui:** re-apply share URL on same-tab paste ([#63](https://github.com/cacack/waterforge/issues/63)) ([52f7e9c](https://github.com/cacack/waterforge/commit/52f7e9c2cfe769910946a298f6feee240a264614))
+* **ui:** replace internal AppSnapshot wording in Import dialog ([#65](https://github.com/cacack/waterforge/issues/65)) ([b3fc0e2](https://github.com/cacack/waterforge/commit/b3fc0e27ac27afee5c78fedb5c32104bb9db31dd))
+* **ui:** replace internal AppSnapshot wording in Import dialog ([#65](https://github.com/cacack/waterforge/issues/65)) ([a57760c](https://github.com/cacack/waterforge/commit/a57760c2b04f197f6fbc00f4d0954610daef6496))
+
 ## [1.0.1] - 2026-05-28
 
 ### Fixed
