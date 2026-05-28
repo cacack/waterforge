@@ -37,8 +37,12 @@ Before tagging a release, confirm:
    - Desktop, light + dark (1440×900 is a reasonable target viewport).
    - Mobile, light + dark (390×844 ≈ iPhone 14).
 
-   Save under `docs/operations/release-assets/v<X>/`, keep each PNG under
-   ~500 KB, and commit alongside the version bump.
+   Keep each PNG under ~500 KB. These are attached **directly to the GitHub
+   release** (step 6) — do not commit them to the repo tree.
+
+   If the UI has materially changed since the last release, also refresh
+   `docs/hero.png` (the single screenshot rendered in `README.md`) in the
+   release PR. Use the same 1440×900 desktop-light capture as the basis.
 
 4. **PR and merge**
 
@@ -66,7 +70,7 @@ Before tagging a release, confirm:
    gh release create v<X> \
      --title "Waterforge v<X>" \
      --notes-file RELEASE_NOTES_v<X>.md
-   gh release upload v<X> docs/operations/release-assets/v<X>/*.png
+   gh release upload v<X> <path/to/your/screenshots>/*.png
    ```
 
 7. **Verify**

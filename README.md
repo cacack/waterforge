@@ -7,7 +7,7 @@ batch-scaled recipe.
 
 **Try it:** [waterforge.app](https://waterforge.app)
 
-![Waterforge — desktop, light theme](docs/operations/release-assets/v1.0/desktop-light.png)
+![Waterforge — desktop, light theme](docs/hero.png)
 
 ## What it does
 
