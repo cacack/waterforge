@@ -409,27 +409,6 @@
     }
   },
   {
-    "name": "Kessel",
-    "ions": {
-      "Ca": 40.8,
-      "Mg": 13.3,
-      "Na": 770.4,
-      "K": 5.4,
-      "HCO3": 2123,
-      "SO4": 5.35,
-      "Cl": 97.4
-    },
-    "alkalinity_unit": "as_HCO3",
-    "ph": 6.2,
-    "tds": 4626,
-    "comment": "NO₃ 0.1 mg/L.",
-    "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
-    }
-  },
-  {
     "name": "London (beer brewing)",
     "ions": { "Ca": 90, "Mg": 4, "Na": 24, "HCO3": 123, "SO4": 58, "Cl": 18 },
     "alkalinity_unit": "as_HCO3",
