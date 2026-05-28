@@ -51,14 +51,44 @@ generated GitHub release mirrors the same notes.
 See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
 [`release.md`](./release.md) for the operator procedure.
 
-## One-time manual step (repo owner)
+## One-time manual steps (repo owner)
 
-GitHub cannot self-enable Pages via a workflow. The repo owner must do this
-once:
+Several owner-only settings underpin the pipeline. These are not in any
+workflow file — they live in the GitHub web UI / API and need to be set
+once.
 
-**Settings → Pages → Build and deployment → Source → GitHub Actions**
+1. **Enable Pages via Actions.** GitHub cannot self-enable Pages via a
+   workflow. Set **Settings → Pages → Build and deployment → Source →
+   GitHub Actions**. Without this, the deploy job fails with a Pages-not-
+   enabled error.
 
-Without this, the deploy job will fail with a Pages not enabled error.
+2. **Allow GitHub Actions to create pull requests.** Required so
+   release-please can open its release PR. Set **Settings → Actions →
+   General → Workflow permissions → ☑ Allow GitHub Actions to create and
+   approve pull requests**. The default is off; without this, release-please
+   gets `403` when trying to open the release PR even though its workflow
+   declares `pull-requests: write`.
+
+3. **Provision a PAT for release-please.** The default `GITHUB_TOKEN` does
+   not propagate events to downstream workflows (loop prevention), so a
+   release published with `GITHUB_TOKEN` never triggers `deploy.yml`. Fix:
+   create a fine-grained Personal Access Token at
+   [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens)
+   scoped to this repo with **Contents: read+write** and **Pull requests:
+   read+write**, then store it as the repo secret `RELEASE_PLEASE_TOKEN`
+   (`gh secret set RELEASE_PLEASE_TOKEN`). The token reference is in
+   `release-please.yml`. PAT expiration is the maintainer's responsibility.
+
+4. **Allow `v*` tags to deploy to the `github-pages` environment.** The
+   environment is created automatically by Pages and defaults to a "selected
+   branches" policy with only `main` allowed; a `release: published` event
+   fires on a tag ref and gets rejected. Add a tag policy via the API:
+   ```bash
+   gh api -X POST repos/cacack/waterforge/environments/github-pages/deployment-branch-policies \
+     -F name='v*' -F type=tag
+   ```
+   The existing `main` branch policy is retained so `workflow_dispatch`
+   redeploys from `main` still work.
 
 ## Follow-up: making CI checks required
 
