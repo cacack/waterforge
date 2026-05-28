@@ -138,6 +138,36 @@ describe('Perrier — exact values from TSV', () => {
 })
 
 // ---------------------------------------------------------------------------
+// Spot checks — Tea brewing (min) — newly verified against US 2006/0286263 A1
+// ---------------------------------------------------------------------------
+
+describe('Tea brewing (min) — verified against US 2006/0286263 A1', () => {
+  const tea = findProfile('Tea brewing (min)')
+
+  it('is found in the library', () => {
+    expect(tea).toBeDefined()
+  })
+
+  it('has the patent "Functional water 1" ion values', () => {
+    expect(tea!.ions.Ca).toBe(4.3)
+    expect(tea!.ions.Mg).toBe(6.8)
+    expect(tea!.ions.Na).toBe(12.7)
+    expect(tea!.ions.K).toBe(4.3)
+    expect(tea!.ions.HCO3).toBe(10.5)
+    expect(tea!.ions.SO4).toBe(3.3)
+    expect(tea!.ions.Cl).toBe(23.7)
+  })
+
+  it('provenance is verified with the patent source', () => {
+    expect(tea!.provenance.verified).toBe(true)
+    expect(tea!.provenance.source).toContain(
+      'US Patent Application 2006/0286263 A1',
+    )
+    expect(tea!.provenance.source_date).toBe('2026-05-28')
+  })
+})
+
+// ---------------------------------------------------------------------------
 // Spot checks — Voss (no HCO3 → no alkalinity_unit required)
 // ---------------------------------------------------------------------------
 
