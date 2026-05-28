@@ -29,3 +29,39 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title is not conventional-commit format
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          PR_USER: ${{ github.event.pull_request.user.login }}
+        run: |
+          # Exempt release-please's own release PRs.
+          if echo "$TITLE" | grep -qE "^chore\(main\): release [0-9]"; then
+            echo "Release-please PR exempt."
+            exit 0
+          fi
+
+          # Exempt Dependabot — its PRs use conventional titles by default
+          # and don't drive release-please entries we care about deduping.
+          if [ "$PR_USER" = "dependabot[bot]" ]; then
+            echo "Dependabot PR exempt."
+            exit 0
+          fi
+
+          # PR titles in conventional-commit format end up in the merge
+          # commit body, which release-please then re-parses — producing a
+          # duplicate changelog entry alongside the branch commit. Keep PR
+          # titles in plain English; reserve conventional format for the
+          # individual commit messages on the branch.
+          PATTERN="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?!?:"
+          if echo "$TITLE" | grep -qE "$PATTERN"; then
+            echo "::error::PR title looks like a conventional commit ('$TITLE')."
+            echo "Use a plain descriptive title (e.g. 'Add date parsing'), not 'feat(date): ...'."
+            echo "Conventional format belongs in the branch commits, not the PR title."
+            exit 1
+          fi
+
+          echo "PR title OK: $TITLE"

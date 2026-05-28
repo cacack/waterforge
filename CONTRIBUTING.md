@@ -64,7 +64,8 @@ This keeps the math portable, independently testable, and easy to reason about.
 
 ### Commits
 
-Use [Conventional Commits](https://www.conventionalcommits.org/):
+Use [Conventional Commits](https://www.conventionalcommits.org/) for the
+individual commits on your branch:
 
 ```
 <type>(<optional scope>): <short description>
@@ -72,17 +73,36 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 <optional body>
 ```
 
-Common types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`.
+Common types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`. These drive
+[release-please](https://github.com/googleapis/release-please) — `feat:` bumps
+the minor version, `fix:` bumps patch, `feat!:` / `BREAKING CHANGE` bumps major.
+
+### Pull request titles
+
+PR titles should be **plain English descriptions**, not conventional-commit
+format. CI rejects PR titles that start with `feat:`, `fix:`, etc.
+
+- ✅ `Add recipe download with target profile`
+- ❌ `feat(ui): downloaded recipe JSON includes target profile`
+
+Why: the repo merges with merge commits, and GitHub puts the PR title into the
+merge commit body. If the title is in conventional format, release-please
+parses it out of the body **and** picks up the original branch commit —
+producing duplicate changelog entries. Plain English titles avoid this.
+
+The release-please bot's own release PR (`chore(main): release X.Y.Z`) and
+Dependabot PRs are exempt.
 
 ### Branch and PR workflow
 
 `main` is **PR-only** — no direct pushes. The workflow is:
 
 1. Branch from `main`: `git switch -c feat/my-thing`
-2. Commit your work.
-3. Open a pull request against `main`.
-4. Wait for CI (lint, typecheck, test, build, GitGuardian secret-scan) to pass.
-5. Merge (squash or merge commit — keep the history readable).
+2. Commit your work (conventional-commit messages).
+3. Open a pull request against `main` (plain-English title).
+4. Wait for CI (lint, typecheck, test, build, PR-title check, GitGuardian
+   secret-scan) to pass.
+5. Merge with a merge commit (branch protection requires it).
 
 PRs that touch a GitHub issue should include "Closes #N" in the PR body.
 
