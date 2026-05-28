@@ -194,18 +194,18 @@ describe('Voss — profile without HCO3', () => {
 })
 
 // ---------------------------------------------------------------------------
-// Spot checks — Dorna (HCO3 = 0, must still have alkalinity_unit)
+// Spot checks — Dorna (re-sourced to a real HCO3 value)
 // ---------------------------------------------------------------------------
 
-describe('Dorna — HCO3 = 0 with alkalinity_unit', () => {
+describe('Dorna — real HCO3 with alkalinity_unit', () => {
   const dorna = findProfile('Dorna')
 
   it('is found', () => {
     expect(dorna).toBeDefined()
   })
 
-  it('HCO3 is 0', () => {
-    expect(dorna!.ions.HCO3).toBe(0)
+  it('HCO3 is the current bottler value', () => {
+    expect(dorna!.ions.HCO3).toBe(680.8)
   })
 
   it('alkalinity_unit is as_HCO3', () => {
@@ -260,7 +260,6 @@ describe('Contrex — CO2 "no gas" → 0', () => {
  * when the data is refreshed (issue #11).
  */
 const KNOWN_IMBALANCED = new Set([
-  'Dorna', // bicarbonate forced to 0; note says "adjusted"
   'Burton (beer brewing)', // classic recipe; NO3 unmeasured/excluded
   'London (beer brewing)', // classic recipe; NO3 unmeasured/excluded
   'Munich (beer brewing)', // classic recipe; NO3 unmeasured/excluded
