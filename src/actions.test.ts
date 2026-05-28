@@ -74,7 +74,7 @@ function applyJson(raw: string): string | null {
     return null
   }
 
-  return 'Unrecognised format. Expected an AppSnapshot (has "version") or a Profile (has "ions").'
+  return 'Unrecognised format. Expected a Waterforge recipe export or a water profile.'
 }
 
 // ---------------------------------------------------------------------------

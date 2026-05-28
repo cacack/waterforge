@@ -7,3 +7,4 @@ LICENSE-DATA
 *.svg
 .playwright-mcp
 qa
+.prompts
