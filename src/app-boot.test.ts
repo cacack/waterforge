@@ -199,4 +199,36 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
     // No hash → no applySnapshot call → storage state remains.
     expect(app.target?.name).toBe('Volvic')
   })
+
+  it('a second hash apply overrides state set by the first (same-tab paste)', () => {
+    // Models the issue #63 reproduction: user opens waterforge.app with
+    // some state, then pastes a different shared URL into the same tab.
+    // The browser does not reload (fragment-only navigation), so App.svelte's
+    // initial-mount hash-apply does not re-run — App.svelte must listen for
+    // hashchange and re-apply. This test proves the engine layer handles
+    // repeated application correctly; the listener wiring itself is verified
+    // by the live reproduction recorded on the issue.
+    const hashA: AppSnapshot = {
+      version: SNAPSHOT_VERSION,
+      targetName: 'Evian',
+      sourceMode: 'distilled',
+      source: {},
+      salts: [...SALT_ORDER],
+      batch: { volume: 1, unit: 'L' },
+    }
+    applySnapshot(decodeHash(encodeHash(hashA)))
+    expect(app.target?.name).toBe('Evian')
+
+    // User pastes a shared URL for a different profile into the same tab.
+    const hashB: AppSnapshot = {
+      version: SNAPSHOT_VERSION,
+      targetName: 'Volvic',
+      sourceMode: 'distilled',
+      source: {},
+      salts: [...SALT_ORDER],
+      batch: { volume: 1, unit: 'L' },
+    }
+    applySnapshot(decodeHash(encodeHash(hashB)))
+    expect(app.target?.name).toBe('Volvic')
+  })
 })

@@ -22,18 +22,31 @@
   // it is applied after loadFromStorage() so the shared link always takes
   // precedence. The hash is then cleared so subsequent manual edits are not
   // "stuck" on the shared URL.
-  loadFromStorage()
-
-  const rawHash = location.hash.slice(1) // strip leading '#'
-  if (rawHash) {
+  function applyHashIfPresent() {
+    const rawHash = location.hash.slice(1) // strip leading '#'
+    if (!rawHash) return
     const decoded = decodeHash(rawHash)
-    if (decoded !== null) {
-      applySnapshot(decoded)
-      // Remove the hash from the address bar without creating a history entry
-      // so the back-button still works as expected.
-      history.replaceState(null, '', location.pathname + location.search)
-    }
+    if (decoded === null) return
+    applySnapshot(decoded)
+    // Remove the hash from the address bar without creating a history entry
+    // so the back-button still works as expected.
+    history.replaceState(null, '', location.pathname + location.search)
   }
+
+  loadFromStorage()
+  applyHashIfPresent()
+
+  // A shared URL pasted into the *same* tab as an already-running Waterforge
+  // session is a fragment-only navigation — the browser does not reload the
+  // page, so the initial-mount code above never re-runs. Listen for
+  // hashchange and re-apply so the second-paste case works. Issue #63.
+  $effect(() => {
+    function onHashChange() {
+      applyHashIfPresent()
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  })
 
   // Keep the document theme class in sync with the theme store.
   $effect(() => {
