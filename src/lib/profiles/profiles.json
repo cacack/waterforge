@@ -86,11 +86,12 @@
       "Cl": 50
     },
     "alkalinity_unit": "as_HCO3",
-    "comment": "Ca:Mg 1:1, Na at 125 mg/L according to    Kulhavy, T; Cuta, J. Vodni Hospodarstvi:  B  1973,  23(9),  222-6 \"Effects of  mineral  content on the  taste  of water\"",
+    "comment": "Synthetic recipe: Ca:Mg 1:1, Na ≈ 125 mg/L, per Kulhavý & Čuta (Vodní Hospodářství B, 1973). The 1973 paper could not be located online; only the Na optimum is independently corroborated (Marcussen et al. 2020). HCO₃/SO₄/Cl values unverified against a primary source.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7765973/",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "Kulhavý & Čuta, Vodní Hospodářství B 1973, 23(9), 222–6 'Effects of mineral content on the taste of water' (primary not located online); Na≈125 mg/L optimum corroborated by Marcussen et al., Foods 2020, 9(12), 1875.",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -427,13 +428,14 @@
   },
   {
     "name": "London (beer brewing)",
-    "ions": { "Ca": 90, "Mg": 4, "Na": 24, "HCO3": 123, "SO4": 58, "Cl": 18 },
+    "ions": { "Ca": 90, "Mg": 4, "Na": 24, "HCO3": 104, "SO4": 58, "Cl": 18 },
     "alkalinity_unit": "as_HCO3",
-    "comment": "NO₃ 3 mg/L.",
+    "comment": "NO₃ 3 mg/L. HCO₃ corrected from Khymos 123 to 104 mg/L per John Palmer 'How to Brew' Table 21 (London Bitter profile). Ca/Mg/Na/SO4/Cl retain Khymos values; historical well analyses vary widely. Classic recipe; NO₃ unmeasured/excluded and knowingly charge-imbalanced.",
+    "url": "https://howtobrew.com/section-3/chapter-15/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "John Palmer — How to Brew (4th ed.), Table 21 (London Bitter water)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -460,13 +462,14 @@
   },
   {
     "name": "Munich (beer brewing)",
-    "ions": { "Ca": 80, "Mg": 19, "Na": 1, "HCO3": 164, "SO4": 5, "Cl": 1 },
+    "ions": { "Ca": 80, "Mg": 19, "Na": 1, "HCO3": 152, "SO4": 5, "Cl": 1 },
     "alkalinity_unit": "as_HCO3",
-    "comment": "NO₃ 3 mg/L.",
+    "comment": "NO₃ 3 mg/L. HCO₃ corrected from Khymos 164 to 152 mg/L per John Palmer 'How to Brew' Table 21 (Munich Oktoberfest profile). Ca/Mg/Na/SO4/Cl retain Khymos values (Ca/Mg closely match Palmer); historical well analyses vary widely. Classic recipe; NO₃ unmeasured/excluded and knowingly charge-imbalanced.",
+    "url": "https://howtobrew.com/section-3/chapter-15/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "John Palmer — How to Brew (4th ed.), Table 21 (Munich Oktoberfest water)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -511,12 +514,14 @@
   },
   {
     "name": "Pilsen (beer brewing)",
-    "ions": { "Ca": 7, "Mg": 1, "Na": 3, "HCO3": 9, "SO4": 6, "Cl": 5 },
+    "ions": { "Ca": 7, "Mg": 1, "Na": 3, "HCO3": 3, "SO4": 6, "Cl": 5 },
     "alkalinity_unit": "as_HCO3",
+    "comment": "HCO₃ corrected from Khymos 9 to 3 mg/L per John Palmer 'How to Brew' Table 21 (Pilsen Pilsner profile). Ca/Mg/Na/SO4/Cl retain Khymos values, all within ~2 ppm of Palmer. Classic recipe; NO₃ unmeasured/excluded.",
+    "url": "https://howtobrew.com/section-3/chapter-15/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "John Palmer — How to Brew (4th ed.), Table 21 (Pilsen Pilsner water)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -531,10 +536,11 @@
       "Cl": 1.8
     },
     "alkalinity_unit": "as_HCO3",
+    "comment": "Provenance unrecoverable: no primary reference ties this 'PurPur' composition to a documented coffee-water recipe. Values retained from the Khymos v6 calculator pending a credible source.",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "Origin unrecoverable — entry inherited from the Khymos Mineral Water Calculator v6 with no upstream citation; searches for a coffee-water recipe (incl. Colonna-Dashwood / Hendon 'Water for Coffee') found no primary source.",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -660,16 +666,16 @@
     }
   },
   {
-    "name": "SCAA target (coffee brewing)",
-    "ions": { "Ca": 68, "Mg": 0, "Na": 10, "K": 0, "HCO3": 233, "Cl": 0 },
+    "name": "SCA target (coffee brewing)",
+    "ions": { "Ca": 27, "Mg": 0, "Na": 10, "K": 0, "HCO3": 49, "Cl": 0 },
     "alkalinity_unit": "as_HCO3",
     "ph": 7,
-    "comment": "NO₃ 0 mg/L. Ideal water for coffee according to Specialty Coffee Association of America (SCAA). HCO3 added to balance charge.",
-    "url": "http://scaa.org/PDF/ST%20-%20WATER%20STANDARD%20V.21NOV2009A.pdf",
+    "comment": "NO₃ 0 mg/L. Target derived from the SCA (formerly SCAA) 'Water for Brewing Specialty Coffee' standard, which specifies Calcium Hardness 68 mg/L and Total Alkalinity 40 mg/L expressed as CaCO₃. Converted to elemental Ca ≈ 27 mg/L and HCO₃ ≈ 49 mg/L. Corrected from the prior Khymos encoding (Ca 68, HCO₃ 233) which read the CaCO₃ hardness figure as elemental Ca.",
+    "url": "https://web.archive.org/web/20230530130441/http://www.scaa.org/PDF/ST%20-%20WATER%20STANDARD%20V.21NOV2009A.pdf",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Specialty Coffee Association (formerly SCAA) — Water for Brewing Specialty Coffee standard (rev. 21 Nov 2009)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -704,12 +710,12 @@
     },
     "alkalinity_unit": "as_HCO3",
     "tds": 152.5,
-    "comment": "\"Functional water 2\" from US 2006/0286263",
-    "url": "http://www.google.com/patents/US20060286263",
+    "comment": "\"Functional water 2\" from US 2006/0286263 A1 — the UPPER bound of a tea-brewing water range (paired with 'Functional water 1' as the lower bound). All ion values and TDS confirmed against Table I.",
+    "url": "https://patents.google.com/patent/US20060286263A1/en",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "US Patent Application 2006/0286263 A1 (Conopco/Unilever), \"Functional water 2\" (Table I)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -725,12 +731,12 @@
     },
     "alkalinity_unit": "as_HCO3",
     "tds": 60.3,
-    "comment": "\"Functional water 1\" from US 2006/0286263",
-    "url": "http://www.google.com/patents/US20060286263",
+    "comment": "\"Functional water 1\" from US 2006/0286263 A1 — the LOWER bound of a tea-brewing water range (the patent pairs it with 'Functional water 2' as the upper bound). All ion values and TDS confirmed against Table I.",
+    "url": "https://patents.google.com/patent/US20060286263A1/en",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "US Patent Application 2006/0286263 A1 (Conopco/Unilever), \"Functional water 1\" (Table I)",
+      "source_date": "2026-05-28"
     }
   },
   {
