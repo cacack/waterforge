@@ -37,7 +37,7 @@
         />
         <Label
           for="salt-{id}"
-          class="flex cursor-pointer flex-col leading-tight"
+          class="flex cursor-pointer flex-col items-start gap-0.5 leading-tight"
         >
           <span class="text-sm font-medium">{salt.name}</span>
           <span class="text-muted-foreground font-mono text-xs"

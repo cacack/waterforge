@@ -20,3 +20,7 @@ npm-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# Playwright MCP scratch (snapshots, screenshots) — local QA artifacts only.
+.playwright-mcp/
+qa/

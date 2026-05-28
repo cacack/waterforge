@@ -11,15 +11,15 @@
   class="border-border bg-background/80 sticky top-0 z-10 border-b backdrop-blur"
 >
   <div
-    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3"
+    class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4"
   >
-    <div class="flex items-baseline gap-2">
+    <div class="flex min-w-0 items-baseline gap-2">
       <span class="text-lg font-semibold tracking-tight">Waterforge</span>
-      <span class="text-muted-foreground hidden text-sm sm:inline">
+      <span class="text-muted-foreground hidden truncate text-sm sm:inline">
         bottled mineral water from salts
       </span>
     </div>
-    <div class="flex items-center gap-1">
+    <div class="flex shrink-0 items-center gap-1">
       <!-- Recipe import/export actions (#22); share link will join here (#23) -->
       <Actions />
       <Button

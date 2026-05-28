@@ -91,6 +91,7 @@
       checked={isKnown}
       onCheckedChange={toggleSourceMode}
       size="sm"
+      aria-label="Use known source water analysis"
     />
     <Label for="source-mode-switch" class="cursor-pointer select-none">
       {isKnown ? 'Known source' : 'Distilled / RO (all ions zero)'}
@@ -108,13 +109,18 @@
             </Label>
             <!-- Alkalinity unit toggle — only on HCO3 row -->
             {#if ion === 'HCO3'}
-              <div class="flex overflow-hidden rounded border text-xs">
+              <div
+                class="flex overflow-hidden rounded border text-xs"
+                role="group"
+                aria-label="Alkalinity unit"
+              >
                 <button
                   type="button"
                   class="px-1.5 py-0.5 transition-colors {alkUnit === 'hco3'
                     ? 'bg-primary text-primary-foreground font-medium'
                     : 'text-muted-foreground hover:bg-muted'}"
                   onclick={() => switchAlkUnit('hco3')}
+                  aria-pressed={alkUnit === 'hco3'}
                   title="Enter alkalinity as mg/L HCO₃ (native engine units)"
                 >
                   HCO₃
@@ -125,6 +131,7 @@
                     ? 'bg-primary text-primary-foreground font-medium'
                     : 'text-muted-foreground hover:bg-muted'}"
                   onclick={() => switchAlkUnit('caco3')}
+                  aria-pressed={alkUnit === 'caco3'}
                   title="Enter alkalinity as mg/L CaCO₃ (common on water reports) — converted to HCO₃ before solving"
                 >
                   CaCO₃
