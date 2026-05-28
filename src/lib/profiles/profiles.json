@@ -98,23 +98,20 @@
   {
     "name": "Badoit",
     "ions": {
-      "Ca": 190,
-      "Mg": 85,
-      "Na": 165,
-      "K": 10,
-      "HCO3": 1300,
-      "SO4": 38,
-      "Cl": 44
+      "Ca": 153,
+      "Mg": 80,
+      "Na": 180,
+      "HCO3": 1250,
+      "SO4": 35,
+      "Cl": 54
     },
     "alkalinity_unit": "as_HCO3",
-    "co2": 2500,
-    "ph": 6,
-    "tds": 1200,
-    "comment": "Used for pale lager beer",
+    "comment": "Naturally carbonated. SiO₂ 27 mg/L, F⁻ 1.2 mg/L. Official badoit.fr table omits K, pH, TDS and CO₂; prior Khymos-2015 values for those fields dropped.",
+    "url": "https://www.badoit.fr/notre-eau-minerale/badoit-composition.html",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Badoit official composition page (badoit.fr — Tableau de composition, valeurs moyennes pour 1 litre)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -205,20 +202,22 @@
   {
     "name": "Carola Rouge",
     "ions": {
-      "Ca": 103,
-      "Mg": 52.2,
-      "Na": 103,
-      "K": 22.2,
-      "HCO3": 505,
-      "SO4": 205,
-      "Cl": 76.6
+      "Ca": 73,
+      "Mg": 20,
+      "Na": 131,
+      "K": 7,
+      "HCO3": 427,
+      "SO4": 143,
+      "Cl": 57
     },
     "alkalinity_unit": "as_HCO3",
-    "url": "http://www.carola.fr",
+    "tds": 665,
+    "comment": "NO₃ 1.5 mg/L. Carbonation grade only (Rouge); ion composition is shared across Carola variants. Now classified as eau de source.",
+    "url": "https://fr.openfoodfacts.org/produit/3268650001069/carola-rouge",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Carola Rouge product label (Sources Alma) as transcribed on Open Food Facts; matches carola.fr composition cited by fr.wikipedia",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -234,12 +233,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "co2": 0,
+    "ph": 7.4,
     "tds": 2078,
-    "comment": "NO₃ 2.9 mg/L.",
+    "comment": "NO₃ 2.9 mg/L. Still water. Major ions and TDS 2078 confirmed against current Contrex/Nestlé label.",
+    "url": "https://www.contrex.fr/eau-minerale-contrex/composition",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Contrex official composition (contrex.fr / Nestlé), label transcription via Open Food Facts EAN 7613035866386",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -550,22 +551,23 @@
   {
     "name": "Saint-Yorre",
     "ions": {
-      "Ca": 78.8,
-      "Mg": 9,
-      "Na": 1744,
-      "K": 115,
-      "HCO3": 4263,
-      "SO4": 182,
-      "Cl": 329
+      "Ca": 90,
+      "Mg": 11,
+      "Na": 1708,
+      "K": 110,
+      "HCO3": 4368,
+      "SO4": 174,
+      "Cl": 322
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 6.6,
     "tds": 4774,
-    "url": "http://fg.geo.uu.nl/perk/mineralwaters/mineralwater.php?Country_id=1013&Brand=St-Yorre",
+    "comment": "Naturally carbonated (Source Royale). F⁻ < 1.5 mg/L. Very high mineralisation; known charge-imbalanced.",
+    "url": "https://www.st-yorre.com/st-yorre-et-mineralite/st-yorre-riche-mineraux/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Saint-Yorre official composition (st-yorre.com — Source Royale, composition moyenne en mg/l)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -784,42 +786,43 @@
   {
     "name": "Vittel",
     "ions": {
-      "Ca": 202,
-      "Mg": 36,
-      "Na": 3.8,
-      "HCO3": 402,
-      "SO4": 306,
-      "Cl": 0
+      "Ca": 240,
+      "Mg": 42,
+      "Na": 5.2,
+      "HCO3": 384,
+      "SO4": 400
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 7.5,
-    "tds": 841,
+    "ph": 7.6,
+    "tds": 1084,
+    "comment": "NO₃ 4.4 mg/L. Official label omits K and Cl; prior Khymos Cl 0 dropped.",
+    "url": "https://www.vittel.fr/source-de-vittel-mineralisation-de-son-eau",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Vittel official mineralisation (vittel.fr), label transcription via Open Food Facts EAN 7613036249928",
+      "source_date": "2026-05-28"
     }
   },
   {
     "name": "Volvic",
     "ions": {
-      "Ca": 11.5,
+      "Ca": 12,
       "Mg": 8,
-      "Na": 11.6,
-      "K": 6.2,
-      "HCO3": 71,
-      "SO4": 6.9,
-      "Cl": 13.5
+      "Na": 12,
+      "K": 6,
+      "HCO3": 74,
+      "SO4": 9,
+      "Cl": 15
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7,
-    "tds": 109,
-    "comment": "NO₃ 6.3 mg/L.",
-    "url": "http://en.wikipedia.org/wiki/Volvic_(mineral_water)",
+    "tds": 130,
+    "comment": "NO₃ 7.3 mg/L. SiO₂ 32 mg/L.",
+    "url": "https://fr.openfoodfacts.org/produit/3057640262128/eau-minerale-naturelle-volvic",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Volvic product label (Analyse caractéristique, mg/L) transcribed on Open Food Facts; volvic.fr composition page no longer publishes the numeric table",
+      "source_date": "2026-05-28"
     }
   },
   {
