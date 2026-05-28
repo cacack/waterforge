@@ -2,23 +2,22 @@
   {
     "name": "Acqua Panna",
     "ions": {
-      "Ca": 30.2,
-      "Mg": 6.9,
+      "Ca": 33.1,
+      "Mg": 6.6,
       "Na": 6.5,
-      "K": 0.9,
-      "HCO3": 100,
-      "SO4": 21.4,
-      "Cl": 7.1
+      "HCO3": 110,
+      "SO4": 20.8,
+      "Cl": 8.3
     },
     "alkalinity_unit": "as_HCO3",
-    "co2": 0.008,
-    "ph": 8.2,
-    "tds": 137,
-    "comment": "NO₃ 5.7 mg/L.",
+    "ph": 7.66,
+    "tds": 138,
+    "comment": "NO₃ 2.1 mg/L (reported as 0.48 mg/L nitrate-as-N). HCO₃ derived from total alkalinity 90 mg/L as CaCO₃. K below detection limit. Still water (no CO₂).",
+    "url": "https://www.acquapanna.com/us/sites/g/files/xknfdk971/files/2024-09/AcquaPanna_WA_EN_2023.pdf",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Acqua Panna Water Analysis Report 2023 (Sanpellegrino S.p.A.); Panna Spring, Scarperia (Florence), Italy",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -310,23 +309,23 @@
   {
     "name": "Fiuggi",
     "ions": {
-      "Ca": 15.9,
-      "Mg": 6.3,
-      "Na": 6.4,
-      "K": 4.4,
-      "HCO3": 81.7,
-      "SO4": 6,
-      "Cl": 13.9
+      "Ca": 25,
+      "Mg": 7.8,
+      "Na": 8.1,
+      "K": 9.5,
+      "HCO3": 113,
+      "SO4": 2
     },
     "alkalinity_unit": "as_HCO3",
-    "co2": 8,
-    "ph": 6.8,
-    "tds": 122,
-    "comment": "NO₃ 7 mg/L.",
+    "co2": 5,
+    "ph": 7.47,
+    "tds": 150,
+    "comment": "NO₃ 3.1 mg/L. SiO₂ ~16–33 mg/L. Cl not published on current analysis (Khymos value dropped). Fonte Fiuggi (FR), Lazio.",
+    "url": "https://www.beverfood.com/acqua/fiuggi.html",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Acqua Fiuggi label — chemical-physical analysis, Università di Roma \"La Sapienza\" (SO₄/NO₃ from acquafiuggi.com-cited label); transcribed by Beverfood",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -592,23 +591,24 @@
   {
     "name": "San Benedetto",
     "ions": {
-      "Ca": 46,
-      "Mg": 30,
-      "Na": 6.8,
-      "K": 1.1,
-      "HCO3": 293,
-      "SO4": 4.9,
-      "Cl": 2.8
+      "Ca": 47.1,
+      "Mg": 26.9,
+      "Na": 5.7,
+      "K": 0.94,
+      "HCO3": 283,
+      "SO4": 4.4,
+      "Cl": 2.7
     },
     "alkalinity_unit": "as_HCO3",
     "co2": 0,
-    "ph": 7.68,
-    "tds": 250,
-    "comment": "NO₃ 6.8 mg/L.",
+    "ph": 7.48,
+    "tds": 262,
+    "comment": "NO₃ 9 mg/L. SiO₂ 16.6 mg/L. Fonte San Benedetto, Scorzè (VE). Still water.",
+    "url": "https://www.mybeverages.it/uploads/prodotti/schede/S.BANA33PL.pdf",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "San Benedetto official scheda tecnica (Acqua Minerale San Benedetto S.p.A.), analysis Università di Napoli Federico II 04/07/2019",
+      "source_date": "2026-05-28"
     }
   },
   {
