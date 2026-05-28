@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "typecheck": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
     "test": "vitest run",
-    "lint": "eslint . && prettier --check .",
+    "lint": "eslint . && prettier --check . && node scripts/check-shadcn-data-attrs.mjs",
     "format": "prettier --write ."
   },
   "devDependencies": {
