@@ -24,3 +24,6 @@ npm-debug.log*
 # Playwright MCP scratch (snapshots, screenshots) — local QA artifacts only.
 .playwright-mcp/
 qa/
+
+# Local prompt scratch
+.prompts/
