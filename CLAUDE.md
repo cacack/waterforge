@@ -22,7 +22,8 @@ TypeScript + Svelte 5 (runes) + Vite, deployed to GitHub Pages.
 
 ## Conventions
 
-- Conventional commits.
+- Conventional commits **on branch commits**. PR titles use plain English
+  (CI rejects conventional-format PR titles — see `CONTRIBUTING.md`).
 - `main` is PR-only — branch → PR → merge; no direct pushes.
 - Engine code (`chem/`, `solver/`) is framework-agnostic pure TypeScript; keep
   it independent of the Svelte UI so the math stays portable and testable.
