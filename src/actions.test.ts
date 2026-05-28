@@ -11,15 +11,18 @@ import { app } from './state.svelte'
 import {
   snapshotState,
   applySnapshot,
+  buildRecipeExport,
   SNAPSHOT_VERSION,
   type AppSnapshot,
 } from './persist.svelte'
+import { computeResult } from './state.svelte'
 import {
   PROFILES,
   SALT_ORDER,
   profileToIonProfile,
   validateProfile,
   type Profile,
+  type SaltId,
 } from '$lib'
 
 // ---------------------------------------------------------------------------
@@ -308,5 +311,113 @@ describe('import — error handling', () => {
     const err = applyJson('[1,2,3]')
     expect(err).toMatch(/Unrecognised format/)
     expect(app.target?.name).toBe(nameBefore)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Export: buildRecipeExport — self-contained recipe download
+// ---------------------------------------------------------------------------
+
+describe('export — buildRecipeExport', () => {
+  beforeEach(resetApp)
+
+  it('embeds the full target profile (ions + alkalinity unit), not just the name', () => {
+    const perrier = PROFILES.find((p) => p.name === 'Perrier')
+    expect(perrier).toBeDefined()
+    app.target = perrier!
+
+    const exported = buildRecipeExport()
+
+    expect(exported.targetName).toBe('Perrier')
+    expect(exported.target).not.toBeNull()
+    expect(exported.target!.name).toBe('Perrier')
+    expect(exported.target!.ions).toEqual(perrier!.ions)
+    expect(exported.target!.alkalinity_unit).toBe(
+      perrier!.alkalinity_unit ?? 'as_HCO3',
+    )
+  })
+
+  it('embeds the computed per-batch recipe matching computeResult().recipe', () => {
+    // Known, deterministic setup: Evian target, distilled source, default
+    // salt palette, 1 L batch.
+    app.target = PROFILES.find((p) => p.name === 'Evian') ?? null
+    app.sourceMode = 'distilled'
+    app.source = {}
+    app.salts = [...SALT_ORDER]
+    app.batch = { volume: 1, unit: 'L' }
+
+    const result = computeResult()
+    expect(result).not.toBeNull()
+
+    const exported = buildRecipeExport()
+    expect(exported.recipe).not.toBeNull()
+    expect(exported.recipe!.batchVolume).toBe(1)
+    expect(exported.recipe!.batchUnit).toBe('L')
+
+    // perBatch matches the solver's recipe ion-by-ion (floats → toBeCloseTo).
+    for (const id of Object.keys(result!.recipe) as SaltId[]) {
+      expect(exported.recipe!.perBatch[id] ?? 0).toBeCloseTo(
+        result!.recipe[id] ?? 0,
+        6,
+      )
+    }
+
+    // perLitre matches the solver's dosePerLitre.
+    for (const id of Object.keys(result!.dosePerLitre) as SaltId[]) {
+      expect(exported.recipe!.perLitre[id] ?? 0).toBeCloseTo(
+        result!.dosePerLitre[id] ?? 0,
+        6,
+      )
+    }
+
+    // resultProfile + readouts are populated.
+    expect(exported.resultProfile).not.toBeNull()
+    expect(exported.readouts).not.toBeNull()
+    expect(exported.readouts!.tds).toBeCloseTo(result!.readouts.tds, 6)
+  })
+
+  it('round-trips through applySnapshot: re-importing restores the same inputs', () => {
+    // Start with a non-default state we can detect was restored.
+    app.target = PROFILES.find((p) => p.name === 'Volvic') ?? null
+    app.sourceMode = 'known'
+    app.source = { Ca: 12, Mg: 8 }
+    app.salts = ['gypsum', 'tableSalt']
+    app.batch = { volume: 5, unit: 'gal' }
+
+    const json = JSON.stringify(buildRecipeExport())
+
+    // Reset to defaults so we can verify the import actually changed things.
+    resetApp()
+    expect(app.target?.name).toBe('Evian')
+
+    // Existing import path needs no change: applySnapshot reads only the
+    // known input keys and silently ignores target/recipe/resultProfile/readouts.
+    expect(() => applySnapshot(JSON.parse(json))).not.toThrow()
+
+    expect(app.target?.name).toBe('Volvic')
+    expect(app.sourceMode).toBe('known')
+    expect(app.source).toEqual({ Ca: 12, Mg: 8 })
+    expect(app.salts).toEqual(['gypsum', 'tableSalt'])
+    expect(app.batch).toEqual({ volume: 5, unit: 'gal' })
+  })
+
+  it('handles a null target: target/recipe/resultProfile/readouts are all null but the file still parses', () => {
+    app.target = null
+
+    const exported = buildRecipeExport()
+    expect(exported.targetName).toBeNull()
+    expect(exported.target).toBeNull()
+    expect(exported.recipe).toBeNull()
+    expect(exported.resultProfile).toBeNull()
+    expect(exported.readouts).toBeNull()
+
+    const json = JSON.stringify(exported)
+    expect(() => JSON.parse(json)).not.toThrow()
+
+    // Re-importing leaves app.target null.
+    resetApp() // sets target to Evian
+    expect(snapshotState().targetName).toBe('Evian')
+    applySnapshot(JSON.parse(json))
+    expect(app.target).toBeNull()
   })
 })

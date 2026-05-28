@@ -14,10 +14,12 @@ import {
   SALT_ORDER,
   findProfile,
   type IonProfile,
+  type Readouts,
+  type SaltDose,
   type SaltId,
   type VolumeUnit,
 } from '$lib'
-import { app, type SourceMode } from './state.svelte'
+import { app, computeResult, type SourceMode } from './state.svelte'
 
 // ---------------------------------------------------------------------------
 // Snapshot schema
@@ -43,6 +45,43 @@ export interface AppSnapshot {
   }
 }
 
+/**
+ * A self-contained "recipe" export: a strict superset of {@link AppSnapshot}
+ * that additionally embeds the resolved target profile, the computed per-salt
+ * doses (per-litre and scaled to the chosen batch), and the result profile +
+ * readouts. Used by the file-download path so a downloaded recipe is
+ * sufficient to follow offline, even if the profile library later changes.
+ *
+ * Deliberately has no discriminator field — it is a strict superset of
+ * {@link AppSnapshot}, which means {@link applySnapshot} round-trips it via
+ * its existing unknown-key tolerance with no special handling required.
+ *
+ * Share-link and localStorage paths intentionally keep using the smaller
+ * {@link AppSnapshot} shape; only the file-download path uses this richer
+ * format.
+ */
+export interface RecipeExport extends AppSnapshot {
+  /** Full resolved target profile, or null if no target is selected. */
+  target: {
+    name: string
+    ions: IonProfile
+    alkalinity_unit: 'as_HCO3' | 'as_CaCO3'
+  } | null
+  /** Computed per-salt doses, or null if no target is selected. */
+  recipe: {
+    /** Per-salt grams per litre (unscaled). */
+    perLitre: SaltDose
+    /** Per-salt grams scaled to {@link batchVolume} and {@link batchUnit}. */
+    perBatch: SaltDose
+    batchVolume: number
+    batchUnit: VolumeUnit
+  } | null
+  /** Ion profile (mg/L) the recipe is expected to produce, or null. */
+  resultProfile: IonProfile | null
+  /** Derived readouts (TDS, charge residual, sulfate:chloride), or null. */
+  readouts: Readouts | null
+}
+
 // ---------------------------------------------------------------------------
 // Snapshot / apply
 // ---------------------------------------------------------------------------
@@ -61,6 +100,45 @@ export function snapshotState(): AppSnapshot {
     source: { ...app.source },
     salts: [...app.salts],
     batch: { ...app.batch },
+  }
+}
+
+/**
+ * Build a self-contained recipe export — see {@link RecipeExport}.
+ *
+ * Strict superset of {@link snapshotState}: the embedded `target` + `recipe`
+ * + `resultProfile` + `readouts` fields are *outputs* that {@link applySnapshot}
+ * silently ignores on import (it only reads known inputs), so round-tripping a
+ * downloaded recipe through the existing import path Just Works.
+ *
+ * If no target is selected, the `target`/`recipe`/`resultProfile`/`readouts`
+ * fields are all `null`; the remaining inputs (source, salts, batch) are still
+ * recorded so the file always parses.
+ */
+export function buildRecipeExport(): RecipeExport {
+  const snap = snapshotState()
+  const result = computeResult()
+  const target = app.target
+    ? {
+        name: app.target.name,
+        ions: { ...app.target.ions },
+        alkalinity_unit: app.target.alkalinity_unit ?? 'as_HCO3',
+      }
+    : null
+  const recipe = result
+    ? {
+        perLitre: { ...result.dosePerLitre },
+        perBatch: { ...result.recipe },
+        batchVolume: app.batch.volume,
+        batchUnit: app.batch.unit,
+      }
+    : null
+  return {
+    ...snap,
+    target,
+    recipe,
+    resultProfile: result ? { ...result.resultProfile } : null,
+    readouts: result ? { ...result.readouts } : null,
   }
 }
 
