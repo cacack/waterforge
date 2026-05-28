@@ -1,6 +1,5 @@
 <script lang="ts">
   import { ION_ORDER, caco3ToHco3, hco3ToCaco3, type IonId } from '$lib'
-  import { Switch } from '$lib/components/ui/switch'
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
   import { app } from '../state.svelte'
@@ -84,18 +83,36 @@
 </script>
 
 <SectionCard title="Source water">
-  <!-- Mode toggle row -->
-  <div class="mb-3 flex items-center gap-3">
-    <Switch
-      id="source-mode-switch"
-      checked={isKnown}
-      onCheckedChange={toggleSourceMode}
-      size="sm"
-      aria-label="Use known source water analysis"
-    />
-    <Label for="source-mode-switch" class="cursor-pointer select-none">
-      {isKnown ? 'Known source' : 'Distilled / RO (all ions zero)'}
-    </Label>
+  <!-- Mode toggle row: segmented control so the active mode is unambiguous -->
+  <div class="mb-3 flex items-center">
+    <div
+      class="flex overflow-hidden rounded border text-sm"
+      role="group"
+      aria-label="Source water mode"
+    >
+      <button
+        type="button"
+        class="px-3 py-1 transition-colors {!isKnown
+          ? 'bg-primary text-primary-foreground font-medium'
+          : 'text-muted-foreground hover:bg-muted'}"
+        onclick={() => toggleSourceMode(false)}
+        aria-pressed={!isKnown}
+        title="Start from distilled or RO water (all source ions zero)"
+      >
+        Distilled / RO
+      </button>
+      <button
+        type="button"
+        class="px-3 py-1 transition-colors {isKnown
+          ? 'bg-primary text-primary-foreground font-medium'
+          : 'text-muted-foreground hover:bg-muted'}"
+        onclick={() => toggleSourceMode(true)}
+        aria-pressed={isKnown}
+        title="Use a known source water analysis — enter ion concentrations below"
+      >
+        Known analysis
+      </button>
+    </div>
   </div>
 
   {#if isKnown}
