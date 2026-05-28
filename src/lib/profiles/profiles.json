@@ -45,33 +45,35 @@
   {
     "name": "Apollinaris",
     "ions": {
-      "Ca": 100,
-      "Mg": 130,
-      "Na": 410,
-      "K": 20,
-      "HCO3": 1810,
-      "SO4": 80,
-      "Cl": 100
+      "Ca": 90,
+      "Mg": 120,
+      "Na": 470,
+      "K": 30,
+      "HCO3": 1800,
+      "SO4": 100,
+      "Cl": 130
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 2767,
-    "comment": "NO₃ 1.6 mg/L. Used for dark, soft flavored beers",
+    "tds": 2740,
+    "comment": "Used for dark, soft flavored beers. Apollinaris (Bad Neuenahr-Ahrweiler, Coca-Cola) — Apollinaris Classic/Selection mineralisation. Classic/Medium were withdrawn from German retail; Selection remains (gastronomy/export), same source water.",
+    "url": "https://www.apollinaris.de/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Apollinaris official mineralisation (Apollinaris Classic/Selection, Coca-Cola DE)",
+      "source_date": "2026-05-28"
     }
   },
   {
     "name": "Aquarel Birken",
-    "ions": { "Ca": 106, "Mg": 23.3, "Na": 19.7, "HCO3": 423, "Cl": 32.2 },
+    "ions": { "Ca": 106, "Mg": 23, "Na": 19, "HCO3": 423, "Cl": 32 },
     "alkalinity_unit": "as_HCO3",
-    "tds": 613,
-    "comment": "Used for dark, soft flavored beers",
+    "tds": 603,
+    "comment": "Used for dark, soft flavored beers. HISTORICAL / unverified-current: Nestlé Aquarel (Birken Quelle, Naturell) is no longer marketed in Germany — no current bottler source. Values from mineralwasser-test.com label transcription. Removal-sub-issue candidate.",
+    "url": "https://mineralwasser-test.com/wasser/nestle-aquarel-birken-quelle-naturell/",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "mineralwasser-test.com label transcription (Nestlé Aquarel Birken Quelle Naturell) — brand discontinued in DE, no current source",
+      "source_date": "2021-08-31"
     }
   },
   {
@@ -370,19 +372,21 @@
   {
     "name": "Hassia Sprudel",
     "ions": {
-      "Ca": 190,
-      "Mg": 34,
-      "Na": 197,
-      "K": 21.9,
-      "HCO3": 1098,
-      "SO4": 37,
-      "Cl": 109
+      "Ca": 198,
+      "Mg": 33,
+      "Na": 164,
+      "K": 20,
+      "HCO3": 1049,
+      "SO4": 28,
+      "Cl": 86
     },
     "alkalinity_unit": "as_HCO3",
+    "comment": "Hassia Sprudel (Bad Vilbel) — official Hassia mineralisation (SGS Institut Fresenius).",
+    "url": "https://www.hassia-sprudel.de/produkte/mineralwasser/sprudel",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Hassia official product page — Hassia Sprudel mineralisation (SGS Institut Fresenius)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -399,27 +403,6 @@
     "alkalinity_unit": "as_HCO3",
     "tds": 581,
     "comment": "NO₃ 16 mg/L.",
-    "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
-    }
-  },
-  {
-    "name": "Kessel",
-    "ions": {
-      "Ca": 40.8,
-      "Mg": 13.3,
-      "Na": 770.4,
-      "K": 5.4,
-      "HCO3": 2123,
-      "SO4": 5.35,
-      "Cl": 97.4
-    },
-    "alkalinity_unit": "as_HCO3",
-    "ph": 6.2,
-    "tds": 4626,
-    "comment": "NO₃ 0.1 mg/L.",
     "provenance": {
       "verified": false,
       "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
@@ -475,19 +458,21 @@
   {
     "name": "Neuselters",
     "ions": {
-      "Ca": 100,
-      "Mg": 27,
-      "Na": 90,
-      "K": 6,
-      "HCO3": 570,
-      "SO4": 6,
-      "Cl": 60
+      "Ca": 124,
+      "Mg": 35,
+      "Na": 149,
+      "K": 9,
+      "HCO3": 680,
+      "SO4": 16,
+      "Cl": 153
     },
     "alkalinity_unit": "as_HCO3",
+    "comment": "HISTORICAL / unverified-current: Neuselters Mineralquellen (Löhnberg) permanently closed Feb 2016 — no current authoritative source exists. Values from mineralwasser-test.com label transcription (Neuselters Still). Removal-sub-issue candidate.",
+    "url": "https://mineralwasser-test.com/wasser/neuselters-still/",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "mineralwasser-test.com label transcription (Neuselters Still) — brand discontinued 2016, no current source",
+      "source_date": "2021-08-31"
     }
   },
   {
@@ -546,19 +531,21 @@
   {
     "name": "Rosbacher Klassich",
     "ions": {
-      "Ca": 206,
-      "Mg": 100,
-      "Na": 72.7,
-      "K": 4.4,
-      "HCO3": 1095,
-      "SO4": 19,
-      "Cl": 112
+      "Ca": 224,
+      "Mg": 101,
+      "Na": 89,
+      "K": 4,
+      "HCO3": 1225,
+      "SO4": 9,
+      "Cl": 142
     },
     "alkalinity_unit": "as_HCO3",
+    "comment": "Rosbacher Klassisch (Rosbach v.d.Höhe, Hassia Group) — manufacturer mineralisation; Rosbacher cites Institut Fresenius analysis (Taunusstein, 17.09.2015). Ca:Mg ~2:1.",
+    "url": "https://www.rosbacher.de/magazin/ein-geschenk-der-natur",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Rosbacher official mineralisation — Rosbacher Klassisch (Institut Fresenius, Taunusstein)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -585,19 +572,21 @@
   {
     "name": "Salvus",
     "ions": {
-      "Ca": 99,
-      "Mg": 5.7,
-      "Na": 18.5,
+      "Ca": 96,
+      "Mg": 5.4,
+      "Na": 27,
       "K": 1,
-      "HCO3": 211,
-      "SO4": 69,
-      "Cl": 42.4
+      "HCO3": 184,
+      "SO4": 84,
+      "Cl": 61
     },
     "alkalinity_unit": "as_HCO3",
+    "comment": "F⁻ 0.16 mg/L. Salvus (Emsdetten) — official Salvus mineralisation (Institut Romeis).",
+    "url": "https://www.salvus.de/sortiment/salvus-classic/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Salvus official mineralisation — Salvus Classic (Institut Romeis)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -681,20 +670,21 @@
   {
     "name": "Selters",
     "ions": {
-      "Ca": 110,
-      "Mg": 38,
-      "Na": 299,
+      "Ca": 107,
+      "Mg": 39,
+      "Na": 257,
       "K": 13,
-      "HCO3": 850,
-      "SO4": 20,
-      "Cl": 269
+      "HCO3": 791,
+      "SO4": 14,
+      "Cl": 254
     },
     "alkalinity_unit": "as_HCO3",
-    "co2": 8200,
+    "comment": "Original Selters Classic (Löhnberg-Selters) — official mineralisation, SGS Institut Fresenius analysis 2014-03-13. CO₂ figure not published by bottler; Khymos-era value dropped.",
+    "url": "https://www.selters.de/sortiment/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Original Selters official mineralisation — Selters Classic (SGS Institut Fresenius, 2014-03-13)",
+      "source_date": "2026-05-28"
     }
   },
   {

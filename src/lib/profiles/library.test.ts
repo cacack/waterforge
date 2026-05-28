@@ -12,9 +12,10 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains approximately 45 profiles (TSV rows minus test row)', () => {
-    // 46 data rows in source TSV, minus the "test" row = 45.
-    expect(PROFILES.length).toBe(45)
+  it('contains approximately 44 profiles (TSV rows minus test row and removed Kessel)', () => {
+    // 46 data rows in source TSV, minus the "test" row = 45, minus Kessel
+    // (removed in #67 as unrecoverable provenance) = 44.
+    expect(PROFILES.length).toBe(44)
   })
 
   it('does not contain the "test" row', () => {
@@ -266,7 +267,6 @@ const KNOWN_IMBALANCED = new Set([
   'Calistoga', // large Cl/Na dominance, no HCO3 balance
   'Farris', // high Na/Cl, large residual
   'Saint-Yorre', // very high mineralisation, known imbalance
-  'Kessel', // very high Na, HCO3 dominant but residual present
 ])
 
 describe('charge-balance sanity', () => {
