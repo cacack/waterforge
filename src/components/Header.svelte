@@ -2,6 +2,9 @@
   import { Button } from '$lib/components/ui/button'
   import { theme, toggleTheme } from '../theme.svelte'
   import Actions from './Actions.svelte'
+  import SunIcon from '@lucide/svelte/icons/sun'
+  import MoonIcon from '@lucide/svelte/icons/moon'
+  import GitHubMark from './icons/GitHubMark.svelte'
 </script>
 
 <header
@@ -24,15 +27,22 @@
         size="icon"
         onclick={toggleTheme}
         aria-label="Toggle light/dark theme"
+        title="Toggle light/dark theme"
       >
-        {theme.mode === 'dark' ? '☀' : '🌙'}
+        {#if theme.mode === 'dark'}
+          <SunIcon class="size-4" />
+        {:else}
+          <MoonIcon class="size-4" />
+        {/if}
       </Button>
       <Button
         variant="ghost"
-        size="sm"
+        size="icon"
         href="https://github.com/cacack/waterforge"
+        aria-label="GitHub"
+        title="GitHub repository"
       >
-        GitHub
+        <GitHubMark class="size-4" />
       </Button>
     </div>
   </div>
