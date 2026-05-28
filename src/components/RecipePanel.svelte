@@ -10,6 +10,8 @@
   } from '$lib'
   import { app } from '../state.svelte'
   import SectionCard from './SectionCard.svelte'
+  import TrendingUpIcon from '@lucide/svelte/icons/trending-up'
+  import TrendingDownIcon from '@lucide/svelte/icons/trending-down'
 
   let { result }: { result: SolveResult | null } = $props()
 
@@ -132,13 +134,21 @@
                   {#if row.status === 'ok'}
                     <span class="text-muted-foreground text-xs">✓</span>
                   {:else if row.status === 'over'}
-                    <span class="text-amber-600 dark:text-amber-400 text-xs"
-                      >▲&nbsp;{fmtDelta(row.delta)}</span
+                    <span
+                      class="inline-flex items-center justify-end gap-1 text-xs text-amber-600 dark:text-amber-400"
+                      aria-label="Above target by {fmtDelta(row.delta)} mg/L"
                     >
+                      <TrendingUpIcon class="size-3.5" aria-hidden="true" />
+                      {fmtDelta(row.delta)}
+                    </span>
                   {:else}
-                    <span class="text-blue-600 dark:text-blue-400 text-xs"
-                      >▼&nbsp;{fmtDelta(row.delta)}</span
+                    <span
+                      class="inline-flex items-center justify-end gap-1 text-xs text-blue-600 dark:text-blue-400"
+                      aria-label="Below target by {fmtDelta(row.delta)} mg/L"
                     >
+                      <TrendingDownIcon class="size-3.5" aria-hidden="true" />
+                      {fmtDelta(row.delta)}
+                    </span>
                   {/if}
                 </td>
               </tr>

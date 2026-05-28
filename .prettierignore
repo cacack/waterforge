@@ -5,3 +5,5 @@ package-lock.json
 LICENSE
 LICENSE-DATA
 *.svg
+.playwright-mcp
+qa

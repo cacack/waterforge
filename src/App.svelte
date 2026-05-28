@@ -59,8 +59,14 @@
         <BatchSection />
       </div>
 
-      <!-- Live recipe + readouts -->
-      <div class="flex flex-col gap-5 @3xl:sticky @3xl:top-20 @3xl:self-start">
+      <!-- Live recipe + readouts.
+           At @3xl the pane is sticky and self-starts so it doesn't stretch.
+           A max-height tied to the viewport (minus the sticky header band)
+           plus overflow-y-auto keeps the entire pane reachable on short
+           viewports where its content exceeds the viewport height. -->
+      <div
+        class="flex flex-col gap-5 @3xl:sticky @3xl:top-20 @3xl:max-h-[calc(100svh-6rem)] @3xl:self-start @3xl:overflow-y-auto"
+      >
         <RecipePanel {result} />
         <ReadoutsPanel {result} />
       </div>
