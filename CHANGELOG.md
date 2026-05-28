@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.1.1](https://github.com/cacack/waterforge/compare/v1.1.0...v1.1.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ui:** replace source-water Switch with a segmented control ([8132a1a](https://github.com/cacack/waterforge/commit/8132a1adc43eabbf5735f3b4bea36b3532456d52))
+
 ## [1.1.0](https://github.com/cacack/waterforge/compare/v1.0.1...v1.1.0) (2026-05-28)
 
 ### Features
