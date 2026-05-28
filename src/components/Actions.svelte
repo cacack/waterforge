@@ -149,7 +149,7 @@
     }
 
     importError =
-      'Unrecognised format. Expected an AppSnapshot (has "version") or a Profile (has "ions").'
+      'Unrecognised format. Expected a Waterforge recipe export or a water profile.'
     return false
   }
 
@@ -258,7 +258,8 @@
       <Dialog.Header>
         <Dialog.Title>Import recipe</Dialog.Title>
         <Dialog.Description>
-          Load an AppSnapshot or Profile JSON. Accepts a file or pasted text.
+          Load a recipe you exported from Waterforge, or a water profile JSON.
+          Accepts a file or pasted text.
         </Dialog.Description>
       </Dialog.Header>
 
@@ -286,7 +287,7 @@
           <Textarea
             id="import-paste"
             bind:value={pasteValue}
-            placeholder="Paste AppSnapshot or Profile JSON here"
+            placeholder="Paste a Waterforge recipe export or a water profile JSON here"
             rows={6}
             class="font-mono text-xs"
           />
