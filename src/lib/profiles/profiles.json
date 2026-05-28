@@ -671,7 +671,7 @@
     "alkalinity_unit": "as_HCO3",
     "ph": 7,
     "comment": "NO₃ 0 mg/L. Target derived from the SCA (formerly SCAA) 'Water for Brewing Specialty Coffee' standard, which specifies Calcium Hardness 68 mg/L and Total Alkalinity 40 mg/L expressed as CaCO₃. Converted to elemental Ca ≈ 27 mg/L and HCO₃ ≈ 49 mg/L. Corrected from the prior Khymos encoding (Ca 68, HCO₃ 233) which read the CaCO₃ hardness figure as elemental Ca.",
-    "url": "https://sca.coffee/research/coffee-standards",
+    "url": "https://web.archive.org/web/20230530130441/http://www.scaa.org/PDF/ST%20-%20WATER%20STANDARD%20V.21NOV2009A.pdf",
     "provenance": {
       "verified": true,
       "source": "Specialty Coffee Association (formerly SCAA) — Water for Brewing Specialty Coffee standard (rev. 21 Nov 2009)",
