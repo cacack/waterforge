@@ -19,7 +19,11 @@
   import UploadIcon from '@lucide/svelte/icons/upload'
   import CopyIcon from '@lucide/svelte/icons/copy'
   import Share2Icon from '@lucide/svelte/icons/share-2'
-  import { snapshotState, applySnapshot } from '../persist.svelte'
+  import {
+    snapshotState,
+    applySnapshot,
+    buildRecipeExport,
+  } from '../persist.svelte'
   import { encodeHash, buildShareUrl } from '../share'
   import { app } from '../state.svelte'
   import { validateProfile, profileToIonProfile, type Profile } from '$lib'
@@ -28,8 +32,17 @@
   // Export
   // ---------------------------------------------------------------------------
 
+  // Small inputs-only payload, used by Copy + Share so URLs stay short and
+  // the round-trip through localStorage/share-link is unchanged.
   function buildJson(): string {
     return JSON.stringify(snapshotState(), null, 2)
+  }
+
+  // Self-contained recipe payload, used by Download so the file on disk is
+  // sufficient to *follow* the recipe offline (full target profile + computed
+  // doses), not just to re-open in Waterforge.
+  function buildRecipeJson(): string {
+    return JSON.stringify(buildRecipeExport(), null, 2)
   }
 
   function buildFilename(): string {
@@ -44,7 +57,7 @@
   }
 
   function handleDownload() {
-    const json = buildJson()
+    const json = buildRecipeJson()
     const blob = new Blob([json], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
