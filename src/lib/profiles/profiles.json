@@ -156,23 +156,23 @@
   {
     "name": "Calistoga",
     "ions": {
-      "Ca": 3.6,
+      "Ca": 2.2,
       "Mg": 0,
       "Na": 170,
       "K": 14,
-      "HCO3": 22,
+      "HCO3": 25,
       "SO4": 110,
-      "Cl": 210
+      "Cl": 200
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 4.75,
-    "tds": 580,
-    "comment": "Calistoga Brand Mineral water",
-    "url": "http://www.calistogawater.com/Mineral.aspx",
+    "ph": 4.55,
+    "tds": 610,
+    "comment": "Calistoga® Brand Sparkling Mineral Water (geothermal aquifer below Calistoga, CA). F 0.17 mg/L, NO₃ ND, Mg ND (→0). Sparkling line discontinued (~2009; Crystal Geyser ceased the line in 2023) — no current authoritative source; values from the historical December 2008 Calistoga Beverage Company / Nestlé Waters bottled-water quality report. Knowingly charge-imbalanced (Cl/Na dominance, no HCO₃ balance).",
+    "url": "https://web.archive.org/web/20120418195811if_/http://www.nestle-watersna.com/pdf/CA_BWQR.pdf",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "Calistoga Beverage Company / Nestlé Waters North America — Bottled Water Quality Report (Report Date December 2008, testing 1st–3rd Quarter 2008), Mineral Analysis: Calistoga® Sparkling Mineral Water; archived via Wayback Machine. Discontinued brand, no current source.",
+      "source_date": "2008-12-31"
     }
   },
   {
@@ -189,12 +189,12 @@
     "alkalinity_unit": "as_HCO3",
     "ph": 7,
     "tds": 172,
-    "comment": "Calistoga Brand Premium water",
-    "url": "http://www.calistogawater.com/Mineral.aspx",
+    "comment": "Calistoga® Brand Premium Water (geothermal aquifer below Calistoga, CA, and Arcadia Spring, Calistoga, CA). NO₃ 0.31 mg/L (as N), F 0.07 mg/L. Brand discontinued (~2009; Crystal Geyser plant closed 2023) — no current authoritative source; values from the historical December 2008 Calistoga Beverage Company / Nestlé Waters bottled-water quality report.",
+    "url": "https://web.archive.org/web/20120418195811if_/http://www.nestle-watersna.com/pdf/CA_BWQR.pdf",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "Calistoga Beverage Company / Nestlé Waters North America — Bottled Water Quality Report (Report Date December 2008, testing 1st–3rd Quarter 2008), Premium Water Analysis (Inorganic Minerals and Metals; Alkalinity 46, TDS 172, pH 7.0); archived via Wayback Machine. Discontinued brand, no current source.",
+      "source_date": "2008-12-31"
     }
   },
   {
@@ -424,23 +424,23 @@
   {
     "name": "Mountain Valley Spring",
     "ions": {
-      "Ca": 68,
-      "Mg": 8,
-      "Na": 2.8,
-      "K": 1,
-      "HCO3": 238,
-      "SO4": 9.72,
-      "Cl": 0
+      "Ca": 67.5,
+      "Mg": 6.65,
+      "Na": 2.1,
+      "K": 0.6,
+      "HCO3": 190,
+      "SO4": 6.7,
+      "Cl": 2.15
     },
-    "alkalinity_unit": "as_HCO3",
-    "co2": 0,
-    "ph": 7.8,
-    "tds": 230,
-    "comment": "NO₃ 0 mg/L.",
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.7,
+    "tds": 210,
+    "comment": "The Mountain Valley® Spring Water (still), Ouachita Mountains, AR. NO₃ as N: ND. Ion values are midpoints of the reported ranges from the 2025 Water Analysis Report (Ca 65–70, Mg 6.1–7.2, Na 1.7–2.5, K ND–1.2, Cl 1.8–2.5, SO₄ 5.2–8.2, pH 7.3–8.1). Alkalinity reported as CaCO₃ (190 mg/L).",
+    "url": "https://www.mountainvalleyspring.com/pages/water-quality-report",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Mountain Valley Spring Water — 2025 Water Analysis Report (The Mountain Valley® Spring Water column)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -755,13 +755,24 @@
   },
   {
     "name": "Topo chico",
-    "ions": { "Ca": 29, "Mg": 9, "Na": 35, "HCO3": 115, "SO4": 40, "Cl": 35 },
-    "alkalinity_unit": "as_HCO3",
-    "comment": "Data from Google books via John Chamberlain",
+    "ions": {
+      "Ca": 140,
+      "Mg": 10,
+      "Na": 33,
+      "K": 3.1,
+      "HCO3": 190,
+      "SO4": 220,
+      "Cl": 46
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 6.2,
+    "tds": 630,
+    "comment": "Topo Chico Sparkling Mineral Water, Monterrey, Mexico (Coca-Cola). F 0.20 mg/L; NO₃/NO₂ within FDA SOQ. Alkalinity reported as CaCO₃ (190 mg/L). Cited via Wayback Machine archive (2025-07-25) of the Coca-Cola annual analysis PDF, which 404s to non-browser clients on the live site.",
+    "url": "https://web.archive.org/web/20250725072428if_/https://www.coca-cola.com/content/dam/onexp/us/en/brands/topo-chico/water-quality-report/topo-chico-water-annual-analysis-2025-en.pdf",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "The Coca-Cola Company — Topo Chico Water Annual Analysis 2025 (archived via Wayback Machine)",
+      "source_date": "2026-05-28"
     }
   },
   {
