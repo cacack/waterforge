@@ -60,6 +60,7 @@ Other useful scripts:
 | [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions      |
 | [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources             |
 | [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                  |
+| [docs/operations/release.md](docs/operations/release.md)       | Release runbook (cut, tag, publish)            |
 
 ## License
 
