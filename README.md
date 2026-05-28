@@ -5,10 +5,11 @@ food-grade salts. Waterforge is a static, client-side web app: pick a target
 profile, set your source water, toggle the salts you own, and get a precise,
 batch-scaled recipe.
 
-> **Status:** early development (M0 — foundation). See
-> [CONSTITUTION.md](CONSTITUTION.md) for mission, scope, and non-goals.
+**Try it:** [waterforge.app](https://waterforge.app) — v1.0 shipped
+([release notes](https://github.com/cacack/waterforge/releases/tag/v1.0)). See
+[CONSTITUTION.md](CONSTITUTION.md) for mission, scope, and non-goals.
 
-_Screenshots — coming with the UI milestone (M3)._
+![Waterforge — desktop, light theme](docs/operations/release-assets/v1.0/desktop-light.png)
 
 ## What it does
 
@@ -31,7 +32,7 @@ see [CONSTITUTION.md](CONSTITUTION.md) for non-goals.
 Requirements: **Node 22** (check with `node -v`).
 
 ```bash
-git clone https://github.com/cclonch/waterforge.git
+git clone https://github.com/cacack/waterforge.git
 cd waterforge
 npm install
 npm run dev          # dev server at http://localhost:5173
@@ -56,7 +57,7 @@ Other useful scripts:
 | [USAGE.md](USAGE.md)                                           | How to use the app (intended user flow)        |
 | [CONTRIBUTING.md](CONTRIBUTING.md)                             | Dev setup, conventions, testing, license terms |
 | [docs/architecture/overview.md](docs/architecture/overview.md) | Stack, module boundaries, data flow            |
-| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records (ADR 0001–0008)  |
+| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records (ADR 0001–0009)  |
 | [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions      |
 | [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources             |
 | [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                  |
