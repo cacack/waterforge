@@ -117,23 +117,21 @@
   {
     "name": "Borsec",
     "ions": {
-      "Ca": 317.5,
-      "Mg": 106.6,
-      "Na": 76.6,
-      "K": 12,
-      "HCO3": 1660,
-      "SO4": 22.2,
-      "Cl": 20.5
+      "Ca": 364.3,
+      "Mg": 110.5,
+      "Na": 78.33,
+      "HCO3": 1962.8
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 6.45,
-    "tds": 1402,
-    "comment": "bicarbonate adjusted to achieve neutral charge",
-    "url": "http://fg.geo.uu.nl/perk/mineralwaters/mineralwater.php?Country_id=1061&Brand=Borsec-Carbogazoasa",
+    "co2": 2500,
+    "ph": 5.75,
+    "tds": 1490,
+    "comment": "Naturally carbonated (Romaqua Group). CO₂ is the label minimum (≥2500 mg/L); TDS is dry residue at 180°C. K, SO₄ and Cl were Khymos-origin and are not on the current product label, so they were dropped.",
+    "url": "https://romaqua-group.ro/en/brands/borsec/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Romaqua Group — Borsec natural carbonated mineral water product label / analysis (Ca 364.3, Mg 110.5, Na 78.33, HCO₃ 1962.8 mg/L, pH 5.75, CO₂ ≥2500 mg/L, dry residue 1490 mg/L)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -246,23 +244,20 @@
   {
     "name": "Dorna",
     "ions": {
-      "Ca": 287.1,
-      "Mg": 8.61,
-      "Na": 23.5,
-      "K": 2.7,
-      "HCO3": 0,
-      "SO4": 25.5,
-      "Cl": 10.9
+      "Ca": 211.1,
+      "Mg": 14.6,
+      "Na": 10.25,
+      "HCO3": 680.8
     },
     "alkalinity_unit": "as_HCO3",
-    "co2": 4300,
-    "ph": 5.6,
-    "comment": "NO₃ 1.66 mg/L. bicarbonate adjusted to achieve neutral charge",
-    "url": "http://www.dorna.ro/thewater.aspx",
+    "ph": 5.88,
+    "tds": 644,
+    "comment": "Dorna natural carbonated mineral water (Poiana Vinului source). NO₃ 0.26 mg/L; Cl <5 mg/L (omitted). TDS is dry residue at 180°C. The current bottler declaration publishes a real HCO₃ (680.8 mg/L), so the prior Khymos HCO₃=0 placeholder, plus the Khymos-origin K, SO₄, Cl and CO₂ figures (not on the current declaration), were dropped.",
+    "url": "https://www.coca-cola.com/ro/ro/brands/dorna",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "The Coca-Cola Company (Romania) — Dorna natural carbonated mineral water nutritional declaration, Poiana Vinului source (Ca 211.1, Mg 14.6, Na 10.25, HCO₃ 680.8 mg/L, NO₃ 0.26, Cl <5, pH 5.88, dry residue 644 mg/L)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -363,10 +358,12 @@
       "Cl": 2
     },
     "alkalinity_unit": "as_HCO3",
+    "comment": "Historical entry — generic Harghita-region (Sâncrăieni, Romania) carbonated water with no current authoritative match. The PERK Mineral Water Atlas no longer lists a 'Harghita' brand, and current Sâncrăieni-source brands (Perla Harghitei, Tiva Harghita) publish different analyses, so this profile could not be re-verified against a current source. Ion values retained from the historical PERK Atlas analysis (well-balanced, residual ≈0.6 meq/L).",
+    "url": "https://mineralwaters.geo.uu.nl/country.php?Country_id=1061",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "PERK Mineral Water Atlas (Utrecht University), Romania — historical analysis; no current authoritative source available",
+      "source_date": "2012-01-04"
     }
   },
   {
@@ -745,11 +742,12 @@
     "alkalinity_unit": "as_HCO3",
     "ph": 5.5,
     "tds": 4578,
-    "comment": "NO₃ 0.88 mg/L.",
+    "comment": "Historical entry — Tešanjski dijamant carbonated natural mineral water (Tešanj, Bosnia and Herzegovina). The producer (Dijamant d.o.o.) is active but publishes a numeric analysis only for its still spring-water line (Ca 11.22, Mg 4.37, Na 131.10, K 1.17, HCO₃ 368.44, pH 7.26), which differs from this carbonated-water profile. No current authoritative analysis of the carbonated mineral water is published, so values are retained from the historical source. NO₃ 0.88 mg/L.",
+    "url": "https://dijamant.ba/",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "Dijamant d.o.o. (dijamant.ba) confirms the brand; no current numeric analysis published for the carbonated mineral water — historical values retained",
+      "source_date": "2026-05-28"
     }
   },
   {
