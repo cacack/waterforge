@@ -12,10 +12,12 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains approximately 44 profiles (TSV rows minus test row and removed Kessel)', () => {
-    // 46 data rows in source TSV, minus the "test" row = 45, minus Kessel
-    // (removed in #67 as unrecoverable provenance) = 44.
-    expect(PROFILES.length).toBe(44)
+  it('contains 45 profiles (44 seed rows + #98 Batch 1 net change)', () => {
+    // Seed library was 44 (46 TSV rows − "test" row − removed Kessel). Issue #98
+    // Batch 1 retired 3 rows (Calistoga Sparkling, Calistoga Premium, historical
+    // Harghita) and added 4 (Calistoga Spring Water, Perla Harghitei, Perla
+    // Harghitei Plată, Tiva Harghita): 44 − 3 + 4 = 45.
+    expect(PROFILES.length).toBe(45)
   })
 
   it('does not contain the "test" row', () => {
@@ -263,10 +265,10 @@ const KNOWN_IMBALANCED = new Set([
   'Burton (beer brewing)', // classic recipe; NO3 unmeasured/excluded
   'London (beer brewing)', // classic recipe; NO3 unmeasured/excluded
   'Munich (beer brewing)', // classic recipe; NO3 unmeasured/excluded
-  'Calistoga', // large Cl/Na dominance, no HCO3 balance
   'Farris', // high Na/Cl, large residual
   'Saint-Yorre', // very high mineralisation, known imbalance
   'San Narciso', // high-mineralisation Na-HCO3 water; published ion set has anion excess
+  'Tiva Harghita', // high-bicarbonate RO carbonated water; published ion set has cation deficit (residual ≈ -2.9 meq/L)
 ])
 
 describe('charge-balance sanity', () => {
