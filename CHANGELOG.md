@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.3.0](https://github.com/cacack/waterforge/compare/v1.2.0...v1.3.0) (2026-05-29)
+
+
+### Features
+
+* **ui:** apply Waterforge brand system ([2c511a4](https://github.com/cacack/waterforge/commit/2c511a47da2085b714f2bd1b95d9b2501038d2cf))
+
 ## [1.2.0](https://github.com/cacack/waterforge/compare/v1.1.1...v1.2.0) (2026-05-29)
 
 
