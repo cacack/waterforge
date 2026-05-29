@@ -351,25 +351,6 @@
     }
   },
   {
-    "name": "Harghita",
-    "ions": {
-      "Ca": 113.4,
-      "Mg": 69.4,
-      "Na": 68.3,
-      "K": 11.1,
-      "HCO3": 854,
-      "Cl": 2
-    },
-    "alkalinity_unit": "as_HCO3",
-    "comment": "Historical entry — generic Harghita-region (Sâncrăieni, Romania) carbonated water with no current authoritative match. The PERK Mineral Water Atlas no longer lists a 'Harghita' brand, and current Sâncrăieni-source brands (Perla Harghitei, Tiva Harghita) publish different analyses, so this profile could not be re-verified against a current source. Ion values retained from the historical PERK Atlas analysis (well-balanced, residual ≈0.6 meq/L).",
-    "url": "https://mineralwaters.geo.uu.nl/country.php?Country_id=1061",
-    "provenance": {
-      "verified": false,
-      "source": "PERK Mineral Water Atlas (Utrecht University), Romania — historical analysis; no current authoritative source available",
-      "source_date": "2012-01-04"
-    }
-  },
-  {
     "name": "Hassia Sprudel",
     "ions": {
       "Ca": 198,

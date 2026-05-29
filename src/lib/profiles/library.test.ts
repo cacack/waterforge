@@ -12,10 +12,10 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains approximately 44 profiles (TSV rows minus test row and removed Kessel)', () => {
+  it('contains approximately 43 profiles (TSV rows minus test row and removed profiles)', () => {
     // 46 data rows in source TSV, minus the "test" row = 45, minus Kessel
-    // (removed in #67 as unrecoverable provenance) = 44.
-    expect(PROFILES.length).toBe(44)
+    // (#67/#85) and Harghita (#94), both removed as unverifiable provenance = 43.
+    expect(PROFILES.length).toBe(43)
   })
 
   it('does not contain the "test" row', () => {
