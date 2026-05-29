@@ -305,6 +305,28 @@
     }
   },
   {
+    "name": "Fiji",
+    "ions": {
+      "Ca": 18,
+      "Mg": 15,
+      "Na": 18,
+      "K": 4.9,
+      "HCO3": 152,
+      "SO4": 2,
+      "Cl": 9.3
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.7,
+    "tds": 222,
+    "comment": "Silica-rich artesian water, Yaqara Valley aquifer, Viti Levu, Fiji. SiO₂ 93 mg/L (dominant mineral; fills the high-silica chemistry gap). F 0.24 mg/L, NO₃ ~0.27 mg/L. Core ions from the bottler's 'Typical Analysis'; SO₄ and NO₃ are from the FineWaters profile (not in the bottler table) and are lower-confidence.",
+    "url": "https://www.fijiwater.com.au/faqs",
+    "provenance": {
+      "verified": true,
+      "source": "FIJI Water official FAQ — 'Typical Analysis in Milligrams per Liter' (Na 18, K 4.9, Ca 18, Mg 15, Cl 9.3, HCO₃ 152, SiO₂ 93, F 0.24, TDS 222, pH 7.7); corroborated by the FIJI Water Company quality report",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
     "name": "Fiuggi",
     "ions": {
       "Ca": 25,
@@ -387,6 +409,28 @@
     "provenance": {
       "verified": true,
       "source": "Henniez official characteristic-components analysis (henniez.ch, source de vie)",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Hépar",
+    "ions": {
+      "Ca": 549,
+      "Mg": 119,
+      "Na": 14.2,
+      "K": 4.1,
+      "HCO3": 384,
+      "SO4": 1530,
+      "Cl": 18.8
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.2,
+    "tds": 2513,
+    "comment": "Still water, Vittel (Vosges, France; Nestlé Waters). The most magnesium-rich still natural mineral water on the French market (Mg 119 mg/L) and very high sulfate (SO₄ 1530 mg/L) — fills the high-Mg / high-SO₄ chemistry gap. NO₃ 4.3 mg/L, F 0.4 mg/L. TDS is dry residue at 180°C; no CaCO₃ alkalinity or SiO₂ published.",
+    "url": "https://www.nutripro.nestle.fr/sites/default/files/2024-08/Tableau%20des%20eaux%20min%C3%A9rales%20naturelles%20plates.pdf",
+    "provenance": {
+      "verified": true,
+      "source": "Nestlé Waters Marketing & Distribution (bottler of Hépar®) — 'Tableau des teneurs en minéraux des eaux minérales naturelles', row HÉPAR, June 2024 (values read from commercial labels); cross-confirmed by hepar.fr (Mg 119, Na 14.2) and the bottle label (OFF EAN 7613035024021)",
       "source_date": "2026-05-28"
     }
   },
