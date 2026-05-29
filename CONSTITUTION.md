@@ -64,7 +64,8 @@ We'll know this is working if:
   — with sulfate:chloride, TDS, charge-residual, and saturation readouts/warnings
   — in one unbroken flow.
 - A seed library of the planned bottled/brewing/coffee target profiles ships and
-  is browsable.
+  is browsable. The library may grow beyond the Lersch/Khymos seed, with every
+  new profile held to the same authoritative-sourcing standard (see ADR 0011).
 - The app is live and usable at a public URL (GitHub Pages), no install required.
 
 ---

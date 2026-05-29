@@ -155,47 +155,24 @@
     }
   },
   {
-    "name": "Calistoga",
+    "name": "Calistoga Spring Water",
     "ions": {
-      "Ca": 2.2,
-      "Mg": 0,
-      "Na": 170,
-      "K": 14,
-      "HCO3": 25,
-      "SO4": 110,
-      "Cl": 200
+      "Ca": 8,
+      "Mg": 2.9,
+      "Na": 3.7,
+      "K": 1.5,
+      "HCO3": 40,
+      "SO4": 0.62
     },
-    "alkalinity_unit": "as_HCO3",
-    "ph": 4.55,
-    "tds": 610,
-    "comment": "Calistoga® Brand Sparkling Mineral Water (geothermal aquifer below Calistoga, CA). F 0.17 mg/L, NO₃ ND, Mg ND (→0). Sparkling line discontinued (~2009; Crystal Geyser ceased the line in 2023) — no current authoritative source; values from the historical December 2008 Calistoga Beverage Company / Nestlé Waters bottled-water quality report. Knowingly charge-imbalanced (Cl/Na dominance, no HCO₃ balance).",
-    "url": "https://web.archive.org/web/20120418195811if_/http://www.nestle-watersna.com/pdf/CA_BWQR.pdf",
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.5,
+    "tds": 78,
+    "comment": "Still Spring Water line; springs: Lukens Spring (Baxter, CA) and/or Sopiago Spring (El Dorado County, CA). Source reports alkalinity as CaCO₃ (40 mg/L as CaCO₃; not pre-converted). Cl and NO₃-as-N reported non-detect (Cl omitted). Low-mineral spring water.",
+    "url": "https://static1.squarespace.com/static/60d362b2beb14d399efd7738/t/6287a33485f6314970f0c227/1653056309052/Calistoga-WQR-2021.pdf",
     "provenance": {
-      "verified": false,
-      "source": "Calistoga Beverage Company / Nestlé Waters North America — Bottled Water Quality Report (Report Date December 2008, testing 1st–3rd Quarter 2008), Mineral Analysis: Calistoga® Sparkling Mineral Water; archived via Wayback Machine. Discontinued brand, no current source.",
-      "source_date": "2008-12-31"
-    }
-  },
-  {
-    "name": "Calistoga Premium",
-    "ions": {
-      "Ca": 4.5,
-      "Mg": 2,
-      "Na": 41,
-      "K": 6.4,
-      "HCO3": 56,
-      "SO4": 21,
-      "Cl": 41
-    },
-    "alkalinity_unit": "as_HCO3",
-    "ph": 7,
-    "tds": 172,
-    "comment": "Calistoga® Brand Premium Water (geothermal aquifer below Calistoga, CA, and Arcadia Spring, Calistoga, CA). NO₃ 0.31 mg/L (as N), F 0.07 mg/L. Brand discontinued (~2009; Crystal Geyser plant closed 2023) — no current authoritative source; values from the historical December 2008 Calistoga Beverage Company / Nestlé Waters bottled-water quality report.",
-    "url": "https://web.archive.org/web/20120418195811if_/http://www.nestle-watersna.com/pdf/CA_BWQR.pdf",
-    "provenance": {
-      "verified": false,
-      "source": "Calistoga Beverage Company / Nestlé Waters North America — Bottled Water Quality Report (Report Date December 2008, testing 1st–3rd Quarter 2008), Premium Water Analysis (Inorganic Minerals and Metals; Alkalinity 46, TDS 172, pH 7.0); archived via Wayback Machine. Discontinued brand, no current source.",
-      "source_date": "2008-12-31"
+      "verified": true,
+      "source": "2021 Calistoga Water Analysis Report, ©2021 BlueTriton Brands, Inc. — Calistoga® Spring Water column (Secondary Inorganics: Ca 8, Mg 2.9, Na 3.7, K 1.5, Alkalinity Total as CaCO₃ 40, SO₄ 0.62, Cl ND, pH 7.5, TDS 78)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -455,6 +432,51 @@
       "verified": false,
       "source": "mineralwasser-test.com label transcription (Neuselters Still) — brand discontinued 2016, no current source",
       "source_date": "2021-08-31"
+    }
+  },
+  {
+    "name": "Perla Harghitei",
+    "ions": {
+      "Ca": 95.9,
+      "Mg": 38.6,
+      "Na": 59.0,
+      "K": 9.08,
+      "HCO3": 694,
+      "SO4": 1.18,
+      "Cl": 16.8
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 3500,
+    "ph": 5.6,
+    "tds": 635,
+    "comment": "Naturally carbonated flagship (\"Carbo\"), Sâncrăieni source. CO₂ is the label minimum (≥3500 mg/L). The lightly-carbonated \"Ușor Carbo\" variant shares this analysis, differing only in CO₂. No NO₃, F, or SiO₂ published.",
+    "url": "https://www.perlaharghitei.ro/produse/perla-harghitei",
+    "provenance": {
+      "verified": true,
+      "source": "S.C. Perla Harghitei S.A. — \"Perla Harghitei\" (Carbo) product page, published mineral-water analysis (Sâncrăieni, Harghita), perlaharghitei.ro",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Perla Harghitei Plată",
+    "ions": {
+      "Ca": 103,
+      "Mg": 9.99,
+      "Na": 7.69,
+      "K": 1.71,
+      "HCO3": 332,
+      "SO4": 11.88,
+      "Cl": 16.1
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.3,
+    "tds": 347,
+    "comment": "Still (\"Plată\") line — chemically distinct from the carbonated Perla Harghitei, drawn from a different spring (FH Artezia 2, Sânsimion): much lower Mg/Na/HCO₃. No NO₃, F, or SiO₂ published.",
+    "url": "https://www.perlaharghitei.ro/produse/perla-harghitei",
+    "provenance": {
+      "verified": true,
+      "source": "S.C. Perla Harghitei S.A. — \"Perla Harghitei\" (Plată) product page, published mineral-water analysis (FH Artezia 2, Sânsimion), perlaharghitei.ro",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -732,6 +754,29 @@
     "provenance": {
       "verified": false,
       "source": "Dijamant d.o.o. (dijamant.ba) confirms the brand; no current numeric analysis published for the carbonated mineral water — historical values retained",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Tiva Harghita",
+    "ions": {
+      "Ca": 102.2,
+      "Mg": 50.78,
+      "Na": 68.76,
+      "K": 10.35,
+      "HCO3": 915,
+      "SO4": 2.06,
+      "Cl": 15.46
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 3500,
+    "ph": 5.7,
+    "tds": 780,
+    "comment": "Naturally carbonated, Sâncrăieni source (F8 ISPIF). CO₂ is the label minimum (≥3500 mg/L); TDS is dry residue at 180°C. No NO₃, F, or SiO₂ published.",
+    "url": "https://www.perlaharghitei.ro/produse/tiva-harghita",
+    "provenance": {
+      "verified": true,
+      "source": "S.C. Perla Harghitei S.A. — \"Tiva Harghita\" product page, published mineral-water analysis (Sâncrăieni, source F8 ISPIF), perlaharghitei.ro",
       "source_date": "2026-05-28"
     }
   },
