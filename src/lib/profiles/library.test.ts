@@ -214,22 +214,22 @@ describe('Dorna — real HCO3 with alkalinity_unit', () => {
 })
 
 // ---------------------------------------------------------------------------
-// Spot checks — San Narciso (CO2 "little gas" → omitted, note in comment)
+// Spot checks — San Narciso (naturally carbonated, no numeric CO2 published)
 // ---------------------------------------------------------------------------
 
-describe('San Narciso — CO2 "little gas" handling', () => {
+describe('San Narciso — CO2 handling', () => {
   const sn = findProfile('San Narciso')
 
   it('is found', () => {
     expect(sn).toBeDefined()
   })
 
-  it('co2 is absent (ambiguous text omitted)', () => {
+  it('co2 is absent (bottler publishes no numeric CO₂ figure)', () => {
     expect(sn!.co2).toBeUndefined()
   })
 
-  it('comment notes the omission', () => {
-    expect(sn!.comment).toContain('little gas')
+  it('comment confirms natural carbonation', () => {
+    expect(sn!.comment).toContain('agua con gas natural')
   })
 })
 
@@ -266,6 +266,7 @@ const KNOWN_IMBALANCED = new Set([
   'Calistoga', // large Cl/Na dominance, no HCO3 balance
   'Farris', // high Na/Cl, large residual
   'Saint-Yorre', // very high mineralisation, known imbalance
+  'San Narciso', // high-mineralisation Na-HCO3 water; published ion set has anion excess
 ])
 
 describe('charge-balance sanity', () => {

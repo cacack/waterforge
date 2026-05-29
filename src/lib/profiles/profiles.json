@@ -23,22 +23,23 @@
   {
     "name": "Antipodes",
     "ions": {
-      "Ca": 3.5,
-      "Mg": 1.8,
+      "Ca": 3,
+      "Mg": 2,
       "Na": 11,
-      "K": 3.3,
+      "K": 3,
       "HCO3": 35,
-      "SO4": 4.5,
+      "SO4": 5,
       "Cl": 7
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 6.5,
+    "ph": 7,
     "tds": 130,
-    "comment": "NO₃ 1.5 mg/L. Used for strong, pale, bitter ales",
+    "comment": "Used for strong, pale, bitter ales. SiO₂ 73 mg/L (dominant mineral). Silica-rich artesian water, Whakatāne, NZ; total minerality ~130 mg/L. Bottler states analysis accurate to ±20%.",
+    "url": "https://www.antipodes.co.nz/our-water",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Antipodes official typical analysis (antipodes.co.nz; full ion set via Fonsapor distributor reproduction)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -616,22 +617,22 @@
   {
     "name": "San Narciso",
     "ions": {
-      "Ca": 55,
-      "Mg": 9,
-      "Na": 1138,
-      "K": 53.4,
-      "HCO3": 2196,
-      "SO4": 54,
-      "Cl": 596
+      "Ca": 54.9,
+      "Mg": 10,
+      "Na": 1050,
+      "K": 49.6,
+      "HCO3": 2170,
+      "SO4": 51.1,
+      "Cl": 627
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 4090,
-    "comment": "NO₃ 0 mg/L. CO₂ reported as \"little gas\" — omitted; re-source needed.",
-    "url": "http://www.aguainfant.com/ENGLISH/AGUAS-ESP/S/s-narciso.htm",
+    "tds": 3424,
+    "comment": "F⁻ 2.3 mg/L. TDS = dry residue at 180 °C. Naturally carbonated bicarbonate-sodium water (Caldes de Malavella). Bottler confirms \"agua con gas natural\" (natural volcanic CO₂) but publishes no numeric CO₂ figure, so co2 is left unset. Published ion set shows an anion excess (known imbalanced). Prior 2015 \"little gas\" ambiguity resolved.",
+    "url": "https://sannarciso.com/?lang=es",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "San Narciso official mineral analysis (sannarciso.com)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -789,10 +790,12 @@
     "alkalinity_unit": "as_HCO3",
     "ph": 6.8,
     "tds": 165,
+    "comment": "NO₃ <0.1 mg/L. F⁻ 0.148 mg/L. SiO₂ 2 mg/L. TDS = dry residue at 180 °C. Bethania, Ceredigion (Wales).",
+    "url": "https://tynant.com/water-analysis/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Tŷ Nant official water analysis (tynant.com); HCO₃/SiO₂/NO₃ corroborated by FineWaters",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -855,12 +858,12 @@
     "ions": { "Ca": 12, "Mg": 2.6, "Na": 1.6, "HCO3": 20, "Cl": 30 },
     "alkalinity_unit": "as_HCO3",
     "ph": 8.6,
-    "comment": "Claimed to be good for brewing coffee",
-    "url": "http://www.purpur-premiumwasser.de/characteristics-of-the-perfect-water.html",
+    "comment": "HISTORICAL / unverified-current: claimed good for brewing coffee. Waiwera Group Ltd entered liquidation in 2017 and the brand is discontinued; waiwera.com is offline and no current or archived bottler analysis table survives. Ion values are Khymos-origin and could not be corroborated against any non-Khymos primary source. Removal-sub-issue candidate.",
+    "url": "https://web.archive.org/web/20200225194044/http://www.waiwera.com/water",
     "provenance": {
       "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "source": "Waiwera official site (archived 2020-02-25, Wayback Machine) — brand defunct since 2017 liquidation; numeric analysis unrecoverable from any non-Khymos source",
+      "source_date": "2020-02-25"
     }
   }
 ]
