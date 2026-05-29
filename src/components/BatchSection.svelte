@@ -56,7 +56,7 @@
         value={rawVolume}
         oninput={handleVolumeInput}
         onblur={handleVolumeBlur}
-        class="w-full"
+        class="w-full font-mono"
         aria-label="Batch volume"
       />
     </div>

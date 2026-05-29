@@ -96,19 +96,21 @@
         title="Sulfate-to-chloride mass ratio (mg/L ÷ mg/L). Higher values favour a drier, more mineral character; lower values favour a rounder, softer taste."
       >
         <dt class="text-muted-foreground text-xs">SO₄:Cl</dt>
-        <dd class="tabular-nums">{so4cl}</dd>
+        <dd class="font-mono tabular-nums">{so4cl}</dd>
       </div>
       <div
         title="Total dissolved solids — sum of all modelled ion concentrations (mg/L). Typical drinking water: 50–500 mg/L."
       >
         <dt class="text-muted-foreground text-xs">TDS</dt>
-        <dd class="tabular-nums">{Math.round(result.readouts.tds)} mg/L</dd>
+        <dd class="font-mono tabular-nums">
+          {Math.round(result.readouts.tds)} mg/L
+        </dd>
       </div>
       <div
         title="Charge-balance residual (meq/L). Near zero means cation and anion charges balance; a large residual suggests mismatched source data or a unit convention error."
       >
         <dt class="text-muted-foreground text-xs">Charge</dt>
-        <dd class="tabular-nums">
+        <dd class="font-mono tabular-nums">
           {result.readouts.chargeResidual.toFixed(2)} meq/L
         </dd>
       </div>

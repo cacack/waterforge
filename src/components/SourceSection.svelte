@@ -167,7 +167,7 @@
               oninput={(e) =>
                 handleInput(ion as IonId, (e.target as HTMLInputElement).value)}
               onblur={() => handleBlur(ion as IonId)}
-              class="h-7 pr-8 text-xs"
+              class="h-7 pr-8 font-mono text-xs"
             />
             <span
               class="text-muted-foreground pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs"

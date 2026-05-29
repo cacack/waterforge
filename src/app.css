@@ -3,50 +3,63 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   WATERFORGE — Brand tokens
+   Cool-slate neutrals carry every surface, border, and text tone.
+   Sky-blue is reserved for active / interactive state only
+   (--primary, --ring). It is never a neutral surface or status hue.
+   See: Waterforge Brand Guidelines — Color.
+   ============================================================ */
 :root {
-  --radius: 0.625rem;
+  --radius: 0.625rem; /* 10px — brand radius */
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
+  /* light — "lab white" */
+  --background: oklch(0.992 0.002 247);
+  --foreground: oklch(0.215 0.02 257);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  --card-foreground: oklch(0.215 0.02 257);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
+  --popover-foreground: oklch(0.215 0.02 257);
+  /* primary = sky-600 (#0284c7) — the lone accent, active states only */
+  --primary: oklch(0.588 0.158 241.966);
+  --primary-foreground: oklch(0.985 0.005 247);
+  --secondary: oklch(0.975 0.004 247);
+  --secondary-foreground: oklch(0.215 0.02 257);
+  --muted: oklch(0.975 0.004 247);
+  --muted-foreground: oklch(0.52 0.018 257);
+  /* accent here is shadcn's *neutral* hover token — intentionally not blue */
+  --accent: oklch(0.975 0.004 247);
+  --accent-foreground: oklch(0.215 0.02 257);
+  --destructive: oklch(0.62 0.21 17);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
+  --border: oklch(0.916 0.006 247);
+  --input: oklch(0.916 0.006 247);
+  /* ring = sky-500 (#0ea5e9) — the focus signal */
+  --ring: oklch(0.685 0.169 237.323);
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  /* dark — "instrument panel" */
+  --background: oklch(0.168 0.012 257);
+  --foreground: oklch(0.965 0.004 247);
+  --card: oklch(0.205 0.014 257);
+  --card-foreground: oklch(0.965 0.004 247);
+  --popover: oklch(0.205 0.014 257);
+  --popover-foreground: oklch(0.965 0.004 247);
+  /* primary = sky-400 (#38bdf8) — brighter so it stays "alive" on dark */
+  --primary: oklch(0.746 0.16 232.661);
+  --primary-foreground: oklch(0.16 0.02 257);
+  --secondary: oklch(0.245 0.015 257);
+  --secondary-foreground: oklch(0.965 0.004 247);
+  --muted: oklch(0.245 0.015 257);
+  --muted-foreground: oklch(0.715 0.014 257);
+  --accent: oklch(0.245 0.015 257);
+  --accent-foreground: oklch(0.965 0.004 247);
+  --destructive: oklch(0.68 0.19 17);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
+  --border: oklch(0.305 0.015 257);
+  --input: oklch(0.305 0.015 257);
+  --ring: oklch(0.746 0.16 232.661);
 }
 
 @theme inline {
@@ -54,6 +67,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* type — Geist for words, Geist Mono for all quantitative data */
+  --font-sans:
+    'Geist Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -85,5 +103,8 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 }
