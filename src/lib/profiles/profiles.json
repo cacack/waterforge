@@ -286,20 +286,22 @@
   {
     "name": "Farris",
     "ions": {
-      "Ca": 26,
-      "Mg": 30,
-      "Na": 400,
+      "Ca": 28,
+      "Mg": 31,
+      "Na": 455,
+      "K": 16,
       "HCO3": 300,
-      "SO4": 15,
-      "Cl": 590
+      "SO4": 11,
+      "Cl": 667
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 5.5,
     "tds": 1400,
+    "comment": "Carbonated; Si 6 mg/L. Total mineral content ~1400 mg/L. High Na/Cl gives a large charge-balance residual (KNOWN_IMBALANCED). pH not published by the bottler.",
+    "url": "https://www.ringnes.no/produkter/farris/farris/",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Ringnes AS official Farris naturell product analysis (ringnes.no)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -389,21 +391,22 @@
   {
     "name": "Henniez",
     "ions": {
-      "Ca": 106,
-      "Mg": 19,
+      "Ca": 104,
+      "Mg": 20,
       "Na": 7,
       "K": 1,
-      "HCO3": 392,
-      "SO4": 13,
+      "HCO3": 389,
+      "SO4": 12,
       "Cl": 8
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 581,
-    "comment": "NO₃ 16 mg/L.",
+    "tds": 571,
+    "comment": "NO₃ 14 mg/L. TDS is total mineralisation (571 mg/L) from the bottler.",
+    "url": "https://www.henniez.ch/fr-ch/source-de-vie-fr",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "Henniez official characteristic-components analysis (henniez.ch, source de vie)",
+      "source_date": "2026-05-28"
     }
   },
   {
@@ -825,13 +828,15 @@
   },
   {
     "name": "Voss",
-    "ions": { "Ca": 3.46, "Mg": 0.78, "SO4": 5 },
-    "ph": 6.4,
-    "tds": 22,
+    "ions": { "Ca": 2.7, "Mg": 0.61, "Na": 3, "Cl": 3.8 },
+    "ph": 5.8,
+    "tds": 40,
+    "comment": "Very low mineralisation artesian water (VOSS Still, Norway). HCO₃ <20 mg/L, SO₄ and K not detected, F 0.1 mg/L on the official analysis.",
+    "url": "https://www.vosswaterglobal.com/pages/analysis-table",
     "provenance": {
-      "verified": false,
-      "source": "Martin Lersch — Mineral Water Calculator v6 (Khymos)",
-      "source_date": "2015-01-01"
+      "verified": true,
+      "source": "VOSS Water official General Mineral Analysis table — VOSS Still NO (vosswaterglobal.com)",
+      "source_date": "2026-05-28"
     }
   },
   {

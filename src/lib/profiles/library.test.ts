@@ -188,8 +188,8 @@ describe('Voss — profile without HCO3', () => {
   })
 
   it('has correct Ca and Mg', () => {
-    expect(voss!.ions.Ca).toBe(3.46)
-    expect(voss!.ions.Mg).toBe(0.78)
+    expect(voss!.ions.Ca).toBe(2.7)
+    expect(voss!.ions.Mg).toBe(0.61)
   })
 })
 
