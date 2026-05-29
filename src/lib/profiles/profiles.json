@@ -155,6 +155,28 @@
     }
   },
   {
+    "name": "Buxton",
+    "ions": {
+      "Ca": 55,
+      "Mg": 19,
+      "Na": 24,
+      "K": 1,
+      "HCO3": 248,
+      "SO4": 13,
+      "Cl": 37
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.4,
+    "tds": 280,
+    "comment": "Still natural mineral water, St Ann's spring (Buxton, Derbyshire, UK; Nestlé Waters). Still and sparkling share this analysis, differing only in carbonation (sparkling pH ~5.2). NO₃ <0.1 mg/L. TDS is dry residue at 180°C; no F or SiO₂ published.",
+    "url": "https://www.buxtonwater.co.uk/faqs/nutritional-information",
+    "provenance": {
+      "verified": true,
+      "source": "Buxton Water (Nestlé Waters UK) — 'Bottled Water Nutritional Information' typical analysis; corroborated by the printed product label (Open Food Facts EAN 5015552555132: Ca 55, Mg 19, K 1, Cl 37 mg/L)",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
     "name": "Calistoga Spring Water",
     "ions": {
       "Ca": 8,
@@ -365,6 +387,28 @@
     "provenance": {
       "verified": true,
       "source": "Henniez official characteristic-components analysis (henniez.ch, source de vie)",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Highland Spring",
+    "ions": {
+      "Ca": 40.5,
+      "Mg": 10.1,
+      "Na": 5.6,
+      "K": 0.7,
+      "HCO3": 150,
+      "SO4": 5.3,
+      "Cl": 6.1
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.8,
+    "tds": 170,
+    "comment": "Still spring water, Blackford (Ochil Hills, Perthshire, UK). NO₃ 3.1 mg/L. Still and sparkling share this 'average analysis at source'; sparkling differs only in carbonation (pH ~4–5). TDS is dry residue at 180°C; no F or SiO₂ published by the bottler.",
+    "url": "https://highlandspring.com/product-range/spring-water/",
+    "provenance": {
+      "verified": true,
+      "source": "Highland Spring — 'Spring Water' product page 'Average Analysis at source' table (mg/L); identical table on the 'Sparkling Water' page; pH from the 'Our Water' page (highlandspring.com)",
       "source_date": "2026-05-28"
     }
   },
