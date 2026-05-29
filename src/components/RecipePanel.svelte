@@ -85,7 +85,9 @@
     <!-- Salt recipe table -->
     <div class="mb-5">
       <p class="text-muted-foreground mb-2 text-xs">
-        Salts for {app.batch.volume}&nbsp;{app.batch.unit}
+        Salts for <span class="font-mono"
+          >{app.batch.volume}&nbsp;{app.batch.unit}</span
+        >
       </p>
       <table class="w-full text-sm">
         <thead class="text-muted-foreground text-xs">
@@ -98,7 +100,9 @@
           {#each doses as d (d.id)}
             <tr class="border-border/60 border-t">
               <td class="py-1">{SALTS[d.id].name}</td>
-              <td class="py-1 text-right tabular-nums">{d.grams.toFixed(3)}</td>
+              <td class="py-1 text-right font-mono tabular-nums"
+                >{d.grams.toFixed(3)}</td
+              >
             </tr>
           {/each}
         </tbody>
@@ -124,13 +128,14 @@
             {#each ionRows() as row (row.id)}
               <tr class="border-border/60 border-t">
                 <td class="py-1 font-mono text-xs">{row.label}</td>
-                <td class="text-muted-foreground py-1 text-right tabular-nums"
+                <td
+                  class="text-muted-foreground py-1 text-right font-mono tabular-nums"
                   >{fmtMgl(row.target)}</td
                 >
-                <td class="py-1 text-right tabular-nums"
+                <td class="py-1 text-right font-mono tabular-nums"
                   >{fmtMgl(row.achieved)}</td
                 >
-                <td class="py-1 text-right tabular-nums">
+                <td class="py-1 text-right font-mono tabular-nums">
                   {#if row.status === 'ok'}
                     <span class="text-muted-foreground text-xs">✓</span>
                   {:else if row.status === 'over'}
@@ -142,8 +147,12 @@
                       {fmtDelta(row.delta)}
                     </span>
                   {:else}
+                    <!-- Both over- and under-target are "out of tolerance"
+                         deviations; the brand reserves blue for active state,
+                         not status, so both directions use the amber warning
+                         tone and the arrow icon carries the direction. -->
                     <span
-                      class="inline-flex items-center justify-end gap-1 text-xs text-blue-600 dark:text-blue-400"
+                      class="inline-flex items-center justify-end gap-1 text-xs text-amber-600 dark:text-amber-400"
                       aria-label="Below target by {fmtDelta(row.delta)} mg/L"
                     >
                       <TrendingDownIcon class="size-3.5" aria-hidden="true" />

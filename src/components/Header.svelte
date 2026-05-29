@@ -5,6 +5,7 @@
   import SunIcon from '@lucide/svelte/icons/sun'
   import MoonIcon from '@lucide/svelte/icons/moon'
   import GitHubMark from './icons/GitHubMark.svelte'
+  import WaterforgeMark from './icons/WaterforgeMark.svelte'
 </script>
 
 <header
@@ -13,7 +14,8 @@
   <div
     class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4"
   >
-    <div class="flex min-w-0 items-baseline gap-2">
+    <div class="flex min-w-0 items-center gap-2">
+      <WaterforgeMark class="text-foreground size-7 shrink-0" />
       <span class="text-lg font-semibold tracking-tight">Waterforge</span>
       <span class="text-muted-foreground hidden truncate text-sm sm:inline">
         bottled mineral water from salts

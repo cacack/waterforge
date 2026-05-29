@@ -71,7 +71,7 @@
         {#if app.target.ions[ion] != null}
           <div class="flex justify-between gap-2">
             <dt>{ion}</dt>
-            <dd class="tabular-nums">{app.target.ions[ion]}</dd>
+            <dd class="font-mono tabular-nums">{app.target.ions[ion]}</dd>
           </div>
         {/if}
       {/each}
