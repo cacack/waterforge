@@ -305,6 +305,29 @@
     }
   },
   {
+    "name": "Ferrarelle",
+    "ions": {
+      "Ca": 400,
+      "Mg": 23,
+      "Na": 50,
+      "K": 49,
+      "HCO3": 1500,
+      "SO4": 4.5,
+      "Cl": 17
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 2600,
+    "ph": 6.2,
+    "tds": 1328,
+    "comment": "Naturally sparkling (\"effervescente naturale\"), Ferrarelle spring, Riardo (Caserta, Campania, Italy). CO₂ is the free-CO₂-at-source figure from the official EPD. NO₃ 3.5 mg/L, F 1.0 mg/L, SiO₂ 84 mg/L. TDS is dry residue at 180°C.",
+    "url": "https://www.ferrarelle.it/assets/pdf/certificazioni/ferrarelle-sparkling-english-13-06-2024.pdf",
+    "provenance": {
+      "verified": true,
+      "source": "Ferrarelle S.p.A. — official Bottled Water Report, Ferrarelle Sparkling (report date 2024-05-20); SiO₂ (84) and free CO₂ at source (2600) from the official Ferrarelle Environmental Product Declaration 'The Composition' table",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
     "name": "Fiji",
     "ions": {
       "Ca": 18,
@@ -909,6 +932,50 @@
     "provenance": {
       "verified": true,
       "source": "Tŷ Nant official water analysis (tynant.com); HCO₃/SiO₂/NO₃ corroborated by FineWaters",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Vichy Catalan",
+    "ions": {
+      "Ca": 44.3,
+      "Mg": 9.46,
+      "Na": 1080,
+      "K": 47.3,
+      "HCO3": 1990,
+      "SO4": 53.3,
+      "Cl": 605
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.21,
+    "tds": 2850,
+    "comment": "High-sodium naturally carbonated Na-HCO₃ water, Caldes de Malavella (Girona, Spain); hyperthermal spring (~60 °C at source). Li 1.7, NO₃ 1.1, SiO₂ ~58 mg/L. Na/K/HCO₃/SO₄/Cl, pH and dry residue (180 °C) are from the bottler's ficha técnica; Ca and Mg (not listed on the bottler sheet) are from the peer-reviewed Tapias et al. analysis.",
+    "url": "https://www.mdpi.com/2073-4441/14/21/3581",
+    "provenance": {
+      "verified": true,
+      "source": "Vichy Catalan Corporation ficha técnica CA-VC-FT-01 (2018) for Na 1080, K 47.3, HCO₃ 1990, SO₄ 53.3, Cl 605, pH 6.21, dry residue ~2850; Ca 44.3 and Mg 9.46 from Tapias et al., 'Geochemical Characterisation … Mineral Bottled Waters in Catalonia', Water 2022, 14(21), 3581 (supplementary dataset, Vichy Catalan sparkling)",
+      "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Vichy Célestins",
+    "ions": {
+      "Ca": 103,
+      "Mg": 10,
+      "Na": 1172,
+      "K": 66,
+      "HCO3": 2989,
+      "SO4": 138,
+      "Cl": 235
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.8,
+    "tds": 3325,
+    "comment": "Very-high-sodium bicarbonate naturally sparkling water, Vichy (Allier, France); Na is principally sodium bicarbonate. F 0.5 mg/L. TDS is the label's total mineralisation (3325 mg/L).",
+    "url": "https://www.sources-alma.com/nos-marques/les-eaux-minerales/marque-vichy-celestin/",
+    "provenance": {
+      "verified": true,
+      "source": "Sources Alma (bottler of Vichy Célestins) — 'Composition moyenne en mg/L'; corroborated by the bottle label (Open Food Facts 3108020266905, which adds pH 6.8 and F 0.5 mg/L)",
       "source_date": "2026-05-28"
     }
   },

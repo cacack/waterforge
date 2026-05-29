@@ -12,15 +12,17 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains 49 profiles (seed minus removed rows plus #98 Batches 1–3)', () => {
+  it('contains 52 profiles (seed minus removed rows plus #98 Batches 1–4)', () => {
     // Seed history: 46 TSV rows − "test" row = 45; minus Kessel (#67/#85) and
     // Harghita (#94), both removed as unverifiable provenance = 43. Issue #98
     // Batch 1 then retired the two unverifiable Calistoga rows (Sparkling,
     // Premium) and added 4 (Calistoga Spring Water, Perla Harghitei, Perla
     // Harghitei Plată, Tiva Harghita): 43 − 2 + 4 = 45. Batch 2 (UK) then added
     // Buxton and Highland Spring: 45 + 2 = 47. Batch 3 (chemistry gaps) then
-    // added Hépar (high-Mg/SO₄) and Fiji (high-silica): 47 + 2 = 49.
-    expect(PROFILES.length).toBe(49)
+    // added Hépar (high-Mg/SO₄) and Fiji (high-silica): 47 + 2 = 49. Batch 4
+    // (high-mineral classics) then added Vichy Catalan, Vichy Célestins and
+    // Ferrarelle: 49 + 3 = 52.
+    expect(PROFILES.length).toBe(52)
   })
 
   it('does not contain the "test" row', () => {
