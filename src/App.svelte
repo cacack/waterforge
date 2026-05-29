@@ -1,5 +1,6 @@
 <script lang="ts">
   import Header from './components/Header.svelte'
+  import Footer from './components/Footer.svelte'
   import TargetSection from './components/TargetSection.svelte'
   import SourceSection from './components/SourceSection.svelte'
   import SaltsSection from './components/SaltsSection.svelte'
@@ -85,4 +86,6 @@
       </div>
     </div>
   </main>
+
+  <Footer />
 </div>

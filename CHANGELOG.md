@@ -9,6 +9,19 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.2.0](https://github.com/cacack/waterforge/compare/v1.1.1...v1.2.0) (2026-05-29)
+
+
+### Features
+
+* **profiles:** validate 8 brewing/coffee/tea/synthetic reference profiles ([#68](https://github.com/cacack/waterforge/issues/68)) ([abb4ea2](https://github.com/cacack/waterforge/commit/abb4ea258827af89e06d323bb224b90cf7a17e1e))
+* **ui:** add site footer with version and license attribution ([c447f1c](https://github.com/cacack/waterforge/commit/c447f1c79be31da623f2f229f9e68d80621ee2bb)), closes [#83](https://github.com/cacack/waterforge/issues/83)
+
+
+### Bug Fixes
+
+* **profiles:** cite SCA water standard via Wayback Machine archive ([c3859cd](https://github.com/cacack/waterforge/commit/c3859cd59f765ec9d753d0a159b9d375b598bf36))
+
 ## [1.1.1](https://github.com/cacack/waterforge/compare/v1.1.0...v1.1.1) (2026-05-28)
 
 

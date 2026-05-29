@@ -20,7 +20,12 @@ export default ts.config(
   ...svelte.configs['flat/prettier'],
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        // Build-time constant injected by Vite's `define` (vite.config.ts).
+        __APP_VERSION__: 'readonly',
+      },
     },
   },
   {

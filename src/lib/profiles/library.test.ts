@@ -12,11 +12,12 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains 45 profiles (44 seed rows + #98 Batch 1 net change)', () => {
-    // Seed library was 44 (46 TSV rows − "test" row − removed Kessel). Issue #98
-    // Batch 1 retired 3 rows (Calistoga Sparkling, Calistoga Premium, historical
-    // Harghita) and added 4 (Calistoga Spring Water, Perla Harghitei, Perla
-    // Harghitei Plată, Tiva Harghita): 44 − 3 + 4 = 45.
+  it('contains 45 profiles (seed minus removed rows plus #98 Batch 1)', () => {
+    // Seed history: 46 TSV rows − "test" row = 45; minus Kessel (#67/#85) and
+    // Harghita (#94), both removed as unverifiable provenance = 43. Issue #98
+    // Batch 1 then retired the two unverifiable Calistoga rows (Sparkling,
+    // Premium) and added 4 (Calistoga Spring Water, Perla Harghitei, Perla
+    // Harghitei Plată, Tiva Harghita): 43 − 2 + 4 = 45.
     expect(PROFILES.length).toBe(45)
   })
 
