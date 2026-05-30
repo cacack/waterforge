@@ -22,8 +22,15 @@ TypeScript + Svelte 5 (runes) + Vite, deployed to GitHub Pages.
 
 ## Conventions
 
-- Conventional commits **on branch commits**. PR titles use plain English
-  (CI rejects conventional-format PR titles — see `CONTRIBUTING.md`).
+- Conventional commits **on branch commits** (CI enforces the type); PR titles
+  use plain English (CI rejects conventional-format PR titles — see
+  `CONTRIBUTING.md`). The type drives release-please versioning, so pick it by
+  **user impact, not file kind**: use **`feat`**/**`fix`** for anything that
+  changes app functionality or output — _including_ water-profile data,
+  chemistry constants, and salts (`feat(profiles):`, `feat(salts):`,
+  `fix(chem):`). Reserve `docs`/`test`/`refactor`/`chore`/`ci` for
+  non-functional work. Never use a `data:` type — release-please ignores
+  unknown types, so the change ships with no version bump or changelog entry.
 - `main` is PR-only — branch → PR → merge; no direct pushes.
 - Engine code (`chem/`, `solver/`) is framework-agnostic pure TypeScript; keep
   it independent of the Svelte UI so the math stays portable and testable.

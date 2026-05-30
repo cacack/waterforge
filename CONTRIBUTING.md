@@ -73,9 +73,22 @@ individual commits on your branch:
 <optional body>
 ```
 
-Common types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`. These drive
-[release-please](https://github.com/googleapis/release-please) — `feat:` bumps
-the minor version, `fix:` bumps patch, `feat!:` / `BREAKING CHANGE` bumps major.
+The type drives [release-please](https://github.com/googleapis/release-please),
+so **choose it by user impact, not by which files changed**:
+
+- **`feat`** / **`fix`** — anything that changes what the app does or outputs.
+  This includes **data and chemistry**, not just UI/engine code: new or corrected
+  water profiles, chemistry constants, and salts are user-facing. Use a scope to
+  say where: `feat(profiles):`, `feat(salts):`, `fix(chem):`, `fix(solver):`.
+  `feat` bumps the minor version, `fix` bumps patch, `feat!:` / `BREAKING CHANGE`
+  bumps major.
+- `docs`, `test`, `refactor`, `style`, `perf`, `build`, `ci`, `chore` — work with
+  no user-visible effect. These do **not** trigger a release.
+
+Do **not** invent types like `data:`. release-please ignores unknown types
+entirely, so the change ships with **no version bump and no changelog entry** —
+exactly the failure this convention exists to prevent. CI enforces the allowed
+set on each branch commit (see `.github/workflows/ci.yml`).
 
 ### Pull request titles
 
@@ -100,8 +113,8 @@ Dependabot PRs are exempt.
 1. Branch from `main`: `git switch -c feat/my-thing`
 2. Commit your work (conventional-commit messages).
 3. Open a pull request against `main` (plain-English title).
-4. Wait for CI (lint, typecheck, test, build, PR-title check, GitGuardian
-   secret-scan) to pass.
+4. Wait for CI (lint, typecheck, test, build, commit-type check, PR-title
+   check, GitGuardian secret-scan) to pass.
 5. Merge with a merge commit (branch protection requires it).
 
 PRs that touch a GitHub issue should include "Closes #N" in the PR body.
