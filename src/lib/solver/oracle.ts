@@ -24,6 +24,7 @@ const DRIVER_ION: Record<SaltId, IonId> = {
   epsom: 'Mg',
   // Chloride salts drive their cation; chloride comes along as the counter-ion.
   calciumChloride: 'Ca',
+  calciumChlorideAnhydrous: 'Ca',
   magnesiumChloride: 'Mg',
   // Monovalent salts drive sodium / potassium.
   tableSalt: 'Na',
