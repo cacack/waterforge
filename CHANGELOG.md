@@ -14,8 +14,14 @@ conventional-commit messages on `main`.
 
 ### Features
 
-* **profiles:** add 11 bottled-water profiles beyond the Khymos seed ([db9da57](https://github.com/cacack/waterforge/commit/db9da57e8c71b6f35853b9cad049b04c20f34c05))
-* **salts:** add anhydrous calcium chloride and clarify salt names ([34da403](https://github.com/cacack/waterforge/commit/34da403a840676be7a9ea486183cedfc8ebc3ee9))
+* **profiles:** add 11 bottled-water profiles beyond the Khymos seed ([db9da57](https://github.com/cacack/waterforge/commit/db9da57e8c71b6f35853b9cad049b04c20f34c05)):
+  Calistoga Spring Water, Perla Harghitei, Perla Harghitei Plată,
+  Tiva Harghita, Buxton, Highland Spring, Fiji, Hépar, Ferrarelle,
+  Vichy Catalan, and Vichy Célestins.
+* **salts:** add anhydrous calcium chloride and clarify salt names ([34da403](https://github.com/cacack/waterforge/commit/34da403a840676be7a9ea486183cedfc8ebc3ee9)).
+  Anhydrous calcium chloride (CaCl₂) is now selectable alongside the
+  dihydrate, and salts are renamed to match common packaging
+  ("Calcium Carbonate (Chalk)", "Calcium Chloride (Dihydrate)").
 
 ## [1.3.0](https://github.com/cacack/waterforge/compare/v1.2.0...v1.3.0) (2026-05-29)
 
