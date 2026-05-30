@@ -14,6 +14,7 @@ export type SaltId =
   | 'epsom'
   | 'tableSalt'
   | 'calciumChloride'
+  | 'calciumChlorideAnhydrous'
   | 'bakingSoda'
   | 'chalk'
   | 'magnesiumChloride'
@@ -116,9 +117,19 @@ export const SALTS: Record<SaltId, Salt> = {
   },
   calciumChloride: {
     id: 'calciumChloride',
-    name: 'Calcium chloride dihydrate',
+    name: 'Calcium Chloride (Dihydrate)',
     formula: 'CaCl2·2H2O',
     molarMass: 147.01,
+    stoichiometry: { Ca: 1, Cl: 2 },
+  },
+  calciumChlorideAnhydrous: {
+    id: 'calciumChlorideAnhydrous',
+    name: 'Calcium Chloride (Anhydrous)',
+    // Same ions as the dihydrate; only the molar mass (no water of hydration)
+    // differs, so the gram dose per unit of Ca/Cl is lower. Common in brewing
+    // supply as pellets/prills (e.g. LD Carlson "Briners Choice").
+    formula: 'CaCl2',
+    molarMass: 110.98,
     stoichiometry: { Ca: 1, Cl: 2 },
   },
   bakingSoda: {
@@ -130,7 +141,7 @@ export const SALTS: Record<SaltId, Salt> = {
   },
   chalk: {
     id: 'chalk',
-    name: 'Chalk',
+    name: 'Calcium Carbonate (Chalk)',
     formula: 'CaCO3',
     molarMass: 100.087,
     // Dissolves (in CO2-charged water) to calcium plus carbonate alkalinity:
@@ -160,6 +171,7 @@ export const SALT_ORDER: readonly SaltId[] = [
   'epsom',
   'tableSalt',
   'calciumChloride',
+  'calciumChlorideAnhydrous',
   'bakingSoda',
   'chalk',
   'magnesiumChloride',
