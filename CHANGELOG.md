@@ -9,6 +9,14 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.4.0](https://github.com/cacack/waterforge/compare/v1.3.0...v1.4.0) (2026-05-30)
+
+
+### Features
+
+* **profiles:** add 11 bottled-water profiles beyond the Khymos seed ([db9da57](https://github.com/cacack/waterforge/commit/db9da57e8c71b6f35853b9cad049b04c20f34c05))
+* **salts:** add anhydrous calcium chloride and clarify salt names ([34da403](https://github.com/cacack/waterforge/commit/34da403a840676be7a9ea486183cedfc8ebc3ee9))
+
 ## [1.3.0](https://github.com/cacack/waterforge/compare/v1.2.0...v1.3.0) (2026-05-29)
 
 
