@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.6.0](https://github.com/cacack/waterforge/compare/v1.5.0...v1.6.0) (2026-05-31)
+
+
+### Features
+
+* **ui:** guide users to request a missing target water ([0740266](https://github.com/cacack/waterforge/commit/07402663aeba33ca61fae91bfe484818a6104716)), closes [#113](https://github.com/cacack/waterforge/issues/113)
+
 ## [1.5.0](https://github.com/cacack/waterforge/compare/v1.4.0...v1.5.0) (2026-05-31)
 
 
