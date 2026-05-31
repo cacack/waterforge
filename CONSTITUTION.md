@@ -9,9 +9,9 @@ Waterforge turns distilled (or known-source) water and food-grade salts into
 faithful clones of bottled mineral waters. It's a static, client-side web app
 that takes a target water profile, subtracts what's already in your source
 water, and computes the exact salt additions needed to hit it — so anyone can
-reproduce a named mineral water at home, precisely and reproducibly. It descends
-from Martin Lersch's (Khymos) freely published method and data, and keeps that
-work free.
+reproduce a named mineral water at home, precisely and reproducibly. Its recipe
+method descends from Martin Lersch's (Khymos) freely published work; the profile
+data is now an independently-sourced compilation, and the whole stays free.
 
 ## Audience
 
@@ -28,8 +28,8 @@ for Bru'n Water / EZ Water Calculator there).
 When in doubt, prefer:
 
 1. **Free and copyleft over proprietary control** — code stays GPLv3, profile
-   data CC-BY-SA-4.0 with attribution to Lersch/Khymos. What we build on the
-   commons stays in the commons.
+   data CC-BY-SA-4.0 (per-profile sources; recipe method credited to
+   Lersch/Khymos). What we build on the commons stays in the commons.
 2. **Distilled-first over tap-water assumptions** — build up from a known-zero
    baseline; treat known-source water as the handled exception, not the default.
    Results should be reproducible anywhere.
@@ -70,4 +70,4 @@ We'll know this is working if:
 
 ---
 
-_Last refreshed: 2026-05-27_
+_Last refreshed: 2026-05-31_
