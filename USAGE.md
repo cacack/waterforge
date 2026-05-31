@@ -1,8 +1,7 @@
 # Using Waterforge
 
-> **Status:** the app UI is in progress (planned for milestone M3). This
-> document describes the intended user flow so you know what to expect. Steps
-> are presented in order; the UI will guide you through them in sequence.
+> The app is live at [waterforge.app](https://waterforge.app). This document
+> walks through the user flow; the UI guides you through the steps in sequence.
 
 ## Overview
 
