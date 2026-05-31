@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Waterforge">
+  <!-- Full-bleed lab-white background so the icon is maskable-safe. -->
+  <rect width="512" height="512" fill="#ffffff" />
+  <!-- Waterforge mark (hexagon + sky droplet), scaled from its 32x32 source
+       and centred within the ~80% maskable safe zone. Matches the live app's
+       WaterforgeMark / favicon: neutral slate hexagon, the droplet is the
+       only blue. -->
+  <g transform="translate(92.16,92.16) scale(10.24)">
+    <polygon
+      points="30,16 23,28.12 9,28.12 2,16 9,3.88 23,3.88"
+      fill="none" stroke="#64748b" stroke-width="1.7" stroke-linejoin="round" />
+    <path
+      d="M16 8 C 12.5 13 10.5 15.5 10.5 18 a 5.5 5.5 0 1 0 11 0 C 21.5 15.5 19.5 13 16 8 Z"
+      fill="#0ea5e9" />
+  </g>
+</svg>

@@ -3,7 +3,8 @@
 Clone bottled mineral waters from distilled (or known-source) water and
 food-grade salts. Waterforge is a static, client-side web app: pick a target
 profile, set your source water, toggle the salts you own, and get a precise,
-batch-scaled recipe.
+batch-scaled recipe. Install it to your home screen and it works offline, at
+the counter, with no connection.
 
 **Try it:** [waterforge.app](https://waterforge.app)
 
