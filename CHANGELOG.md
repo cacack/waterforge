@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.5.0](https://github.com/cacack/waterforge/compare/v1.4.0...v1.5.0) (2026-05-31)
+
+
+### Features
+
+* **pwa:** add installable offline support ([#26](https://github.com/cacack/waterforge/issues/26)) ([c0d5ed6](https://github.com/cacack/waterforge/commit/c0d5ed6fe4d63707ba3ce47ca2bb1527596b156a))
+
 ## [1.4.0](https://github.com/cacack/waterforge/compare/v1.3.0...v1.4.0) (2026-05-30)
 
 
