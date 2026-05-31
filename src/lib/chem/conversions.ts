@@ -30,6 +30,16 @@ export function usGallonsToLitres(gallons: number): number {
   return gallons * LITRES_PER_US_GALLON
 }
 
+/** Convert a temperature from Celsius to Fahrenheit. */
+export function celsiusToFahrenheit(celsius: number): number {
+  return celsius * 1.8 + 32
+}
+
+/** Convert a temperature from Fahrenheit to Celsius. */
+export function fahrenheitToCelsius(fahrenheit: number): number {
+  return (fahrenheit - 32) / 1.8
+}
+
 // Alkalinity expressed as-CaCO3 and as-HCO3 measure the same thing in different
 // reference compounds. CaCO3 carries two charge equivalents per mole (so its
 // equivalent weight is ~50.0435 g/eq); HCO3 carries one (so its equivalent
