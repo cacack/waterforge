@@ -3,6 +3,12 @@
 **Status:** Accepted
 **Date:** 2026-05-27
 
+**Amended by:** [ADR 0012](0012-profile-data-independently-sourced.md)
+(2026-05-31) — profile data is now independently sourced; CC-BY-SA-4.0 is the
+project's own copyleft choice over the compilation, with Khymos credited for the
+recipe method rather than the data. The license-split mechanism below stands;
+only its data-provenance rationale is updated.
+
 ## Context
 
 Waterforge ships two distinct kinds of intellectual property:

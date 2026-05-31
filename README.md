@@ -67,8 +67,11 @@ Other useful scripts:
 Waterforge uses a split license:
 
 - **Code** — [GPL-3.0-or-later](LICENSE).
-- **Profile data** — [CC-BY-SA-4.0](LICENSE-DATA), attributed to Martin Lersch
-  (Khymos). Derived data must be shared under the same license.
+- **Profile data** — [CC-BY-SA-4.0](LICENSE-DATA). The data is an
+  independently-sourced compilation (each profile cites its own source);
+  CC-BY-SA-4.0 is the project's copyleft choice over it, and derived data must
+  be shared under the same license. The recipe method is credited to Martin
+  Lersch (Khymos).
 
 This keeps the project free and copyleft, faithful to the freely published
 source method it builds on.

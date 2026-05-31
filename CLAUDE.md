@@ -6,7 +6,8 @@ Guidance for Claude Code in the **Waterforge** repo. User-facing docs: `README.m
 
 Waterforge is a static, client-side web app for cloning bottled mineral waters
 from distilled water and food-grade salts. Copyleft: code **GPLv3**, profile
-data **CC-BY-SA-4.0** (attribution to Martin Lersch / Khymos). Stack:
+data **CC-BY-SA-4.0** (per-profile sources; recipe method credited to Martin
+Lersch / Khymos). Stack:
 TypeScript + Svelte 5 (runes) + Vite, deployed to GitHub Pages.
 
 ## Where to look

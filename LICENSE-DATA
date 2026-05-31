@@ -21,13 +21,20 @@ Full license text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
 Attribution
 -----------
 
-The profiles and underlying method derive from work freely published by
-Martin Lersch on Khymos:
+The profile data is an independently-sourced compilation: each profile carries
+its own primary-source citation in its provenance, and the CC-BY-SA-4.0 above is
+the project's own copyleft choice over that curated compilation. When
+redistributing or adapting the data, credit those per-profile sources and the
+Waterforge compilation, and preserve the CC-BY-SA-4.0 ShareAlike terms.
+
+The recipe *method* — the salt priority order, driver-ion assignments, and the
+sequential-oracle algorithm — is adapted from work freely published by Martin
+Lersch on Khymos, who is also the source of the two residual seed profiles still
+derived from that work (PurPur (coffee brewing) and Waiwera):
 
   Martin Lersch — Khymos — https://khymos.org/
 
-Please preserve this attribution in any redistribution or derivative of the
-profile data.
+Please preserve this method attribution in any redistribution or derivative.
 
 
 Note
