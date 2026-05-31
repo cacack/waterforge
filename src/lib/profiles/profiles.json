@@ -492,6 +492,27 @@
     }
   },
   {
+    "name": "Magnetic Springs",
+    "ions": {
+      "Ca": 9.8,
+      "Mg": 3.8,
+      "Na": 2,
+      "K": 1.1,
+      "HCO3": 40,
+      "Cl": 2
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 6.5,
+    "tds": 58,
+    "comment": "Magnetic Springs Spring water (still), sourced from Pine Grove Springs, Columbus, Ohio — a low-mineralisation US spring. SiO₂ 9.6 mg/L. NO₃ as N 0.78 mg/L (≈ NO₃ 3.5 mg/L). Sulfate below the lab reporting limit (<5 mg/L, treated as absent). Alkalinity reported as CaCO₃ (40 mg/L).",
+    "url": "https://magneticsprings.com/wp-content/uploads/2025/05/2022-23-Spring-Water-Annual-Testing.pdf",
+    "provenance": {
+      "verified": true,
+      "source": "Magnetic Springs Water Co. — Spring Water Annual Testing report (National Testing Laboratories, NELAP-accredited; sample 439363, collected 2022-12-30)",
+      "source_date": "2026-05-31"
+    }
+  },
+  {
     "name": "Mountain Valley Spring",
     "ions": {
       "Ca": 67.5,
@@ -1032,6 +1053,27 @@
       "verified": true,
       "source": "VOSS Water official General Mineral Analysis table — VOSS Still NO (vosswaterglobal.com)",
       "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Waiākea",
+    "ions": {
+      "Ca": 5.6,
+      "Mg": 2.9,
+      "Na": 6.1,
+      "HCO3": 31,
+      "SO4": 4.9,
+      "Cl": 3
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.8,
+    "tds": 84,
+    "comment": "Waiākea® Hawaiian Volcanic Water, a naturally alkaline deep-well water from the Keaʻau aquifer at the eastern base of Mauna Loa, Hilo, Hawaiʻi. SiO₂ 37 mg/L (silica-rich volcanic water). F 0.061 mg/L. NO₃ as N: ND. Alkalinity reported as CaCO₃ (31 mg/L). Note: the bottler's 2026 General Mineral Analysis prints Fluoride 2.9 / Magnesium 0.061; these are transposed — the same report's Product Analysis table independently reports Fluoride 0.061, so the corrected values are F 0.061 / Mg 2.9 (also consistent with prior typical analyses and charge balance).",
+    "url": "https://waiakea.com/pages/water-quality-report",
+    "provenance": {
+      "verified": true,
+      "source": "Waiākea Hawaiian Volcanic — Bottled Water Quality Report 2026 (Typical Mineral Analysis, sampling period March 2026)",
+      "source_date": "2026-05-31"
     }
   },
   {
