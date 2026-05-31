@@ -50,6 +50,22 @@ conventional-commit messages on `main`.
 
 * **profiles:** cite SCA water standard via Wayback Machine archive ([c3859cd](https://github.com/cacack/waterforge/commit/c3859cd59f765ec9d753d0a159b9d375b598bf36))
 
+
+### Data
+
+_Recorded retroactively: these profile-data changes shipped in 1.2.0 but were
+committed with a non-release-driving `data:` type, so release-please omitted
+them from this section at the time. Recovered as part of issue #114._
+
+* **profiles:** re-source the commercial bottled-water library against current
+  authoritative sources, replacing the stale Khymos-2015 provenance — French,
+  German, Italian, Romanian/Balkan, Swiss/Nordic, North American, and remaining
+  batches. Corrects ion values where authoritative sources differ and flips many
+  profiles to `verified: true` ([#67](https://github.com/cacack/waterforge/issues/67)).
+* **profiles:** remove the Harghita profile — no current real-world brand matches
+  it ([#94](https://github.com/cacack/waterforge/issues/94)).
+* **profiles:** remove the Kessel profile — unrecoverable provenance ([#85](https://github.com/cacack/waterforge/issues/85)).
+
 ## [1.1.1](https://github.com/cacack/waterforge/compare/v1.1.0...v1.1.1) (2026-05-28)
 
 

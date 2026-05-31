@@ -56,7 +56,7 @@ Other useful scripts:
 | [USAGE.md](USAGE.md)                                           | How to use the app (intended user flow)        |
 | [CONTRIBUTING.md](CONTRIBUTING.md)                             | Dev setup, conventions, testing, license terms |
 | [docs/architecture/overview.md](docs/architecture/overview.md) | Stack, module boundaries, data flow            |
-| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records (ADR 0001–0009)  |
+| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records                  |
 | [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions      |
 | [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources             |
 | [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                  |
