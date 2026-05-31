@@ -10,10 +10,12 @@
     SelectTrigger,
   } from '$lib/components/ui/select'
   import {
+    celsiusToFahrenheit,
+    fahrenheitToCelsius,
     gramsPerLitreToVolumes,
     regulatorPsi,
+    toCarbonationVolumes,
     toCelsius,
-    toVolumes,
     volumesToGramsPerLitre,
     type CarbonationUnit,
     type TemperatureUnit,
@@ -22,9 +24,9 @@
   // Standalone "set-and-forget" force-carbonation calculator (issue #121).
   // Local component state only — carbonation is not yet wired into the recipe
   // or shared/persisted state; that integration is issue #123.
-  let carbonationInput = $state('2.4')
+  let carbonationInput = $state('2.4') // typical sparkling-water level (volumes CO₂)
   let carbonationUnit = $state<CarbonationUnit>('volumes')
-  let tempInput = $state('4')
+  let tempInput = $state('4') // typical fridge / serving temperature (°C)
   let tempUnit = $state<TemperatureUnit>('C')
 
   const carbonationValue = $derived(parseFloat(carbonationInput))
@@ -37,17 +39,48 @@
   )
 
   const targetVolumes = $derived(
-    valid ? toVolumes(carbonationValue, carbonationUnit) : 0,
+    valid ? toCarbonationVolumes(carbonationValue, carbonationUnit) : 0,
   )
   const tempC = $derived(valid ? toCelsius(tempValue, tempUnit) : 0)
   const psi = $derived(valid ? regulatorPsi(targetVolumes, tempC) : null)
 
-  // The same carbonation expressed in the *other* unit, for cross-reference.
+  // The same carbonation in the *other* unit, for cross-reference. Derived from
+  // the canonical `targetVolumes` (not the raw input) so it shares the single
+  // normalisation path, and guarded on `valid` so it never renders "NaN".
   const equivalent = $derived(
-    carbonationUnit === 'volumes'
-      ? `${volumesToGramsPerLitre(carbonationValue).toFixed(1)} g/L`
-      : `${gramsPerLitreToVolumes(carbonationValue).toFixed(2)} volumes`,
+    !valid
+      ? null
+      : carbonationUnit === 'volumes'
+        ? `${volumesToGramsPerLitre(targetVolumes).toFixed(1)} g/L`
+        : `${targetVolumes.toFixed(2)} volumes`,
   )
+
+  // Switching a unit converts the in-flight value so the underlying carbonation
+  // / temperature stays the same — otherwise the same digits would be silently
+  // reinterpreted in the new unit (e.g. 2.4 volumes → read as 2.4 g/L).
+  function changeCarbonationUnit(next: CarbonationUnit) {
+    if (next === carbonationUnit) return
+    if (Number.isFinite(carbonationValue)) {
+      const converted =
+        next === 'gPerL'
+          ? volumesToGramsPerLitre(carbonationValue)
+          : gramsPerLitreToVolumes(carbonationValue)
+      carbonationInput = String(Number(converted.toFixed(2)))
+    }
+    carbonationUnit = next
+  }
+
+  function changeTempUnit(next: TemperatureUnit) {
+    if (next === tempUnit) return
+    if (Number.isFinite(tempValue)) {
+      const converted =
+        next === 'F'
+          ? celsiusToFahrenheit(tempValue)
+          : fahrenheitToCelsius(tempValue)
+      tempInput = String(Number(converted.toFixed(1)))
+    }
+    tempUnit = next
+  }
 
   const CARBONATION_UNITS: { value: CarbonationUnit; label: string }[] = [
     { value: 'volumes', label: 'Volumes CO₂' },
@@ -57,6 +90,10 @@
     { value: 'C', label: '°C' },
     { value: 'F', label: '°F' },
   ]
+
+  // Sensible lower bound for the temperature field, matched to the selected
+  // unit (serving temperatures are never below freezing in practice).
+  const tempMin = $derived(tempUnit === 'C' ? -10 : 14)
 </script>
 
 <SectionCard title="Carbonation">
@@ -87,7 +124,7 @@
           type="single"
           value={carbonationUnit}
           onValueChange={(v: string) => {
-            if (v === 'volumes' || v === 'gPerL') carbonationUnit = v
+            if (v === 'volumes' || v === 'gPerL') changeCarbonationUnit(v)
           }}
         >
           <SelectTrigger
@@ -113,6 +150,7 @@
         <Input
           id="carbonation-temp"
           type="number"
+          min={tempMin}
           step="1"
           inputmode="decimal"
           bind:value={tempInput}
@@ -126,7 +164,7 @@
           type="single"
           value={tempUnit}
           onValueChange={(v: string) => {
-            if (v === 'C' || v === 'F') tempUnit = v
+            if (v === 'C' || v === 'F') changeTempUnit(v)
           }}
         >
           <SelectTrigger

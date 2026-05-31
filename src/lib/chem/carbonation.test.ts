@@ -1,11 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { fahrenheitToCelsius } from './conversions'
+import { fahrenheitToCelsius, toCelsius } from './conversions'
 import {
   CO2_G_PER_L_PER_VOLUME,
   gramsPerLitreToVolumes,
   regulatorPsi,
-  toCelsius,
-  toVolumes,
+  toCarbonationVolumes,
   volumesAtPressure,
   volumesToGramsPerLitre,
 } from './carbonation'
@@ -24,9 +23,11 @@ describe('volumes <-> g/L', () => {
 })
 
 describe('unit normalisation', () => {
-  it('toVolumes passes volumes through and converts g/L', () => {
-    expect(toVolumes(2.4, 'volumes')).toBe(2.4)
-    expect(toVolumes(volumesToGramsPerLitre(2.4), 'gPerL')).toBeCloseTo(2.4, 12)
+  it('toCarbonationVolumes passes volumes through and converts g/L', () => {
+    expect(toCarbonationVolumes(2.4, 'volumes')).toBe(2.4)
+    expect(
+      toCarbonationVolumes(volumesToGramsPerLitre(2.4), 'gPerL'),
+    ).toBeCloseTo(2.4, 12)
   })
 
   it('toCelsius passes °C through and converts °F', () => {
@@ -72,5 +73,18 @@ describe('volumesAtPressure (inverse)', () => {
     const t = fahrenheitToCelsius(38)
     const psi = regulatorPsi(2.5, t)
     expect(volumesAtPressure(psi, t)).toBeCloseTo(2.5, 6)
+  })
+
+  it('clamps to 0 for unphysical (negative) gauge pressure', () => {
+    expect(volumesAtPressure(-50, fahrenheitToCelsius(38))).toBe(0)
+  })
+
+  it('explains why regulatorPsi clamps: atmospheric carbonation exceeds the saturated target', () => {
+    // regulatorPsi(0.5, 75 °F) clamps to 0 (tested above). The reason: at
+    // atmospheric pressure the warm water already holds MORE than 0.5 volumes,
+    // so no positive gauge pressure can bring it down to 0.5. This pins that
+    // relationship so the clamp and its inverse stay consistent.
+    const warm = fahrenheitToCelsius(75)
+    expect(volumesAtPressure(0, warm)).toBeGreaterThan(0.5)
   })
 })

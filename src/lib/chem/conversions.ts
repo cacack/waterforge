@@ -40,6 +40,14 @@ export function fahrenheitToCelsius(fahrenheit: number): number {
   return (fahrenheit - 32) / 1.8
 }
 
+/** How a temperature is expressed. */
+export type TemperatureUnit = 'C' | 'F'
+
+/** Normalise a temperature in either unit to canonical Celsius. */
+export function toCelsius(value: number, unit: TemperatureUnit): number {
+  return unit === 'C' ? value : fahrenheitToCelsius(value)
+}
+
 // Alkalinity expressed as-CaCO3 and as-HCO3 measure the same thing in different
 // reference compounds. CaCO3 carries two charge equivalents per mole (so its
 // equivalent weight is ~50.0435 g/eq); HCO3 carries one (so its equivalent

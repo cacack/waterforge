@@ -13,18 +13,20 @@
 // See docs/guides/chemistry.md §2 (Forced carbonation) for the derivation and
 // the source of the empirical fit.
 
-import { celsiusToFahrenheit, fahrenheitToCelsius } from './conversions'
+import { celsiusToFahrenheit } from './conversions'
 
 /** How a carbonation figure is expressed. */
 export type CarbonationUnit = 'volumes' | 'gPerL'
 
-/** How a temperature is expressed. */
-export type TemperatureUnit = 'C' | 'F'
-
-// One "volume" of CO2 is one litre of CO2 gas (at 0 °C, 1 atm) dissolved per
-// litre of water. At that reference the gas mass is ~1.96 g, so this constant
-// converts between volumes and g/L. (CO2 molar mass 44.01 g/mol ÷ 22.414 L/mol
-// molar volume ≈ 1.964 g/L; 1.96 is the conventionally rounded value.)
+/**
+ * Mass of CO2 per litre for one "volume" of carbonation.
+ *
+ * One "volume" is one litre of CO2 gas (at 0 °C, 1 atm) dissolved per litre of
+ * water. This is the **conventionally rounded** brewing value (1.96 g/L); the
+ * more precise figure from CO2 molar mass 44.01 g/mol ÷ 22.414 L/mol molar
+ * volume is ≈ 1.964 g/L. Both conversion directions use this same constant, so
+ * round-trips are exact regardless of the rounding.
+ */
 export const CO2_G_PER_L_PER_VOLUME = 1.96
 
 /** Convert a carbonation level from volumes of CO2 to g/L. */
@@ -38,13 +40,11 @@ export function gramsPerLitreToVolumes(gPerL: number): number {
 }
 
 /** Normalise a carbonation value in either unit to canonical volumes of CO2. */
-export function toVolumes(value: number, unit: CarbonationUnit): number {
+export function toCarbonationVolumes(
+  value: number,
+  unit: CarbonationUnit,
+): number {
   return unit === 'volumes' ? value : gramsPerLitreToVolumes(value)
-}
-
-/** Normalise a temperature in either unit to canonical Celsius. */
-export function toCelsius(value: number, unit: TemperatureUnit): number {
-  return unit === 'C' ? value : fahrenheitToCelsius(value)
 }
 
 // Empirical fit relating gauge pressure (psi), temperature, and dissolved CO2,
@@ -88,7 +88,16 @@ export function regulatorPsi(volumes: number, tempC: number): number {
 /**
  * The equilibrium carbonation (volumes of CO2) reached at a given gauge
  * pressure and temperature — the inverse of {@link regulatorPsi}.
+ *
+ * Clamped at 0 (negative carbonation is unphysical). Note that because
+ * `regulatorPsi` clamps at 0, the round-trip
+ * `volumesAtPressure(regulatorPsi(v, t), t) ≈ v` only holds while
+ * `regulatorPsi` is positive — i.e. when the target is above atmospheric
+ * solubility at that temperature. Below that, `regulatorPsi` saturates to 0 and
+ * the round-trip returns the atmospheric-equilibrium carbonation instead of v.
  */
 export function volumesAtPressure(psi: number, tempC: number): number {
-  return (psi + ATMOSPHERIC_PSI) * solubilityCoefficient(tempC) - HENRY_OFFSET
+  const volumes =
+    (psi + ATMOSPHERIC_PSI) * solubilityCoefficient(tempC) - HENRY_OFFSET
+  return Math.max(0, volumes)
 }
