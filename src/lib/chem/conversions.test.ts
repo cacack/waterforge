@@ -3,6 +3,8 @@ import {
   HCO3_PER_CACO3,
   LITRES_PER_US_GALLON,
   caco3ToHco3,
+  celsiusToFahrenheit,
+  fahrenheitToCelsius,
   hco3ToCaco3,
   litresToUsGallons,
   mgToMmol,
@@ -50,5 +52,17 @@ describe('alkalinity as-CaCO3 <-> as-HCO3', () => {
 
   it('100 mg/L as CaCO3 is ~121.9 mg/L as HCO3', () => {
     expect(caco3ToHco3(100)).toBeCloseTo(121.93, 2)
+  })
+})
+
+describe('Celsius <-> Fahrenheit', () => {
+  it('uses the standard anchors', () => {
+    expect(celsiusToFahrenheit(0)).toBe(32)
+    expect(celsiusToFahrenheit(100)).toBe(212)
+    expect(fahrenheitToCelsius(32)).toBe(0)
+  })
+
+  it('round-trips', () => {
+    expect(fahrenheitToCelsius(celsiusToFahrenheit(3.5))).toBeCloseTo(3.5, 12)
   })
 })

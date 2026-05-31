@@ -5,6 +5,7 @@
   import SourceSection from './components/SourceSection.svelte'
   import SaltsSection from './components/SaltsSection.svelte'
   import BatchSection from './components/BatchSection.svelte'
+  import CarbonationSection from './components/CarbonationSection.svelte'
   import RecipePanel from './components/RecipePanel.svelte'
   import ReadoutsPanel from './components/ReadoutsPanel.svelte'
   import { computeResult } from './state.svelte'
@@ -71,6 +72,7 @@
         <SourceSection />
         <SaltsSection />
         <BatchSection />
+        <CarbonationSection />
       </div>
 
       <!-- Live recipe + readouts.

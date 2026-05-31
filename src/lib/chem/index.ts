@@ -2,3 +2,4 @@
 // conversions. The solver builds on these.
 export * from './constants'
 export * from './conversions'
+export * from './carbonation'

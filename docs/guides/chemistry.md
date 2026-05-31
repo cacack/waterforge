@@ -54,6 +54,43 @@ water at typical pH, alkalinity ≈ [HCO₃⁻]. Waterforge stores alkalinity as
 two conventions is the single most common error in water chemistry. See
 section 3 for the trap and how to avoid it.
 
+### Forced carbonation
+
+Cloning a _sparkling_ water needs one more thing the ion solver doesn't touch:
+the fizz. Carbonation is a separate, orthogonal axis from ion matching, and for
+DIY sparkling water it is set by **force carbonation** — holding the water under
+CO₂ pressure until it reaches equilibrium ("set and forget").
+
+How much CO₂ dissolves is governed by Henry's law: at equilibrium, dissolved
+CO₂ is a function of the head pressure and the temperature (cold water holds
+more). Carbonation is reported either as **volumes of CO₂** (the brewing
+convention — one "volume" is one litre of CO₂ gas at 0 °C / 1 atm dissolved per
+litre of water) or as **g/L**. The two relate by the gas density at that
+reference:
+
+```
+g/L CO₂ = volumes × 1.96        (CO₂ 44.01 g/mol ÷ 22.414 L/mol ≈ 1.96 g/L)
+```
+
+Waterforge uses an empirical fit, widely used in homebrewing, that reproduces
+standard CO₂-solubility carbonation tables to within their chart resolution
+over the fridge-to-room range:
+
+```
+volumes = (P + 14.695) × (0.01821 + 0.09011 × e^(−(T_F − 32) / 43.11)) − 0.003342
+```
+
+where `P` is the regulator **gauge** pressure in psi and `T_F` the temperature
+in °F (14.695 psi bridges gauge and absolute pressure). Waterforge inverts this
+to answer the practical question — _"what pressure do I set to hit this
+carbonation at this temperature?"_ — and clamps the result at 0 psi, since a
+negative solution just means the target is below what the water holds at
+atmospheric pressure.
+
+The engine keeps carbonation canonical in **volumes of CO₂** and **°C**, with
+explicit converters at the edges (`src/lib/chem/carbonation.ts`), mirroring the
+unit discipline used everywhere else in the engine.
+
 ---
 
 ## 3. Alkalinity: the as-CaCO₃ / as-HCO₃ Trap
