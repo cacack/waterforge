@@ -55,12 +55,26 @@ Other useful scripts:
 | [CONSTITUTION.md](CONSTITUTION.md)                             | Mission, audience, principles, non-goals       |
 | [USAGE.md](USAGE.md)                                           | How to use the app (intended user flow)        |
 | [CONTRIBUTING.md](CONTRIBUTING.md)                             | Dev setup, conventions, testing, license terms |
+| [ROADMAP.md](ROADMAP.md)                                       | Where the project is headed                    |
 | [docs/architecture/overview.md](docs/architecture/overview.md) | Stack, module boundaries, data flow            |
 | [docs/decisions/](docs/decisions/)                             | Architecture Decision Records                  |
 | [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions      |
 | [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources             |
 | [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                  |
 | [docs/operations/release.md](docs/operations/release.md)       | Release runbook (cut, tag, publish)            |
+
+## Getting help
+
+- **A question, or unsure what a readout means?** Open a
+  [question issue](https://github.com/cacack/waterforge/issues/new?labels=question&template=question.md).
+- **Found a bug or a wrong number?** File a
+  [bug report](https://github.com/cacack/waterforge/issues/new?template=bug_report.md)
+  — a shared recipe link (the share button in the app) captures the exact inputs.
+- **Want a water added to the library?** Open a
+  [profile request](https://github.com/cacack/waterforge/issues/new?template=profile_request.md)
+  with a source for its mineral analysis.
+
+Where the project is headed is in [ROADMAP.md](ROADMAP.md).
 
 ## License
 

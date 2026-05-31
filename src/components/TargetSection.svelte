@@ -45,7 +45,20 @@
       <Command.Root>
         <Command.Input placeholder="Search waters…" />
         <Command.List>
-          <Command.Empty>No water found.</Command.Empty>
+          <Command.Empty>
+            <p>No water found.</p>
+            <p class="text-muted-foreground mt-1 text-xs">
+              Can't find your water?
+              <a
+                href="https://github.com/cacack/waterforge/issues/new?template=profile_request.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-foreground underline underline-offset-2"
+              >
+                Request it on GitHub</a
+              >.
+            </p>
+          </Command.Empty>
           <Command.Group>
             {#each PROFILES as profile (profile.name)}
               <Command.Item
