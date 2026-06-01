@@ -100,6 +100,15 @@
   {
     "name": "Badoit",
     "carbonation_style": "sparkling",
+    "carbonation_target": {
+      "value": 1.5,
+      "unit": "volumes",
+      "provenance": {
+        "verified": false,
+        "source": "Estimate. No producer-published bottled-carbonation spec found (badoit.fr composition page lists no CO₂/volumes figure). Badoit is consistently classified as LIGHT carbonation — below San Pellegrino and well below Perrier (~5 vol) — per the Sparkel 'Science of Carbonation' comparison (qualitative chart, no number). ~1.5 volumes (≈2.9 g/L) reflects that light position. NOT derived from source-CO₂: the widely-cited '~3 g/L' number is a historical 1856 spring analysis (source dissolved CO₂), not a bottled spec, and is not used here as a target. Replace with an authoritative figure if one is published.",
+        "source_date": "2026-06-01"
+      }
+    },
     "ions": {
       "Ca": 153,
       "Mg": 80,
@@ -817,6 +826,15 @@
   {
     "name": "San Pellegrino",
     "carbonation_style": "sparkling",
+    "carbonation_target": {
+      "value": 3,
+      "unit": "volumes",
+      "provenance": {
+        "verified": false,
+        "source": "Estimate. S.Pellegrino is force-carbonated (\"acqua naturale con aggiunta di anidride carbonica\"); no producer-published finished-product carbonation spec in g/L or volumes was found, including in the official S.Pellegrino Water Analysis Report. ~3.0 volumes is the figure independent secondary carbonation-testing sources converge on (Billi UK ≈ 13 PSI at 35°F reported as a 3.00:1 rating; corroborated by Sparkel/Bonne O as moderate carbonation). NOT derived from source CO₂ (this profile records no co2). Replace with an authoritative figure if the producer publishes one.",
+        "source_date": "2026-06-01"
+      }
+    },
     "ions": {
       "Ca": 164,
       "Mg": 49.5,
@@ -962,6 +980,15 @@
   {
     "name": "Topo chico",
     "carbonation_style": "sparkling",
+    "carbonation_target": {
+      "value": 4.8,
+      "unit": "volumes",
+      "provenance": {
+        "verified": false,
+        "source": "Estimate. No Coca-Cola-published bottled-carbonation spec found; Topo Chico is force-carbonated, and ~4.8 volumes of CO₂ is the figure consistently cited across independent secondary clone/carbonation sources (Third Leap Brewing clone: 35 psi → ~4.8 volumes; Keg Outlet and Homebrew Talk clone discussions corroborate the mid-to-upper-4 volumes range). NOT derived from any source-CO₂ value (this profile records no co2). Replace with an authoritative figure if one is published.",
+        "source_date": "2026-06-01"
+      }
+    },
     "ions": {
       "Ca": 140,
       "Mg": 10,
