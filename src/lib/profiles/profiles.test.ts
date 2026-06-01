@@ -503,7 +503,7 @@ describe('chargeBalanceResidual', () => {
 })
 
 // ---------------------------------------------------------------------------
-// Seeded bundled-profile carbonation target (#123 data half)
+// Seeded bundled-profile carbonation targets (#123 data half; #132 population)
 // ---------------------------------------------------------------------------
 
 describe('bundled profiles — seeded carbonation_target', () => {
@@ -539,5 +539,32 @@ describe('bundled profiles — seeded carbonation_target', () => {
     const perrier = findProfile('Perrier')
     expect(perrier?.co2).toBeUndefined()
     expect(perrier?.carbonation_target?.value).toBeGreaterThan(0)
+  })
+
+  it('Gerolsteiner carries an authoritative (verified) carbonation_target', () => {
+    const g = findProfile('Gerolsteiner')
+    expect(g).toBeDefined()
+    expect(g?.carbonation_style).toBe('sparkling')
+
+    const target = g?.carbonation_target
+    expect(target).toBeDefined()
+    // Producer-published bottled carbonation: 7 g/L natural carbonic acid.
+    expect(target!.value).toBe(7)
+    expect(target!.unit).toBe('gPerL')
+    expect(target!.provenance.verified).toBe(true)
+    expect(target!.provenance.source_date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    expect(validateProfile(g).ok).toBe(true)
+  })
+
+  it('Gerolsteiner carbonation_target is sourced independently of co2', () => {
+    // Gerolsteiner *does* carry a `co2` figure, and it happens to coincide
+    // (7 g/L) because the carbonation is natural and matched to the source.
+    // The discipline is that the target is not *derived from* co2: assert it
+    // carries its own provenance, distinct from the profile-level source.
+    const g = findProfile('Gerolsteiner')
+    expect(g?.co2).toBeDefined()
+    expect(g?.carbonation_target?.provenance.source).not.toBe(
+      g?.provenance.source,
+    )
   })
 })
