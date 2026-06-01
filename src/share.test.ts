@@ -21,6 +21,7 @@ function resetApp() {
   app.source = {}
   app.salts = [...SALT_ORDER]
   app.batch = { volume: 1, unit: 'L' }
+  app.carbonation = { temp: 4, tempUnit: 'C' }
 }
 
 // ---------------------------------------------------------------------------
@@ -76,6 +77,18 @@ describe('encodeHash / decodeHash — round-trips', () => {
     const hash = encodeHash(snap)
     const decoded = decodeHash(hash)
     expect(decoded).toEqual(snap)
+  })
+
+  it('round-trips the carbonating temperature and unit', () => {
+    app.carbonation = { temp: 38, tempUnit: 'F' }
+    const snap = snapshotState()
+    const hash = encodeHash(snap)
+    const decoded = decodeHash(hash)
+    expect(decoded).toEqual(snap)
+    expect((decoded as Record<string, unknown>)['carbonation']).toEqual({
+      temp: 38,
+      tempUnit: 'F',
+    })
   })
 
   it('produces only URL-safe characters', () => {

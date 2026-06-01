@@ -74,6 +74,24 @@ also shows four readouts:
 | **Charge residual**  | Ionic charge balance in meq/L — ideally close to zero     |
 | **Saturation index** | Per-salt saturation index; a warning appears when SI ≥ 0  |
 
+### Carbonation
+
+If the target profile carries a known **carbonation target** (a sparkling
+water), the recipe panel adds a carbonation line:
+
+> Carbonate to **X g/L** (≈ Y volumes) → **Z psi** at T °C
+
+The PSI is the regulator gauge pressure to set on a CO₂ tank and leave until the
+keg equilibrates ("set and forget"). CO₂ dissolves more readily when cold, so
+the pressure depends on temperature: use the **carbonating temperature** control
+to match the temperature you'll carbonate at, and the PSI recomputes live (switch
+between °C and °F as you prefer). If the target needs no added pressure at that
+temperature, the line says so. This temperature is saved with your recipe and
+travels in share links and downloaded recipes.
+
+Profiles recorded as **still** show "Still water — no carbonation"; profiles with
+no recorded carbonation show no carbonation line.
+
 ### Warnings
 
 A **saturation warning** means a salt is at or above its solubility limit at

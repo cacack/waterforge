@@ -9,11 +9,16 @@ import {
   PROFILES,
   SALT_ORDER,
   profileToIonProfile,
+  regulatorPsi,
   solve,
+  toCarbonationVolumes,
+  toCelsius,
+  volumesToGramsPerLitre,
   type IonProfile,
   type Profile,
   type SaltId,
   type SolveResult,
+  type TemperatureUnit,
   type VolumeUnit,
 } from '$lib'
 
@@ -28,6 +33,10 @@ export const app = $state({
   source: {} as IonProfile,
   salts: [...SALT_ORDER] as SaltId[],
   batch: { volume: 1, unit: 'L' as VolumeUnit },
+  // Carbonating temperature for the recipe carbonation readout. Display value
+  // + unit (mirrors CarbonationSection); the recipe line owns this state, the
+  // standalone calculator keeps its own.
+  carbonation: { temp: 4, tempUnit: 'C' as TemperatureUnit },
 })
 
 /** The live solver result for the current inputs (null until a target is chosen). */
@@ -36,4 +45,41 @@ export function computeResult(): SolveResult | null {
   const target = profileToIonProfile(app.target)
   const source = app.sourceMode === 'known' ? app.source : {}
   return solve(target, source, app.salts, app.batch)
+}
+
+/**
+ * Resolved carbonation instruction for the selected profile, as a discriminated
+ * union so the renderer stays a thin switch and the branching is unit-testable.
+ *
+ * - `'target'` — the profile carries a `carbonation_target`: report the target
+ *   carbonation (volumes + g/L) and the regulator PSI at the chosen carbonating
+ *   temperature.
+ * - `'still'` — the profile is recorded as still: no carbonation number.
+ * - `'none'` — no target and no known style: render nothing.
+ *
+ * Orthogonal to the salt solver — this never touches `computeResult()` or the
+ * ion math; it only reuses the framework-agnostic carbonation engine.
+ */
+export type CarbonationReadout =
+  | { kind: 'none' }
+  | { kind: 'still' }
+  | {
+      kind: 'target'
+      volumes: number
+      gPerL: number
+      psi: number
+      tempC: number
+    }
+
+export function computeCarbonation(): CarbonationReadout {
+  const target = app.target?.carbonation_target
+  if (target) {
+    const tempC = toCelsius(app.carbonation.temp, app.carbonation.tempUnit)
+    const volumes = toCarbonationVolumes(target.value, target.unit)
+    const gPerL = volumesToGramsPerLitre(volumes)
+    const psi = regulatorPsi(volumes, tempC)
+    return { kind: 'target', volumes, gPerL, psi, tempC }
+  }
+  if (app.target?.carbonation_style === 'still') return { kind: 'still' }
+  return { kind: 'none' }
 }

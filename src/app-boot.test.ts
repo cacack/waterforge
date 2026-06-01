@@ -59,6 +59,7 @@ function resetApp() {
   app.source = {}
   app.salts = [...SALT_ORDER]
   app.batch = { volume: 1, unit: 'L' }
+  app.carbonation = { temp: 4, tempUnit: 'C' }
 }
 
 // ---------------------------------------------------------------------------
@@ -147,6 +148,9 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
       source: { Ca: 80 },
       salts: ['gypsum', 'epsom'],
       batch: { volume: 5, unit: 'gal' },
+      // Default carbonating temperature: the hash omits carbonation, so apply
+      // leaves the reset default, which snapshotState then re-emits.
+      carbonation: { temp: 4, tempUnit: 'C' },
     }
     const hash = encodeHash(hashSnap)
 

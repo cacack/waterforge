@@ -10,10 +10,11 @@ import { app } from './state.svelte'
 import {
   snapshotState,
   applySnapshot,
+  buildRecipeExport,
   SNAPSHOT_VERSION,
   type AppSnapshot,
 } from './persist.svelte'
-import { PROFILES, SALT_ORDER } from '$lib'
+import { PROFILES, SALT_ORDER, type Profile } from '$lib'
 
 // Reset app to known defaults before each test so tests are independent.
 function resetApp() {
@@ -23,6 +24,7 @@ function resetApp() {
   app.source = {}
   app.salts = [...SALT_ORDER]
   app.batch = { volume: 1, unit: 'L' }
+  app.carbonation = { temp: 4, tempUnit: 'C' }
 }
 
 describe('snapshotState', () => {
@@ -129,6 +131,124 @@ describe('applySnapshot — round-trip', () => {
   })
 })
 
+describe('carbonation — snapshot round-trip & tolerance', () => {
+  beforeEach(resetApp)
+
+  it('captures the carbonating temperature and unit', () => {
+    app.carbonation = { temp: 38, tempUnit: 'F' }
+    const snap = snapshotState()
+    expect(snap.carbonation).toEqual({ temp: 38, tempUnit: 'F' })
+  })
+
+  it('round-trips the carbonating temperature', () => {
+    app.carbonation = { temp: 6, tempUnit: 'C' }
+    applySnapshot(snapshotState())
+    expect(app.carbonation).toEqual({ temp: 6, tempUnit: 'C' })
+  })
+
+  it('round-trips a Fahrenheit carbonating temperature', () => {
+    app.carbonation = { temp: 40, tempUnit: 'F' }
+    applySnapshot(snapshotState())
+    expect(app.carbonation).toEqual({ temp: 40, tempUnit: 'F' })
+  })
+
+  it('keeps the default when a legacy snapshot omits carbonation', () => {
+    app.carbonation = { temp: 6, tempUnit: 'C' }
+    // A snapshot from before the carbonation field existed.
+    applySnapshot({
+      version: SNAPSHOT_VERSION,
+      targetName: 'Evian',
+      sourceMode: 'distilled',
+      source: {},
+      salts: [...SALT_ORDER],
+      batch: { volume: 1, unit: 'L' },
+    })
+    // Other state applies; carbonation is left intact (not reset).
+    expect(app.target?.name).toBe('Evian')
+    expect(app.carbonation).toEqual({ temp: 6, tempUnit: 'C' })
+  })
+
+  it('ignores a non-finite carbonating temperature', () => {
+    app.carbonation = { temp: 4, tempUnit: 'C' }
+    applySnapshot({
+      version: SNAPSHOT_VERSION,
+      targetName: 'Evian',
+      sourceMode: 'distilled',
+      source: {},
+      salts: [...SALT_ORDER],
+      batch: { volume: 1, unit: 'L' },
+      carbonation: { temp: NaN, tempUnit: 'F' },
+    })
+    // temp ignored (kept), but a valid unit still applies.
+    expect(app.carbonation.temp).toBe(4)
+    expect(app.carbonation.tempUnit).toBe('F')
+  })
+
+  it('ignores an invalid temperature unit', () => {
+    app.carbonation = { temp: 4, tempUnit: 'C' }
+    applySnapshot({
+      version: SNAPSHOT_VERSION,
+      targetName: 'Evian',
+      sourceMode: 'distilled',
+      source: {},
+      salts: [...SALT_ORDER],
+      batch: { volume: 1, unit: 'L' },
+      carbonation: { temp: 10, tempUnit: 'K' },
+    })
+    expect(app.carbonation.temp).toBe(10)
+    expect(app.carbonation.tempUnit).toBe('C')
+  })
+})
+
+describe('buildRecipeExport — carbonation block', () => {
+  beforeEach(resetApp)
+
+  // In-test fixture so the test does not depend on profile-library data the
+  // parallel data prompt owns.
+  const sparkling: Profile = {
+    name: 'Test Sparkling',
+    ions: { Na: 10 },
+    carbonation_style: 'sparkling',
+    carbonation_target: {
+      value: 2.4,
+      unit: 'volumes',
+      provenance: { verified: true, source: 'test', source_date: '2026-01-01' },
+    },
+    provenance: { verified: true, source: 'test', source_date: '2026-01-01' },
+  }
+
+  const still: Profile = {
+    name: 'Test Still',
+    ions: { Na: 10 },
+    carbonation_style: 'still',
+    provenance: { verified: true, source: 'test', source_date: '2026-01-01' },
+  }
+
+  it('embeds a resolved carbonation block for a target profile', () => {
+    app.target = sparkling
+    app.carbonation = { temp: 4, tempUnit: 'C' }
+    const exp = buildRecipeExport()
+    expect(exp.carbonationRecipe).not.toBeNull()
+    expect(exp.carbonationRecipe?.targetValue).toBe(2.4)
+    expect(exp.carbonationRecipe?.targetUnit).toBe('volumes')
+    expect(exp.carbonationRecipe?.volumes).toBeCloseTo(2.4)
+    expect(exp.carbonationRecipe?.tempC).toBe(4)
+    expect(Number.isFinite(exp.carbonationRecipe?.psi)).toBe(true)
+  })
+
+  it('is null for a still profile', () => {
+    app.target = still
+    const exp = buildRecipeExport()
+    expect(exp.carbonationRecipe).toBeNull()
+  })
+
+  it('is null for a profile with neither target nor style', () => {
+    app.target = PROFILES.find((p) => p.name === 'Evian') ?? null
+    const exp = buildRecipeExport()
+    expect(exp.carbonationRecipe).toBeNull()
+  })
+})
+
 describe('applySnapshot — version handling', () => {
   beforeEach(resetApp)
 
@@ -140,6 +260,7 @@ describe('applySnapshot — version handling', () => {
       source: {},
       salts: [...SALT_ORDER],
       batch: { volume: 5, unit: 'L' },
+      carbonation: { temp: 4, tempUnit: 'C' },
     }
     applySnapshot(snap)
     // State should remain at the Evian default, not Volvic
