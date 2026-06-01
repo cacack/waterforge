@@ -73,6 +73,56 @@ export interface CarbonationTarget {
 }
 
 /**
+ * Controlled vocabulary for a profile's high-level {@link Profile.category}.
+ *
+ * This is the **single source of truth** for the category enum — `schema.ts`
+ * and `validate.ts` both derive from this constant rather than repeating the
+ * literal list. The {@link ProfileCategory} union type is derived from it.
+ *
+ * - `'bottled'` — a commercial bottled mineral/spring water.
+ * - `'brewing'` — a brewing-water target (e.g. Palmer / SCA references).
+ * - `'coffee'` — a coffee-brewing water target.
+ * - `'synthetic'` — a constructed/reference profile, not a real product.
+ */
+export const PROFILE_CATEGORIES = [
+  'bottled',
+  'brewing',
+  'coffee',
+  'synthetic',
+] as const
+
+/** A profile's high-level category. One of {@link PROFILE_CATEGORIES}. */
+export type ProfileCategory = (typeof PROFILE_CATEGORIES)[number]
+
+/**
+ * Controlled vocabulary for a profile's descriptive {@link Profile.traits}.
+ *
+ * The **single source of truth** for the trait enum — `schema.ts` and
+ * `validate.ts` both derive from this constant. Traits are **editorially
+ * assigned** browsing/filtering metadata, NOT auto-computed from the ion
+ * figures; a curator chooses them to characterise a water.
+ *
+ * Note: still/sparkling is deliberately **not** a trait — carbonation is a
+ * first-class field (`carbonation_style` / `carbonation_target`, see ADR 0013).
+ */
+export const PROFILE_TRAITS = [
+  'calcium-rich',
+  'magnesium-rich',
+  'sodium-rich',
+  'sulfate-rich',
+  'bicarbonate-rich',
+  'chloride-rich',
+  'silica-rich',
+  'low-mineralization',
+  'high-mineralization',
+  'artesian',
+  'volcanic',
+] as const
+
+/** A single descriptive trait. One of {@link PROFILE_TRAITS}. */
+export type ProfileTrait = (typeof PROFILE_TRAITS)[number]
+
+/**
  * Ion concentrations in mg/L for a named mineral-water profile.
  *
  * All seven ions tracked by the Waterforge engine are optional; missing ions
@@ -161,6 +211,26 @@ export interface Profile {
   comment?: string
   /** URL to the primary source or product page. */
   url?: string
+
+  // Descriptive metadata (optional, additive — for browsing/filtering only;
+  // does not affect the recipe math). See ADR 0014.
+
+  /** Country of origin (e.g. `'France'`). Free text; a geographic fact. */
+  country?: string
+  /** Locality / region or spring source (e.g. `'Évian-les-Bains'`). Free text. */
+  locality?: string
+  /**
+   * Short, neutral prose description (~1–2 sentences). Our own editorial
+   * summary — never copied bottler marketing. Soft cap ~240 characters.
+   */
+  description?: string
+  /** High-level category. One of {@link PROFILE_CATEGORIES}. */
+  category?: ProfileCategory
+  /**
+   * Editorially-assigned descriptive traits for browsing/filtering. Each entry
+   * is one of {@link PROFILE_TRAITS}. Not auto-computed from ions.
+   */
+  traits?: ProfileTrait[]
 
   /** Provenance metadata. */
   provenance: ProfileProvenance
