@@ -209,6 +209,188 @@ describe('validateProfile — invalid inputs', () => {
 })
 
 // ---------------------------------------------------------------------------
+// validateProfile — carbonation (still/sparkling + target)
+// ---------------------------------------------------------------------------
+
+/** A sparkling profile carrying a fully-sourced carbonation target. */
+const SPARKLING_WITH_TARGET: Profile = {
+  ...EVIAN_LIKE,
+  name: 'Fizzy-like',
+  carbonation_style: 'sparkling',
+  carbonation_target: {
+    value: 2.4,
+    unit: 'volumes',
+    provenance: {
+      verified: true,
+      source: 'Producer carbonation spec 2025',
+      source_date: '2025-03-10',
+    },
+  },
+}
+
+describe('validateProfile — carbonation', () => {
+  it('accepts a sparkling profile with a fully-sourced target', () => {
+    const result = validateProfile(SPARKLING_WITH_TARGET)
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.value.carbonation_style).toBe('sparkling')
+      expect(result.value.carbonation_target?.value).toBe(2.4)
+      expect(result.value.carbonation_target?.unit).toBe('volumes')
+      expect(result.value.carbonation_target?.provenance.verified).toBe(true)
+    }
+  })
+
+  it('accepts a target with no carbonation_style (unknown ≠ still)', () => {
+    const p: Profile = { ...SPARKLING_WITH_TARGET }
+    delete p.carbonation_style
+    expect(validateProfile(p).ok).toBe(true)
+  })
+
+  it('accepts carbonation_style alone (no numeric target)', () => {
+    const p = { ...EVIAN_LIKE, carbonation_style: 'still' as const }
+    expect(validateProfile(p).ok).toBe(true)
+  })
+
+  it('accepts a gPerL target', () => {
+    const p: Profile = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: {
+        ...SPARKLING_WITH_TARGET.carbonation_target!,
+        value: 4.7,
+        unit: 'gPerL',
+      },
+    }
+    expect(validateProfile(p).ok).toBe(true)
+  })
+
+  it('rejects an invalid carbonation_style', () => {
+    const bad = { ...EVIAN_LIKE, carbonation_style: 'bubbly' as never }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'carbonation_style')).toBe(
+        true,
+      )
+    }
+  })
+
+  it('rejects a target without its unit (the trap)', () => {
+    const bad = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: {
+        value: 2.4,
+        provenance: SPARKLING_WITH_TARGET.carbonation_target!.provenance,
+      } as never,
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) => e.path === 'carbonation_target.unit'),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a target with an invalid unit', () => {
+    const bad = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: {
+        ...SPARKLING_WITH_TARGET.carbonation_target!,
+        unit: 'psi' as never,
+      },
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) => e.path === 'carbonation_target.unit'),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a target without provenance', () => {
+    const bad = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: { value: 2.4, unit: 'volumes' } as never,
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) =>
+          e.path.startsWith('carbonation_target.provenance'),
+        ),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a negative target value', () => {
+    const bad = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: {
+        ...SPARKLING_WITH_TARGET.carbonation_target!,
+        value: -1,
+      },
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) => e.path === 'carbonation_target.value'),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a target without its value (mirror of the unit trap)', () => {
+    const bad = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: {
+        unit: 'volumes',
+        provenance: SPARKLING_WITH_TARGET.carbonation_target!.provenance,
+      } as never,
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) => e.path === 'carbonation_target.value'),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a NaN target value (number but not finite)', () => {
+    const bad = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_target: {
+        ...SPARKLING_WITH_TARGET.carbonation_target!,
+        value: NaN,
+      },
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) => e.path === 'carbonation_target.value'),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a target on a still profile (incoherent combination)', () => {
+    const bad: Profile = {
+      ...SPARKLING_WITH_TARGET,
+      carbonation_style: 'still',
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'carbonation_target')).toBe(
+        true,
+      )
+    }
+  })
+})
+
+// ---------------------------------------------------------------------------
 // Round-trip: parse → serialize → parse is stable
 // ---------------------------------------------------------------------------
 

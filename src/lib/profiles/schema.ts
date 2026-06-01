@@ -78,7 +78,60 @@ export const PROFILE_SCHEMA = {
     co2: {
       type: 'number',
       minimum: 0,
-      description: 'Dissolved CO₂ in mg/L, as reported.',
+      description:
+        'SOURCE dissolved CO₂ in mg/L, as reported by a spring/source analysis (water as it emerges). Distinct from carbonation_target (bottled fizz); never derive one from the other.',
+    },
+    carbonation_style: {
+      type: 'string',
+      enum: ['still', 'sparkling'],
+      description:
+        'Whether the water is bottled still or sparkling. Absent = unknown (does not imply still). A first-class field, separate from any traits metadata.',
+    },
+    carbonation_target: {
+      type: 'object',
+      description:
+        'Target/bottled carbonation to reproduce the product, with its own unit and provenance. Absent = not authoritatively sourced; do not estimate from co2.',
+      required: ['value', 'unit', 'provenance'],
+      additionalProperties: false,
+      properties: {
+        value: {
+          type: 'number',
+          minimum: 0,
+          description: 'Target carbonation magnitude, expressed in `unit`.',
+        },
+        unit: {
+          type: 'string',
+          enum: ['volumes', 'gPerL'],
+          description:
+            'Unit the value is expressed in: "volumes" of CO₂ or "gPerL" (g/L). Required when carbonation_target is present.',
+        },
+        provenance: {
+          type: 'object',
+          description:
+            'Where the carbonation figure came from and how reliable it is — same authoritative-sourcing bar as ion data.',
+          required: ['verified', 'source', 'source_date'],
+          additionalProperties: false,
+          properties: {
+            verified: {
+              type: 'boolean',
+              description:
+                'Whether the carbonation figure has been cross-checked against a primary source.',
+            },
+            source: {
+              type: 'string',
+              minLength: 1,
+              description:
+                'Human-readable description of the carbonation data source.',
+            },
+            source_date: {
+              type: 'string',
+              pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+              description:
+                'Date the carbonation source was published or accessed (YYYY-MM-DD).',
+            },
+          },
+        },
+      },
     },
     ph: {
       type: 'number',

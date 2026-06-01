@@ -10,6 +10,7 @@
 // See docs/guides/chemistry.md §3 for a full explanation of the trap.
 
 import type { IonId } from '../chem/constants'
+import type { CarbonationUnit } from '../chem/carbonation'
 
 /**
  * How the bicarbonate / alkalinity figure is expressed in this profile.
@@ -22,6 +23,54 @@ import type { IonId } from '../chem/constants'
  * reported). Importers MUST check this field before using the HCO₃ value.
  */
 export type AlkalinityUnit = 'as_HCO3' | 'as_CaCO3'
+
+/**
+ * Whether a water is bottled still (flat) or sparkling (carbonated).
+ *
+ * This is a **first-class profile field**, deliberately kept out of the
+ * controlled-vocabulary `traits` metadata system — the still/sparkling
+ * distinction drives recipe behaviour, not just browsing metadata.
+ *
+ * When absent the style is simply **unknown / not recorded** — it does not
+ * imply still. "Unknown" is an honest, first-class state; do not guess.
+ */
+export type CarbonationStyle = 'still' | 'sparkling'
+
+/**
+ * The **target / bottled carbonation** of a sparkling water — the fizz you'd
+ * actually force to reproduce the finished product.
+ *
+ * This is distinct from the {@link Profile.co2} field, which records **source
+ * dissolved CO₂** (the water as it emerges from the spring, as reported by an
+ * analysis). The two numbers must never be derived from one another:
+ *
+ * - `co2` describes the spring water; it does not describe the fizz in the bottle.
+ * - `carbonation_target` describes the bottled product; it is often **not
+ *   published** and is held to the same authoritative-sourcing bar as ion data
+ *   (it carries its own {@link ProfileProvenance}).
+ *
+ * Modelled as a self-contained object so a value can never be recorded without
+ * its unit and provenance — the carbonation analogue of the `alkalinity_unit`
+ * required-when-present rule.
+ */
+export interface CarbonationTarget {
+  /**
+   * Target carbonation magnitude, expressed in {@link CarbonationTarget.unit}.
+   *
+   * `0` is technically valid (atmospheric-equilibrium CO₂), but "still / not
+   * carbonated" should be recorded as `carbonation_style: 'still'` with no
+   * `carbonation_target` — do not use `value: 0` as a stand-in for flat.
+   */
+  value: number
+  /**
+   * Unit the `value` is expressed in. Reuses the engine's `CarbonationUnit`
+   * vocabulary (`'volumes'` of CO₂ or `'gPerL'`) so profile data and the
+   * carbonation calculator speak the same units.
+   */
+  unit: CarbonationUnit
+  /** Provenance for this carbonation figure — sourced and verified in its own right. */
+  provenance: ProfileProvenance
+}
 
 /**
  * Ion concentrations in mg/L for a named mineral-water profile.
@@ -76,8 +125,30 @@ export interface Profile {
 
   // Supplemental measurements (optional, informational):
 
-  /** Dissolved CO₂ in mg/L, as reported. */
+  /**
+   * **Source** dissolved CO₂ in mg/L, as reported by a spring/source analysis
+   * (the water as it emerges). This is *not* the fizz of the finished bottle —
+   * for that, see {@link Profile.carbonation_target}. The two are separately
+   * sourced and one must never be derived from the other.
+   */
   co2?: number
+
+  /**
+   * Whether this water is bottled still or sparkling. Absent = unknown.
+   *
+   * A first-class field, intentionally separate from the `traits` metadata
+   * system and from {@link Profile.carbonation_target} (the style can be known
+   * even when no numeric target is published).
+   */
+  carbonation_style?: CarbonationStyle
+
+  /**
+   * Target / bottled carbonation to reproduce the product, with its own unit
+   * and provenance. Absent = not authoritatively sourced (the honest default);
+   * do not estimate it from `co2`.
+   */
+  carbonation_target?: CarbonationTarget
+
   /** pH, as reported. */
   ph?: number
   /**
