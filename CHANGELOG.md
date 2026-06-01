@@ -9,6 +9,17 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.9.0](https://github.com/cacack/waterforge/compare/v1.8.0...v1.9.0) (2026-06-01)
+
+
+### Features
+
+* **profiles:** add carbonation targets for sparkling profiles ([c093ecb](https://github.com/cacack/waterforge/commit/c093ecb8fecbf862efc7aad0ce43e45f1911a1dd))
+* **profiles:** add structured profile metadata fields ([ad6326e](https://github.com/cacack/waterforge/commit/ad6326e6e86ea236c0d707aa104c0c35a8787843)), closes [#126](https://github.com/cacack/waterforge/issues/126)
+* **profiles:** backfill geography, category, traits and descriptions ([5be8981](https://github.com/cacack/waterforge/commit/5be89816b9a51d04a456fc8816f8cabfc2b9b277)), closes [#127](https://github.com/cacack/waterforge/issues/127)
+* **profiles:** reject duplicate traits and harden metadata tests ([da87fbf](https://github.com/cacack/waterforge/commit/da87fbf67942ea85b473fdb3db19aae0cee32237))
+* **ui:** surface profile metadata in the target panel ([32087e0](https://github.com/cacack/waterforge/commit/32087e03aaf441b4e42cfd480f79694cdb017f21)), closes [#128](https://github.com/cacack/waterforge/issues/128)
+
 ## [1.8.0](https://github.com/cacack/waterforge/compare/v1.7.0...v1.8.0) (2026-06-01)
 
 
