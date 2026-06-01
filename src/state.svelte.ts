@@ -55,10 +55,16 @@ export function computeResult(): SolveResult | null {
  *   carbonation (volumes + g/L) and the regulator PSI at the chosen carbonating
  *   temperature.
  * - `'still'` — the profile is recorded as still: no carbonation number.
- * - `'none'` — no target and no known style: render nothing.
+ * - `'none'` — no `carbonation_target` to report, so render nothing. This
+ *   covers both an unknown-style profile and a profile that is styled
+ *   `'sparkling'` but has no numeric target yet — per the issue spec, we never
+ *   show a guessed value, so the absence of a target (not the style) is what
+ *   matters here.
  *
- * Orthogonal to the salt solver — this never touches `computeResult()` or the
- * ion math; it only reuses the framework-agnostic carbonation engine.
+ * Reads `app.target` and `app.carbonation` from the module-level state
+ * singleton — callers must set those before calling (the signature looks pure
+ * but is not). Orthogonal to the salt solver: never touches `computeResult()`
+ * or the ion math; only reuses the framework-agnostic carbonation engine.
  */
 export type CarbonationReadout =
   | { kind: 'none' }
@@ -67,6 +73,11 @@ export type CarbonationReadout =
       kind: 'target'
       volumes: number
       gPerL: number
+      /**
+       * Regulator gauge pressure in psi. `0` is a meaningful value, not missing
+       * data: it means the target is reached at atmospheric pressure (no
+       * regulator needed) — `regulatorPsi` clamps negatives to 0.
+       */
       psi: number
       tempC: number
     }

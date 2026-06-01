@@ -78,7 +78,10 @@ describe('computeCarbonation', () => {
     expect(r.gPerL).toBeCloseTo(2.4 * 1.96)
     expect(r.tempC).toBe(4)
     expect(Number.isFinite(r.psi)).toBe(true)
-    expect(r.psi).toBeGreaterThan(0)
+    // Magnitude anchor (not just "> 0"): hand-computed from the Henry's-law fit
+    // for 2.4 volumes at 4 °C ≈ 10.75 psi. Pins the value so a regression in
+    // the engine constants or unit conversion can't pass silently.
+    expect(r.psi).toBeCloseTo(10.75, 1)
   })
 
   it('normalises a g/L target to volumes', () => {

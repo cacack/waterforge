@@ -56,7 +56,8 @@ export interface AppSnapshot {
    * Optional in the type because it is an **additive** field: snapshots written
    * before it existed (and forward-compat fixtures) legitimately omit it, and
    * {@link applySnapshot} tolerates its absence. {@link snapshotState} always
-   * writes it.
+   * writes it. When this field is absent, `applySnapshot` leaves the current
+   * `app.carbonation` unchanged rather than resetting it to the default.
    */
   carbonation?: {
     temp: number
@@ -113,7 +114,11 @@ export interface RecipeExport extends AppSnapshot {
     volumes: number
     /** Carbonation in g/L. */
     gPerL: number
-    /** Regulator gauge pressure (psi) at {@link tempC}. */
+    /**
+     * Regulator gauge pressure (psi) at the carbonating temperature recorded
+     * in `tempC`. `0` means the target is reached at atmospheric pressure (no
+     * regulator needed), not missing data.
+     */
     psi: number
     /** Carbonating temperature in °C the PSI was computed at. */
     tempC: number
@@ -270,7 +275,15 @@ export function applySnapshot(s: unknown): void {
     const c = rawCarb as Record<string, unknown>
     const temp = c['temp']
     const tempUnit = c['tempUnit']
-    if (typeof temp === 'number' && Number.isFinite(temp)) {
+    // Bound to a sane physical range (covers °C and °F serving/carbonating
+    // temperatures) so a crafted snapshot can't inject an absurd magnitude that
+    // propagates Infinity/NaN through the carbonation math into the UI.
+    if (
+      typeof temp === 'number' &&
+      Number.isFinite(temp) &&
+      temp >= -100 &&
+      temp <= 300
+    ) {
       app.carbonation.temp = temp
     }
     if (tempUnit === 'C' || tempUnit === 'F') {

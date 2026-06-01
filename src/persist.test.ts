@@ -198,6 +198,22 @@ describe('carbonation — snapshot round-trip & tolerance', () => {
     expect(app.carbonation.temp).toBe(10)
     expect(app.carbonation.tempUnit).toBe('C')
   })
+
+  it('ignores an out-of-range carbonating temperature from a crafted snapshot', () => {
+    app.carbonation = { temp: 4, tempUnit: 'C' }
+    applySnapshot({
+      version: SNAPSHOT_VERSION,
+      targetName: 'Evian',
+      sourceMode: 'distilled',
+      source: {},
+      salts: [...SALT_ORDER],
+      batch: { volume: 1, unit: 'L' },
+      // A finite-but-absurd value that would otherwise propagate Infinity
+      // through the carbonation math into the UI.
+      carbonation: { temp: 1e308, tempUnit: 'C' },
+    })
+    expect(app.carbonation.temp).toBe(4)
+  })
 })
 
 describe('buildRecipeExport — carbonation block', () => {

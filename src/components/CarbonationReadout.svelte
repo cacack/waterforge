@@ -39,8 +39,15 @@
     { value: 'F', label: '°F' },
   ]
 
-  // Sensible lower bound for the temperature field, matched to the unit.
+  // Sensible bounds for the temperature field, matched to the unit. The
+  // empirical carbonation fit is only meaningful around fridge-to-room
+  // temperature, so cap the field there rather than letting it run away.
   const tempMin = $derived(app.carbonation.tempUnit === 'C' ? -10 : 14)
+  const tempMax = $derived(app.carbonation.tempUnit === 'C' ? 40 : 104)
+
+  // A cleared number field binds to NaN; guard so we prompt for a value rather
+  // than rendering "NaN psi".
+  const tempValid = $derived(Number.isFinite(app.carbonation.temp))
 </script>
 
 {#if readout.kind === 'target'}
@@ -55,6 +62,7 @@
           id="recipe-carbonation-temp"
           type="number"
           min={tempMin}
+          max={tempMax}
           step="1"
           inputmode="decimal"
           bind:value={app.carbonation.temp}
@@ -86,19 +94,31 @@
         </Select>
       </div>
     </div>
-    <div class="bg-muted/50 rounded-md px-3 py-2.5 text-sm">
-      Carbonate to
-      <span class="font-mono font-semibold">{readout.gPerL.toFixed(1)} g/L</span
-      >
-      (≈ {readout.volumes.toFixed(2)} volumes) →
-      <span class="font-mono font-semibold">{readout.psi.toFixed(1)} psi</span>
-      at {readout.tempC.toFixed(1)} °C
-      {#if readout.psi === 0}
-        <span class="text-muted-foreground block text-xs"
-          >This carbonation needs no added pressure at this temperature.</span
+    {#if tempValid}
+      <div class="bg-muted/50 rounded-md px-3 py-2.5 text-sm">
+        Carbonate to
+        <span class="font-mono font-semibold"
+          >{readout.gPerL.toFixed(1)} g/L</span
         >
-      {/if}
-    </div>
+        (≈ {readout.volumes.toFixed(2)} volumes) →
+        <span class="font-mono font-semibold">{readout.psi.toFixed(1)} psi</span
+        >
+        at {app.carbonation.temp} °{app.carbonation.tempUnit}
+        <!-- Match the rounded display: anything under 0.05 shows as "0.0 psi",
+             so treat it as "no added pressure" rather than testing === 0
+             (regulatorPsi can clamp to a hair above 0 for floating-point
+             reasons near the atmospheric-solubility boundary). -->
+        {#if readout.psi < 0.05}
+          <span class="text-muted-foreground block text-xs"
+            >This carbonation needs no added pressure at this temperature.</span
+          >
+        {/if}
+      </div>
+    {:else}
+      <p class="text-muted-foreground text-sm">
+        Enter a carbonating temperature to see the regulator pressure.
+      </p>
+    {/if}
   </div>
 {:else if readout.kind === 'still'}
   <div class="mt-5">

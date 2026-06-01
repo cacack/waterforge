@@ -21,9 +21,10 @@
     type TemperatureUnit,
   } from '$lib'
 
-  // Standalone "set-and-forget" force-carbonation calculator (issue #121).
-  // Local component state only — carbonation is not yet wired into the recipe
-  // or shared/persisted state; that integration is issue #123.
+  // Standalone "set-and-forget" force-carbonation calculator (issue #121): a
+  // manual what-if tool with its own local state. The profile-driven
+  // carbonation line in the recipe output (issue #123) is separate and owns
+  // its own shared/persisted carbonating temperature.
   let carbonationInput = $state('2.4') // typical sparkling-water level (volumes CO₂)
   let carbonationUnit = $state<CarbonationUnit>('volumes')
   let tempInput = $state('4') // typical fridge / serving temperature (°C)
