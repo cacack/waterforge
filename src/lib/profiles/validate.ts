@@ -7,6 +7,7 @@
 
 import { IONS, ION_ORDER } from '../chem/constants'
 import type { IonId } from '../chem/constants'
+import { PROFILE_CATEGORIES, PROFILE_TRAITS } from './types'
 import type { Profile, ProfileIons } from './types'
 
 // ---------------------------------------------------------------------------
@@ -46,6 +47,9 @@ function isPlainObject(v: unknown): v is Record<string, unknown> {
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 
 const ION_IDS = new Set<string>(ION_ORDER)
+
+const CATEGORY_VALUES = new Set<string>(PROFILE_CATEGORIES)
+const TRAIT_VALUES = new Set<string>(PROFILE_TRAITS)
 
 function addError(
   errors: ValidationError[],
@@ -196,10 +200,51 @@ export function validateProfile(raw: unknown): ValidationResult {
   }
 
   // --- optional string fields ---
-  for (const field of ['comment', 'url'] as const) {
+  for (const field of [
+    'comment',
+    'url',
+    'country',
+    'locality',
+    'description',
+  ] as const) {
     const v = raw[field]
     if (v !== undefined && typeof v !== 'string') {
       addError(errors, field, 'must be a string when present')
+    }
+  }
+
+  // --- category (controlled vocab; unknown values rejected) ---
+  const category = raw['category']
+  if (category !== undefined) {
+    if (typeof category !== 'string' || !CATEGORY_VALUES.has(category)) {
+      addError(
+        errors,
+        'category',
+        `must be one of: ${PROFILE_CATEGORIES.join(', ')}`,
+      )
+    }
+  }
+
+  // --- traits (array of controlled-vocab values; unknown values rejected) ---
+  const traits = raw['traits']
+  if (traits !== undefined) {
+    if (!Array.isArray(traits)) {
+      addError(errors, 'traits', 'must be an array when present')
+    } else {
+      const seen = new Set<unknown>()
+      for (const [i, t] of traits.entries()) {
+        if (typeof t !== 'string' || !TRAIT_VALUES.has(t)) {
+          addError(
+            errors,
+            `traits[${i}]`,
+            `must be one of: ${PROFILE_TRAITS.join(', ')}`,
+          )
+        } else if (seen.has(t)) {
+          addError(errors, `traits[${i}]`, `duplicate trait: ${t}`)
+        } else {
+          seen.add(t)
+        }
+      }
     }
   }
 

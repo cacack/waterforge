@@ -9,6 +9,8 @@
 // (e.g. by validation functions or a future JSON-Schema validator) without
 // bundling a dedicated schema library.
 
+import { PROFILE_CATEGORIES, PROFILE_TRAITS } from './types'
+
 /** JSON Schema (draft 2020-12) for a Waterforge mineral-water Profile. */
 export const PROFILE_SCHEMA = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
@@ -154,6 +156,36 @@ export const PROFILE_SCHEMA = {
       type: 'string',
       format: 'uri',
       description: 'URL to the primary source or product page.',
+    },
+    country: {
+      type: 'string',
+      description: 'Country of origin (e.g. "France"). A geographic fact.',
+    },
+    locality: {
+      type: 'string',
+      description:
+        'Locality / region or spring source (e.g. "Évian-les-Bains").',
+    },
+    description: {
+      type: 'string',
+      description:
+        'Short, neutral prose description (~1–2 sentences, soft cap ~240 chars). Our own editorial summary — never copied bottler marketing.',
+    },
+    category: {
+      type: 'string',
+      enum: [...PROFILE_CATEGORIES],
+      description:
+        'High-level category. Unknown values are rejected. One of: bottled, brewing, coffee, synthetic.',
+    },
+    traits: {
+      type: 'array',
+      description:
+        'Editorially-assigned descriptive traits for browsing/filtering (not auto-computed from ions). Each item must be a known trait; unknown values are rejected.',
+      uniqueItems: true,
+      items: {
+        type: 'string',
+        enum: [...PROFILE_TRAITS],
+      },
     },
     provenance: {
       type: 'object',

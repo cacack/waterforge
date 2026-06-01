@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { validateProfile, chargeBalanceResidual } from './validate'
 import { profileToIonProfile } from './convert'
-import { findProfile } from './library'
+import { findProfile, PROFILES } from './library'
 import { HCO3_PER_CACO3 } from '../chem/conversions'
 import { IONS, SO4_WEIGHT } from '../chem/constants'
 import type { CarbonationUnit } from '../chem/carbonation'
 import type { Profile } from './types'
+import { PROFILE_CATEGORIES } from './types'
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -388,6 +389,126 @@ describe('validateProfile — carbonation', () => {
       expect(result.errors.some((e) => e.path === 'carbonation_target')).toBe(
         true,
       )
+    }
+  })
+})
+
+// ---------------------------------------------------------------------------
+// validateProfile — descriptive metadata (country/locality/description/
+// category/traits) — #126
+// ---------------------------------------------------------------------------
+
+describe('validateProfile — descriptive metadata', () => {
+  it('accepts a profile with all new metadata fields', () => {
+    const p: Profile = {
+      ...EVIAN_LIKE,
+      country: 'France',
+      locality: 'Évian-les-Bains',
+      description: 'A low-mineral spring water from the French Alps.',
+      category: 'bottled',
+      traits: ['calcium-rich', 'bicarbonate-rich'],
+    }
+    const result = validateProfile(p)
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.value.country).toBe('France')
+      expect(result.value.locality).toBe('Évian-les-Bains')
+      expect(result.value.description).toBe(
+        'A low-mineral spring water from the French Alps.',
+      )
+      expect(result.value.category).toBe('bottled')
+      expect(result.value.traits).toEqual(['calcium-rich', 'bicarbonate-rich'])
+    }
+  })
+
+  it('accepts an empty traits array', () => {
+    const p: Profile = { ...EVIAN_LIKE, traits: [] }
+    expect(validateProfile(p).ok).toBe(true)
+  })
+
+  it('accepts each valid category value', () => {
+    for (const category of PROFILE_CATEGORIES) {
+      const p: Profile = { ...EVIAN_LIKE, category }
+      expect(validateProfile(p).ok).toBe(true)
+    }
+  })
+
+  it('accepts the profile when metadata fields are absent (additive/optional)', () => {
+    expect(validateProfile(EVIAN_LIKE).ok).toBe(true)
+  })
+
+  it('rejects an unknown category value', () => {
+    const bad = { ...EVIAN_LIKE, category: 'tap' as never }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'category')).toBe(true)
+    }
+  })
+
+  it('rejects a non-string category', () => {
+    const bad = { ...EVIAN_LIKE, category: 42 as never }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'category')).toBe(true)
+    }
+  })
+
+  it('rejects an unknown trait value', () => {
+    const bad = {
+      ...EVIAN_LIKE,
+      traits: ['calcium-rich', 'sparkling'] as never,
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'traits[1]')).toBe(true)
+    }
+  })
+
+  it('rejects duplicate trait values', () => {
+    const bad = {
+      ...EVIAN_LIKE,
+      traits: ['calcium-rich', 'calcium-rich'] as never,
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'traits[1]')).toBe(true)
+    }
+  })
+
+  it('rejects traits that is not an array', () => {
+    const bad = { ...EVIAN_LIKE, traits: 'calcium-rich' as never }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'traits')).toBe(true)
+    }
+  })
+
+  it('rejects non-string country/locality/description', () => {
+    for (const field of ['country', 'locality', 'description'] as const) {
+      const bad = { ...EVIAN_LIKE, [field]: 123 as never }
+      const result = validateProfile(bad)
+      expect(result.ok).toBe(false)
+      if (!result.ok) {
+        expect(result.errors.some((e) => e.path === field)).toBe(true)
+      }
+    }
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Bundled profiles still validate unchanged after the additive metadata fields
+// ---------------------------------------------------------------------------
+
+describe('bundled profiles — additive metadata is backward-compatible', () => {
+  it('all bundled profiles still validate', () => {
+    expect(PROFILES.length).toBeGreaterThan(0)
+    for (const profile of PROFILES) {
+      expect(validateProfile(profile).ok).toBe(true)
     }
   })
 })
