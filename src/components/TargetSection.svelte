@@ -16,6 +16,23 @@
     app.target = profile
     open = false
   }
+
+  /**
+   * Turn a controlled-vocabulary trait slug into a human-readable label:
+   * `'silica-rich'` → `'Silica-rich'` (compound term kept hyphenated),
+   * `'low-mineralization'` → `'Low mineralization'` (qualifier + word).
+   * Hyphens before `-rich` are part of the term; other hyphens separate words.
+   */
+  function humanizeTrait(trait: string): string {
+    const spaced = trait.replace(/-(?!rich\b)/g, ' ')
+    return spaced.charAt(0).toUpperCase() + spaced.slice(1)
+  }
+
+  /** Build a "locality, country" location string from whatever is present. */
+  function locationLabel(profile: Profile): string | null {
+    const parts = [profile.locality, profile.country].filter(Boolean)
+    return parts.length > 0 ? parts.join(', ') : null
+  }
 </script>
 
 <SectionCard title="Target water">
@@ -89,6 +106,41 @@
         {/if}
       {/each}
     </dl>
+
+    <!-- Descriptive metadata (display-only) -->
+    {@const location = locationLabel(app.target)}
+    {#if location || app.target.description || app.target.category || (app.target.traits && app.target.traits.length > 0)}
+      <div class="mt-3 space-y-1.5 text-xs">
+        {#if location}
+          <p class="text-muted-foreground">{location}</p>
+        {/if}
+        {#if app.target.description}
+          <p class="text-muted-foreground leading-snug">
+            {app.target.description}
+          </p>
+        {/if}
+        {#if (app.target.traits && app.target.traits.length > 0) || app.target.category}
+          <div class="flex flex-wrap gap-1">
+            {#if app.target.traits}
+              {#each app.target.traits as trait (trait)}
+                <span
+                  class="bg-muted text-muted-foreground rounded px-1.5 py-0.5"
+                >
+                  {humanizeTrait(trait)}
+                </span>
+              {/each}
+            {/if}
+            {#if app.target.category}
+              <span
+                class="border-border text-muted-foreground rounded border px-1.5 py-0.5 capitalize"
+              >
+                {app.target.category}
+              </span>
+            {/if}
+          </div>
+        {/if}
+      </div>
+    {/if}
 
     <!-- Provenance -->
     <div class="mt-3 space-y-1 text-xs">
