@@ -55,6 +55,44 @@ function addError(
   errors.push({ path, message })
 }
 
+/**
+ * Validate a provenance block (`verified` / `source` / `source_date`) rooted at
+ * `pathPrefix`. Shared by the profile-level `provenance` and the
+ * `carbonation_target.provenance` so both are held to the same bar.
+ */
+function validateProvenance(
+  candidate: unknown,
+  pathPrefix: string,
+  errors: ValidationError[],
+): void {
+  if (!isPlainObject(candidate)) {
+    addError(errors, pathPrefix, 'must be a plain object')
+    return
+  }
+  const prov = candidate
+
+  if (typeof prov['verified'] !== 'boolean') {
+    addError(errors, `${pathPrefix}.verified`, 'must be a boolean')
+  }
+
+  if (
+    typeof prov['source'] !== 'string' ||
+    prov['source'].trim().length === 0
+  ) {
+    addError(errors, `${pathPrefix}.source`, 'must be a non-empty string')
+  }
+
+  if (typeof prov['source_date'] !== 'string') {
+    addError(errors, `${pathPrefix}.source_date`, 'must be a string')
+  } else if (!ISO_DATE_RE.test(prov['source_date'])) {
+    addError(
+      errors,
+      `${pathPrefix}.source_date`,
+      'must be an ISO 8601 date string (YYYY-MM-DD)',
+    )
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Public validator
 // ---------------------------------------------------------------------------
@@ -66,9 +104,13 @@ function addError(
  * `Profile`) or `{ ok: false, errors }` on failure. All errors are collected
  * before returning — a single call surfaces every problem, not just the first.
  *
- * Key invariant enforced: if `ions.HCO3` is present, `alkalinity_unit` MUST
- * also be present. This is the explicit guard against the ×1.22 silent
- * misconversion trap.
+ * Key invariants enforced:
+ * - If `ions.HCO3` is present, `alkalinity_unit` MUST also be present. This is
+ *   the explicit guard against the ×1.22 silent misconversion trap.
+ * - If `carbonation_target` is present, its `unit` and `provenance` are
+ *   required — a carbonation value never travels without its unit and source.
+ * - `carbonation_target` is rejected on a `carbonation_style: 'still'` profile;
+ *   a still water has no bottled carbonation to record.
  */
 export function validateProfile(raw: unknown): ValidationResult {
   const errors: ValidationError[] = []
@@ -161,33 +203,63 @@ export function validateProfile(raw: unknown): ValidationResult {
     }
   }
 
-  // --- provenance ---
-  if (!isPlainObject(raw['provenance'])) {
-    addError(errors, 'provenance', 'must be a plain object')
-  } else {
-    const prov = raw['provenance'] as Record<string, unknown>
+  // --- carbonation_style ---
+  const style = raw['carbonation_style']
+  if (style !== undefined && style !== 'still' && style !== 'sparkling') {
+    addError(errors, 'carbonation_style', 'must be "still" or "sparkling"')
+  }
 
-    if (typeof prov['verified'] !== 'boolean') {
-      addError(errors, 'provenance.verified', 'must be a boolean')
+  // --- carbonation_target ---
+  // Self-contained: a target may never be recorded without its unit and
+  // provenance (the carbonation analogue of the alkalinity_unit rule).
+  const target = raw['carbonation_target']
+  if (target !== undefined) {
+    if (!isPlainObject(target)) {
+      addError(errors, 'carbonation_target', 'must be a plain object')
+    } else {
+      const value = target['value']
+      if (typeof value !== 'number' || !isFinite(value)) {
+        addError(errors, 'carbonation_target.value', 'must be a finite number')
+      } else if (value < 0) {
+        addError(errors, 'carbonation_target.value', 'must be >= 0')
+      }
+
+      const unit = target['unit']
+      if (unit === undefined) {
+        addError(
+          errors,
+          'carbonation_target.unit',
+          'required when carbonation_target is present — specify "volumes" or "gPerL"',
+        )
+      } else if (unit !== 'volumes' && unit !== 'gPerL') {
+        addError(
+          errors,
+          'carbonation_target.unit',
+          'must be "volumes" or "gPerL"',
+        )
+      }
+
+      validateProvenance(
+        target['provenance'],
+        'carbonation_target.provenance',
+        errors,
+      )
     }
 
-    if (
-      typeof prov['source'] !== 'string' ||
-      prov['source'].trim().length === 0
-    ) {
-      addError(errors, 'provenance.source', 'must be a non-empty string')
-    }
-
-    if (typeof prov['source_date'] !== 'string') {
-      addError(errors, 'provenance.source_date', 'must be a string')
-    } else if (!ISO_DATE_RE.test(prov['source_date'])) {
+    // Cross-field: a still water has no bottled carbonation to reproduce, so a
+    // target on a 'still' profile is incoherent. (An absent style stays
+    // permitted — "unknown" does not contradict having a sourced target.)
+    if (style === 'still') {
       addError(
         errors,
-        'provenance.source_date',
-        'must be an ISO 8601 date string (YYYY-MM-DD)',
+        'carbonation_target',
+        'must be absent when carbonation_style is "still" — set the style to "sparkling" or remove the target',
       )
     }
   }
+
+  // --- provenance ---
+  validateProvenance(raw['provenance'], 'provenance', errors)
 
   if (errors.length > 0) {
     return { ok: false, errors }

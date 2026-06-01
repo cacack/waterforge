@@ -1,6 +1,7 @@
 [
   {
     "name": "Acqua Panna",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 33.1,
       "Mg": 6.6,
@@ -98,6 +99,7 @@
   },
   {
     "name": "Badoit",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 153,
       "Mg": 80,
@@ -117,6 +119,7 @@
   },
   {
     "name": "Borsec",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 364.3,
       "Mg": 110.5,
@@ -156,6 +159,7 @@
   },
   {
     "name": "Buxton",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 55,
       "Mg": 19,
@@ -178,6 +182,7 @@
   },
   {
     "name": "Calistoga Spring Water",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 8,
       "Mg": 2.9,
@@ -199,6 +204,7 @@
   },
   {
     "name": "Carola Rouge",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 73,
       "Mg": 20,
@@ -220,6 +226,7 @@
   },
   {
     "name": "Contrex",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 468,
       "Mg": 74.5,
@@ -243,6 +250,7 @@
   },
   {
     "name": "Dorna",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 211.1,
       "Mg": 14.6,
@@ -262,6 +270,7 @@
   },
   {
     "name": "Evian",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 80,
       "Mg": 26,
@@ -285,6 +294,7 @@
   },
   {
     "name": "Farris",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 28,
       "Mg": 31,
@@ -306,6 +316,7 @@
   },
   {
     "name": "Ferrarelle",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 400,
       "Mg": 23,
@@ -329,6 +340,7 @@
   },
   {
     "name": "Fiji",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 18,
       "Mg": 15,
@@ -351,6 +363,7 @@
   },
   {
     "name": "Fiuggi",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 25,
       "Mg": 7.8,
@@ -373,6 +386,7 @@
   },
   {
     "name": "Gerolsteiner",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 348,
       "Mg": 108,
@@ -396,6 +410,7 @@
   },
   {
     "name": "Hassia Sprudel",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 198,
       "Mg": 33,
@@ -437,6 +452,7 @@
   },
   {
     "name": "Hépar",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 549,
       "Mg": 119,
@@ -459,6 +475,7 @@
   },
   {
     "name": "Highland Spring",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 40.5,
       "Mg": 10.1,
@@ -493,6 +510,7 @@
   },
   {
     "name": "Magnetic Springs",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 9.8,
       "Mg": 3.8,
@@ -514,6 +532,7 @@
   },
   {
     "name": "Mountain Valley Spring",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 67.5,
       "Mg": 6.65,
@@ -548,6 +567,7 @@
   },
   {
     "name": "Neuselters",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 124,
       "Mg": 35,
@@ -568,6 +588,7 @@
   },
   {
     "name": "Perla Harghitei",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 95.9,
       "Mg": 38.6,
@@ -591,6 +612,7 @@
   },
   {
     "name": "Perla Harghitei Plată",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 103,
       "Mg": 9.99,
@@ -613,6 +635,7 @@
   },
   {
     "name": "Perrier",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 150,
       "Mg": 3.9,
@@ -686,6 +709,7 @@
   },
   {
     "name": "Saint-Yorre",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 90,
       "Mg": 11,
@@ -728,6 +752,7 @@
   },
   {
     "name": "San Benedetto",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 47.1,
       "Mg": 26.9,
@@ -751,6 +776,7 @@
   },
   {
     "name": "San Narciso",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 54.9,
       "Mg": 10,
@@ -772,6 +798,7 @@
   },
   {
     "name": "San Pellegrino",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 164,
       "Mg": 49.5,
@@ -869,6 +896,7 @@
   },
   {
     "name": "Tesanjski Dijamant",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 64.92,
       "Mg": 47.62,
@@ -891,6 +919,7 @@
   },
   {
     "name": "Tiva Harghita",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 102.2,
       "Mg": 50.78,
@@ -914,6 +943,7 @@
   },
   {
     "name": "Topo chico",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 140,
       "Mg": 10,
@@ -958,6 +988,7 @@
   },
   {
     "name": "Vichy Catalan",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 44.3,
       "Mg": 9.46,
@@ -980,6 +1011,7 @@
   },
   {
     "name": "Vichy Célestins",
+    "carbonation_style": "sparkling",
     "ions": {
       "Ca": 103,
       "Mg": 10,
@@ -1002,6 +1034,7 @@
   },
   {
     "name": "Vittel",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 240,
       "Mg": 42,
@@ -1022,6 +1055,7 @@
   },
   {
     "name": "Volvic",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 12,
       "Mg": 8,
@@ -1044,6 +1078,7 @@
   },
   {
     "name": "Voss",
+    "carbonation_style": "still",
     "ions": { "Ca": 2.7, "Mg": 0.61, "Na": 3, "Cl": 3.8 },
     "ph": 5.8,
     "tds": 40,
@@ -1057,6 +1092,7 @@
   },
   {
     "name": "Waiākea",
+    "carbonation_style": "still",
     "ions": {
       "Ca": 5.6,
       "Mg": 2.9,
