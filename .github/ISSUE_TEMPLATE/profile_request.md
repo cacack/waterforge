@@ -17,4 +17,17 @@ only added when they can be sourced to this standard (see
 Ca, Mg, Na, K, HCO₃ (or alkalinity as CaCO₃), SO₄, Cl — in mg/L. Note the
 alkalinity unit if you know it.
 
+**Geography** _(optional)_
+Country of origin, and the region / city / spring source if known.
+
+**Category** _(optional)_
+One of `bottled`, `brewing`, `coffee`, `synthetic` — see the
+[category enum](../../docs/guides/reference-data.md#category-enum).
+
+**Notable traits** _(optional)_
+Chemistry/origin tags from the
+[controlled vocabulary](../../docs/guides/reference-data.md#traits-controlled-vocabulary)
+(e.g. `calcium-rich`, `artesian`). Chemistry/origin only — no flavour language.
+Leave blank if unsure; a curator will assign these.
+
 **Anything else?**
