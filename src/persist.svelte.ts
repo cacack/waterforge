@@ -13,13 +13,20 @@
 import {
   SALT_ORDER,
   findProfile,
+  type CarbonationUnit,
   type IonProfile,
   type Readouts,
   type SaltDose,
   type SaltId,
+  type TemperatureUnit,
   type VolumeUnit,
 } from '$lib'
-import { app, computeResult, type SourceMode } from './state.svelte'
+import {
+  app,
+  computeCarbonation,
+  computeResult,
+  type SourceMode,
+} from './state.svelte'
 
 // ---------------------------------------------------------------------------
 // Snapshot schema
@@ -42,6 +49,19 @@ export interface AppSnapshot {
   batch: {
     volume: number
     unit: VolumeUnit
+  }
+  /**
+   * Carbonating temperature for the recipe carbonation readout.
+   *
+   * Optional in the type because it is an **additive** field: snapshots written
+   * before it existed (and forward-compat fixtures) legitimately omit it, and
+   * {@link applySnapshot} tolerates its absence. {@link snapshotState} always
+   * writes it. When this field is absent, `applySnapshot` leaves the current
+   * `app.carbonation` unchanged rather than resetting it to the default.
+   */
+  carbonation?: {
+    temp: number
+    tempUnit: TemperatureUnit
   }
 }
 
@@ -80,6 +100,29 @@ export interface RecipeExport extends AppSnapshot {
   resultProfile: IonProfile | null
   /** Derived readouts (TDS, charge residual, sulfate:chloride), or null. */
   readouts: Readouts | null
+  /**
+   * Resolved carbonation instruction for the selected profile, or `null` when
+   * the profile is still / has no target. Self-contained so a downloaded
+   * recipe carries the regulator pressure without the profile library.
+   */
+  carbonationRecipe: {
+    /** Target carbonation magnitude as recorded on the profile. */
+    targetValue: number
+    /** Unit the `targetValue` is expressed in. */
+    targetUnit: CarbonationUnit
+    /** Canonical carbonation in volumes of CO₂. */
+    volumes: number
+    /** Carbonation in g/L. */
+    gPerL: number
+    /**
+     * Regulator gauge pressure (psi) at the carbonating temperature recorded
+     * in `tempC`. `0` means the target is reached at atmospheric pressure (no
+     * regulator needed), not missing data.
+     */
+    psi: number
+    /** Carbonating temperature in °C the PSI was computed at. */
+    tempC: number
+  } | null
 }
 
 // ---------------------------------------------------------------------------
@@ -100,6 +143,7 @@ export function snapshotState(): AppSnapshot {
     source: { ...app.source },
     salts: [...app.salts],
     batch: { ...app.batch },
+    carbonation: { ...app.carbonation },
   }
 }
 
@@ -133,12 +177,25 @@ export function buildRecipeExport(): RecipeExport {
         batchUnit: app.batch.unit,
       }
     : null
+  const carbonation = computeCarbonation()
+  const carbonationRecipe =
+    carbonation.kind === 'target' && app.target?.carbonation_target
+      ? {
+          targetValue: app.target.carbonation_target.value,
+          targetUnit: app.target.carbonation_target.unit,
+          volumes: carbonation.volumes,
+          gPerL: carbonation.gPerL,
+          psi: carbonation.psi,
+          tempC: carbonation.tempC,
+        }
+      : null
   return {
     ...snap,
     target,
     recipe,
     resultProfile: result ? { ...result.resultProfile } : null,
     readouts: result ? { ...result.readouts } : null,
+    carbonationRecipe,
   }
 }
 
@@ -207,6 +264,30 @@ export function applySnapshot(s: unknown): void {
     }
     if (unit === 'L' || unit === 'gal') {
       app.batch.unit = unit
+    }
+  }
+
+  // --- carbonation ---------------------------------------------------------
+  // Additive field (added after the initial schema): read tolerantly so legacy
+  // snapshots without it keep the current default rather than resetting it.
+  const rawCarb = snap['carbonation']
+  if (typeof rawCarb === 'object' && rawCarb !== null) {
+    const c = rawCarb as Record<string, unknown>
+    const temp = c['temp']
+    const tempUnit = c['tempUnit']
+    // Bound to a sane physical range (covers °C and °F serving/carbonating
+    // temperatures) so a crafted snapshot can't inject an absurd magnitude that
+    // propagates Infinity/NaN through the carbonation math into the UI.
+    if (
+      typeof temp === 'number' &&
+      Number.isFinite(temp) &&
+      temp >= -100 &&
+      temp <= 300
+    ) {
+      app.carbonation.temp = temp
+    }
+    if (tempUnit === 'C' || tempUnit === 'F') {
+      app.carbonation.tempUnit = tempUnit
     }
   }
 }

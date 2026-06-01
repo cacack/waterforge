@@ -10,6 +10,7 @@
   } from '$lib'
   import { app } from '../state.svelte'
   import SectionCard from './SectionCard.svelte'
+  import CarbonationReadout from './CarbonationReadout.svelte'
   import TrendingUpIcon from '@lucide/svelte/icons/trending-up'
   import TrendingDownIcon from '@lucide/svelte/icons/trending-down'
 
@@ -173,4 +174,6 @@
   {:else}
     <p class="text-muted-foreground text-sm">Choose a target water to start.</p>
   {/if}
+
+  <CarbonationReadout />
 </SectionCard>

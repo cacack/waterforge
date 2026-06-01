@@ -636,6 +636,15 @@
   {
     "name": "Perrier",
     "carbonation_style": "sparkling",
+    "carbonation_target": {
+      "value": 5,
+      "unit": "volumes",
+      "provenance": {
+        "verified": false,
+        "source": "Estimate. No producer-published bottled-carbonation spec found; ~5.0 volumes is the figure widely cited for Perrier across secondary industry/hobbyist sources (e.g. Sparkel 'The Science of Carbonation', CySoda). NOT derived from the source-CO₂ value. Replace with an authoritative figure if one is published.",
+        "source_date": "2026-05-31"
+      }
+    },
     "ions": {
       "Ca": 150,
       "Mg": 3.9,
@@ -648,7 +657,7 @@
     "alkalinity_unit": "as_HCO3",
     "ph": 5.5,
     "tds": 456,
-    "comment": "NO₃ 7.3 mg/L. Current product label (Vergèze). Nestlé's corporate fact sheet differs (Ca 155, Mg 6.8, SO₄ 33, Cl 22, HCO₃ 430) — Perrier's published composition varies by source/period.",
+    "comment": "NO₃ 7.3 mg/L. Current product label (Vergèze). Nestlé's corporate fact sheet differs (Ca 155, Mg 6.8, SO₄ 33, Cl 22, HCO₃ 430) — Perrier's published composition varies by source/period. carbonation_target ≈5.0 volumes is an unverified estimate (see carbonation_target.provenance), not a producer spec.",
     "url": "https://www.nestle.com/sites/default/files/asset-library/documents/investors/fact-sheets/perrier%20facts%20and%20figures.pdf",
     "provenance": {
       "verified": true,

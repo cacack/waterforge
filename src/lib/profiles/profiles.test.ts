@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { validateProfile, chargeBalanceResidual } from './validate'
 import { profileToIonProfile } from './convert'
+import { findProfile } from './library'
 import { HCO3_PER_CACO3 } from '../chem/conversions'
 import { IONS, SO4_WEIGHT } from '../chem/constants'
+import type { CarbonationUnit } from '../chem/carbonation'
 import type { Profile } from './types'
 
 // ---------------------------------------------------------------------------
@@ -497,5 +499,45 @@ describe('chargeBalanceResidual', () => {
       SO4: SO4_WEIGHT,
     })
     expect(residual).toBeCloseTo(0, 10)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Seeded bundled-profile carbonation target (#123 data half)
+// ---------------------------------------------------------------------------
+
+describe('bundled profiles — seeded carbonation_target', () => {
+  const VALID_UNITS: readonly CarbonationUnit[] = ['volumes', 'gPerL']
+
+  it('Perrier carries a well-formed carbonation_target', () => {
+    const perrier = findProfile('Perrier')
+    expect(perrier).toBeDefined()
+    expect(perrier?.carbonation_style).toBe('sparkling')
+
+    const target = perrier?.carbonation_target
+    expect(target).toBeDefined()
+    // value finite and strictly > 0 (0 would mean "still", recorded via style).
+    expect(Number.isFinite(target?.value)).toBe(true)
+    expect(target!.value).toBeGreaterThan(0)
+    // unit is a valid CarbonationUnit.
+    expect(VALID_UNITS).toContain(target!.unit)
+    // provenance is well-formed.
+    expect(typeof target!.provenance.verified).toBe('boolean')
+    expect(target!.provenance.source.trim().length).toBeGreaterThan(0)
+    expect(target!.provenance.source_date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
+  it('Perrier passes profile validation with its carbonation_target', () => {
+    const perrier = findProfile('Perrier')
+    expect(validateProfile(perrier).ok).toBe(true)
+  })
+
+  it('the carbonation_target is not derived from the source co2 figure', () => {
+    // Provenance discipline: the bottled target must be sourced in its own
+    // right, never copied from `co2` (source dissolved CO₂). Perrier carries no
+    // `co2` field, so the two cannot be conflated here — assert that invariant.
+    const perrier = findProfile('Perrier')
+    expect(perrier?.co2).toBeUndefined()
+    expect(perrier?.carbonation_target?.value).toBeGreaterThan(0)
   })
 })
