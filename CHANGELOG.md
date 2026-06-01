@@ -9,6 +9,21 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.8.0](https://github.com/cacack/waterforge/compare/v1.7.0...v1.8.0) (2026-06-01)
+
+
+### Features
+
+* **profiles:** add authoritative carbonation target to Gerolsteiner ([ac71a9a](https://github.com/cacack/waterforge/commit/ac71a9a03483b7486b49210e1a01d0a418e18638))
+* **profiles:** add estimated carbonation target to Perrier ([1d19d49](https://github.com/cacack/waterforge/commit/1d19d49ff53837da5f27e0bcd52f2455a7049ea6)), closes [#123](https://github.com/cacack/waterforge/issues/123)
+* **profiles:** model still/sparkling and a carbonation target ([6025593](https://github.com/cacack/waterforge/commit/6025593639b46bdd996ae17015a1ace757b6e0c6))
+* **ui:** surface carbonation target in recipe output ([67565b5](https://github.com/cacack/waterforge/commit/67565b59db344ab3247c322b4bcd06ad59736376)), closes [#123](https://github.com/cacack/waterforge/issues/123)
+
+
+### Bug Fixes
+
+* **ui:** address panel-review findings on carbonation readout ([c4a5961](https://github.com/cacack/waterforge/commit/c4a59616840bb8045eb211ec69943509959c9a54))
+
 ## [1.7.0](https://github.com/cacack/waterforge/compare/v1.6.0...v1.7.0) (2026-05-31)
 
 
