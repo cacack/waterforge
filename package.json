@@ -1,7 +1,7 @@
 {
   "name": "waterforge",
   "private": true,
-  "version": "1.8.0",
+  "version": "1.9.0",
   "type": "module",
   "description": "Clone bottled mineral waters from distilled water and food-grade salts.",
   "license": "GPL-3.0-or-later",
