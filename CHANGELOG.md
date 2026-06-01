@@ -9,6 +9,19 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.7.0](https://github.com/cacack/waterforge/compare/v1.6.0...v1.7.0) (2026-05-31)
+
+
+### Features
+
+* **carbonation:** add force-carbonation calculator ([de09f75](https://github.com/cacack/waterforge/commit/de09f75da592566361ac4c9d578121e06fa5c142))
+* **profiles:** add Magnetic Springs (OH) and Waiākea (HI) ([a9638b2](https://github.com/cacack/waterforge/commit/a9638b294dfbd5bc382b4f6d38a9d51a527bf5cf)), closes [#98](https://github.com/cacack/waterforge/issues/98)
+
+
+### Bug Fixes
+
+* **carbonation:** address panel-review findings on the calculator ([71348b9](https://github.com/cacack/waterforge/commit/71348b9e60ca011aecc65993bd6852977feb24dc))
+
 ## [1.6.0](https://github.com/cacack/waterforge/compare/v1.5.0...v1.6.0) (2026-05-31)
 
 
