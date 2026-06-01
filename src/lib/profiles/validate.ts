@@ -231,15 +231,20 @@ export function validateProfile(raw: unknown): ValidationResult {
     if (!Array.isArray(traits)) {
       addError(errors, 'traits', 'must be an array when present')
     } else {
-      traits.forEach((t, i) => {
+      const seen = new Set<unknown>()
+      for (const [i, t] of traits.entries()) {
         if (typeof t !== 'string' || !TRAIT_VALUES.has(t)) {
           addError(
             errors,
             `traits[${i}]`,
             `must be one of: ${PROFILE_TRAITS.join(', ')}`,
           )
+        } else if (seen.has(t)) {
+          addError(errors, `traits[${i}]`, `duplicate trait: ${t}`)
+        } else {
+          seen.add(t)
         }
-      })
+      }
     }
   }
 

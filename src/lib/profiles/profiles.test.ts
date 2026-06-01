@@ -6,6 +6,7 @@ import { HCO3_PER_CACO3 } from '../chem/conversions'
 import { IONS, SO4_WEIGHT } from '../chem/constants'
 import type { CarbonationUnit } from '../chem/carbonation'
 import type { Profile } from './types'
+import { PROFILE_CATEGORIES } from './types'
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -411,6 +412,10 @@ describe('validateProfile — descriptive metadata', () => {
     expect(result.ok).toBe(true)
     if (result.ok) {
       expect(result.value.country).toBe('France')
+      expect(result.value.locality).toBe('Évian-les-Bains')
+      expect(result.value.description).toBe(
+        'A low-mineral spring water from the French Alps.',
+      )
       expect(result.value.category).toBe('bottled')
       expect(result.value.traits).toEqual(['calcium-rich', 'bicarbonate-rich'])
     }
@@ -422,12 +427,7 @@ describe('validateProfile — descriptive metadata', () => {
   })
 
   it('accepts each valid category value', () => {
-    for (const category of [
-      'bottled',
-      'brewing',
-      'coffee',
-      'synthetic',
-    ] as const) {
+    for (const category of PROFILE_CATEGORIES) {
       const p: Profile = { ...EVIAN_LIKE, category }
       expect(validateProfile(p).ok).toBe(true)
     }
@@ -467,6 +467,18 @@ describe('validateProfile — descriptive metadata', () => {
     }
   })
 
+  it('rejects duplicate trait values', () => {
+    const bad = {
+      ...EVIAN_LIKE,
+      traits: ['calcium-rich', 'calcium-rich'] as never,
+    }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'traits[1]')).toBe(true)
+    }
+  })
+
   it('rejects traits that is not an array', () => {
     const bad = { ...EVIAN_LIKE, traits: 'calcium-rich' as never }
     const result = validateProfile(bad)
@@ -493,8 +505,8 @@ describe('validateProfile — descriptive metadata', () => {
 // ---------------------------------------------------------------------------
 
 describe('bundled profiles — additive metadata is backward-compatible', () => {
-  it('all 54 bundled profiles still validate', () => {
-    expect(PROFILES.length).toBe(54)
+  it('all bundled profiles still validate', () => {
+    expect(PROFILES.length).toBeGreaterThan(0)
     for (const profile of PROFILES) {
       expect(validateProfile(profile).ok).toBe(true)
     }

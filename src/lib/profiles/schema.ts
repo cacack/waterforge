@@ -181,6 +181,7 @@ export const PROFILE_SCHEMA = {
       type: 'array',
       description:
         'Editorially-assigned descriptive traits for browsing/filtering (not auto-computed from ions). Each item must be a known trait; unknown values are rejected.',
+      uniqueItems: true,
       items: {
         type: 'string',
         enum: [...PROFILE_TRAITS],
