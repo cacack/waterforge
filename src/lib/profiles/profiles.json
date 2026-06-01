@@ -387,6 +387,15 @@
   {
     "name": "Gerolsteiner",
     "carbonation_style": "sparkling",
+    "carbonation_target": {
+      "value": 7,
+      "unit": "gPerL",
+      "provenance": {
+        "verified": true,
+        "source": "Gerolsteiner official product page: \"Gerolsteiner Sprudel enthält 7 g Kohlensäure pro Liter\" — exclusively natural carbonation, bottled to match the source. Producer-stated bottled carbonation, independently published from (not derived from) the analysis-sheet source-CO₂ figure.",
+        "source_date": "2026-06-01"
+      }
+    },
     "ions": {
       "Ca": 348,
       "Mg": 108,
