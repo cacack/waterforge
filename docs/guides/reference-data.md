@@ -238,6 +238,77 @@ that exist today.
 
 ---
 
+## 6. Profile Metadata Fields
+
+Each library profile may carry optional, additive metadata for browsing and
+filtering. These fields **do not affect the recipe math** — they describe what a
+water _is_, not how to dose it. All are optional; absence is the honest default
+and carries no implied value (see the leave-unset rule in
+[CONTRIBUTING.md](../../CONTRIBUTING.md)). The decision is recorded in
+[ADR 0014](../decisions/0014-profile-metadata-fields.md).
+
+| Field         | Type               | Notes                                                              |
+| ------------- | ------------------ | ------------------------------------------------------------------ |
+| `country`     | string             | Country of origin — a geographic fact (e.g. `France`).             |
+| `locality`    | string             | Region / city / spring source (e.g. `Évian-les-Bains`).            |
+| `description` | string             | Short, neutral **original prose** (~1–2 sentences, soft cap ~240). |
+| `category`    | enum               | High-level kind — see the category enum below.                     |
+| `traits`      | array of trait IDs | Editorially-assigned characteristics — see the traits vocab below. |
+
+> Carbonation (still/sparkling and bottled carbonation target) is **not**
+> metadata and **not** a trait — it is a first-class field set
+> (`carbonation_style` / `carbonation_target`). See
+> [ADR 0013](../decisions/0013-still-sparkling-and-carbonation-target.md).
+
+### Category enum
+
+`category` classifies the kind of entry. Exactly one value, drawn from the
+`PROFILE_CATEGORIES` constant in `src/lib/profiles/types.ts` (the single source
+of truth — schema validation derives from it):
+
+| Value       | Definition                                           |
+| ----------- | ---------------------------------------------------- |
+| `bottled`   | A commercial bottled mineral/spring water.           |
+| `brewing`   | A brewing-water target (e.g. Palmer / SCA refs).     |
+| `coffee`    | A coffee-brewing water target.                       |
+| `synthetic` | A constructed/reference profile, not a real product. |
+
+### Traits controlled vocabulary
+
+`traits` is an array of zero or more controlled tags drawn from the
+`PROFILE_TRAITS` constant in `src/lib/profiles/types.ts` (the single source of
+truth). The list below mirrors that constant exactly; if they disagree, the
+constant wins. Validation rejects any tag not in this set.
+
+Traits describe **chemistry or origin only** — never flavour, mouthfeel, or
+marketing language. They are **editorially assigned** by a curator from the
+source's reported character, _not_ auto-computed from the ion figures (a water
+can read as "calcium-rich" in character without tripping an arbitrary numeric
+cutoff).
+
+Chemistry traits:
+
+| Trait                 | Assign when…                                         |
+| --------------------- | ---------------------------------------------------- |
+| `calcium-rich`        | Calcium is a defining/dominant cation.               |
+| `magnesium-rich`      | Magnesium is a defining/dominant cation.             |
+| `sodium-rich`         | Sodium is a defining/dominant cation.                |
+| `sulfate-rich`        | Sulfate is a defining/dominant anion.                |
+| `bicarbonate-rich`    | Bicarbonate/alkalinity is a defining/dominant anion. |
+| `chloride-rich`       | Chloride is a defining/dominant anion.               |
+| `silica-rich`         | Silica (SiO₂) is a notable reported component.       |
+| `low-mineralization`  | Low overall mineral content / TDS.                   |
+| `high-mineralization` | High overall mineral content / TDS.                  |
+
+Origin traits:
+
+| Trait      | Assign when…                                        |
+| ---------- | --------------------------------------------------- |
+| `artesian` | The source is reported as an artesian well/aquifer. |
+| `volcanic` | The source is reported as volcanic in origin.       |
+
+---
+
 ## References
 
 - Lersch, M. (Khymos). Mineral water recipes.

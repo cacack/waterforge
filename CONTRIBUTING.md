@@ -143,6 +143,32 @@ rationale.
 If you change stoichiometry constants (`src/lib/chem/constants.ts`) or the
 NNLS algorithm, the golden tests are the first thing to check.
 
+## Profile metadata
+
+Library profiles carry optional, additive metadata for browsing and filtering:
+`country`, `locality`, `description`, `category`, and `traits`. These do not
+affect the recipe math. The fields, the category enum, and the full controlled
+`traits` vocabulary are documented in
+[reference-data.md §6](docs/guides/reference-data.md#6-profile-metadata-fields);
+the design decision is [ADR 0014](docs/decisions/0014-profile-metadata-fields.md).
+The data model itself lives in `src/lib/profiles/types.ts`, the single source of
+truth for the `category` and `traits` controlled vocabularies.
+
+Two rules govern this metadata:
+
+- **Original prose, facts vs. expression.** Geographic facts (`country`,
+  `locality`) and ion values are facts and not copyrightable. But `description`
+  must be **our own neutral prose** — a plain summary we write, **never** lifted
+  bottler marketing copy. Facts may be sourced freely; their _expression_ must be
+  ours. Likewise `traits` are editorial classification (chemistry/origin only, no
+  flavour language), assigned by a curator rather than auto-computed. See
+  [ADR 0012](docs/decisions/0012-profile-data-independently-sourced.md) and
+  [ADR 0014](docs/decisions/0014-profile-metadata-fields.md).
+- **Leave unset when unsourceable.** Every metadata field is optional. If a value
+  can't be sourced honestly, **omit it** — absence is the correct default and
+  carries no implied meaning. Don't guess, and don't fill a field just to look
+  complete.
+
 ## Design rationale
 
 Before changing something structural, check the Architecture Decision Records in
