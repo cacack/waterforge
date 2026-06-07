@@ -45,7 +45,7 @@ This is the one step that stops the auto-unset permanently.
 3. Add it in CloudFlare DNS (TXT records are always DNS-only; the proxy does not
    apply), then click **Verify**.
 
-A *verified* domain is immune to the auto-unset even though DNS resolves to
+A _verified_ domain is immune to the auto-unset even though DNS resolves to
 CloudFlare.
 
 ### Step 2 — Bootstrap GitHub's TLS certificate with the proxy off (one-time)
@@ -87,8 +87,8 @@ the hostname, even though the repo settings still record the domain. This
 happens when the live deployment gets deactivated while the domain is
 re-verified or the certificate is re-provisioned (e.g. during the recovery steps
 above). The most recent `deploy.yml` run may still read `success` — deployment
-*statuses* are immutable history; what matters is whether the deployment is the
-currently *active* one.
+_statuses_ are immutable history; what matters is whether the deployment is the
+currently _active_ one.
 
 ### Fix — republish
 
@@ -105,12 +105,12 @@ current `main` build and is safe to run at any time.
 
 ## Correct CloudFlare DNS layout
 
-| Type  | Name                              | Value                                                  | Proxy  |
-| ----- | --------------------------------- | ------------------------------------------------------ | ------ |
-| A     | `@`                               | `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`  | orange |
-| AAAA  | `@`                               | `2606:50c0:8000::153` … `8003::153` (optional)         | orange |
-| CNAME | `www`                             | `cacack.github.io`                                      | orange |
-| TXT   | `_github-pages-challenge-cacack`  | `<token from Step 1>`                                   | n/a    |
+| Type  | Name                             | Value                                                 | Proxy  |
+| ----- | -------------------------------- | ----------------------------------------------------- | ------ |
+| A     | `@`                              | `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` | orange |
+| AAAA  | `@`                              | `2606:50c0:8000::153` … `8003::153` (optional)        | orange |
+| CNAME | `www`                            | `cacack.github.io`                                    | orange |
+| TXT   | `_github-pages-challenge-cacack` | `<token from Step 1>`                                 | n/a    |
 
 ## Verify the fix
 
