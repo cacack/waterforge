@@ -112,6 +112,25 @@ current `main` build and is safe to run at any time.
 | CNAME | `www`                            | `cacack.github.io`                                    | orange |
 | TXT   | `_github-pages-challenge-cacack` | `<token from Step 1>`                                 | n/a    |
 
+## `www` → apex redirect
+
+`www.waterforge.app` 301-redirects to the apex `https://waterforge.app/`. This
+redirect is issued by **GitHub Pages itself**, not CloudFlare: because the repo's
+custom domain is the apex, GitHub treats the apex as canonical and automatically
+redirects the `www` host to it. The `www` `CNAME → cacack.github.io` exists so
+the request reaches GitHub Pages and the redirect can fire (proxied through
+CloudFlare).
+
+No CloudFlare redirect rule or page rule is needed, and the `CNAME` target should
+stay `cacack.github.io` — a CNAME controls name resolution, not redirects, so
+repointing it would not change the redirect behaviour. Verify:
+
+```sh
+curl -sI https://www.waterforge.app | grep -i -E 'http/|location'
+```
+
+Expect `HTTP/2 301` and `location: https://waterforge.app/`.
+
 ## Verify the fix
 
 ```sh
