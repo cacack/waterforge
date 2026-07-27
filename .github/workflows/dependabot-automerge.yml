@@ -21,10 +21,44 @@ jobs:
         id: metadata
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
 
-      - name: Enable auto-merge for patch and minor updates
-        if: |
-          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
-          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+      - name: Classify update
+        id: classify
+        env:
+          UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
+          PREVIOUS: ${{ steps.metadata.outputs.previous-version }}
+          NEW: ${{ steps.metadata.outputs.new-version }}
+        run: |
+          set -euo pipefail
+
+          allow() { echo "allow=true"  >> "$GITHUB_OUTPUT"; echo "$1"; exit 0; }
+          deny()  { echo "allow=false" >> "$GITHUB_OUTPUT"; echo "$1"; exit 0; }
+
+          case "$UPDATE_TYPE" in
+            version-update:semver-patch|version-update:semver-minor)
+              allow "Dependabot classified this as ${UPDATE_TYPE#version-update:}." ;;
+            version-update:semver-major)
+              deny "Major update — leaving for manual review." ;;
+          esac
+
+          # Dependabot omits update-type for indirect (transitive) dependencies,
+          # so fall back to comparing the major component ourselves. Anything
+          # that does not parse cleanly is left for manual review.
+          major() { echo "$1" | grep -oE '^[0-9]+' || true; }
+          prev_major=$(major "$PREVIOUS")
+          new_major=$(major "$NEW")
+
+          if [ -z "$prev_major" ] || [ -z "$new_major" ]; then
+            deny "Cannot parse versions ('$PREVIOUS' -> '$NEW') — leaving for manual review."
+          fi
+
+          if [ "$prev_major" = "$new_major" ]; then
+            allow "Update within major $new_major ($PREVIOUS -> $NEW)."
+          fi
+
+          deny "Major update ($PREVIOUS -> $NEW) — leaving for manual review."
+
+      - name: Enable auto-merge
+        if: steps.classify.outputs.allow == 'true'
         # `--merge` because the branch ruleset allows only merge commits.
         run: gh pr merge --auto --merge "$PR_URL"
         env:
