@@ -104,7 +104,30 @@ parses it out of the body **and** picks up the original branch commit —
 producing duplicate changelog entries. Plain English titles avoid this.
 
 The release-please bot's own release PR (`chore(main): release X.Y.Z`) and
-Dependabot PRs are exempt.
+Dependabot PRs are exempt from the CI check. Dependabot cannot comply on its
+own — it derives the PR title from the commit subject, so both carry the same
+conventional prefix. `dependabot-automerge.yml` rewrites its titles into plain
+English instead, leaving the branch commit as the single source release-please
+reads.
+
+### Dependencies
+
+`package.json` splits dependencies by **whether the package ends up in the
+built output**, not by when it runs:
+
+- **`dependencies`** — compiled, bundled, or otherwise present in `dist/`:
+  Svelte and Vite (and their plugins), Tailwind, runtime libraries, fonts.
+  Build-time tools count: the Svelte compiler determines the shipped JS, so
+  bumping it changes what users get.
+- **`devDependencies`** — lint, format, typecheck, and test tooling only:
+  ESLint, Prettier, `svelte-check`, TypeScript, Vitest.
+
+Nothing installs with `--omit=dev`, so this split has no effect on builds. It
+exists to tell Dependabot which bumps need a release: `dependencies` get a
+`fix(deps):` commit (patch release → deploy), `devDependencies` get
+`chore(deps-dev):` (no release). Placing a new package on the wrong side
+either ships a silent change or cuts a release nobody needed — when adding
+one, ask whether `dist/` would differ.
 
 ### Branch and PR workflow
 

@@ -33,5 +33,9 @@ TypeScript + Svelte 5 (runes) + Vite, deployed to GitHub Pages.
   non-functional work. Never use a `data:` type — release-please ignores
   unknown types, so the change ships with no version bump or changelog entry.
 - `main` is PR-only — branch → PR → merge; no direct pushes.
+- `package.json` splits `dependencies` vs `devDependencies` by whether the
+  package lands in `dist/`, not by when it runs — Svelte/Vite/Tailwind are
+  runtime deps here. That split tells Dependabot which bumps cut a release
+  (see `CONTRIBUTING.md`); put new packages on the right side.
 - Engine code (`chem/`, `solver/`) is framework-agnostic pure TypeScript; keep
   it independent of the Svelte UI so the math stays portable and testable.
