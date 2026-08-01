@@ -3,8 +3,20 @@ name: Dependabot auto-merge
 # Dependabot has no auto-merge setting of its own — something has to call
 # `gh pr merge --auto`. Patch and minor bumps merge themselves once CI and
 # the required GitGuardian check pass; major bumps are left for review.
+#
+# This workflow also rewrites the PR title into plain English, which every
+# Dependabot PR needs regardless of whether it auto-merges.
 
-on: pull_request
+# `edited` is on top of the default types because Dependabot rewrites the title
+# when a newer version supersedes an open PR. If that edit lands after the push,
+# the `synchronize` payload still carries the old title and the retitle below
+# no-ops, letting a conventional title reach the merge commit. Re-running on
+# `edited` cannot loop: the retitle is idempotent, and events raised by
+# GITHUB_TOKEN do not trigger workflows (same reason release-please.yml uses a
+# PAT).
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
 
 # Dependabot-triggered runs get a read-only GITHUB_TOKEN by default, so the
 # write scopes auto-merge needs must be requested explicitly.
@@ -17,6 +29,37 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
     steps:
+      - name: Rewrite the PR title in plain English
+        # Dependabot derives the PR title from the commit subject, so the
+        # `commit-message.prefix` from dependabot.yml lands in both. The repo
+        # merges with merge commits and merge_commit_message is PR_TITLE, so a
+        # conventional title reaches the merge commit body and release-please
+        # counts it a second time alongside the branch commit — the duplicate
+        # changelog entry the pr-title job in ci.yml exists to prevent.
+        #
+        # Retitling at open time (rather than suppressing the merge body) also
+        # covers major bumps, which are merged by hand below.
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          PLAIN=$(printf '%s' "$TITLE" | sed -E 's/^[a-z]+(\([^)]*\))?!?: *//')
+
+          if [ "$PLAIN" = "$TITLE" ]; then
+            echo "Title is not in conventional format; leaving as-is."
+            exit 0
+          fi
+
+          # Capitalise the first letter so the result reads as a sentence:
+          # 'fix(deps): bump svelte ...' -> 'Bump svelte ...'
+          PLAIN=$(printf '%s' "$PLAIN" | awk '{print toupper(substr($0,1,1)) substr($0,2)}')
+
+          gh pr edit "$PR_URL" --title "$PLAIN"
+          echo "Retitled: '$TITLE' -> '$PLAIN'"
+
       - name: Fetch Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0

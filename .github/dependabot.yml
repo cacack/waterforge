@@ -2,13 +2,30 @@
 # pin actions to commit SHAs (not floating tags); Dependabot opens PRs
 # that bump both the SHA and the trailing `# vX.Y.Z` comment when new
 # releases land.
+#
+# Commit prefixes drive release-please. The app deploys on `release: published`,
+# so a dependency that ships in `dist/` only reaches users once a release is cut
+# — which needs a `feat`/`fix` commit. `prefix` applies to `dependencies`,
+# `prefix-development` to `devDependencies`; see the "Dependencies" section of
+# CONTRIBUTING.md for how that split is drawn here.
 version: 2
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    # Actions run the build, they are never part of it — nothing to release.
+    commit-message:
+      prefix: ci
+
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
+    commit-message:
+      # `dependencies` are compiled or bundled into dist/ — the shipped output
+      # changes, so users need a patch release to receive it.
+      prefix: fix
+      # `devDependencies` are lint/test/typecheck tooling only — no release.
+      prefix-development: chore
+      include: scope
