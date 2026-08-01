@@ -7,7 +7,16 @@ name: Dependabot auto-merge
 # This workflow also rewrites the PR title into plain English, which every
 # Dependabot PR needs regardless of whether it auto-merges.
 
-on: pull_request
+# `edited` is on top of the default types because Dependabot rewrites the title
+# when a newer version supersedes an open PR. If that edit lands after the push,
+# the `synchronize` payload still carries the old title and the retitle below
+# no-ops, letting a conventional title reach the merge commit. Re-running on
+# `edited` cannot loop: the retitle is idempotent, and events raised by
+# GITHUB_TOKEN do not trigger workflows (same reason release-please.yml uses a
+# PAT).
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
 
 # Dependabot-triggered runs get a read-only GITHUB_TOKEN by default, so the
 # write scopes auto-merge needs must be requested explicitly.
