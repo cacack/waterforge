@@ -9,6 +9,17 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.9.1](https://github.com/cacack/waterforge/compare/v1.9.0...v1.9.1) (2026-08-01)
+
+
+### Bug Fixes
+
+* **deps:** bump @tailwindcss/vite from 4.3.0 to 4.3.3 ([50cf837](https://github.com/cacack/waterforge/commit/50cf837a021786683cb1897ea2e4babeef21d86b))
+* **deps:** bump @tailwindcss/vite from 4.3.0 to 4.3.3 ([ed5c24a](https://github.com/cacack/waterforge/commit/ed5c24a3633cec86c7e7d1d82902bdeea1089ec2))
+* **deps:** bump brace-expansion past the DoS advisories ([687b799](https://github.com/cacack/waterforge/commit/687b79923a928628f3df1df59c0e3da2143e897c))
+* **deps:** bump tailwindcss from 4.3.0 to 4.3.3 ([f07827a](https://github.com/cacack/waterforge/commit/f07827a8cf93c9226c2837637f87f157e82f456a))
+* **deps:** bump tailwindcss from 4.3.0 to 4.3.3 ([d06e2ef](https://github.com/cacack/waterforge/commit/d06e2ef1c7f9dea3a43ec41d909272ae15fa90e6))
+
 ## [1.9.0](https://github.com/cacack/waterforge/compare/v1.8.0...v1.9.0) (2026-06-01)
 
 
