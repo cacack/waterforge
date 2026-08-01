@@ -31,14 +31,15 @@ jobs:
     steps:
       - name: Rewrite the PR title in plain English
         # Dependabot derives the PR title from the commit subject, so the
-        # `commit-message.prefix` from dependabot.yml lands in both. The repo
-        # merges with merge commits and merge_commit_message is PR_TITLE, so a
-        # conventional title reaches the merge commit body and release-please
-        # counts it a second time alongside the branch commit — the duplicate
-        # changelog entry the pr-title job in ci.yml exists to prevent.
+        # `commit-message.prefix` from dependabot.yml lands in both, and a
+        # conventional PR title would reach the merge commit body (the repo sets
+        # merge_commit_message=PR_TITLE) where release-please counts it a second
+        # time — the duplicate the pr-title job in ci.yml exists to prevent.
         #
-        # Retitling at open time (rather than suppressing the merge body) also
-        # covers major bumps, which are merged by hand below.
+        # This is NOT what protects the auto-merge path; the explicit --body
+        # below does, because the title is a value Dependabot also writes and
+        # rewrites on every rebase, so it cannot be relied on. This step keeps
+        # the PR list readable and covers major bumps, which are merged by hand.
         env:
           TITLE: ${{ github.event.pull_request.title }}
           PR_URL: ${{ github.event.pull_request.html_url }}
@@ -103,7 +104,22 @@ jobs:
       - name: Enable auto-merge
         if: steps.classify.outputs.allow == 'true'
         # `--merge` because the branch ruleset allows only merge commits.
-        run: gh pr merge --auto --merge "$PR_URL"
+        #
+        # --subject/--body are explicit because GitHub snapshots the merge commit
+        # message when auto-merge is *enabled*, not when it fires. Left to the
+        # repo default (merge_commit_message=PR_TITLE) it would freeze whatever
+        # the title happened to be at that instant — and Dependabot resets the
+        # title to conventional format on every rebase, so that value is a race.
+        # An empty body leaves the branch commit as release-please's only input.
+        run: |
+          set -euo pipefail
+          gh pr merge --auto --merge \
+            --subject "Merge pull request #${PR_NUMBER} from ${OWNER}/${HEAD_REF}" \
+            --body '' \
+            "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          OWNER: ${{ github.repository_owner }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

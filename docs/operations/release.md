@@ -26,6 +26,13 @@ Before merging a release PR, confirm:
    day-to-day flow — release-please reads these commit messages to determine
    the next version and changelog entries.
 
+   release-please runs on every push to `main`, plus a **daily scheduled
+   sweep**. The sweep exists because auto-merged Dependabot PRs land via
+   `GITHUB_TOKEN`, whose events do not fan out to other workflows — without it,
+   releasable `fix(deps):` commits would sit on `main` unreleased until a human
+   merged something. Expect a dependency-only release to appear within a day
+   rather than immediately; `gh workflow run release-please.yml` forces it.
+
 2. **Review the release PR**
 
    release-please opens (and keeps updated) a PR titled something like

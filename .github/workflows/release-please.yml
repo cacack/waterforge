@@ -1,8 +1,19 @@
 name: Release Please
 
+# The push trigger misses anything merged by a bot: auto-merged Dependabot PRs
+# land via GITHUB_TOKEN, and GITHUB_TOKEN events do not fan out (the same rule
+# that forces the PAT below). A week of pure-Dependabot activity would otherwise
+# accumulate releasable `fix(deps):` commits on main with no release PR ever
+# opened. The daily sweep picks those up regardless of who merged them.
+#
+# release-please is idempotent — it opens the release PR or updates the existing
+# one — so the extra runs are free.
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
