@@ -9,6 +9,22 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.9.2](https://github.com/cacack/waterforge/compare/v1.9.1...v1.9.2) (2026-09-06)
+
+
+### Bug Fixes
+
+* **deps:** bump @fontsource-variable/geist from 5.2.9 to 5.3.0 ([2c78a4b](https://github.com/cacack/waterforge/commit/2c78a4b9eb7a4cf0965e0b41c5e920de8d8f9480))
+* **deps:** bump @internationalized/date from 3.12.2 to 3.12.3 ([c122c8c](https://github.com/cacack/waterforge/commit/c122c8c9a316d29ee5eff5ef98d0339f54c7654a))
+* **deps:** bump @lucide/svelte from 1.16.0 to 1.37.0 ([47c02ce](https://github.com/cacack/waterforge/commit/47c02ce0efa525a6117be81aeefc29b9149068db))
+* **deps:** bump @sveltejs/vite-plugin-svelte from 7.1.2 to 7.3.0 ([7a75df6](https://github.com/cacack/waterforge/commit/7a75df6fbbcc0f670e3345effdf823139e176ad0))
+* **deps:** bump browserslist from 4.28.2 to 4.28.8 ([9a19a85](https://github.com/cacack/waterforge/commit/9a19a85171e17aba3c2d97de9b18c744d494e12f))
+* **deps:** bump fast-uri from 3.1.4 to 3.1.5 ([a3cd7ae](https://github.com/cacack/waterforge/commit/a3cd7ae2e085605b578b887e8ff5a8a13cd10226))
+* **deps:** bump fast-uri from 3.1.5 to 3.1.7 ([b61d8fe](https://github.com/cacack/waterforge/commit/b61d8fec3b66c1c919787ec114bee2611c884f6b))
+* **deps:** bump postcss-selector-parser from 7.1.1 to 7.1.5 ([f8d04d1](https://github.com/cacack/waterforge/commit/f8d04d12908e8801a360fd27d09a8c5989dacdc2))
+* **deps:** bump svelte from 5.55.9 to 5.57.0 ([8aaf2f9](https://github.com/cacack/waterforge/commit/8aaf2f950cd0b14ea6417609b970a50a69ac980c))
+* **deps:** bump tailwind-variants from 3.2.2 to 3.3.0 ([bb69628](https://github.com/cacack/waterforge/commit/bb69628078966b0795922c9d38e72e0bcd127fbd))
+
 ## [1.9.1](https://github.com/cacack/waterforge/compare/v1.9.0...v1.9.1) (2026-08-01)
 
 
