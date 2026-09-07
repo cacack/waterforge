@@ -61,7 +61,7 @@
   initPersistence()
 </script>
 
-<div class="bg-background text-foreground min-h-svh">
+<div class="min-h-svh bg-background text-foreground">
   <Header />
 
   <main class="@container mx-auto max-w-6xl px-4 py-6">

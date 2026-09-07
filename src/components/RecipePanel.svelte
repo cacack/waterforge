@@ -85,13 +85,13 @@
   {#if result && doses.length}
     <!-- Salt recipe table -->
     <div class="mb-5">
-      <p class="text-muted-foreground mb-2 text-xs">
+      <p class="mb-2 text-xs text-muted-foreground">
         Salts for <span class="font-mono"
           >{app.batch.volume}&nbsp;{app.batch.unit}</span
         >
       </p>
       <table class="w-full text-sm">
-        <thead class="text-muted-foreground text-xs">
+        <thead class="text-xs text-muted-foreground">
           <tr>
             <th class="pb-1 text-left font-normal">Salt</th>
             <th class="pb-1 text-right font-normal">g</th>
@@ -99,7 +99,7 @@
         </thead>
         <tbody>
           {#each doses as d (d.id)}
-            <tr class="border-border/60 border-t">
+            <tr class="border-t border-border/60">
               <td class="py-1">{SALTS[d.id].name}</td>
               <td class="py-1 text-right font-mono tabular-nums"
                 >{d.grams.toFixed(3)}</td
@@ -113,11 +113,11 @@
     <!-- Achieved vs target ion table -->
     {#if ionRows().length}
       <div>
-        <p class="text-muted-foreground mb-2 text-xs">
+        <p class="mb-2 text-xs text-muted-foreground">
           Ions achieved vs target (mg/L)
         </p>
         <table class="w-full text-sm">
-          <thead class="text-muted-foreground text-xs">
+          <thead class="text-xs text-muted-foreground">
             <tr>
               <th class="pb-1 text-left font-normal">Ion</th>
               <th class="pb-1 text-right font-normal">Target</th>
@@ -127,10 +127,10 @@
           </thead>
           <tbody>
             {#each ionRows() as row (row.id)}
-              <tr class="border-border/60 border-t">
+              <tr class="border-t border-border/60">
                 <td class="py-1 font-mono text-xs">{row.label}</td>
                 <td
-                  class="text-muted-foreground py-1 text-right font-mono tabular-nums"
+                  class="py-1 text-right font-mono text-muted-foreground tabular-nums"
                   >{fmtMgl(row.target)}</td
                 >
                 <td class="py-1 text-right font-mono tabular-nums"
@@ -138,7 +138,7 @@
                 >
                 <td class="py-1 text-right font-mono tabular-nums">
                   {#if row.status === 'ok'}
-                    <span class="text-muted-foreground text-xs">✓</span>
+                    <span class="text-xs text-muted-foreground">✓</span>
                   {:else if row.status === 'over'}
                     <span
                       class="inline-flex items-center justify-end gap-1 text-xs text-amber-600 dark:text-amber-400"
@@ -168,11 +168,11 @@
       </div>
     {/if}
   {:else if result}
-    <p class="text-muted-foreground text-sm">
+    <p class="text-sm text-muted-foreground">
       No salts needed — the source already matches the target.
     </p>
   {:else}
-    <p class="text-muted-foreground text-sm">Choose a target water to start.</p>
+    <p class="text-sm text-muted-foreground">Choose a target water to start.</p>
   {/if}
 
   <CarbonationReadout />

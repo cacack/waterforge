@@ -93,7 +93,7 @@
       <button
         type="button"
         class="px-3 py-1 transition-colors {!isKnown
-          ? 'bg-primary text-primary-foreground font-medium'
+          ? 'bg-primary font-medium text-primary-foreground'
           : 'text-muted-foreground hover:bg-muted'}"
         onclick={() => toggleSourceMode(false)}
         aria-pressed={!isKnown}
@@ -104,7 +104,7 @@
       <button
         type="button"
         class="px-3 py-1 transition-colors {isKnown
-          ? 'bg-primary text-primary-foreground font-medium'
+          ? 'bg-primary font-medium text-primary-foreground'
           : 'text-muted-foreground hover:bg-muted'}"
         onclick={() => toggleSourceMode(true)}
         aria-pressed={isKnown}
@@ -134,7 +134,7 @@
                 <button
                   type="button"
                   class="px-1.5 py-0.5 transition-colors {alkUnit === 'hco3'
-                    ? 'bg-primary text-primary-foreground font-medium'
+                    ? 'bg-primary font-medium text-primary-foreground'
                     : 'text-muted-foreground hover:bg-muted'}"
                   onclick={() => switchAlkUnit('hco3')}
                   aria-pressed={alkUnit === 'hco3'}
@@ -145,7 +145,7 @@
                 <button
                   type="button"
                   class="px-1.5 py-0.5 transition-colors {alkUnit === 'caco3'
-                    ? 'bg-primary text-primary-foreground font-medium'
+                    ? 'bg-primary font-medium text-primary-foreground'
                     : 'text-muted-foreground hover:bg-muted'}"
                   onclick={() => switchAlkUnit('caco3')}
                   aria-pressed={alkUnit === 'caco3'}
@@ -170,7 +170,7 @@
               class="h-7 pr-8 font-mono text-xs"
             />
             <span
-              class="text-muted-foreground pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs"
+              class="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 text-xs text-muted-foreground"
             >
               mg/L
             </span>
@@ -180,7 +180,7 @@
     </div>
 
     <!-- Alkalinity unit hint — makes the active conversion unmistakable -->
-    <p class="text-muted-foreground mt-2 text-xs">
+    <p class="mt-2 text-xs text-muted-foreground">
       {#if alkUnit === 'caco3'}
         <span class="text-amber-600 dark:text-amber-400"
           >Alkalinity entered as CaCO₃ — converted to HCO₃ (×{(
