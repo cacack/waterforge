@@ -149,6 +149,58 @@ is cleared — that module asserts `cname = "waterforge.app"` and would fight th
 recovery. Once the domain is re-added the value matches again and no drift
 remains.
 
+#### When the remove/re-add does not clear it
+
+Verified on 2026-09-07: it does not always work. With DNS confirmed correct on
+both names (`A`, `AAAA` and the `www` `CNAME` all resolving to Pages, no `CAA`
+record restricting Let's Encrypt), the domain was cleared, left cleared for
+**11 minutes** until the certificate record read `none`, and re-added. The state
+returned to `bad_authz` within one second and had not moved 45 minutes later.
+
+A `bad_authz` that reappears _instantly_ on re-add means GitHub is restoring a
+persisted certificate record rather than starting a new ACME order. Nothing you
+can do through Settings or the API restarts it. **Stop there.** Each cycle
+consumes Let's Encrypt's failed-validation allowance (5 per hostname per hour),
+so repeating it makes the next genuine attempt more likely to fail. Open a
+GitHub Support ticket and ask them to reset the ACME authorization for the
+domain.
+
+#### Stopgap: serve through CloudFlare while the origin cert is broken
+
+**`waterforge.app` cannot fall back to HTTP.** The `.app` TLD is HSTS-preloaded
+at the registry level, which `waterforge.app` inherits:
+
+```sh
+curl -s "https://hstspreload.org/api/v2/status?domain=waterforge.app"
+# {"name":"waterforge.app","status":"preloaded","preloadedDomain":"app"}
+```
+
+Browsers therefore force HTTPS and offer **no click-through** past an expired
+certificate. Grey-clouded with a dead origin cert, the site is hard-down for
+real users even while `curl http://waterforge.app/` happily returns 200 — do not
+read that 200 as "partly working."
+
+The only fast way back up without a valid origin certificate is to let
+CloudFlare terminate TLS with its own (valid) edge certificate:
+
+1. Flip apex and `www` back to **Proxied (orange cloud)**.
+2. CloudFlare → **SSL/TLS → Overview → Full** — deliberately _not_ Full
+   (strict), which is what rejects the expired origin cert with a 526. Still
+   never **Flexible**.
+3. Purge the CloudFlare cache.
+
+This is a temporary deviation from [Step 3](#step-3--re-enable-the-proxy-with-the-correct-ssl-mode).
+It restores the site for visitors but stops validating the origin, so
+CloudFlare↔origin is encrypted but unauthenticated. **Return to Full (strict)
+as soon as the certificate is issued.** Because the SSL/TLS mode is per-zone and
+`waterforge.app` is its own zone, this does not weaken `theclonchs.com`.
+
+Note that Full masks the expired origin certificate from anything probing the
+public URL — the end-to-end `200` check goes green while the origin is still
+broken. The [monitoring](#monitoring) certificate checks read the Pages API and
+the origin certificate directly rather than through the proxy, so they keep
+telling the truth in this state; a naive uptime check would not.
+
 ## Symptom: "Site not found" with settings that look correct
 
 A distinct failure from the auto-unset above. The site returns 404 and
