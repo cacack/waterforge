@@ -9,15 +9,15 @@
 </script>
 
 <header
-  class="border-border bg-background/80 sticky top-0 z-10 border-b backdrop-blur"
+  class="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur"
 >
   <div
     class="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4"
   >
     <div class="flex min-w-0 items-center gap-2">
-      <WaterforgeMark class="text-foreground size-7 shrink-0" />
+      <WaterforgeMark class="size-7 shrink-0 text-foreground" />
       <span class="text-lg font-semibold tracking-tight">Waterforge</span>
-      <span class="text-muted-foreground hidden truncate text-sm sm:inline">
+      <span class="hidden truncate text-sm text-muted-foreground sm:inline">
         bottled mineral water from salts
       </span>
     </div>

@@ -10,11 +10,11 @@
   }: { title: string; hint?: string; children: Snippet } = $props()
 </script>
 
-<section class="bg-card text-card-foreground rounded-lg border p-4">
+<section class="rounded-lg border bg-card p-4 text-card-foreground">
   <div class="flex items-baseline justify-between gap-2">
     <h2 class="text-sm font-medium">{title}</h2>
     {#if hint}
-      <span class="text-muted-foreground text-xs">{hint}</span>
+      <span class="text-xs text-muted-foreground">{hint}</span>
     {/if}
   </div>
   <div class="mt-3">

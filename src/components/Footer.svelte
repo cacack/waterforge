@@ -5,9 +5,9 @@
   const repo = 'https://github.com/cacack/waterforge'
 </script>
 
-<footer class="border-border mt-6 border-t py-4">
+<footer class="mt-6 border-t border-border py-4">
   <div
-    class="text-muted-foreground mx-auto flex max-w-6xl flex-col gap-2 px-4 text-xs sm:flex-row sm:items-center sm:justify-between"
+    class="mx-auto flex max-w-6xl flex-col gap-2 px-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
   >
     <p>
       <a

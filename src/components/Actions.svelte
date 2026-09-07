@@ -286,11 +286,11 @@
             type="file"
             accept=".json,application/json"
             onchange={handleFileChange}
-            class="text-foreground file:bg-muted file:text-foreground hover:file:bg-muted/80 cursor-pointer text-sm file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:px-2.5 file:py-1 file:text-xs file:font-medium file:transition-colors"
+            class="cursor-pointer text-sm text-foreground file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-muted file:px-2.5 file:py-1 file:text-xs file:font-medium file:text-foreground file:transition-colors hover:file:bg-muted/80"
           />
         </div>
 
-        <div class="text-muted-foreground text-center text-xs">or</div>
+        <div class="text-center text-xs text-muted-foreground">or</div>
 
         <!-- Paste area -->
         <div class="flex flex-col gap-1.5">
@@ -308,7 +308,7 @@
 
         <!-- Inline error -->
         {#if importError}
-          <p class="text-destructive text-sm" role="alert">{importError}</p>
+          <p class="text-sm text-destructive" role="alert">{importError}</p>
         {/if}
       </div>
 

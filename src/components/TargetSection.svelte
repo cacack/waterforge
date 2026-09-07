@@ -55,7 +55,7 @@
       {/snippet}
     </Popover.Trigger>
     <Popover.Content
-      class="p-0 w-[var(--bits-popover-anchor-width)] min-w-64"
+      class="w-[var(--bits-popover-anchor-width)] min-w-64 p-0"
       align="start"
       sideOffset={4}
     >
@@ -64,7 +64,7 @@
         <Command.List>
           <Command.Empty>
             <p>No water found.</p>
-            <p class="text-muted-foreground mt-1 text-xs">
+            <p class="mt-1 text-xs text-muted-foreground">
               Can't find your water?
               <a
                 href="https://github.com/cacack/waterforge/issues/new?template=profile_request.md"
@@ -95,7 +95,7 @@
   <!-- Ion profile grid -->
   {#if app.target}
     <dl
-      class="text-muted-foreground mt-3 grid grid-cols-3 gap-x-4 gap-y-0.5 text-xs sm:grid-cols-4"
+      class="mt-3 grid grid-cols-3 gap-x-4 gap-y-0.5 text-xs text-muted-foreground sm:grid-cols-4"
     >
       {#each ION_ORDER as ion (ion)}
         {#if app.target.ions[ion] != null}
@@ -115,7 +115,7 @@
           <p class="text-muted-foreground">{location}</p>
         {/if}
         {#if app.target.description}
-          <p class="text-muted-foreground leading-snug">
+          <p class="leading-snug text-muted-foreground">
             {app.target.description}
           </p>
         {/if}
@@ -124,7 +124,7 @@
             {#if app.target.traits}
               {#each app.target.traits as trait (trait)}
                 <span
-                  class="bg-muted text-muted-foreground rounded px-1.5 py-0.5"
+                  class="rounded bg-muted px-1.5 py-0.5 text-muted-foreground"
                 >
                   {humanizeTrait(trait)}
                 </span>
@@ -132,7 +132,7 @@
             {/if}
             {#if app.target.category}
               <span
-                class="border-border text-muted-foreground rounded border px-1.5 py-0.5 capitalize"
+                class="rounded border border-border px-1.5 py-0.5 text-muted-foreground capitalize"
               >
                 {app.target.category}
               </span>
@@ -155,7 +155,7 @@
           <span class="text-muted-foreground">Unverified</span>
         {/if}
       </div>
-      <p class="text-muted-foreground leading-snug">
+      <p class="leading-snug text-muted-foreground">
         {app.target.provenance.source}
         {#if app.target.provenance.source_date}
           <span class="opacity-70">({app.target.provenance.source_date})</span>
@@ -166,7 +166,7 @@
           href={app.target.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-primary inline-flex items-center gap-1 underline-offset-2 hover:underline"
+          class="inline-flex items-center gap-1 text-primary underline-offset-2 hover:underline"
         >
           Source
           <ExternalLinkIcon class="size-3" />
@@ -174,6 +174,6 @@
       {/if}
     </div>
   {:else}
-    <p class="text-muted-foreground mt-3 text-sm">No target selected.</p>
+    <p class="mt-3 text-sm text-muted-foreground">No target selected.</p>
   {/if}
 </SectionCard>

@@ -99,7 +99,7 @@
 
 <SectionCard title="Carbonation">
   <div class="flex flex-col gap-3">
-    <p class="text-muted-foreground text-xs">
+    <p class="text-xs text-muted-foreground">
       Force-carbonate a sparkling clone: pick a target CO₂ level and your
       serving temperature to get the regulator pressure to set and forget.
     </p>
@@ -185,7 +185,7 @@
     </div>
 
     {#if psi !== null}
-      <div class="bg-muted/50 rounded-md px-3 py-2.5 text-sm">
+      <div class="rounded-md bg-muted/50 px-3 py-2.5 text-sm">
         Set your regulator to
         <span class="font-mono font-semibold">{psi.toFixed(1)} psi</span>
         {#if psi === 0}
@@ -193,13 +193,13 @@
             >— this carbonation needs no added pressure at this temperature.</span
           >
         {/if}
-        <span class="text-muted-foreground block text-xs"
+        <span class="block text-xs text-muted-foreground"
           >Target ≈ {equivalent}. Leave the keg at this pressure and temperature
           until carbonation equilibrates (typically a few days).</span
         >
       </div>
     {:else}
-      <p class="text-muted-foreground text-sm">
+      <p class="text-sm text-muted-foreground">
         Enter a target carbonation and temperature to see the regulator
         pressure.
       </p>

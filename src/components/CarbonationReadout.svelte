@@ -52,7 +52,7 @@
 
 {#if readout.kind === 'target'}
   <div class="mt-5">
-    <p class="text-muted-foreground mb-2 text-xs">Carbonation</p>
+    <p class="mb-2 text-xs text-muted-foreground">Carbonation</p>
     <div class="mb-3 flex flex-wrap items-end gap-3">
       <div class="flex min-w-0 flex-1 flex-col gap-1.5">
         <Label for="recipe-carbonation-temp" class="text-xs"
@@ -95,7 +95,7 @@
       </div>
     </div>
     {#if tempValid}
-      <div class="bg-muted/50 rounded-md px-3 py-2.5 text-sm">
+      <div class="rounded-md bg-muted/50 px-3 py-2.5 text-sm">
         Carbonate to
         <span class="font-mono font-semibold"
           >{readout.gPerL.toFixed(1)} g/L</span
@@ -109,19 +109,19 @@
              (regulatorPsi can clamp to a hair above 0 for floating-point
              reasons near the atmospheric-solubility boundary). -->
         {#if readout.psi < 0.05}
-          <span class="text-muted-foreground block text-xs"
+          <span class="block text-xs text-muted-foreground"
             >This carbonation needs no added pressure at this temperature.</span
           >
         {/if}
       </div>
     {:else}
-      <p class="text-muted-foreground text-sm">
+      <p class="text-sm text-muted-foreground">
         Enter a carbonating temperature to see the regulator pressure.
       </p>
     {/if}
   </div>
 {:else if readout.kind === 'still'}
   <div class="mt-5">
-    <p class="text-muted-foreground text-sm">Still water — no carbonation.</p>
+    <p class="text-sm text-muted-foreground">Still water — no carbonation.</p>
   </div>
 {/if}

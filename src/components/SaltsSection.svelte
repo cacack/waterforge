@@ -40,7 +40,7 @@
           class="flex cursor-pointer flex-col items-start gap-0.5 leading-tight"
         >
           <span class="text-sm font-medium">{salt.name}</span>
-          <span class="text-muted-foreground font-mono text-xs"
+          <span class="font-mono text-xs text-muted-foreground"
             >{salt.formula}</span
           >
         </Label>
