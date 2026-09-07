@@ -67,28 +67,38 @@ jobs:
       - name: Check site is reachable
         run: |
           set -uo pipefail
-          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://$DOMAIN/" || echo "000")
+          # A browser-like UA reduces CloudFlare bot-management false positives,
+          # but its edge still 403s some datacenter ranges and GitHub's runners
+          # sit in one. A 403 from the edge is a bot challenge, not an outage, so
+          # it warns rather than pages. The failure modes this check exists for --
+          # 404 (custom-domain auto-unset), 526 (dead origin cert), 5xx and 000 --
+          # all stay hard failures.
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -A "$UA" --max-time 30 "https://$DOMAIN/" || echo "000")
           echo "GET https://$DOMAIN/ -> $code"
-          if [ "$code" != "200" ]; then
-            echo "FAIL: https://$DOMAIN/ returned $code (expected 200)" >> "$RUNNER_TEMP/failures"
-          fi
+          case "$code" in
+            200) ;;
+            403) echo "::warning::CloudFlare returned 403 to this runner (bot management, not an outage); reachability inconclusive. The gatus probe covers this path from a residential IP." ;;
+            *) echo "FAIL: https://$DOMAIN/ returned $code (expected 200)" >> "$RUNNER_TEMP/failures" ;;
+          esac
 
       - name: Report
         env:
           GH_TOKEN: ${{ github.token }}
           TITLE: Site health check failed for waterforge.app
+          GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           # Dedup by title rather than a label: repo labels are Terraform-managed
           # (git-repositories/labels.json taxonomy), so this workflow must not
           # depend on a label that module does not declare.
-          open_issue=$(gh issue list --state open --search "in:title \"$TITLE\"" \
+          open_issue=$(gh issue list --repo "$GH_REPO" --state open --search "in:title \"$TITLE\"" \
             --limit 1 --json number --jq '.[0].number // empty')
 
           if [ ! -f "$RUNNER_TEMP/failures" ]; then
             echo "All checks passed."
             if [ -n "$open_issue" ]; then
-              gh issue close "$open_issue" --comment "Site health checks are passing again as of $(date -u '+%Y-%m-%d %H:%M UTC'). Closing automatically."
+              gh issue close "$open_issue" --repo "$GH_REPO" --comment "Site health checks are passing again as of $(date -u '+%Y-%m-%d %H:%M UTC'). Closing automatically."
             fi
             exit 0
           fi
@@ -108,10 +118,10 @@ jobs:
             cat "$RUNNER_TEMP/failures"
             echo '```'
             echo
-            echo "Runbook: ${{ github.server_url }}/${{ github.repository }}/blob/main/docs/operations/pages-tls.md"
+            echo "Runbook: ${{ github.server_url }}/${{ github.repository }}/blob/main/docs/operations/cloudflare-pages.md"
             echo
             echo "[Workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
           } > body.md
 
-          gh issue create --title "$TITLE" --body-file body.md
+          gh issue create --repo "$GH_REPO" --title "$TITLE" --body-file body.md
           exit 1

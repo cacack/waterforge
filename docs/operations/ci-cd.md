@@ -60,7 +60,16 @@ deduplicated by title so a sustained outage does not file one per day — and
 closes that issue automatically once the checks pass again.
 
 No secrets required: the default `GITHUB_TOKEN` with `pages: read` and
-`issues: write` covers all three checks.
+`issues: write` covers all three checks. The job runs without
+`actions/checkout`, so every `gh` call must pass `--repo` — without it `gh`
+looks for a git remote and dies with "not a git repository", which silently
+disables the alerting rather than failing the check.
+
+CloudFlare's bot management returns `403` to some datacenter ranges, GitHub's
+runners included, so the reachability check treats a `403` as inconclusive and
+warns instead of filing an issue. `404`, `526`, `5xx` and connection failures
+stay hard failures. The gatus probe in the homelab covers that same public path
+from a residential IP, where the `403` does not occur.
 
 Scheduled workflows only run from the **default branch**, so this takes effect
 once merged to `main`, not on the PR branch. GitHub also disables cron
