@@ -158,12 +158,39 @@ record restricting Let's Encrypt), the domain was cleared, left cleared for
 returned to `bad_authz` within one second and had not moved 45 minutes later.
 
 A `bad_authz` that reappears _instantly_ on re-add means GitHub is restoring a
-persisted certificate record rather than starting a new ACME order. Nothing you
-can do through Settings or the API restarts it. **Stop there.** Each cycle
+persisted certificate record rather than starting a new ACME order.
+
+Deleting the whole Pages site does not clear it either. Also verified on
+2026-09-07, and this is the decisive test:
+
+```sh
+gh api -X DELETE repos/cacack/waterforge/pages          # site gone; GET now 404s
+gh api -X POST repos/cacack/waterforge/pages --input - <<'JSON'
+{"source": {"branch": "main", "path": "/"}, "build_type": "workflow"}
+JSON
+gh api repos/cacack/waterforge/pages --jq '.https_certificate.state'  # -> null
+gh api -X PUT repos/cacack/waterforge/pages --input - <<'JSON'
+{"cname": "waterforge.app"}
+JSON
+gh api repos/cacack/waterforge/pages --jq '.https_certificate.state'  # -> bad_authz
+```
+
+The freshly created site genuinely reports `null` — then attaching the domain
+restores `bad_authz` in one second. **The certificate record is keyed to the
+domain, not to the repository's Pages site**, so it survives deleting the site
+and lives above anything the repo owner can reach through the API or the
+Settings UI.
+
+**There is no self-serve fix. Open a GitHub Support ticket** and ask them to
+reset the ACME authorization for the domain. Do not keep cycling: each attempt
 consumes Let's Encrypt's failed-validation allowance (5 per hostname per hour),
-so repeating it makes the next genuine attempt more likely to fail. Open a
-GitHub Support ticket and ask them to reset the ACME authorization for the
-domain.
+making the eventual genuine attempt more likely to fail.
+
+Deleting the Pages site also destroys the published deployment. If you do run
+this test, republish afterwards per [Fix — republish](#fix--republish) and set
+the custom domain again explicitly — for `build_type: workflow` the artifact's
+`public/CNAME` does **not** restore it by itself, which is branch-build
+behaviour only.
 
 #### Stopgap: serve through CloudFlare while the origin cert is broken
 
