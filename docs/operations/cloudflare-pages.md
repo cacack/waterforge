@@ -59,6 +59,22 @@ origin directly.
 2. In the **repo** Settings → Pages, re-enter custom domain `waterforge.app`,
    wait for "DNS check successful," then enable **Enforce HTTPS**.
 
+**Both names must be grey.** GitHub orders a _single_ certificate covering
+`waterforge.app` **and** `www.waterforge.app`, and an ACME order succeeds or
+fails as a unit. Leaving `www` proxied while the apex is DNS-only is enough to
+wedge issuance for both names. Check before starting — a proxied `www` answers
+as an `A` record pointing at CloudFlare, a DNS-only one reveals the underlying
+`CNAME`:
+
+```sh
+ns=$(dig +short NS waterforge.app | head -1)
+dig +short @"$ns" waterforge.app A
+dig +short @"$ns" www.waterforge.app
+```
+
+Expect the four `185.199.108-111.153` Pages IPs for the apex and
+`cacack.github.io.` for `www`.
+
 ### Step 3 — Re-enable the proxy with the correct SSL mode
 
 1. Flip the DNS records back to **Proxied (orange cloud)**.
@@ -94,7 +110,9 @@ GitHub renews the Pages Let's Encrypt certificate automatically, roughly 30 days
 before expiry. When that ACME authorization fails repeatedly the certificate
 state sticks at **`bad_authz`** — _"The ACME authorization is in a bad state. We
 need to start over."_ GitHub neither recovers on its own nor warns anyone, so
-the existing certificate simply runs out. Because
+the existing certificate simply runs out. The usual trigger is one of the two
+certificate names becoming unreachable for the ACME challenge — most easily
+`www`, which is quietly re-proxied more often than the apex. Because
 [SSL/TLS mode is Full (strict)](#step-3--re-enable-the-proxy-with-the-correct-ssl-mode),
 CloudFlare then refuses the expired origin certificate and returns 526.
 
