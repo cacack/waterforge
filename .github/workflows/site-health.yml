@@ -1,0 +1,117 @@
+name: Site health
+
+# Watches the two things that took the site down on 2026-09-05: GitHub Pages'
+# Let's Encrypt renewal wedging in `bad_authz`, and the resulting expired origin
+# cert that Cloudflare (Full strict) rejects with a 526. The certificate *state*
+# check is the early warning -- it goes bad ~30 days before the cert expires,
+# while everything still looks fine to visitors.
+
+on:
+  schedule:
+    - cron: '17 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: read
+  issues: write
+
+env:
+  DOMAIN: waterforge.app
+  ORIGIN_IP: 185.199.108.153
+  EXPIRY_WARN_DAYS: 21
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Pages certificate state
+        id: cert_state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          # GITHUB_TOKEN's reach into the Pages API is not guaranteed, so a read
+          # failure downgrades to a warning rather than paging someone: the origin
+          # certificate check below is an independent backstop that needs no API
+          # access, and still fires ~21 days before an outage.
+          if ! pages=$(gh api "repos/${{ github.repository }}/pages" 2>&1); then
+            echo "::warning::Could not read the Pages API; certificate-state check skipped. $pages"
+            exit 0
+          fi
+          state=$(echo "$pages" | jq -r '.https_certificate.state // "absent"')
+          echo "Certificate state: $state"
+          if [ "$state" != "approved" ]; then
+            desc=$(echo "$pages" | jq -r '.https_certificate.description // "no description"')
+            echo "FAIL: Pages cert state is '$state' (expected 'approved') -- $desc" >> "$RUNNER_TEMP/failures"
+          fi
+
+      - name: Check origin certificate expiry
+        run: |
+          set -uo pipefail
+          cert=$(echo | openssl s_client -connect "$ORIGIN_IP:443" -servername "$DOMAIN" 2>/dev/null \
+            | openssl x509 -outform pem 2>/dev/null)
+          if [ -z "$cert" ]; then
+            echo "FAIL: could not read origin certificate from $ORIGIN_IP" >> "$RUNNER_TEMP/failures"
+            exit 0
+          fi
+          not_after=$(echo "$cert" | openssl x509 -noout -enddate | cut -d= -f2)
+          # -checkend answers "will it expire within N seconds?" directly, so we
+          # never have to parse OpenSSL's date format ourselves.
+          if echo "$cert" | openssl x509 -noout -checkend $(( EXPIRY_WARN_DAYS * 86400 )) >/dev/null; then
+            echo "Origin cert valid, expires $not_after (more than $EXPIRY_WARN_DAYS days out)"
+          else
+            echo "FAIL: origin cert expires within $EXPIRY_WARN_DAYS days (notAfter: $not_after)" >> "$RUNNER_TEMP/failures"
+          fi
+
+      - name: Check site is reachable
+        run: |
+          set -uo pipefail
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://$DOMAIN/" || echo "000")
+          echo "GET https://$DOMAIN/ -> $code"
+          if [ "$code" != "200" ]; then
+            echo "FAIL: https://$DOMAIN/ returned $code (expected 200)" >> "$RUNNER_TEMP/failures"
+          fi
+
+      - name: Report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: Site health check failed for waterforge.app
+        run: |
+          set -euo pipefail
+          # Dedup by title rather than a label: repo labels are Terraform-managed
+          # (git-repositories/labels.json taxonomy), so this workflow must not
+          # depend on a label that module does not declare.
+          open_issue=$(gh issue list --state open --search "in:title \"$TITLE\"" \
+            --limit 1 --json number --jq '.[0].number // empty')
+
+          if [ ! -f "$RUNNER_TEMP/failures" ]; then
+            echo "All checks passed."
+            if [ -n "$open_issue" ]; then
+              gh issue close "$open_issue" --comment "Site health checks are passing again as of $(date -u '+%Y-%m-%d %H:%M UTC'). Closing automatically."
+            fi
+            exit 0
+          fi
+
+          echo "::error::Site health checks failed"
+          cat "$RUNNER_TEMP/failures"
+
+          if [ -n "$open_issue" ]; then
+            echo "Issue #$open_issue is already open; not filing a duplicate."
+            exit 1
+          fi
+
+          {
+            echo "Automated check failed at $(date -u '+%Y-%m-%d %H:%M UTC')."
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/failures"
+            echo '```'
+            echo
+            echo "Runbook: ${{ github.server_url }}/${{ github.repository }}/blob/main/docs/operations/pages-tls.md"
+            echo
+            echo "[Workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          } > body.md
+
+          gh issue create --title "$TITLE" --body-file body.md
+          exit 1

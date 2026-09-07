@@ -1,6 +1,6 @@
 # CI/CD
 
-Waterforge uses two GitHub Actions workflows.
+Waterforge's GitHub Actions workflows:
 
 ## PR checks (`ci.yml`)
 
@@ -50,6 +50,24 @@ generated GitHub release mirrors the same notes.
 
 See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
 [`release.md`](./release.md) for the operator procedure.
+
+## Site health (`site-health.yml`)
+
+Runs daily on a schedule, and on `workflow_dispatch`. Three checks: the GitHub
+Pages certificate state, the origin certificate's remaining lifetime, and that
+`https://waterforge.app/` returns `200`. On failure it opens a single issue —
+deduplicated by title so a sustained outage does not file one per day — and
+closes that issue automatically once the checks pass again.
+
+No secrets required: the default `GITHUB_TOKEN` with `pages: read` and
+`issues: write` covers all three checks.
+
+Scheduled workflows only run from the **default branch**, so this takes effect
+once merged to `main`, not on the PR branch. GitHub also disables cron
+workflows after 60 days of repository inactivity.
+
+See [CloudFlare in front of GitHub Pages](./cloudflare-pages.md#monitoring) for
+what each check catches and the runbook the alert links to.
 
 ## One-time manual steps (repo owner)
 
