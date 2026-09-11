@@ -204,6 +204,24 @@ Two rules govern this metadata:
   carries no implied meaning. Don't guess, and don't fill a field just to look
   complete.
 
+## Editing USAGE.md
+
+`USAGE.md` is not only a GitHub document — it is also the app's help dialog. The
+build renders it to HTML and bundles it so the guide works offline
+([ADR 0020](docs/decisions/0020-usage-guide-rendered-into-the-app.md)). Two
+things follow for anyone editing it:
+
+- **Headings are link targets.** Heading text determines the anchor slug, which
+  the app deep-links to (`src/components/RecipePanel.svelte` jumps to
+  `#weighing-the-salts`) and which the guide's own cross-links use. Slugs match
+  GitHub's, so an anchor copied from the rendered page works in the app too.
+  Renaming a heading can break a link — `src/usage-guide.test.ts` fails if it
+  does, so trust the test rather than remembering this rule.
+- **It must keep a single leading `#` heading**, which becomes the dialog title.
+  The build fails loudly otherwise.
+
+Edits are picked up automatically; there is no copy to regenerate.
+
 ## Design rationale
 
 Before changing something structural, check the Architecture Decision Records in

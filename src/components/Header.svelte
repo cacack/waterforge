@@ -7,8 +7,7 @@
   import HelpIcon from '@lucide/svelte/icons/circle-question-mark'
   import GitHubMark from './icons/GitHubMark.svelte'
   import WaterforgeMark from './icons/WaterforgeMark.svelte'
-
-  const usageGuide = 'https://github.com/cacack/waterforge/blob/main/USAGE.md'
+  import { openHelp } from '../help.svelte'
 </script>
 
 <header
@@ -43,9 +42,7 @@
       <Button
         variant="ghost"
         size="icon"
-        href={usageGuide}
-        target="_blank"
-        rel="noopener noreferrer"
+        onclick={() => openHelp()}
         aria-label="Usage guide"
         title="Usage guide"
       >
