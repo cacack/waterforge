@@ -1,7 +1,8 @@
 # Constitution
 
-> The mission, principles, and non-goals of Waterforge. When in conflict with
-> this document, future decisions should align here or explicitly update it.
+> The mission, posture, principles, and non-goals of Waterforge. When in conflict
+> with this document, future decisions should align here or explicitly update it
+> — see [How intent is recorded](#how-intent-is-recorded).
 
 ## Mission
 
@@ -16,13 +17,38 @@ data is now an independently-sourced compilation, and the whole stays free.
 
 ## Audience
 
-**This is for:** homebrewers and water hobbyists who want to match a specific
-drinking-water profile from a clean baseline using food-grade salts, and who
-care about getting the numbers right.
+**Built for:** its maintainer, first. Waterforge exists because he wanted it and
+he uses it. That is the whole reason it is maintained, and it is enough.
+
+**Aimed at:** homebrewers and water hobbyists who want to match a specific
+drinking-water profile from a clean baseline using food-grade salts, and who care
+about getting the numbers right. This describes the aim, not a measured
+population — anyone who finds the app useful is welcome to it.
 
 **This is not for:** brewers looking for mash-pH or residual-alkalinity tooling —
 Waterforge models the water itself, not what happens when grain hits it (reach
 for Bru'n Water / EZ Water Calculator there).
+
+## Posture
+
+What kind of project this is, in four layers. Which layer is load-bearing
+matters more than the labels:
+
+1. **Why it exists and is maintained** — it was built for its maintainer, who
+   actively uses it. This is the load-bearing justification, and it needs no
+   audience to hold. Maintenance is not a service owed to anyone.
+2. **The standard of care** — it is nonetheless finished to the standard its
+   maintainer would have wanted had he stumbled on it: sourced, licensed,
+   documented, precise. That standard is freely chosen, not a debt owed.
+3. **The backstop** — should that use end, the sourced profile compilation and a
+   correct solver are still worth preserving on their own: copyleft, forkable,
+   archived. Insurance on an artifact, not service to a population.
+4. **Aspiration, not commitment** — if users arrive, good. Serving a user base
+   would be a new decision, recorded here when it is made; it is not assumed
+   today, and no work is owed to a hypothetical audience.
+
+See [ADR 0016](docs/decisions/0016-built-for-its-maintainer.md) for the
+alternatives weighed and why they were rejected.
 
 ## Principles
 
@@ -44,6 +70,10 @@ When in doubt, prefer:
    browser. No servers, accounts, or telemetry: cheaper to host, private by
    default, durable — and installable, so it keeps working offline at the
    counter.
+6. **Real use over assumed demand** — effort is justified by the maintainer's own
+   use of the app, by correctness under Principle 3, or by the durability of the
+   artifact. Never by an assumed audience. "Users might want this" is not a
+   reason; "this would mislead or annoy me at the counter" is.
 
 ## Non-Goals
 
@@ -73,6 +103,23 @@ We'll know this is working if:
 - Once feature-complete, it stays that way: the site is up, dependencies stay
   current, and security advisories are cleared promptly — a released version is
   always installable and correct.
+
+## How intent is recorded
+
+Project intent lives in a hierarchy. When two documents disagree, the one higher
+in this list wins, and the lower one is brought into line:
+
+1. **This constitution** — mission, values, posture, guiding principles. The
+   ethos. Changes here are deliberate and rare.
+2. **Decisions ([ADRs](docs/decisions/))** — the decisions made along the way
+   that carry the constitution out, each with its context, alternatives, and
+   consequences. An ADR is superseded by a later ADR, never silently overridden
+   (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+3. **[Architecture](docs/architecture/) and code** — the implementation of those
+   decisions.
+4. **Issues and [roadmap](ROADMAP.md)** — planning. They record what is being
+   worked on and when, not what the project is for. Neither may quietly redefine
+   anything above it.
 
 ---
 
