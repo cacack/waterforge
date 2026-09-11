@@ -316,3 +316,7 @@ GitHub renews at ~30 days and a wedged renewal shows up as a shrinking window.
   its own.
 - This is entirely a GitHub-settings + CloudFlare-dashboard fix; no code change
   is required.
+- The same proxy is what makes the site measurable. See
+  [traffic-baseline.md](./traffic-baseline.md) for what it actually receives and
+  [ADR 0017](../decisions/0017-client-side-analytics-scope.md) for the two
+  client-side scripts CloudFlare injects here (Web Analytics, Bot Fight Mode).

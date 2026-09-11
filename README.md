@@ -80,20 +80,21 @@ What happens to this project if its maintainer stops is written down in
 
 ## Documentation
 
-| Document                                                       | What it covers                                  |
-| -------------------------------------------------------------- | ----------------------------------------------- |
-| [CONSTITUTION.md](CONSTITUTION.md)                             | Mission, audience, principles, non-goals        |
-| [USAGE.md](USAGE.md)                                           | How to use the app (intended user flow)         |
-| [CONTRIBUTING.md](CONTRIBUTING.md)                             | Dev setup, conventions, testing, license terms  |
-| [SECURITY.md](SECURITY.md)                                     | Reporting a vulnerability; supported versions   |
-| [ROADMAP.md](ROADMAP.md)                                       | Where the project is headed                     |
-| [docs/architecture/overview.md](docs/architecture/overview.md) | Stack, module boundaries, data flow             |
-| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records                   |
-| [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions       |
-| [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources              |
-| [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                   |
-| [docs/operations/release.md](docs/operations/release.md)       | Release runbook (cut, tag, publish)             |
-| [docs/operations/continuity.md](docs/operations/continuity.md) | What must survive; forking if the project stops |
+| Document                                                                   | What it covers                                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [CONSTITUTION.md](CONSTITUTION.md)                                         | Mission, audience, principles, non-goals               |
+| [USAGE.md](USAGE.md)                                                       | How to use the app (intended user flow)                |
+| [CONTRIBUTING.md](CONTRIBUTING.md)                                         | Dev setup, conventions, testing, license terms         |
+| [SECURITY.md](SECURITY.md)                                                 | Reporting a vulnerability; supported versions          |
+| [ROADMAP.md](ROADMAP.md)                                                   | Where the project is headed                            |
+| [docs/architecture/overview.md](docs/architecture/overview.md)             | Stack, module boundaries, data flow                    |
+| [docs/decisions/](docs/decisions/)                                         | Architecture Decision Records                          |
+| [docs/guides/chemistry.md](docs/guides/chemistry.md)                       | Chemistry background and unit conversions              |
+| [docs/guides/reference-data.md](docs/guides/reference-data.md)             | Reference data and profile sources                     |
+| [docs/operations/ci-cd.md](docs/operations/ci-cd.md)                       | CI/CD pipeline and deployment                          |
+| [docs/operations/release.md](docs/operations/release.md)                   | Release runbook (cut, tag, publish)                    |
+| [docs/operations/continuity.md](docs/operations/continuity.md)             | What must survive; forking if the project stops        |
+| [docs/operations/traffic-baseline.md](docs/operations/traffic-baseline.md) | What the site actually receives, and how to re-measure |
 
 ## Getting help
 
