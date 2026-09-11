@@ -82,57 +82,39 @@ what each check catches and the runbook the alert links to.
 
 ## Dependabot watch (`dependabot-watch.yml`)
 
-Runs daily on a schedule, and on `workflow_dispatch`. Queries
-`repos/{owner}/{repo}/dependabot/alerts?state=open` and fails when a **high- or
-critical-severity** alert has been open longer than the grace period, filing a
-single issue — deduplicated by title, same as site-health — that names severity,
-package, age in days, the version the fix landed in, and a link to the alert. The
-issue closes automatically on the next clean run.
+Runs daily on a schedule, and on `workflow_dispatch`. Fails when a high- or
+critical-severity Dependabot alert has been open longer than the grace period,
+files a single issue naming severity, package, age and the alert, and closes that
+issue again on the next clean run.
 
-The threshold lives in
-[ADR 0017](../decisions/0017-maintenance-thresholds.md), not here: no high- or
-critical-severity advisory open more than **7 days**, with medium and low
-deliberately unbounded. The workflow reuses that ADR's own query, so the two
-cannot drift. Change the number in the ADR. A `grace_days` dispatch input
-overrides it for a one-off test run.
+**A stub.** The logic lives in
+[`cacack/workflows`](https://github.com/cacack/workflows), pinned here by SHA, so a
+fix lands in one place rather than drifting per repo. That repo's README documents
+the mechanism, the inputs, and the reasoning behind the parts that look
+over-engineered but are not. What stays in waterforge's stub is the schedule (a
+`workflow_call` workflow cannot declare one) and the two values that are this
+repo's own rather than the shared default.
 
-Why it exists: alert #13 (`nanoid`, high) sat open for 25 days in August 2026
-with no Dependabot PR, and nothing in the merge flow surfaced it — `ci.yml` only
-proves `main` builds and site-health only proves the site is up. It watches the
-_symptom_, an alert that stays open, rather than the cause: why Dependabot
-skipped that alert is recorded only in the update-job logs at `/network/updates`,
-which no REST endpoint exposes.
+Why it exists: alert #13 (`nanoid`, high) sat open for 25 days in August 2026 with
+no Dependabot PR, and nothing in the merge flow surfaced it — `ci.yml` only proves
+`main` builds and site-health only proves the site is up. A fully green repo can
+carry a high-severity alert indefinitely.
 
-Unlike site-health, this one needs a credential. `GITHUB_TOKEN` cannot read the
-Dependabot alerts API at all, so the read step authenticates as the
-`waterforge-steward` GitHub App — see
-[§ One-time manual steps](#one-time-manual-steps-repo-owner) for provisioning and
-for why an App rather than a PAT. Only that one step uses it; the issue it files
-and closes still runs as `GITHUB_TOKEN`, which is why the App needs a single
-read-only permission. Minting the token is `continue-on-error`, because an action
-step that fails outright would end the run before anything could report it — a
-missing or rotated key is surfaced through the same issue as any other fault,
-rather than as a red X on a scheduled run nobody is watching.
+The threshold is [ADR 0017](../decisions/0017-maintenance-thresholds.md)'s, not the
+shared workflow's: no high- or critical-severity advisory open more than **7 days**,
+with medium and low deliberately unbounded. The stub passes that ADR's URL upstream
+so the filed issue cites it, and change the number in the ADR rather than in either
+workflow. A `grace_days` dispatch input overrides it for a one-off test run.
 
-A failed API read is a **hard failure** rather than a warning.
-Site-health can degrade safely because its origin-certificate check is an
-independent backstop; here the API read _is_ the check, so a warning would rebuild
-the exact silent failure the workflow exists to close. The same applies to the
-issue it files: an operational failure ("the watch could not complete") is
-reported in its own wording rather than squeezed into the advisory table, because
-a watch that cannot answer the question is worse than a stale advisory.
-
-Both constraints that apply to site-health apply here too: dedup is by **title,
-not label**, because repo labels are Terraform-managed (`git-repositories/labels.json`)
-and this workflow must not depend on a label that module does not declare; and the
-job runs without `actions/checkout`, so every `gh` call passes `--repo` — without
-it `gh` looks for a git remote and dies with "not a git repository", silently
-disabling the alerting rather than failing the check.
+It needs a credential, which site-health does not. `GITHUB_TOKEN` cannot read the
+Dependabot alerts API at all, so the read authenticates as the `waterforge-steward`
+GitHub App — see [§ One-time manual steps](#one-time-manual-steps-repo-owner) for
+provisioning and for why an App rather than a PAT.
 
 Scheduled workflows and `workflow_dispatch` both resolve from the **default
-branch**, so this takes effect once merged to `main` — it cannot be exercised from
-a PR branch. GitHub also disables cron workflows after 60 days of repository
-inactivity.
+branch**, so a change here takes effect once merged to `main` — it cannot be
+exercised from a PR branch. GitHub also disables cron workflows after 60 days of
+repository inactivity.
 
 ## One-time manual steps (repo owner)
 
