@@ -258,7 +258,11 @@ and carries no implied value (see the leave-unset rule in
 > Carbonation (still/sparkling and bottled carbonation target) is **not**
 > metadata and **not** a trait — it is a first-class field set
 > (`carbonation_style` / `carbonation_target`). See
-> [ADR 0013](../decisions/0013-still-sparkling-and-carbonation-target.md).
+> [ADR 0013](../decisions/0013-still-sparkling-and-carbonation-target.md) and
+> [ADR 0015](../decisions/0015-carbonation-target-sourcing-bar.md) (the
+> sourcing bar for a `carbonation_target`: a producer-published figure is
+> `verified: true`; a sourced estimate ships `verified: false` and must say so
+> in its provenance; unsourceable stays unset).
 
 ### Category enum
 

@@ -3,6 +3,16 @@
 **Status:** Accepted
 **Date:** 2026-05-31
 
+**Amended by:** [ADR 0015](0015-carbonation-target-sourcing-bar.md) (2026-09-11)
+— the **sourcing bar** below is superseded: decision #5 ("targets are not
+estimated") and decision #2's clause holding carbonation provenance "to the same
+authoritative bar as ion data". A `carbonation_target` may now be a sourced
+estimate shipped `verified: false`, because the recipe readout now shows the
+carbonation figure's own provenance (#218) and says so explicitly when no target
+exists (#217). Everything else stands — decisions #1, #3 and #4 in full, and
+decision #2's structure (a value can never be recorded without its unit and
+provenance).
+
 ## Context
 
 To clone a sparkling water faithfully we eventually need to know its
