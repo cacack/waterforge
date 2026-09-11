@@ -5,6 +5,10 @@ name: Site health
 # cert that Cloudflare (Full strict) rejects with a 526. The certificate *state*
 # check is the early warning -- it goes bad ~30 days before the cert expires,
 # while everything still looks fine to visitors.
+#
+# The domain-registration check has nothing to do with that outage and is here
+# for the same reason: it fails invisibly. A renewal that does not go through
+# produces no error anywhere until the name stops resolving.
 
 on:
   schedule:
@@ -20,6 +24,9 @@ env:
   DOMAIN: waterforge.app
   ORIGIN_IP: 185.199.108.153
   EXPIRY_WARN_DAYS: 21
+  # Wider than the certificate window on purpose: a stuck renewal is a support
+  # ticket at a registrar, not something a CI fix or a redeploy can clear.
+  DOMAIN_EXPIRY_WARN_DAYS: 45
 
 jobs:
   check:
@@ -62,6 +69,34 @@ jobs:
             echo "Origin cert valid, expires $not_after (more than $EXPIRY_WARN_DAYS days out)"
           else
             echo "FAIL: origin cert expires within $EXPIRY_WARN_DAYS days (notAfter: $not_after)" >> "$RUNNER_TEMP/failures"
+          fi
+
+      - name: Check domain registration expiry
+        run: |
+          set -uo pipefail
+          # RDAP publishes the expiry as a machine-readable field. rdap.org resolves
+          # the right registry server from the IANA bootstrap, so a change of
+          # registrar or TLD does not strand this check on a hardcoded endpoint.
+          #
+          # A read failure warns rather than fails. The renewal is also diarised in
+          # the owner's calendar (docs/operations/continuity.md), so this is not the
+          # only line of defence, and a flaky third-party redirector must not file an
+          # issue every night.
+          rdap=$(curl -sSL -m 30 "https://rdap.org/domain/$DOMAIN" 2>/dev/null)
+          expiry=$(echo "$rdap" \
+            | jq -r '[.events[]? | select(.eventAction == "expiration") | .eventDate] | first // empty' 2>/dev/null)
+          if [ -z "$expiry" ]; then
+            echo "::warning::No registration expiry found for $DOMAIN via RDAP; check skipped."
+            exit 0
+          fi
+          if ! expiry_epoch=$(date -u -d "$expiry" +%s 2>/dev/null); then
+            echo "::warning::Could not parse the RDAP expiry date '$expiry'; check skipped."
+            exit 0
+          fi
+          days=$(( (expiry_epoch - $(date -u +%s)) / 86400 ))
+          echo "Domain $DOMAIN expires $expiry ($days days out)"
+          if [ "$days" -lt "$DOMAIN_EXPIRY_WARN_DAYS" ]; then
+            echo "FAIL: $DOMAIN registration expires in $days days ($expiry) -- renew it at the registrar; nothing in CI can fix this" >> "$RUNNER_TEMP/failures"
           fi
 
       - name: Check site is reachable

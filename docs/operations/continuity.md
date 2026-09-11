@@ -23,7 +23,7 @@ Each of these is held by one person, and each ends the public site if it lapses.
 | -------------------------- | --------------------------------------- | ---------------------------------------------------------------------- |
 | **Domain registration**    | `waterforge.app`                        | Site stops resolving. Recoverable only until the name is re-sold.      |
 | **CloudFlare account**     | DNS + proxy (CDN/WAF) in front of Pages | DNS stops resolving; see [cloudflare-pages.md](./cloudflare-pages.md). |
-| **GitHub account**         | Repo, Pages hosting, Actions, releases  | Site and source both disappear at once.                                |
+| **GitHub account**         | Repo, Pages hosting, Actions, releases  | Site, issues and releases go; the source survives in the archive.      |
 | **`RELEASE_PLEASE_TOKEN`** | PAT that lets release-please open PRs   | Releases silently stop; the site freezes at the last deploy.           |
 
 The PAT is the least severe and the easiest to miss — see
@@ -36,12 +36,16 @@ for all owner-only settings; this one does not restate them.
 The dangerous failures are the quiet ones — the project looks fine right up
 until it is gone.
 
-- **A lapsed domain renewal is not monitored.** The daily
-  [site-health check](./ci-cd.md#site-health-site-healthyml) covers the Pages
-  certificate state, the origin certificate's remaining lifetime, and that the
-  site returns `200`. **It does not check domain registration expiry.** A
-  renewal that fails will not raise an alert until the site is already down, and
-  by then the recovery window is a registrar grace period, not a CI fix.
+- **A lapsed domain renewal produces no error until the name stops resolving.**
+  Nothing degrades first: no certificate warning, no failing response, just a site
+  that is gone one morning, with a registrar grace period rather than a CI fix as
+  the recovery window. The daily
+  [site-health check](./ci-cd.md#site-health-site-healthyml) now reads the
+  registration expiry from RDAP and fails **45 days out** — wider than the 21-day
+  certificate window, because a stuck renewal is a support ticket at a registrar,
+  not something a redeploy can clear. That check is the early warning, not the
+  guarantee: the next bullet is why it cannot be the only one, and why the renewal
+  is also diarised off-repo.
 
 - **The watchdogs stop watching when the maintainer stops.** GitHub disables
   scheduled workflows after **60 days of repository inactivity**
@@ -62,19 +66,23 @@ until it is gone.
 
 ## Owner checklist
 
-Two things make the mission durable, and neither can be done from inside this
-repository. They are recorded here so they are not forgotten.
+Two things make the mission durable, and neither could be done from inside this
+repository. Both are now done. They stay on record because both are worth
+re-checking rather than assuming.
 
-- [ ] **Put a copy somewhere that is not this GitHub account.** The cheapest
-      durability insurance is distribution, not succession planning. Options
-      include a software-preservation archive
-      ([Software Heritage](https://archive.softwareheritage.org) accepts a public
-      repository URL and archives the full history), a mirror on a second forge,
-      or a release tarball kept in personal backups. One copy elsewhere converts
-      Principle 1 from an intention into a fact.
-- [ ] **Diarise the domain renewal** outside this repo, in a calendar that
-      outlives any single machine — with a reminder early enough to act on, given
-      that nothing in CI will warn first.
+- [x] **A copy exists outside this account.** The full git history is in
+      [Software Heritage](https://archive.softwareheritage.org/browse/origin/directory/?origin_url=https://github.com/cacack/waterforge),
+      a software-preservation archive run independently of this project, first
+      ingested 2026-09-11. [`archive.yml`](./ci-cd.md#archive-archiveyml)
+      re-requests a visit on every release and monthly in between, so the copy
+      tracks the project rather than freezing at one commit. This is what turns
+      Principle 1 from an intention into a fact: the code stays in the commons
+      whether or not this account does.
+- [x] **The domain renewal is diarised** off-repo, in a calendar that outlives any
+      single machine, timed to the same 45-day window the site-health check uses.
+      Deliberately duplicated with CI rather than replaced by it — the calendar is
+      the half that keeps working after the workflows switch themselves off. The
+      date and the registrar live there, not here.
 
 Optional, and worth it if the project outlives its maintainer's interest:
 

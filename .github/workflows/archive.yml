@@ -1,0 +1,52 @@
+name: Archive
+
+# Principle 1 -- "what we build on the commons stays in the commons" -- is a
+# licence promise, and a licence does not put a copy anywhere. One GitHub
+# account holds the repo, the Pages host and the release history; if it lapses,
+# the source disappears with the site. Software Heritage ingests the full git
+# history from a public URL and keeps it independently of this account, which is
+# the whole of the durability story in docs/operations/continuity.md.
+#
+# Archiving is anonymous and idempotent: the API takes a repository URL, needs no
+# credential, and a repeat request simply queues another visit. The monthly run
+# exists because releases here can be months apart, and an archive that lags that
+# far behind is a snapshot rather than a mirror.
+
+on:
+  release:
+    types: [published]
+  schedule:
+    - cron: '29 4 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request Software Heritage archival
+        env:
+          ORIGIN: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -uo pipefail
+          # Ingestion is asynchronous: the POST returns as soon as the visit is
+          # queued, so `accepted` is the success signal and `snapshot_swhid`
+          # stays null until a loader has actually run. -f turns an HTTP error
+          # into a nonzero exit, so a rejected or rate-limited request fails the
+          # run rather than passing silently.
+          if ! body=$(curl -fsS -m 60 -X POST \
+            "https://archive.softwareheritage.org/api/1/origin/save/git/url/$ORIGIN/"); then
+            echo "::error::Software Heritage save request failed for $ORIGIN"
+            exit 1
+          fi
+
+          echo "$body" | jq .
+          status=$(echo "$body" | jq -r '.save_request_status // "unknown"')
+          if [ "$status" != "accepted" ]; then
+            echo "::error::Save request was not accepted (status: $status)"
+            exit 1
+          fi
+
+          echo "Queued. Browse: https://archive.softwareheritage.org/browse/origin/directory/?origin_url=$ORIGIN"
