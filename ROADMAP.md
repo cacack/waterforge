@@ -25,7 +25,8 @@ time, and versions are cut automatically by release-please from the commit log.
 ## Active direction
 
 - **Keep it healthy.** Dependency currency, advisory response, and uptime — the
-  daily site-health check and CI-on-main runs exist for this. See
+  daily site-health check, the daily Dependabot advisory watch, and CI-on-main
+  runs exist for this. See
   [docs/operations/](docs/operations/). This is the one direction with a
   measurable bar behind it: the constitution's fifth success criterion now
   carries thresholds (see [ADR 0017](docs/decisions)).

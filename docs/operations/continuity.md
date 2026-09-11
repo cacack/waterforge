@@ -43,11 +43,13 @@ until it is gone.
   renewal that fails will not raise an alert until the site is already down, and
   by then the recovery window is a registrar grace period, not a CI fix.
 
-- **The watchdog stops watching when the maintainer stops.** GitHub disables
+- **The watchdogs stop watching when the maintainer stops.** GitHub disables
   scheduled workflows after **60 days of repository inactivity**
-  ([ci-cd.md](./ci-cd.md#site-health-site-healthyml)). The site-health monitor is
-  therefore guaranteed to switch itself off in exactly the scenario it exists to
-  catch — a project going quiet. Treat a long silence as the point at which
+  ([ci-cd.md](./ci-cd.md#site-health-site-healthyml)). Both scheduled monitors —
+  the site-health check and the
+  [Dependabot watch](./ci-cd.md#dependabot-watch-dependabot-watchyml) — are
+  therefore guaranteed to switch themselves off in exactly the scenario they exist
+  to catch: a project going quiet. Treat a long silence as the point at which
   monitoring must be assumed absent, not as evidence that nothing is wrong.
 
 - **The custom domain can be un-set without anyone touching it.** GitHub
