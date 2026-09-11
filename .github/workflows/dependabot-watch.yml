@@ -32,9 +32,14 @@ on:
         description: Grace period in days (overrides the ADR 0017 default of 7)
         required: false
 
+# `security-events: read` is deliberately absent: it looks like the permission
+# that covers this and does not. GITHUB_TOKEN cannot read the Dependabot alerts
+# API at all -- the first run after merge returned `403 Resource not accessible
+# by integration` (#240) -- so the read below authenticates as the
+# waterforge-steward App instead. `issues: write` stays on GITHUB_TOKEN, which
+# is why the App needs only one permission.
 permissions:
   contents: read
-  security-events: read
   issues: write
 
 env:
@@ -46,11 +51,40 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      # Minted per run and good for about an hour, so there is no long-lived
+      # credential to rotate and no expiry to forget -- the failure mode
+      # continuity.md already records against RELEASE_PLEASE_TOKEN. A PAT would
+      # also work and was rejected for that reason: a watch that exists to
+      # prevent a silent failure should not be guarded by one.
+      - name: Mint a token that can read Dependabot alerts
+        id: app_token
+        # continue-on-error, because a failed action step would end the job before
+        # the Report step and file nothing -- a red X on a scheduled run that
+        # nobody is watching, which is the failure mode this workflow exists to
+        # prevent. Failing soft here lets the missing token be reported as an
+        # error like any other, through the same issue.
+        continue-on-error: true
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+
       - name: Read open Dependabot alerts
         env:
-          GH_TOKEN: ${{ github.token }}
+          # The App holds exactly one permission (Dependabot alerts: read), so it
+          # is scoped to this step. Everything else still runs as GITHUB_TOKEN.
+          GH_TOKEN: ${{ steps.app_token.outputs.token }}
         run: |
           set -uo pipefail
+          # Empty when the step above failed soft: the secrets are missing, the
+          # key no longer matches the App, or the App was uninstalled from this
+          # repo. Named explicitly because "gh: not logged in" further down would
+          # send the reader hunting for the wrong problem.
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "Could not mint the waterforge-steward App token -- check the BOT_APP_ID and BOT_PRIVATE_KEY secrets and that the App is still installed on this repo" \
+              >> "$RUNNER_TEMP/errors"
+            exit 0
+          fi
           # Unlike site-health.yml, an unreadable API is a hard failure rather than
           # a warning. There it degrades safely because the origin-certificate check
           # is an independent backstop; here the API read *is* the check, so a
@@ -168,8 +202,10 @@ jobs:
               echo
               while IFS= read -r line; do echo "- $line"; done < "$RUNNER_TEMP/errors"
               echo
-              echo "If this is a \`403\`, the \`GITHUB_TOKEN\` cannot read the alerts API and the watch"
-              echo "needs a fine-grained PAT with **Dependabot alerts: read** — see"
+              echo "The alerts read authenticates as the **waterforge-steward** GitHub App, so a"
+              echo "token or \`403\` failure usually means its private key was rotated, its"
+              echo "**Dependabot alerts: read** permission was removed, or it was uninstalled from"
+              echo "this repo — see"
               echo "[ci-cd.md § One-time manual steps](${{ github.server_url }}/${{ github.repository }}/blob/main/docs/operations/ci-cd.md#one-time-manual-steps-repo-owner)."
             fi
             if [ "$stale" = yes ]; then
