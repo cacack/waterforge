@@ -1,8 +1,23 @@
 name: CI
 
+# `check` guards main as well as PRs. GitGuardian is the only *required* status
+# check in the ruleset, so a red `check` never blocks a merge and main can go
+# green-to-red unnoticed — it did, for five days, after a
+# prettier-plugin-tailwindcss bump auto-merged with `check` already failing.
+# A run on main also disambiguates a red PR: branch's fault, or already broken?
+#
+# The schedule is not redundant with the push trigger. Dependabot auto-merges
+# land via GITHUB_TOKEN, and GITHUB_TOKEN events do not fan out — the same rule
+# that forces the PAT in release-please.yml — so the merges most likely to
+# break main raise no push event at all. The daily sweep catches those.
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: '37 6 * * *'
+  workflow_dispatch:
 
 jobs:
   check:
@@ -32,6 +47,8 @@ jobs:
 
   pr-title:
     runs-on: ubuntu-latest
+    # Reads github.event.pull_request.*, which is empty on push and schedule.
+    if: github.event_name == 'pull_request'
     steps:
       - name: Check PR title is not conventional-commit format
         env:
@@ -68,6 +85,8 @@ jobs:
 
   commit-types:
     runs-on: ubuntu-latest
+    # Same as pr-title: without a PR payload the base..head range is empty.
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
