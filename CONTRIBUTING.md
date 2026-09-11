@@ -5,9 +5,21 @@ project conventions, testing, and license terms.
 
 ## Requirements
 
-- **Node 22** — check with `node -v`; install via [nvm](https://github.com/nvm-sh/nvm)
-  or [fnm](https://github.com/Schniz/fnm) if needed.
-- A recent npm (bundled with Node 22 is fine).
+- **Node 24** — the version is pinned in [`.nvmrc`](.nvmrc), so `nvm use` (or
+  `fnm use`) in a fresh clone selects it with no argument. Install
+  [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm)
+  if needed, and check with `node -v`.
+- A recent npm (the one bundled with Node 24 is fine).
+
+`.nvmrc` is the single authoritative home for the Node version — CI and deploy
+both read it via `node-version-file`, and `package.json`'s `engines.node`
+declares the floor. Change it in one place.
+
+**We track Active LTS, not Current.** Newest is not the rule: `vitest` supports
+`^22.12.0 || ^24.0.0 || >=26.0.0` — it skips Node 25 entirely, because odd
+majors never become LTS. Moving to a Current release would break the test
+runner. When a new LTS is promoted each October, bump `.nvmrc` and
+`engines.node` together, and check the toolchain's `engines` ranges first.
 
 ## Getting started
 

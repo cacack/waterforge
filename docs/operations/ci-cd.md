@@ -14,8 +14,10 @@ runs the full quality gate in order:
 | Test       | `npm run test` (Vitest)                      |
 | Build      | `npm run build` (Vite production build)      |
 
-Node version: **22** (LTS). Dependencies are installed with `npm ci` and
-cached by npm to keep runs fast.
+Node version: read from [`.nvmrc`](../../.nvmrc) via `setup-node`'s
+`node-version-file`, so CI, deploy and local dev cannot drift apart. See
+[CONTRIBUTING.md](../../CONTRIBUTING.md#requirements) for the Active-LTS policy.
+Dependencies are installed with `npm ci` and cached by npm to keep runs fast.
 
 Each step is separate so a failure points directly at the offending tool.
 
