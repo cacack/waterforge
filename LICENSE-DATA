@@ -2,8 +2,8 @@ Waterforge — Profile Data License
 ==================================
 
 The water profile data in this repository — the mineral-water target profiles
-and associated reference values (e.g. files under `data/` / `profiles/`) — is
-licensed under the Creative Commons Attribution-ShareAlike 4.0 International
+and associated reference values, bundled as `src/lib/profiles/profiles.json` —
+is licensed under the Creative Commons Attribution-ShareAlike 4.0 International
 License (CC-BY-SA-4.0).
 
 SPDX-License-Identifier: CC-BY-SA-4.0
