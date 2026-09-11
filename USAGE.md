@@ -62,6 +62,10 @@ shortfall.
 Enter the volume you want to make and choose the unit: **litre** or **US
 gallon**. All gram quantities in the recipe are scaled to this volume.
 
+Batch size is also what makes a recipe weighable: because every gram quantity
+scales with it, a larger batch lifts small doses up into the range a scale can
+actually read. See [Weighing the salts](#weighing-the-salts) below.
+
 ## Step 5 — Read the recipe and readouts
 
 The recipe panel shows the grams of each selected salt to add to your batch. It
@@ -73,6 +77,49 @@ also shows four readouts:
 | **TDS**              | Total Dissolved Solids — sum of all modelled ions in mg/L |
 | **Charge residual**  | Ionic charge balance in meq/L — ideally close to zero     |
 | **Saturation index** | Per-salt saturation index; a warning appears when SI ≥ 0  |
+
+### Weighing the salts
+
+Doses vary enormously between profiles — an individual salt can run to several
+grams per litre for a mineral-heavy water, or down to thousandths of a gram for
+a soft one. The small end sets the equipment: a scale that reads to **0.01 g**,
+the resolution sold as a pocket or jeweller's scale, is the practical entry
+point. A 1 g kitchen scale cannot resolve these doses at all; it would read most
+of a recipe as `0`.
+
+The recipe table shows three decimals so the numbers stay exact as you scale the
+batch, not because you need to hit the third one. Round to whatever your scale
+reads. A dose shown as `0.000` contributes so little at this batch size that it
+has rounded away — leave it out.
+
+**Batch size is the real lever.** Every gram quantity scales with the batch, so
+making more at once is the simplest way to move a dose into range. Evian, for
+example:
+
+| Salt                           |   1 L |   5 L |
+| ------------------------------ | ----: | ----: |
+| Calcium Carbonate (Chalk)      | 0.237 | 1.187 |
+| Baking soda                    | 0.072 | 0.358 |
+| Epsom salt                     | 0.049 | 0.244 |
+| Magnesium chloride hexahydrate | 0.044 | 0.221 |
+| Potassium bicarbonate          | 0.022 | 0.112 |
+
+At 1 L the smallest dose is two divisions on a 0.01 g scale; at 5 L it is
+eleven. Same recipe — far less of your weighing error ends up in the glass.
+
+**When no batch size is enough.** The most dilute profiles stay below a 0.01 g
+scale whatever volume you pick: Voss needs 0.001 g of gypsum per litre, which is
+still only 0.005 g at 5 L. For these, weigh a larger and comfortably readable
+mass into a known volume of distilled water to make a stock solution, then
+measure that liquid into your batch with a syringe.
+
+This is not the teaspoon shortcut in disguise. The mass is still weighed on a
+scale, once, at a size the scale is accurate at; the syringe then measures a
+_liquid_ volume, which is reproducible in a way a scoop of powder is not —
+powder density shifts with grind, packing and humidity. Stock solutions only
+work for the freely soluble salts, though: gypsum and chalk are sparingly
+soluble, which is why the app raises saturation warnings for them, and they
+cannot be concentrated this way.
 
 ### Carbonation
 
