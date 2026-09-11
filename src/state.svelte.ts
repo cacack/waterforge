@@ -16,6 +16,7 @@ import {
   volumesToGramsPerLitre,
   type IonProfile,
   type Profile,
+  type ProfileProvenance,
   type SaltId,
   type SolveResult,
   type TemperatureUnit,
@@ -69,6 +70,15 @@ export function computeResult(): SolveResult | null {
 export type CarbonationReadout =
   | { kind: 'none' }
   | { kind: 'still' }
+  /**
+   * Known to be sparkling, but no sourced `carbonation_target` exists for it.
+   * Distinct from `'none'` (style not recorded at all) so the UI can say "we
+   * don't know this number" instead of rendering nothing — silence would read
+   * as "no carbonation needed", which is the opposite of the truth. Per ADR
+   * 0013 an absent target is an honest state, and Principle 3 requires
+   * surfacing it rather than burying it.
+   */
+  | { kind: 'sparkling-unknown' }
   | {
       kind: 'target'
       volumes: number
@@ -80,6 +90,14 @@ export type CarbonationReadout =
        */
       psi: number
       tempC: number
+      /**
+       * Provenance of the carbonation figure itself — not the profile's ion
+       * provenance. Carried through so the readout can show how good this
+       * number is: most bottled-carbonation targets are unverified estimates
+       * (ADR 0013), and a psi instruction that hides that overstates its own
+       * precision.
+       */
+      provenance: ProfileProvenance
     }
 
 export function computeCarbonation(): CarbonationReadout {
@@ -89,8 +107,17 @@ export function computeCarbonation(): CarbonationReadout {
     const volumes = toCarbonationVolumes(target.value, target.unit)
     const gPerL = volumesToGramsPerLitre(volumes)
     const psi = regulatorPsi(volumes, tempC)
-    return { kind: 'target', volumes, gPerL, psi, tempC }
+    return {
+      kind: 'target',
+      volumes,
+      gPerL,
+      psi,
+      tempC,
+      provenance: target.provenance,
+    }
   }
   if (app.target?.carbonation_style === 'still') return { kind: 'still' }
+  if (app.target?.carbonation_style === 'sparkling')
+    return { kind: 'sparkling-unknown' }
   return { kind: 'none' }
 }

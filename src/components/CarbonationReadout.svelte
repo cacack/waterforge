@@ -13,6 +13,8 @@
     fahrenheitToCelsius,
     type TemperatureUnit,
   } from '$lib'
+  import CheckCircle2Icon from '@lucide/svelte/icons/check-circle-2'
+  import CircleIcon from '@lucide/svelte/icons/circle'
   import { app, computeCarbonation } from '../state.svelte'
 
   // Bound to the shared carbonating-temperature state — the recipe line owns
@@ -114,11 +116,54 @@
           >
         {/if}
       </div>
+      <!-- Provenance for the carbonation figure, mirroring the target
+           profile's badge in TargetSection. Most bottled-carbonation targets
+           are unverified estimates (ADR 0013); showing a precise psi without
+           saying so would overstate the number's authority. -->
+      <div class="mt-2 space-y-1 text-xs">
+        <div class="flex items-center gap-1.5">
+          {#if readout.provenance.verified}
+            <CheckCircle2Icon class="size-3.5 shrink-0 text-green-500" />
+            <span class="font-medium text-green-600 dark:text-green-400"
+              >Verified carbonation figure</span
+            >
+          {:else}
+            <CircleIcon class="size-3.5 shrink-0 text-muted-foreground" />
+            <span class="text-muted-foreground"
+              >Estimated carbonation figure</span
+            >
+          {/if}
+        </div>
+        <p class="leading-snug text-muted-foreground">
+          {readout.provenance.source}
+          {#if readout.provenance.source_date}
+            <span class="opacity-70">({readout.provenance.source_date})</span>
+          {/if}
+        </p>
+      </div>
     {:else}
       <p class="text-sm text-muted-foreground">
         Enter a carbonating temperature to see the regulator pressure.
       </p>
     {/if}
+  </div>
+{:else if readout.kind === 'sparkling-unknown'}
+  <!-- Known sparkling, but no sourced target. Rendering nothing here would
+       read as "no carbonation needed" — the opposite of the truth — so say
+       plainly that the number is unknown and point at the calculator, which
+       works from a target the user supplies. No directional wording: the
+       calculator is a sibling column at wide widths and stacked above at
+       narrow ones. -->
+  <div class="mt-5">
+    <p class="mb-1 text-xs text-muted-foreground">Carbonation</p>
+    <div class="rounded-md bg-muted/50 px-3 py-2.5 text-sm">
+      <span class="font-medium">Sparkling</span> — no sourced carbonation target
+      for this water yet.
+      <span class="mt-1 block text-xs text-muted-foreground">
+        We only record a target when one can be authoritatively sourced. Use the
+        carbonation calculator with your own target to get a regulator pressure.
+      </span>
+    </div>
   </div>
 {:else if readout.kind === 'still'}
   <div class="mt-5">
