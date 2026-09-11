@@ -35,7 +35,7 @@ Window **2026-06-13 → 2026-09-10** (90 days), from the CloudFlare zone that
 
 Window **2026-06-11 → 2026-09-11** (92 days — the retention limit, see
 [Limits](#limits-of-the-data)), from CloudFlare Web Analytics
-([ADR 0017](../decisions/0017-client-side-analytics-scope.md)):
+([ADR 0018](../decisions/0018-client-side-analytics-scope.md)):
 
 | Metric                 | 92-day total      |
 | ---------------------- | ----------------- |
@@ -62,6 +62,13 @@ which the top 25 user agents account for 3,149:
 | Declared bots / AI crawlers    | 550      | 17%             |
 | Browser-like user agents       | 417      | 13%             |
 | Exploit scanners               | 32       | 1%              |
+
+> **This sample was taken while Bot Fight Mode was still enabled**, which it no
+> longer is ([ADR 0019](../decisions/0019-bot-fight-mode-off.md), same day).
+> Later comparisons must account for that: the `403` line — 35 of ~4,900
+> responses in the same window — should fall close to zero, and a little more
+> automated traffic should reach the origin and be answered with 404s. Neither
+> movement is a change in human traffic.
 
 Four things follow, and each one is a trap avoided:
 
@@ -186,8 +193,10 @@ query ($accountTag: String!, $s: Time!, $e: Time!, $siteTag: String!) {
 
 ## Related
 
-- [ADR 0017](../decisions/0017-client-side-analytics-scope.md) — what Principle 5
+- [ADR 0018](../decisions/0018-client-side-analytics-scope.md) — what Principle 5
   bans, and why the beacon is allowed under it.
+- [ADR 0019](../decisions/0019-bot-fight-mode-off.md) — why Bot Fight Mode was
+  turned off, and what that does to these numbers.
 - [ADR 0016](../decisions/0016-built-for-its-maintainer.md) — why a traffic
   figure is not a justification for anything.
 - [cloudflare-pages.md](./cloudflare-pages.md) — the proxy these numbers come

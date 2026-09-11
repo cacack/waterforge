@@ -72,7 +72,7 @@ When in doubt, prefer:
    working offline at the counter. Anonymous, aggregate page counts at the CDN
    are permitted and in use; the bar is that no individual can be singled out or
    re-identified, and nothing about it ships in the bundle
-   ([ADR 0017](docs/decisions/0017-client-side-analytics-scope.md)).
+   ([ADR 0018](docs/decisions/0018-client-side-analytics-scope.md)).
 6. **Real use over assumed demand** — effort is justified by the maintainer's own
    use of the app, by correctness under Principle 3, or by the durability of the
    artifact. Never by an assumed audience. "Users might want this" is not a
