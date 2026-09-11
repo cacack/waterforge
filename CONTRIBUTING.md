@@ -24,7 +24,7 @@ runner. When a new LTS is promoted each October, bump `.nvmrc` and
 ## Getting started
 
 ```bash
-git clone https://github.com/cclonch/waterforge.git
+git clone https://github.com/cacack/waterforge.git
 cd waterforge
 npm install
 npm run dev          # dev server at http://localhost:5173
