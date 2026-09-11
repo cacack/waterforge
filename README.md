@@ -28,7 +28,8 @@ see [CONSTITUTION.md](CONSTITUTION.md) for non-goals.
 
 ## Quickstart
 
-Requirements: **Node 22** (check with `node -v`).
+Requirements: **Node 24**, pinned in [`.nvmrc`](.nvmrc) — run `nvm use` in the
+clone to select it (check with `node -v`).
 
 ```bash
 git clone https://github.com/cacack/waterforge.git

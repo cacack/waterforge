@@ -5,6 +5,9 @@
   "type": "module",
   "description": "Clone bottled mineral waters from distilled water and food-grade salts.",
   "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
