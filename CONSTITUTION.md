@@ -8,7 +8,8 @@
 Waterforge turns distilled (or known-source) water and food-grade salts into
 faithful clones of bottled mineral waters. It's a static, client-side web app
 that takes a target water profile, subtracts what's already in your source
-water, and computes the exact salt additions needed to hit it — so anyone can
+water, and computes the exact salt additions needed to hit it — and, for a
+sparkling target, the regulator pressure to carbonate it to match — so anyone can
 reproduce a named mineral water at home, precisely and reproducibly. Its recipe
 method descends from Martin Lersch's (Khymos) freely published work; the profile
 data is now an independently-sourced compilation, and the whole stays free.
@@ -41,7 +42,8 @@ When in doubt, prefer:
    reinventions.
 5. **Static and client-side over backend convenience** — everything runs in the
    browser. No servers, accounts, or telemetry: cheaper to host, private by
-   default, durable.
+   default, durable — and installable, so it keeps working offline at the
+   counter.
 
 ## Non-Goals
 
@@ -63,11 +65,15 @@ We'll know this is working if:
 - A user can go from a named target to a gram-accurate, batch-scaled salt recipe
   — with sulfate:chloride, TDS, charge-residual, and saturation readouts/warnings
   — in one unbroken flow.
-- A seed library of the planned bottled/brewing/coffee target profiles ships and
-  is browsable. The library may grow beyond the Lersch/Khymos seed, with every
-  new profile held to the same authoritative-sourcing standard (see ADR 0011).
-- The app is live and usable at a public URL (GitHub Pages), no install required.
+- A browsable library of sourced target profiles ships — bottled, brewing,
+  coffee, and synthetic references. It grows opportunistically, with every new
+  profile held to the same authoritative-sourcing standard (see ADR 0011).
+- The app is live and usable at [waterforge.app](https://waterforge.app), no
+  install required — and installable for offline use.
+- Once feature-complete, it stays that way: the site is up, dependencies stay
+  current, and security advisories are cleared promptly — a released version is
+  always installable and correct.
 
 ---
 
-_Last refreshed: 2026-05-31_
+_Last refreshed: 2026-09-11_
