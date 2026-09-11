@@ -124,8 +124,10 @@ the audience _visible_; it does not make it _load-bearing_.
 - If promotion ever happens, `refererHost` will show whether it worked. The
   beacon is not retroactive, so having it on now is what makes that possible
   later.
-- **Open:** whether Bot Fight Mode earns its script. A static site fronted by a
-  CDN has little to protect; turning it off would remove the more invasive of
-  the two injected scripts. Not decided here — it is an availability and cost
-  question, not a privacy-principle one, and it deserves its own issue.
+- **Open:** whether Bot Fight Mode earns its script — tracked as
+  [#237](https://github.com/cacack/waterforge/issues/237). A static site fronted
+  by a CDN has little to protect, and at most ~0.7% of requests are being
+  blocked; turning it off would remove the more invasive of the two injected
+  scripts. Not decided here — it is an availability and cost question, not a
+  privacy-principle one.
 - **Open:** the devtools confirmation noted in decision #2.
