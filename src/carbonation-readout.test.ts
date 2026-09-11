@@ -38,6 +38,31 @@ const sparklingGPerL: Profile = {
   provenance,
 }
 
+const sparklingNoTarget: Profile = {
+  name: 'Test Sparkling (no target)',
+  ions: { Na: 10 },
+  carbonation_style: 'sparkling',
+  provenance,
+}
+
+const estimateProvenance = {
+  verified: false,
+  source: 'Estimate. No producer-published figure found.',
+  source_date: '2026-06-01',
+}
+
+const sparklingEstimated: Profile = {
+  name: 'Test Sparkling (estimated)',
+  ions: { Na: 10 },
+  carbonation_style: 'sparkling',
+  carbonation_target: {
+    value: 2.4,
+    unit: 'volumes',
+    provenance: estimateProvenance,
+  },
+  provenance,
+}
+
 const still: Profile = {
   name: 'Test Still',
   ions: { Na: 10 },
@@ -100,6 +125,52 @@ describe('computeCarbonation', () => {
     expect(r.kind).toBe('target')
     if (r.kind !== 'target') return
     expect(r.tempC).toBeCloseTo(4, 1)
+  })
+
+  // #217 — a sparkling profile with no sourced target must be distinguishable
+  // from "style not recorded". The UI renders a "we don't know" message for
+  // the former; rendering nothing would read as "no carbonation needed".
+  it("returns 'sparkling-unknown' for a sparkling profile with no target", () => {
+    app.target = sparklingNoTarget
+    expect(computeCarbonation()).toEqual({ kind: 'sparkling-unknown' })
+  })
+
+  it("keeps 'none' distinct from 'sparkling-unknown' when style is unrecorded", () => {
+    app.target = unknown
+    expect(computeCarbonation()).toEqual({ kind: 'none' })
+    app.target = sparklingNoTarget
+    expect(computeCarbonation().kind).toBe('sparkling-unknown')
+  })
+
+  // #218 — the psi instruction must carry the provenance of the carbonation
+  // figure, which is usually an unverified estimate (ADR 0013). It is the
+  // carbonation target's own provenance, never the profile's ion provenance.
+  it('carries the carbonation target provenance on a target readout', () => {
+    app.target = sparkling
+    const r = computeCarbonation()
+    expect(r.kind).toBe('target')
+    if (r.kind !== 'target') return
+    expect(r.provenance).toEqual(provenance)
+  })
+
+  it('reports an unverified carbonation figure as such', () => {
+    app.target = sparklingEstimated
+    const r = computeCarbonation()
+    expect(r.kind).toBe('target')
+    if (r.kind !== 'target') return
+    expect(r.provenance.verified).toBe(false)
+    expect(r.provenance.source).toMatch(/Estimate/)
+  })
+
+  it('uses the carbonation provenance, not the profile ion provenance', () => {
+    app.target = sparklingEstimated
+    const r = computeCarbonation()
+    if (r.kind !== 'target') throw new Error('expected target')
+    // The fixture's profile-level provenance is verified: true; the
+    // carbonation figure's is verified: false. Confusing the two would let an
+    // estimate inherit the ion data's credibility.
+    expect(sparklingEstimated.provenance.verified).toBe(true)
+    expect(r.provenance.verified).toBe(false)
   })
 
   it('PSI strictly increases as temperature rises (CO₂ less soluble when warm)', () => {
