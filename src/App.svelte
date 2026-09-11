@@ -8,6 +8,7 @@
   import CarbonationSection from './components/CarbonationSection.svelte'
   import RecipePanel from './components/RecipePanel.svelte'
   import ReadoutsPanel from './components/ReadoutsPanel.svelte'
+  import HelpDialog from './components/HelpDialog.svelte'
   import { computeResult } from './state.svelte'
   import { applyTheme } from './theme.svelte'
   import {
@@ -90,4 +91,7 @@
   </main>
 
   <Footer />
+
+  <!-- Mounted once; opened from the header's `?` and RecipePanel (#234). -->
+  <HelpDialog />
 </div>

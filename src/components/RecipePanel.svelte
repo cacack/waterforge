@@ -13,10 +13,9 @@
   import CarbonationReadout from './CarbonationReadout.svelte'
   import TrendingUpIcon from '@lucide/svelte/icons/trending-up'
   import TrendingDownIcon from '@lucide/svelte/icons/trending-down'
+  import { openHelp } from '../help.svelte'
 
   let { result }: { result: SolveResult | null } = $props()
-
-  const usageGuide = 'https://github.com/cacack/waterforge/blob/main/USAGE.md'
 
   // Salts prescribed for the batch (> 0 grams only), ordered by SALT_ORDER.
   const doses = $derived(
@@ -117,14 +116,13 @@
         Needs a scale reading to 0.01&nbsp;g. Larger batches lift small doses
         into range; a row showing <span class="font-mono">0.000</span> has
         rounded away — leave it out.
-        <a
-          href="{usageGuide}#weighing-the-salts"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-primary underline-offset-4 hover:underline"
+        <button
+          type="button"
+          onclick={() => openHelp('weighing-the-salts')}
+          class="cursor-pointer text-primary underline-offset-4 hover:underline"
         >
           Weighing the salts
-        </a>
+        </button>
       </p>
     </div>
 
