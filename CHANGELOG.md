@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.9.4](https://github.com/cacack/waterforge/compare/v1.9.3...v1.9.4) (2026-09-11)
+
+
+### Bug Fixes
+
+* **deps:** bring shipped dependencies to latest stable ([50f7acb](https://github.com/cacack/waterforge/commit/50f7acb84602153adf8f639ed5d1afa0fdc746bc))
+
 ## [1.9.3](https://github.com/cacack/waterforge/compare/v1.9.2...v1.9.3) (2026-09-11)
 
 
