@@ -55,17 +55,28 @@ See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
 
 ## Site health (`site-health.yml`)
 
-Runs daily on a schedule, and on `workflow_dispatch`. Three checks: the GitHub
-Pages certificate state, the origin certificate's remaining lifetime, and that
-`https://waterforge.app/` returns `200`. On failure it opens a single issue —
-deduplicated by title so a sustained outage does not file one per day — and
-closes that issue automatically once the checks pass again.
+Runs daily on a schedule, and on `workflow_dispatch`. Four checks: the GitHub
+Pages certificate state, the origin certificate's remaining lifetime, the
+domain's registration expiry, and that `https://waterforge.app/` returns `200`.
+On failure it opens a single issue — deduplicated by title so a sustained outage
+does not file one per day — and closes that issue automatically once the checks
+pass again.
 
 No secrets required: the default `GITHUB_TOKEN` with `pages: read` and
-`issues: write` covers all three checks. The job runs without
+`issues: write` covers all four checks. The job runs without
 `actions/checkout`, so every `gh` call must pass `--repo` — without it `gh`
 looks for a git remote and dies with "not a git repository", which silently
 disables the alerting rather than failing the check.
+
+The domain-registration check reads the expiry from RDAP via `rdap.org`, which
+resolves the authoritative registry server from the IANA bootstrap — so a change
+of registrar or TLD does not strand the check on a hardcoded endpoint. Its
+threshold is **45 days** (`DOMAIN_EXPIRY_WARN_DAYS`), deliberately wider than the
+21-day certificate window: a stuck renewal is a support ticket at a registrar,
+not something a redeploy can clear. An unreadable or unparseable RDAP response
+warns rather than failing — the renewal is diarised off-repo as well
+([continuity.md](./continuity.md#owner-checklist)), so a flaky third-party
+redirector must not file an issue every night.
 
 CloudFlare's bot management returns `403` to some datacenter ranges, GitHub's
 runners included, so the reachability check treats a `403` as inconclusive and
@@ -79,6 +90,25 @@ workflows after 60 days of repository inactivity.
 
 See [CloudFlare in front of GitHub Pages](./cloudflare-pages.md#monitoring) for
 what each check catches and the runbook the alert links to.
+
+## Archive (`archive.yml`)
+
+Asks [Software Heritage](https://archive.softwareheritage.org) to ingest the
+repository, on every published release, monthly on a schedule, and on
+`workflow_dispatch`. One anonymous `POST` to the Save Code Now API with the
+repository URL — no checkout, no secret, `contents: read`.
+
+Why it exists: one account holds the repo, the Pages host and the release
+history, so without a copy elsewhere, Principle 1 ("what we build on the commons
+stays in the commons") is a licence promise with nothing behind it. The archive
+ingests the full git history and is reachable whatever happens to this account.
+[continuity.md](./continuity.md) is the wider picture.
+
+Ingestion is asynchronous: the `POST` returns once a visit is queued, so
+`save_request_status: accepted` is the success signal and the snapshot ID appears
+only after a loader has run. A rejected, rate-limited or unreachable request
+fails the run. The monthly trigger is there because releases can be months apart,
+and an archive that lags that far behind is a snapshot rather than a mirror.
 
 ## Dependabot watch (`dependabot-watch.yml`)
 
