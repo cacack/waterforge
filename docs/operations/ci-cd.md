@@ -103,7 +103,18 @@ _symptom_, an alert that stays open, rather than the cause: why Dependabot
 skipped that alert is recorded only in the update-job logs at `/network/updates`,
 which no REST endpoint exposes.
 
-Unlike site-health, a failed API read is a **hard failure** rather than a warning.
+Unlike site-health, this one needs a credential. `GITHUB_TOKEN` cannot read the
+Dependabot alerts API at all, so the read step authenticates as the
+`waterforge-steward` GitHub App — see
+[§ One-time manual steps](#one-time-manual-steps-repo-owner) for provisioning and
+for why an App rather than a PAT. Only that one step uses it; the issue it files
+and closes still runs as `GITHUB_TOKEN`, which is why the App needs a single
+read-only permission. Minting the token is `continue-on-error`, because an action
+step that fails outright would end the run before anything could report it — a
+missing or rotated key is surfaced through the same issue as any other fault,
+rather than as a red X on a scheduled run nobody is watching.
+
+A failed API read is a **hard failure** rather than a warning.
 Site-health can degrade safely because its origin-certificate check is an
 independent backstop; here the API read _is_ the check, so a warning would rebuild
 the exact silent failure the workflow exists to close. The same applies to the
@@ -164,16 +175,36 @@ once.
    The existing `main` branch policy is retained so `workflow_dispatch`
    redeploys from `main` still work.
 
-5. **Only if the Dependabot watch cannot read the alerts API.** Unlike the four
-   above, this one may never be needed. `dependabot-watch.yml` requests
-   `security-events: read`, which should let `GITHUB_TOKEN` read the alerts API
-   on a public repo — but that could not be verified before merge, because the
-   workflow cannot run from a PR branch. If its first run fails with a `403`, it
-   files an issue saying so; the fix is a fine-grained PAT scoped to this repo
-   with **Dependabot alerts: read**, stored as `DEPENDABOT_WATCH_TOKEN`
-   (`gh secret set DEPENDABOT_WATCH_TOKEN`) and referenced from the workflow's
-   `GH_TOKEN` in place of `github.token`. A green first run means this step is
-   moot and can be struck from this list.
+5. **Provision the `waterforge-steward` GitHub App.** Required by
+   `dependabot-watch.yml`. `GITHUB_TOKEN` **cannot** read the Dependabot alerts
+   API — `security-events: read` looks like the permission that covers it and
+   does not, and the first run after merge returned `403 Resource not accessible
+by integration` ([#240](https://github.com/cacack/waterforge/issues/240)).
+   Because the workflow cannot run from a PR branch, this was only discoverable
+   once it landed on `main`.
+
+   Create the App at
+   [github.com/settings/apps/new](https://github.com/settings/apps/new) with
+   webhooks off, installable on this account only, and exactly one repository
+   permission: **Dependabot alerts: Read-only**. Generate a private key, install
+   the App on this repo, then store both halves:
+
+   ```bash
+   gh secret set BOT_APP_ID --body '<app-id>'
+   gh secret set BOT_PRIVATE_KEY < waterforge-steward.private-key.pem
+   ```
+
+   The workflow mints a short-lived token from these per run, so there is nothing
+   to rotate and no expiry to forget. **A PAT would also work and was rejected**:
+   it is a long-lived credential tied to a person, and PAT expiry is already a
+   recorded silent-failure mode
+   ([continuity.md](./continuity.md#silent-failure-modes)) — a watch whose purpose
+   is to prevent a silent failure should not be guarded by one.
+
+   The secret names match the convention in
+   [`cacack/workflows`](https://github.com/cacack/workflows), so the same App can
+   later carry the Contents / Pull requests / Workflows write permissions that
+   repo's reusable `dependabot-automerge.yml` stub expects.
 
 ## Follow-up: making CI checks required
 
