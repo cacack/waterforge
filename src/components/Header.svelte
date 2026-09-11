@@ -4,8 +4,11 @@
   import Actions from './Actions.svelte'
   import SunIcon from '@lucide/svelte/icons/sun'
   import MoonIcon from '@lucide/svelte/icons/moon'
+  import HelpIcon from '@lucide/svelte/icons/circle-question-mark'
   import GitHubMark from './icons/GitHubMark.svelte'
   import WaterforgeMark from './icons/WaterforgeMark.svelte'
+
+  const usageGuide = 'https://github.com/cacack/waterforge/blob/main/USAGE.md'
 </script>
 
 <header
@@ -36,6 +39,17 @@
         {:else}
           <MoonIcon class="size-4" />
         {/if}
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        href={usageGuide}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Usage guide"
+        title="Usage guide"
+      >
+        <HelpIcon class="size-4" />
       </Button>
       <Button
         variant="ghost"

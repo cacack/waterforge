@@ -26,6 +26,12 @@ water and food-grade salts.
 drinking-water profile precisely. It is _not_ a mash-pH or brewing-salts tool;
 see [CONSTITUTION.md](CONSTITUTION.md) for non-goals.
 
+**What you need:** distilled (or known-source) water, food-grade salts, and a
+scale that reads to **0.01 g** — the resolution sold as a pocket or jeweller's
+scale. A 1 g kitchen scale cannot resolve these doses and would read most of a
+recipe as zero. Larger batches lift small doses into range; see
+[Weighing the salts](USAGE.md#weighing-the-salts).
+
 ## Quickstart
 
 Requirements: **Node 24**, pinned in [`.nvmrc`](.nvmrc) — run `nvm use` in the

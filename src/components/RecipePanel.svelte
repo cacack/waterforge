@@ -16,6 +16,8 @@
 
   let { result }: { result: SolveResult | null } = $props()
 
+  const usageGuide = 'https://github.com/cacack/waterforge/blob/main/USAGE.md'
+
   // Salts prescribed for the batch (> 0 grams only), ordered by SALT_ORDER.
   const doses = $derived(
     result
@@ -108,6 +110,22 @@
           {/each}
         </tbody>
       </table>
+      <!-- #221: the 0.01 g requirement is the "not for you" boundary behind #27
+           (teaspoon mode, closed not-planned). State the fact in plain text, not
+           only behind the link, so it still reads with the app offline. -->
+      <p class="mt-2 text-xs text-muted-foreground">
+        Needs a scale reading to 0.01&nbsp;g. Larger batches lift small doses
+        into range; a row showing <span class="font-mono">0.000</span> has
+        rounded away — leave it out.
+        <a
+          href="{usageGuide}#weighing-the-salts"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary underline-offset-4 hover:underline"
+        >
+          Weighing the salts
+        </a>
+      </p>
     </div>
 
     <!-- Achieved vs target ion table -->
