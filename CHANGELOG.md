@@ -9,6 +9,19 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.10.0](https://github.com/cacack/waterforge/compare/v1.9.4...v1.10.0) (2026-09-11)
+
+
+### Features
+
+* **ui:** make the usage guide readable offline in the app ([db10b1f](https://github.com/cacack/waterforge/commit/db10b1f91ab64768c37ba68b15fb81220ab93e85)), closes [#234](https://github.com/cacack/waterforge/issues/234)
+* **ui:** surface the usage guide and the scale requirement ([bde2a74](https://github.com/cacack/waterforge/commit/bde2a741a922d28089f67deafd2e68c902766b9e)), closes [#220](https://github.com/cacack/waterforge/issues/220) [#221](https://github.com/cacack/waterforge/issues/221)
+
+
+### Bug Fixes
+
+* **ui:** surface carbonation uncertainty instead of burying it ([c099251](https://github.com/cacack/waterforge/commit/c099251bbf8ac47d09d8e526d9ef28719fff9c8f))
+
 ## [1.9.4](https://github.com/cacack/waterforge/compare/v1.9.3...v1.9.4) (2026-09-11)
 
 
