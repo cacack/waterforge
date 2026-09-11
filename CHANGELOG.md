@@ -9,6 +9,16 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.9.3](https://github.com/cacack/waterforge/compare/v1.9.2...v1.9.3) (2026-09-11)
+
+
+### Bug Fixes
+
+* **deps:** bump @fontsource-variable/geist-mono from 5.2.8 to 5.3.0 ([9acf806](https://github.com/cacack/waterforge/commit/9acf8067508c347c6b35d01ba4b46cd3e3f6e21e))
+* **deps:** bump @internationalized/date from 3.12.3 to 3.12.4 ([74c2686](https://github.com/cacack/waterforge/commit/74c2686d26f3d046d611d3b6aed2cb1de51a1461))
+* **deps:** bump @vitest/mocker and vitest ([b4144bf](https://github.com/cacack/waterforge/commit/b4144bf7cdd676b81b9e0a81be1039047c2275d0))
+* **deps:** bump bits-ui from 2.18.1 to 2.19.0 ([cd83faf](https://github.com/cacack/waterforge/commit/cd83faf52e9b684daf3c7c58795834a7e1531935))
+
 ## [1.9.2](https://github.com/cacack/waterforge/compare/v1.9.1...v1.9.2) (2026-09-07)
 
 
