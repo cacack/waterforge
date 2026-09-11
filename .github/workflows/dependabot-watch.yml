@@ -1,26 +1,11 @@
 name: Dependabot watch
 
-# Watches for the failure that went unnoticed for 25 days in August 2026: alert
-# #13 (nanoid, high) stayed open from 2026-08-17 to 2026-09-11 with no Dependabot
-# PR, even though a satisfying fix had been published ten days before the alert
-# opened and Dependabot's npm job ran twice while it was open. It was found only
-# because someone went looking, and fixed by hand in #208.
+# Stub. The logic lives in cacack/workflows so a fix lands in one place instead
+# of drifting per repo -- see that repo's README for what it does and why.
 #
-# Nothing in the existing flow could have caught it: ci.yml proves `main` builds
-# and site-health.yml proves the site is up, but neither ever asks GitHub whether
-# the repo is sitting on an unactioned vulnerability. A fully green repo can carry
-# a high-severity alert indefinitely.
-#
-# This watches the *symptom* -- an alert that is open and staying open -- not the
-# cause. Why Dependabot skipped #13 is only recorded in the update-job logs at
-# /network/updates, which no REST endpoint exposes (dependabot/update_jobs,
-# dependabot/updates and network/updates all 404), so the cause is not detectable
-# from automation at all.
-#
-# The threshold is not invented here. ADR 0017 sets it -- no high- or
-# critical-severity advisory open more than 7 days, with medium and low
-# deliberately unbounded -- and this workflow is the mechanism for that criterion,
-# reusing the ADR's own query. Change the number there, not here.
+# What stays here: the schedule (a workflow_call workflow cannot declare one),
+# and the two values that are waterforge's own rather than the shared default --
+# the grace period and the decision record it comes from.
 
 on:
   schedule:
@@ -32,206 +17,28 @@ on:
         description: Grace period in days (overrides the ADR 0017 default of 7)
         required: false
 
-# `security-events: read` is deliberately absent: it looks like the permission
-# that covers this and does not. GITHUB_TOKEN cannot read the Dependabot alerts
-# API at all -- the first run after merge returned `403 Resource not accessible
-# by integration` (#240) -- so the read below authenticates as the
-# waterforge-steward App instead. `issues: write` stays on GITHUB_TOKEN, which
-# is why the App needs only one permission.
+# Must grant at least what the called job declares, or GitHub rejects the call
+# with `startup_failure` before any step runs and with no log explaining it.
+# `issues: write` is the one to get right: without it the watch would detect a
+# stale advisory and then be unable to tell anyone, which is the failure it
+# exists to prevent.
 permissions:
   contents: read
   issues: write
 
-env:
-  # Empty for a scheduled run, so the default applies unless a dispatch overrides.
-  GRACE_DAYS: ${{ github.event.inputs.grace_days || 7 }}
-  GH_REPO: ${{ github.repository }}
-
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      # Minted per run and good for about an hour, so there is no long-lived
-      # credential to rotate and no expiry to forget -- the failure mode
-      # continuity.md already records against RELEASE_PLEASE_TOKEN. A PAT would
-      # also work and was rejected for that reason: a watch that exists to
-      # prevent a silent failure should not be guarded by one.
-      - name: Mint a token that can read Dependabot alerts
-        id: app_token
-        # continue-on-error, because a failed action step would end the job before
-        # the Report step and file nothing -- a red X on a scheduled run that
-        # nobody is watching, which is the failure mode this workflow exists to
-        # prevent. Failing soft here lets the missing token be reported as an
-        # error like any other, through the same issue.
-        continue-on-error: true
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        with:
-          app-id: ${{ secrets.BOT_APP_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-
-      - name: Read open Dependabot alerts
-        env:
-          # The App holds exactly one permission (Dependabot alerts: read), so it
-          # is scoped to this step. Everything else still runs as GITHUB_TOKEN.
-          GH_TOKEN: ${{ steps.app_token.outputs.token }}
-        run: |
-          set -uo pipefail
-          # Empty when the step above failed soft: the secrets are missing, the
-          # key no longer matches the App, or the App was uninstalled from this
-          # repo. Named explicitly because "gh: not logged in" further down would
-          # send the reader hunting for the wrong problem.
-          if [ -z "${GH_TOKEN:-}" ]; then
-            echo "Could not mint the waterforge-steward App token -- check the BOT_APP_ID and BOT_PRIVATE_KEY secrets and that the App is still installed on this repo" \
-              >> "$RUNNER_TEMP/errors"
-            exit 0
-          fi
-          # Unlike site-health.yml, an unreadable API is a hard failure rather than
-          # a warning. There it degrades safely because the origin-certificate check
-          # is an independent backstop; here the API read *is* the check, so a
-          # warning would rebuild the exact silent failure this workflow exists to
-          # close. Routing it through the failures file rather than exiting non-zero
-          # means the Report step still files an issue -- a red X on a scheduled run
-          # is not an alert if nobody looks at the Actions tab.
-          if ! gh api "repos/$GH_REPO/dependabot/alerts?state=open&per_page=100" \
-                 --paginate > "$RUNNER_TEMP/alerts.json" 2> "$RUNNER_TEMP/api-error"; then
-            # The redirect creates the file even when gh fails, so remove it --
-            # otherwise the next step reads an empty file as "no open alerts" and
-            # reports a clean bill of health for an API it never managed to read.
-            rm -f "$RUNNER_TEMP/alerts.json"
-            echo "Could not read the Dependabot alerts API: $(cat "$RUNNER_TEMP/api-error")" \
-              >> "$RUNNER_TEMP/errors"
-            exit 0
-          fi
-          echo "Open alerts: $(jq 'length' "$RUNNER_TEMP/alerts.json")"
-
-      - name: Check for advisories past the grace period
-        run: |
-          set -uo pipefail
-          [ -f "$RUNNER_TEMP/alerts.json" ] || exit 0
-
-          # --argjson below parses this as JSON, so a non-numeric dispatch input
-          # would fail mid-jq with nothing explaining why.
-          if ! echo "$GRACE_DAYS" | grep -qE '^[0-9]+$'; then
-            echo "Could not use grace period '$GRACE_DAYS': expected a whole number of days" \
-              >> "$RUNNER_TEMP/errors"
-            exit 0
-          fi
-          echo "Grace period: $GRACE_DAYS days"
-
-          # ADR 0017's query, with the grace period applied. One row per alert:
-          # the API reports an advisory once per manifest occurrence, so a single
-          # CVE can legitimately appear several times (fast-uri produced four).
-          jq --argjson grace "$GRACE_DAYS" -r '
-            .[] | select(.security_advisory.severity=="high" or .security_advisory.severity=="critical")
-                | (((now - (.created_at|fromdate)) / 86400) | floor) as $days
-                | select($days > $grace)
-                | "| \(.security_advisory.severity) | `\(.dependency.package.name)` | \($days) days | \(.security_vulnerability.first_patched_version.identifier // "_no fix available_") | [alert](\(.html_url)) |"
-          ' "$RUNNER_TEMP/alerts.json" > "$RUNNER_TEMP/stale"
-
-          # Everything else open is context, not a failure: medium and low are
-          # unbounded by ADR 0017, and a high inside the grace period is Dependabot
-          # being given its fair chance to self-serve.
-          jq --argjson grace "$GRACE_DAYS" -r '
-            .[] | (((now - (.created_at|fromdate)) / 86400) | floor) as $days
-                | select((.security_advisory.severity != "high" and .security_advisory.severity != "critical")
-                         or $days <= $grace)
-                | "  \(.security_advisory.severity)\t\(.dependency.package.name)\t\($days)d"
-          ' "$RUNNER_TEMP/alerts.json" > "$RUNNER_TEMP/tolerated"
-
-          if [ -s "$RUNNER_TEMP/tolerated" ]; then
-            echo "Open but within the threshold:"
-            cat "$RUNNER_TEMP/tolerated"
-          fi
-
-      - name: Report
-        env:
-          GH_TOKEN: ${{ github.token }}
-          # One stable title covers both failure classes below, because dedup keys
-          # on it -- so it has to stay true whether the body is reporting a stale
-          # advisory or a watch that could not run.
-          TITLE: The Dependabot advisory watch needs attention
-        run: |
-          set -euo pipefail
-          # Dedup by title rather than a label: repo labels are Terraform-managed
-          # (git-repositories/labels.json taxonomy), so this workflow must not
-          # depend on a label that module does not declare.
-          #
-          # Every gh call passes --repo because the job runs without
-          # actions/checkout -- without it gh looks for a git remote and dies with
-          # "not a git repository", which silently disables the alerting rather
-          # than failing the check.
-          open_issue=$(gh issue list --repo "$GH_REPO" --state open --search "in:title \"$TITLE\"" \
-            --limit 1 --json number --jq '.[0].number // empty')
-
-          # Two distinct failure classes, deliberately rendered differently: a
-          # stale advisory is a table the maintainer acts on, while an error means
-          # the watch itself could not answer the question -- which is worse, and
-          # reads as nonsense if it is pushed through the advisory wording.
-          stale=$([ -s "$RUNNER_TEMP/stale" ] && echo yes || echo no)
-          errored=$([ -s "$RUNNER_TEMP/errors" ] && echo yes || echo no)
-
-          if [ "$stale" = no ] && [ "$errored" = no ]; then
-            echo "No advisory past the $GRACE_DAYS-day grace period."
-            if [ -n "$open_issue" ]; then
-              gh issue close "$open_issue" --repo "$GH_REPO" --comment "No Dependabot advisory is past the $GRACE_DAYS-day grace period as of $(date -u '+%Y-%m-%d %H:%M UTC'). Closing automatically."
-            fi
-            exit 0
-          fi
-
-          if [ "$errored" = yes ]; then
-            echo "::error::The Dependabot advisory watch could not complete"
-            cat "$RUNNER_TEMP/errors"
-          fi
-          if [ "$stale" = yes ]; then
-            echo "::error::A Dependabot advisory is past the $GRACE_DAYS-day grace period"
-            cat "$RUNNER_TEMP/stale"
-          fi
-
-          if [ -n "$open_issue" ]; then
-            echo "Issue #$open_issue is already open; not filing a duplicate."
-            exit 1
-          fi
-
-          {
-            echo "Detected at $(date -u '+%Y-%m-%d %H:%M UTC')."
-            if [ "$errored" = yes ]; then
-              echo
-              echo "**The watch could not complete.** Until this is fixed, an unactioned advisory"
-              echo "would go unreported — this is the silent failure the workflow exists to prevent,"
-              echo "so it is reported loudly instead:"
-              echo
-              while IFS= read -r line; do echo "- $line"; done < "$RUNNER_TEMP/errors"
-              echo
-              echo "The alerts read authenticates as the **waterforge-steward** GitHub App, so a"
-              echo "token or \`403\` failure usually means its private key was rotated, its"
-              echo "**Dependabot alerts: read** permission was removed, or it was uninstalled from"
-              echo "this repo — see"
-              echo "[ci-cd.md § One-time manual steps](${{ github.server_url }}/${{ github.repository }}/blob/main/docs/operations/ci-cd.md#one-time-manual-steps-repo-owner)."
-            fi
-            if [ "$stale" = yes ]; then
-              echo
-              echo "These advisories have been open longer than the **$GRACE_DAYS-day** grace period set by"
-              echo "[ADR 0017](${{ github.server_url }}/${{ github.repository }}/blob/main/docs/decisions/0017-maintenance-thresholds.md):"
-              echo
-              echo "| Severity | Package | Open | Fixed in | |"
-              echo "| --- | --- | --- | --- | --- |"
-              cat "$RUNNER_TEMP/stale"
-              echo
-              echo "Any one of these clears it:"
-              echo
-              echo "- Merge the Dependabot PR, if one exists."
-              echo "- Bump the dependency by hand — for a transitive one, \`npm audit fix\` or a targeted"
-              echo "  \`package-lock.json\` update, as in #208."
-              echo "- [Dismiss the alert](${{ github.server_url }}/${{ github.repository }}/security/dependabot)"
-              echo "  if the risk is accepted or unreachable. This is the intended escape hatch for an"
-              echo "  advisory with no fix available — it moves the alert out of \`open\`, so this issue"
-              echo "  then closes itself rather than nagging forever."
-            fi
-            echo
-            echo "This issue closes automatically on the next run that comes back clean."
-            echo
-            echo "[Workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-          } > body.md
-
-          gh issue create --repo "$GH_REPO" --title "$TITLE" --body-file body.md
-          exit 1
+  watch:
+    uses: cacack/workflows/.github/workflows/dependabot-watch.yml@09e64312f66e291b6aa14c4d3f4b55c2ec26ea1b # v2.1.0
+    with:
+      # Empty on a scheduled run, which the called workflow resolves to its
+      # default of 7 -- the same number ADR 0017 sets. Passed through rather
+      # than restated so a dispatch override reaches it.
+      grace-days: ${{ inputs.grace_days }}
+      # ADR 0017 is the authoritative home for the 7 days, not the shared
+      # workflow's default. Passing it makes the filed issue cite that decision.
+      threshold-doc-url: https://github.com/cacack/waterforge/blob/main/docs/decisions/0017-maintenance-thresholds.md
+    secrets:
+      # Mapped by name rather than `secrets: inherit`, which would hand the
+      # called workflow every secret this repo holds when it declares two.
+      BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
+      BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
