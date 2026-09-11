@@ -14,24 +14,36 @@ coffee, and synthetic references), and the live app at
 [waterforge.app](https://waterforge.app) (installable + offline).
 
 The project is now in **sustained maintenance**, which the constitution's fifth
-success criterion names explicitly: keep the site up, keep dependencies current,
-and clear security advisories promptly.
+success criterion governs — and, as of [ADR 0017](docs/decisions), measures: a
+high- or critical-severity advisory open no more than 7 days, no Dependabot PR
+open more than 14, and the scheduled site-health check green on ≥99% of runs over
+a rolling 90 days.
 
 There is no fixed release schedule. Work happens opportunistically, one PR at a
 time, and versions are cut automatically by release-please from the commit log.
 
 ## Active direction
 
-- **Grow the water library.** The expand-beyond-the-Khymos-seed push
-  ([#98](https://github.com/cacack/waterforge/issues/98)) is closed, but the
-  effort is open-ended by nature: add notable bottled and reference waters that
-  fill geographic and chemistry gaps, each held to the authoritative-sourcing
-  standard in [ADR 0011](docs/decisions). Requests are welcome via the
-  [profile-request issue template](.github/ISSUE_TEMPLATE/profile_request.md)
-  and are tracked one issue per water.
 - **Keep it healthy.** Dependency currency, advisory response, and uptime — the
   daily site-health check and CI-on-main runs exist for this. See
-  [docs/operations/](docs/operations/).
+  [docs/operations/](docs/operations/). This is the one direction with a
+  measurable bar behind it: the constitution's fifth success criterion now
+  carries thresholds (see [ADR 0017](docs/decisions)).
+
+## Opportunistic — no backlog is maintained
+
+- **Grow the water library.** The expand-beyond-the-Khymos-seed push
+  ([#98](https://github.com/cacack/waterforge/issues/98)) closed 2026-06-01, and
+  nothing has been queued behind it since. That is the intended state, not
+  neglect: under **Principle 6** (_real use over assumed demand_), profiles get
+  added when the maintainer wants one, and a standing backlog is owed to nobody.
+  New waters fill geographic and chemistry gaps and are held to the
+  authoritative-sourcing standard in [ADR 0011](docs/decisions).
+
+  Requests remain welcome via the
+  [profile-request issue template](.github/ISSUE_TEMPLATE/profile_request.md)
+  and are tracked one issue per water — welcoming a request costs nothing and
+  commits to nothing. Expect no open profile issues between such requests.
 
 ## Deferred — revisit when the trigger fires
 

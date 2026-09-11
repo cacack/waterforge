@@ -100,9 +100,22 @@ We'll know this is working if:
   profile held to the same authoritative-sourcing standard (see ADR 0011).
 - The app is live and usable at [waterforge.app](https://waterforge.app), no
   install required — and installable for offline use.
-- Once feature-complete, it stays that way: the site is up, dependencies stay
-  current, and security advisories are cleared promptly — a released version is
-  always installable and correct.
+- Once feature-complete, it stays that way — a released version is always
+  installable and correct. This is the only criterion governing the phase the
+  project is actually in, so it carries thresholds rather than adjectives:
+  - **Advisories:** no high- or critical-severity advisory open more than
+    **7 days**.
+  - **Dependency currency:** no Dependabot PR open more than **14 days**.
+  - **Site health:** the scheduled site-health check green on **≥99%** of runs
+    over a rolling 90 days. Scheduled runs only — manual dispatches are tests,
+    not signal. The window first covers a full quarter in December 2026, since
+    scheduled runs began 2026-09-07.
+
+  These exist because the app must be installable and correct whenever its
+  maintainer reaches for it, and because a static PWA with stale dependencies
+  decays to broken. They are not a service level offered to users (Principle 6).
+  Baselines, measurement queries, and why each number sits just beyond current
+  practice: [ADR 0017](docs/decisions/0017-maintenance-thresholds.md).
 
 ## How intent is recorded
 
