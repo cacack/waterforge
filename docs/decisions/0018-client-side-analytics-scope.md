@@ -1,9 +1,11 @@
-# ADR 0017 — Principle 5 bans tracking people, not counting page loads
+# ADR 0018 — Principle 5 bans tracking people, not counting page loads
 
 **Status:** Accepted
 **Date:** 2026-09-11
 **Amends:** [CONSTITUTION.md](../../CONSTITUTION.md) (Principle 5 — the
 "no telemetry" clause)
+**Amended by:** [ADR 0019](0019-bot-fight-mode-off.md) (2026-09-11) — decision #4
+is reversed; Bot Fight Mode is off
 
 ## Context
 
@@ -99,6 +101,10 @@ The decision is scoped, and any of these being breached re-opens it:
 
 ### 4. Bot Fight Mode's JS Detections is accepted on the same test, separately
 
+> **Reversed by [ADR 0019](0019-bot-fight-mode-off.md) (2026-09-11).** Examined
+> on its merits, it protected nothing a static site needs protecting and its only
+> realistic failure mode was turning away real visitors. It is now off.
+
 It collects browser signals to classify automated traffic, not to identify
 people, and it serves an availability purpose rather than a measurement one. It
 is recorded here because it was undocumented, not because #232 asked about it.
@@ -124,10 +130,8 @@ the audience _visible_; it does not make it _load-bearing_.
 - If promotion ever happens, `refererHost` will show whether it worked. The
   beacon is not retroactive, so having it on now is what makes that possible
   later.
-- **Open:** whether Bot Fight Mode earns its script — tracked as
-  [#237](https://github.com/cacack/waterforge/issues/237). A static site fronted
-  by a CDN has little to protect, and at most ~0.7% of requests are being
-  blocked; turning it off would remove the more invasive of the two injected
-  scripts. Not decided here — it is an availability and cost question, not a
-  privacy-principle one.
+- **Closed:** whether Bot Fight Mode earns its script. Examined in
+  [#237](https://github.com/cacack/waterforge/issues/237) and decided in
+  [ADR 0019](0019-bot-fight-mode-off.md) — **it is off.** The more invasive of
+  the two injected scripts is gone; only the analytics beacon remains.
 - **Open:** the devtools confirmation noted in decision #2.

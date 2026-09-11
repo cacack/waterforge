@@ -318,5 +318,7 @@ GitHub renews at ~30 days and a wedged renewal shows up as a shrinking window.
   is required.
 - The same proxy is what makes the site measurable. See
   [traffic-baseline.md](./traffic-baseline.md) for what it actually receives and
-  [ADR 0017](../decisions/0017-client-side-analytics-scope.md) for the two
-  client-side scripts CloudFlare injects here (Web Analytics, Bot Fight Mode).
+  [ADR 0018](../decisions/0018-client-side-analytics-scope.md) for the one
+  client-side script CloudFlare still injects here (Web Analytics). Bot Fight
+  Mode injected a second one until
+  [ADR 0019](../decisions/0019-bot-fight-mode-off.md) turned it off.
