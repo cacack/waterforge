@@ -49,20 +49,45 @@ Other useful scripts:
 | `npm run lint`      | ESLint + Prettier format check                |
 | `npm run format`    | Auto-format all files with Prettier           |
 
+## Fork and self-host
+
+Waterforge is GPLv3 and needs no backend, so you can run your own copy — and
+nothing about this project has to keep working for yours to. Clone it, then:
+
+```bash
+npm ci
+npm run build        # static output in dist/
+```
+
+Serve `dist/` from anything that serves files: any static host, an object-storage
+bucket, `npx serve dist`, a directory on your own machine. The build uses a
+**relative base path**, so it works from a subpath (`example.com/water/`) as
+readily as from a domain root, with no configuration.
+
+The water profiles are a single file —
+[`src/lib/profiles/profiles.json`](src/lib/profiles/profiles.json) — under
+[CC-BY-SA-4.0](LICENSE-DATA), with each profile carrying its own source citation.
+Take the data on its own if the app is not what you want.
+
+What happens to this project if its maintainer stops is written down in
+[docs/operations/continuity.md](docs/operations/continuity.md).
+
 ## Documentation
 
-| Document                                                       | What it covers                                 |
-| -------------------------------------------------------------- | ---------------------------------------------- |
-| [CONSTITUTION.md](CONSTITUTION.md)                             | Mission, audience, principles, non-goals       |
-| [USAGE.md](USAGE.md)                                           | How to use the app (intended user flow)        |
-| [CONTRIBUTING.md](CONTRIBUTING.md)                             | Dev setup, conventions, testing, license terms |
-| [ROADMAP.md](ROADMAP.md)                                       | Where the project is headed                    |
-| [docs/architecture/overview.md](docs/architecture/overview.md) | Stack, module boundaries, data flow            |
-| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records                  |
-| [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions      |
-| [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources             |
-| [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                  |
-| [docs/operations/release.md](docs/operations/release.md)       | Release runbook (cut, tag, publish)            |
+| Document                                                       | What it covers                                  |
+| -------------------------------------------------------------- | ----------------------------------------------- |
+| [CONSTITUTION.md](CONSTITUTION.md)                             | Mission, audience, principles, non-goals        |
+| [USAGE.md](USAGE.md)                                           | How to use the app (intended user flow)         |
+| [CONTRIBUTING.md](CONTRIBUTING.md)                             | Dev setup, conventions, testing, license terms  |
+| [SECURITY.md](SECURITY.md)                                     | Reporting a vulnerability; supported versions   |
+| [ROADMAP.md](ROADMAP.md)                                       | Where the project is headed                     |
+| [docs/architecture/overview.md](docs/architecture/overview.md) | Stack, module boundaries, data flow             |
+| [docs/decisions/](docs/decisions/)                             | Architecture Decision Records                   |
+| [docs/guides/chemistry.md](docs/guides/chemistry.md)           | Chemistry background and unit conversions       |
+| [docs/guides/reference-data.md](docs/guides/reference-data.md) | Reference data and profile sources              |
+| [docs/operations/ci-cd.md](docs/operations/ci-cd.md)           | CI/CD pipeline and deployment                   |
+| [docs/operations/release.md](docs/operations/release.md)       | Release runbook (cut, tag, publish)             |
+| [docs/operations/continuity.md](docs/operations/continuity.md) | What must survive; forking if the project stops |
 
 ## Getting help
 
