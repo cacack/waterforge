@@ -110,6 +110,35 @@ only after a loader has run. A rejected, rate-limited or unreachable request
 fails the run. The monthly trigger is there because releases can be months apart,
 and an archive that lags that far behind is a snapshot rather than a mirror.
 
+## Dependabot auto-merge (`dependabot-automerge.yml`, `dependabot-retitle.yml`)
+
+Enables GitHub auto-merge on Dependabot PRs and approves them, so a patch or minor
+bump lands on its own once CI and the required GitGuardian check pass. Majors are
+left for manual review — and so is any bump Dependabot declines to classify, which
+matters here: it omits `update-type` for indirect dependencies, and `dependencies`
+are compiled into `dist/`, so an unreviewed transitive major would be _shipped_
+rather than merely merged.
+
+**A stub.** The logic lives in
+[`cacack/workflows`](https://github.com/cacack/workflows), pinned here by SHA, so a
+fix lands in one place rather than drifting per repo. That repo's README documents
+the mechanism and the inputs. What stays in waterforge's stub is `merge-method:
+merge`, which is a hard constraint here rather than a preference — the ruleset on
+`main` allows merge commits only.
+
+It runs on `pull_request_target`, not `pull_request`: a Dependabot-triggered
+`pull_request` run cannot see this repo's Actions secrets, and the merge and approve
+authenticate as the `waterforge-steward` App rather than as `GITHUB_TOKEN`. The App
+needs **Contents, Pull requests and Workflows: write** for this — more than the watch
+asks of the same App; see [§ One-time manual steps](#one-time-manual-steps-repo-owner).
+
+`dependabot-retitle.yml` is separate and cosmetic. Dependabot derives its PR title
+from the commit subject, so every Dependabot PR arrives in conventional format; the
+rewrite keeps the PR list readable and covers majors, which are merged by hand. It is
+**not** what protects the merge commit — the called workflow passes an explicit merge
+subject and an empty body for that, because the title is a value Dependabot rewrites
+on every rebase and cannot be relied on at merge time.
+
 ## Dependabot watch (`dependabot-watch.yml`)
 
 Runs daily on a schedule, and on `workflow_dispatch`. Fails when a high- or
@@ -213,10 +242,15 @@ by integration` ([#240](https://github.com/cacack/waterforge/issues/240)).
    ([continuity.md](./continuity.md#silent-failure-modes)) — a watch whose purpose
    is to prevent a silent failure should not be guarded by one.
 
-   The secret names match the convention in
-   [`cacack/workflows`](https://github.com/cacack/workflows), so the same App can
-   later carry the Contents / Pull requests / Workflows write permissions that
-   repo's reusable `dependabot-automerge.yml` stub expects.
+   **Since adopting the reusable `dependabot-automerge.yml`, the same App also needs
+   Contents: Read and write, Pull requests: Read and write, and Workflows: Read and
+   write.** `Workflows: write` is the load-bearing one — most Dependabot PRs here edit
+   `.github/workflows/*`, and GitHub refuses to enable auto-merge on such a PR without
+   it, a permission `GITHUB_TOKEN` cannot be granted through a `permissions:` block at
+   all. Widen the App under **Settings → Developer settings → GitHub Apps →
+   waterforge-steward → Permissions**, then accept the permission request on the
+   installation. Until that is done the auto-merge job fails at the token step; the
+   run goes red rather than quietly skipping.
 
 ## Follow-up: making CI checks required
 
