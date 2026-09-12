@@ -118,9 +118,11 @@ producing duplicate changelog entries. Plain English titles avoid this.
 The release-please bot's own release PR (`chore(main): release X.Y.Z`) and
 Dependabot PRs are exempt from the CI check. Dependabot cannot comply on its
 own — it derives the PR title from the commit subject, so both carry the same
-conventional prefix. `dependabot-automerge.yml` rewrites its titles into plain
+conventional prefix. `dependabot-retitle.yml` rewrites its titles into plain
 English instead, leaving the branch commit as the single source release-please
-reads.
+reads. That rewrite is cosmetic: on an auto-merged PR what actually keeps the
+title out of the merge commit is the explicit body `dependabot-automerge.yml`
+passes, since Dependabot rewrites the title again on every rebase.
 
 ### Dependencies
 
