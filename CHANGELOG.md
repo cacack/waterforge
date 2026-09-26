@@ -9,6 +9,15 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.10.1](https://github.com/cacack/waterforge/compare/v1.10.0...v1.10.1) (2026-09-26)
+
+
+### Bug Fixes
+
+* **deps:** bump bits-ui from 2.19.2 to 2.19.3 ([5248d2b](https://github.com/cacack/waterforge/commit/5248d2bf90a50cfbd8532d90c3d74c663ae9b2ce))
+* **deps:** bump devalue from 5.8.1 to 5.9.4 ([51ad1ab](https://github.com/cacack/waterforge/commit/51ad1ab062bdb465b94b237d1a0cb1a6d5237f01))
+* **deps:** bump tailwind-merge from 3.6.0 to 3.7.0 ([f80d7bf](https://github.com/cacack/waterforge/commit/f80d7bfa1f7d615cfe47933d7fc9930ff7888bfd))
+
 ## [1.10.0](https://github.com/cacack/waterforge/compare/v1.9.4...v1.10.0) (2026-09-11)
 
 
