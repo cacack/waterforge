@@ -5,11 +5,11 @@ project conventions, testing, and license terms.
 
 ## Requirements
 
-- **Node 24** — the version is pinned in [`.nvmrc`](.nvmrc), so `nvm use` (or
+- **Node 26** — the version is pinned in [`.nvmrc`](.nvmrc), so `nvm use` (or
   `fnm use`) in a fresh clone selects it with no argument. Install
   [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm)
   if needed, and check with `node -v`.
-- A recent npm (the one bundled with Node 24 is fine).
+- A recent npm (the one bundled with Node 26 is fine).
 
 `.nvmrc` is the single authoritative home for the Node version — CI and deploy
 both read it via `node-version-file`, and `package.json`'s `engines.node`

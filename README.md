@@ -34,7 +34,7 @@ recipe as zero. Larger batches lift small doses into range; see
 
 ## Quickstart
 
-Requirements: **Node 24**, pinned in [`.nvmrc`](.nvmrc) — run `nvm use` in the
+Requirements: **Node 26**, pinned in [`.nvmrc`](.nvmrc) — run `nvm use` in the
 clone to select it (check with `node -v`).
 
 ```bash
