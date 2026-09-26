@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.10.2](https://github.com/cacack/waterforge/compare/v1.10.1...v1.10.2) (2026-09-26)
+
+
+### Bug Fixes
+
+* **deps:** bump @sveltejs/vite-plugin-svelte from 7.3.0 to 7.3.1 ([4ba6ff2](https://github.com/cacack/waterforge/commit/4ba6ff2f8d4155191f3d680482c9b6d2a349b450))
+
 ## [1.10.1](https://github.com/cacack/waterforge/compare/v1.10.0...v1.10.1) (2026-09-26)
 
 
