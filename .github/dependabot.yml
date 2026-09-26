@@ -29,3 +29,9 @@ updates:
       # `devDependencies` are lint/test/typecheck tooling only — no release.
       prefix-development: chore
       include: scope
+    ignore:
+      # @types/node tracks the Node runtime pinned in .nvmrc. A major bump
+      # here alone would type-check against APIs the runtime lacks, so it
+      # moves only with .nvmrc (see CONTRIBUTING.md#requirements).
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
