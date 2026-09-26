@@ -15,11 +15,13 @@ project conventions, testing, and license terms.
 both read it via `node-version-file`, and `package.json`'s `engines.node`
 declares the floor. Change it in one place.
 
-**We track Active LTS, not Current.** Newest is not the rule: `vitest` supports
-`^22.12.0 || ^24.0.0 || >=26.0.0` — it skips Node 25 entirely, because odd
-majors never become LTS. Moving to a Current release would break the test
-runner. When a new LTS is promoted each October, bump `.nvmrc` and
-`engines.node` together, and check the toolchain's `engines` ranges first.
+**We track the newest LTS line — even majors only.** Newest is not the rule:
+`vitest` supports `^22.12.0 || ^24.0.0 || >=26.0.0` — it skips Node 25
+entirely, because odd majors never become LTS. Moving to an odd major would
+break the test runner. An even major may be adopted before its October LTS
+promotion, once every dependency's `engines.node` range admits it. Bump
+`.nvmrc`, `engines.node` and `@types/node` together — Dependabot leaves
+`@types/node` majors to this bump.
 
 ## Getting started
 
