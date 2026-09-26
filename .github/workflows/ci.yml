@@ -1,9 +1,8 @@
 name: CI
 
-# `check` guards main as well as PRs. GitGuardian is the only *required* status
-# check in the ruleset, so a red `check` never blocks a merge and main can go
-# green-to-red unnoticed — it did, for five days, after a
-# prettier-plugin-tailwindcss bump auto-merged with `check` already failing.
+# `check` guards main as well as PRs. It is a required status check (#264), so
+# a red `check` blocks the merge; before that, main went green-to-red for five
+# days after a prettier-plugin-tailwindcss bump auto-merged with `check` failing.
 # A run on main also disambiguates a red PR: branch's fault, or already broken?
 #
 # The schedule is not redundant with the push trigger. Dependabot auto-merges

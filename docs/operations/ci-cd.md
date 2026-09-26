@@ -55,15 +55,16 @@ See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
 
 ## Site health (`site-health.yml`)
 
-Runs daily on a schedule, and on `workflow_dispatch`. Four checks: the GitHub
+Runs daily on a schedule, and on `workflow_dispatch`. Five checks: the GitHub
 Pages certificate state, the origin certificate's remaining lifetime, the
-domain's registration expiry, and that `https://waterforge.app/` returns `200`.
+domain's registration expiry, that the latest `release-please.yml` run on `main`
+succeeded, and that `https://waterforge.app/` returns `200`.
 On failure it opens a single issue — deduplicated by title so a sustained outage
 does not file one per day — and closes that issue automatically once the checks
 pass again.
 
-No secrets required: the default `GITHUB_TOKEN` with `pages: read` and
-`issues: write` covers all four checks. The job runs without
+No secrets required: the default `GITHUB_TOKEN` with `pages: read`,
+`actions: read` and `issues: write` covers all five checks. The job runs without
 `actions/checkout`, so every `gh` call must pass `--repo` — without it `gh`
 looks for a git remote and dies with "not a git repository", which silently
 disables the alerting rather than failing the check.
@@ -113,7 +114,7 @@ and an archive that lags that far behind is a snapshot rather than a mirror.
 ## Dependabot auto-merge (`dependabot-automerge.yml`, `dependabot-retitle.yml`)
 
 Enables GitHub auto-merge on Dependabot PRs and approves them, so a patch or minor
-bump lands on its own once CI and the required GitGuardian check pass. Majors are
+bump lands on its own once the required `check` and GitGuardian checks pass. Majors are
 left for manual review — and so is any bump Dependabot declines to classify, which
 matters here: it omits `update-type` for indirect dependencies, and `dependencies`
 are compiled into `dist/`, so an unreviewed transitive major would be _shipped_
@@ -201,7 +202,10 @@ once.
    scoped to this repo with **Contents: read+write** and **Pull requests:
    read+write**, then store it as the repo secret `RELEASE_PLEASE_TOKEN`
    (`gh secret set RELEASE_PLEASE_TOKEN`). The token reference is in
-   `release-please.yml`. PAT expiration is the maintainer's responsibility.
+   `release-please.yml`. PAT expiration is the maintainer's responsibility;
+   when it lapses, the [site-health check](#site-health-site-healthyml) files an
+   issue linking back here. To rotate, regenerate the token and run
+   `gh secret set RELEASE_PLEASE_TOKEN` again.
 
 4. **Allow `v*` tags to deploy to the `github-pages` environment.** The
    environment is created automatically by Pages and defaults to a "selected
@@ -252,13 +256,14 @@ by integration` ([#240](https://github.com/cacack/waterforge/issues/240)).
    installation. Until that is done the auto-merge job fails at the token step; the
    run goes red rather than quietly skipping.
 
-## Follow-up: making CI checks required
+## Required status checks
 
-The current branch-protection ruleset only requires the "GitGuardian Security
-Checks" status check. To make the `check` job from `ci.yml` a required gate,
-the repo owner must edit the ruleset under **Settings → Rules → Rulesets** and
-add `CI / check` to the required status checks. This is an owner-only operation
-and is out of scope for this PR.
+The `main` ruleset requires two status checks, with branches kept up to date
+before merging: `check` (the `ci.yml` job) and "GitGuardian Security Checks". A
+PR, including a Dependabot auto-merge, cannot land while either is red.
+
+The ruleset is managed as code outside this repository. Change it there, not
+under **Settings → Rules → Rulesets**: the next apply reverts a UI edit.
 
 release-please needs `contents: write` and `pull-requests: write` permissions
 to open release PRs and create tags/releases; these are granted in the

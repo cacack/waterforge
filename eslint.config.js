@@ -29,6 +29,25 @@ export default ts.config(
     },
   },
   {
+    // The engine stays framework-agnostic (docs/architecture/overview.md):
+    // relative imports only, plus vitest in its tests.
+    files: ['src/lib/{chem,solver,profiles}/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              regex: '^(?!\\.{1,2}/|vitest$)',
+              message:
+                'Engine code (chem/solver/profiles) imports only relative modules — no Svelte, UI, or runtime libraries.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
     languageOptions: {
       parserOptions: {
