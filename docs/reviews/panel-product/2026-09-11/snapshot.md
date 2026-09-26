@@ -2,7 +2,7 @@
 
 ## Repo metadata
 
-- Root: /Users/chris/devel/home/waterforge
+- Root: <repo root>
 - Branch: docs/constitution-refresh-2026-09
 - HEAD: 8d27ddd
 - Origin: git@github.com:cacack/waterforge.git
