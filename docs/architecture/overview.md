@@ -21,20 +21,31 @@ deployment unit (see ADR 0006).
 
 ```
 src/
-  lib/
-    chem/           — pure TS: ions, salts, atomic weights, unit conversions
-    solver/         — pure TS: matrix, NNLS, oracle, saturation, solve
-    index.ts        — re-exports all of chem + solver; the engine's public API
-    components/     — Svelte UI components (consume engine via $lib)
-  app.css           — Tailwind entry point
-  App.svelte        — root Svelte component
+  lib/                  — $lib
+    chem/               — engine: ions, salts, atomic weights, conversions, CO₂
+    solver/             — engine: matrix, NNLS, oracle, saturation, solve
+    profiles/           — engine: profile data model, schema, validation, library
+    index.ts            — re-exports chem + solver + profiles; the engine's public API
+    utils.ts            — shadcn helpers (`cn`, component types)
+    components/ui/      — vendored shadcn-svelte primitives (formatted, not linted)
+  components/           — feature components (consume the engine via $lib)
+    icons/              — SVG marks
+  state.svelte.ts       — app state (runes)
+  persist.svelte.ts     — versioned snapshot + localStorage persistence
+  share.ts              — share-link encode/decode
+  help.svelte.ts        — usage-guide dialog state
+  theme.svelte.ts       — light/dark theme
+  main.ts               — entry point; mounts App.svelte
+  App.svelte            — root Svelte component
+  app.css               — Tailwind entry point
 ```
 
-The `chem/` and `solver/` directories are **framework-agnostic pure
-TypeScript**. They import nothing from Svelte, the DOM, or any runtime library.
-This boundary is enforced by convention (and will be linted): engine tests run
-in a Node environment (`vitest` with `environment: 'node'`), which would fail
-immediately if a DOM import snuck in.
+The engine — `chem/`, `solver/` and `profiles/` — is **framework-agnostic pure
+TypeScript**. It imports nothing from Svelte, the DOM, or any runtime library.
+A scoped `no-restricted-imports` rule in `eslint.config.js` enforces this: engine
+files may import only relative modules (plus `vitest` in tests), so `npm run lint`
+fails on a Svelte, `$lib/components` or third-party import. Engine tests also
+run under `environment: 'node'`, so a DOM global reached by a test fails there.
 
 The public engine API is `src/lib/index.ts`. UI components import from `$lib`
 and never reach into engine sub-modules directly. This keeps the math portable

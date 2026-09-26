@@ -37,5 +37,5 @@ TypeScript + Svelte 5 (runes) + Vite, deployed to GitHub Pages.
   package lands in `dist/`, not by when it runs — Svelte/Vite/Tailwind are
   runtime deps here. That split tells Dependabot which bumps cut a release
   (see `CONTRIBUTING.md`); put new packages on the right side.
-- Engine code (`chem/`, `solver/`) is framework-agnostic pure TypeScript; keep
+- Engine code (`chem/`, `solver/`, `profiles/`) is framework-agnostic pure TypeScript; keep
   it independent of the Svelte UI so the math stays portable and testable.
