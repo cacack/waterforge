@@ -7,18 +7,21 @@ Waterforge's tracker is empty by design, not by neglect: zero open issues, zero 
 ## Findings
 
 **[MEDIUM] The roadmap's recent motion is largely panel-generated, not usage-generated**
+
 - Constitution section: Principle 6 ("Real use over assumed demand — effort is justified by the maintainer's own use of the app, by correctness under Principle 3, or by the durability of the artifact. Never by an assumed audience.")
 - Observed evidence: of the ~30 issues in the "recently closed" window, at least 15 trace directly to the 2026-09-11 product-panel's `proposed-issues.md` (#216–#225) or its immediate follow-ups (#232, #234, #237, #240, #242), plus a further batch (#254, #264, #265, #266) tied to the 2026-09-26 engineering-panel commit (`4816edf docs: add 2026-09-26 engineering panel review`). That is the majority of this cycle's entire closed-issue throughput.
 - Gap: this is not a non-goal violation — the maintainer chose to commission and act on these reviews, which is itself "the maintainer's own use of the project." But it does mean the roadmap's forward motion this cycle was substantially set by a recurring external audit rather than by the dogfooding loop Principle 6 names as the sole legitimate driver of effort. Left unexamined, a project could end up doing quarterly-review-driven work indefinitely without that ever being named as a deliberate, chosen input alongside (not instead of) real use.
 - Suggested action: no process change needed, but consider a one-line note in `ROADMAP.md` or `CONTRIBUTING.md` acknowledging that periodic strategic self-review is a chosen, bounded input to the backlog — so a future reader (or a future version of this same panel) can distinguish "the maintainer hit this while using the app" from "the audit surfaced this" without having to reconstruct it from commit archaeology, as this review just did.
 
 **[LOW] Success criterion 5's new thresholds have no track record yet**
+
 - Constitution section: Success criteria — "no high- or critical-severity advisory open more than 7 days... no Dependabot PR open more than 14 days... the scheduled site-health check green on ≥99% of runs over a rolling 90 days... The window first covers a full quarter in December 2026, since scheduled runs began 2026-09-07."
 - Observed evidence: the automation meant to enforce this needed two follow-up fixes within the current cycle before appearing stable — #240 ("The Dependabot advisory watch needs attention," closed 2026-09-11) and #254 ("Dependabot auto-merge fails: the App token cannot merge pull requests," closed 2026-09-24).
 - Gap: not a misalignment — building the measurement apparatus is exactly the right maintenance-phase work, and ADR 0017 already flags December 2026 as the first real measurement window. But the criterion this panel's prior run pushed the project to add (#223) is not yet gradeable against real data.
 - Suggested action: none needed now; the next scheduled review (once the December 2026 window closes) is the right point to check the criterion against actual rolling-90-day data rather than the presence of the tooling alone.
 
 **[LOW] Milestones are now a fully retired mechanism**
+
 - Constitution section: "How intent is recorded" — issues and roadmap are tier 4, recording "what is being worked on and when."
 - Observed evidence: all 8 milestones are closed and none are open, alongside zero open issues. The two milestones visible in the closed-issue history ("Carbonation & sparkling-water support," "Profile metadata (geography, description, traits)") both concluded 2026-06-01.
 - Gap: for a feature-complete project in opportunistic maintenance this is plausibly the correct state, and it is consistent with (not a repeat of) the prior review's LOW finding about the growth effort lacking a label — that finding was resolved by demoting the claim in ROADMAP.md rather than by adding tracker-side scaffolding, which is a legitimate alternative resolution. Worth naming only so a stranger browsing the Milestones tab directly (rather than reading ROADMAP.md) isn't misread as an abandoned project.
@@ -29,4 +32,5 @@ Waterforge's tracker is empty by design, not by neglect: zero open issues, zero 
 `ROADMAP.md` remains present, current (updated 2026-09-11, the same day the prior panel ran), and does the job well: it states the phase plainly ("feature-complete... now in sustained maintenance"), gives the one active direction a measurable backstop (ADR 0017's thresholds), correctly downgrades library growth to "opportunistic" per the fix noted above, and keeps "Deferred" (#27, #28, #13) and "Not planned" items legible with re-evaluation triggers. With the tracker itself empty (0 open issues, 0 open milestones), ROADMAP.md is now carrying essentially all of the plan's visibility — which is fine at this scale and matches the project's stated posture (built for its maintainer, not a promised roadmap to users), but it is worth noting that a stranger who skips the doc and only checks Issues/Milestones would see nothing at all rather than a coherent "here's why" signal.
 
 ### Summary counts
+
 critical=0 high=0 medium=1 low=2

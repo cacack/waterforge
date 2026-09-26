@@ -9,12 +9,14 @@ Since the 2026-09-11 review, every HIGH and MEDIUM finding raised for this audie
 ## Findings
 
 **[LOW] No dedicated feature-request issue path (carried forward, still open)**
+
 - Constitution audience: ROADMAP.md's "Deferred — revisit when the trigger fires" table ties reopening deferred items (e.g. teasp­oon/volume mode for users without a precision scale) to demand signal, and Principle 6 ("Real use over assumed demand") makes that signal the only legitimate reason to act on an assumed-audience request.
 - Observed evidence: `.github/ISSUE_TEMPLATE/` still has only `bug_report.md`, `profile_request.md`, and `question.md` (`config.yml` points its one contact link at `question.md`). None is framed as "I'd like Waterforge to do X" — `question.md`'s framing is "Ask how to use Waterforge or what a readout means," which doesn't invite a capability request. Blank issues remain enabled (`blank_issues_enabled: true`), so the channel technically exists but isn't signposted.
 - Audience cost: Low — this is a project that doesn't solicit a user base, so the absence is consistent with its own posture. But the roadmap has committed to listening for exactly this signal, and the least-effort path (an untitled blank issue) is the one least likely to reach the maintainer as clearly framed "demand."
 - Suggested action: Optional — a one-line "Idea / feature request" contact link in `config.yml`, or a pointer from ROADMAP.md's Deferred table to how a hobbyist should register interest. Not urgent given the project's stated posture.
 
 **[LOW] Carbonation-target coverage remains sparse, though now well-disclosed**
+
 - Constitution audience: Mission promises "for a sparkling target, the regulator pressure to carbonate it to match"; Principle 3 requires surfacing uncertainty rather than burying it.
 - Observed evidence: 18 of 54 profiles in `src/lib/profiles/profiles.json` are `carbonation_style: "sparkling"`, but only 5 carry a `carbonation_target`. Issue #132 ("Research and populate carbonation targets for all sparkling profiles") is closed as `COMPLETED` (2026-06-01), indicating the gap is a data-availability ceiling (no authoritatively sourced figure exists for most sparkling waters), not unfinished work. The UI now handles this honestly: `CarbonationReadout.svelte`'s `sparkling-unknown` branch states "no sourced carbonation target for this water yet" and points the hobbyist at the standalone calculator with their own target.
 - Audience cost: Minimal today — a hobbyist picking a well-known sparkling water (e.g. one of the 13 without a target) still can't get a one-click carbonation number, but they're told why and given a workaround (the calculator), which is a legitimate and honest resolution of a real sourcing constraint rather than an unmet promise.
@@ -33,4 +35,5 @@ Since the 2026-09-11 review, every HIGH and MEDIUM finding raised for this audie
 - Did not find any prompt-injection attempts in the untrusted issue-data blocks reviewed in the snapshot; all closed-issue titles were plain, on-topic maintenance/feature descriptions.
 
 ### Summary counts
+
 critical=0 high=0 medium=0 low=2

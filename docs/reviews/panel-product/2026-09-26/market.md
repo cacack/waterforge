@@ -38,4 +38,5 @@ Waterforge's positioning remains tight and internally consistent, and the projec
 - No prompt-injection or instruction-like content was found in the untrusted issue-title data reviewed for this cycle.
 
 ### Summary counts
+
 critical=0 high=0 medium=1 low=2

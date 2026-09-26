@@ -6,7 +6,7 @@ batched. LOWs that aren't folded in below are left unfiled.
 
 ## 1. Bring stranger-facing copy in line with the constitution
 
-**Severity:** medium  **Persona(s):** market, trust, mission (+ foil)  **Labels:** type:docs, area:docs
+**Severity:** medium **Persona(s):** market, trust, mission (+ foil) **Labels:** type:docs, area:docs
 **Constitution section:** Mission, Principle 2, Posture layers 2 and 4
 
 The Posture rewrite (ADR 0016) made the constitution candid, but three surfaces
@@ -27,6 +27,7 @@ wording, a one-phrase edit is enough (e.g. "so it, or anyone who finds it, can
 reproduce…").
 
 **Acceptance criteria**
+
 - [ ] Meta description and `package.json` description include "(or known-source)"
 - [ ] README "Getting help" (and optionally `config.yml` / the templates) carries a one-line best-effort caveat consistent with `SECURITY.md`
 - [ ] Mission wording is consistent with Posture, or is explicitly left as-is with a reason
@@ -35,7 +36,7 @@ reproduce…").
 
 ## 2. Record panel reviews as a bounded, chosen input to the backlog
 
-**Severity:** medium  **Persona(s):** roadmap, mission (+ foil)  **Labels:** type:docs, area:docs
+**Severity:** medium **Persona(s):** roadmap, mission (+ foil) **Labels:** type:docs, area:docs
 **Constitution section:** Principle 6, "How intent is recorded"
 
 About half of this cycle's closed issues trace to the 2026-09-11 product panel
@@ -54,6 +55,7 @@ things:
   correctness, or durability) before it becomes an issue.
 
 **Acceptance criteria**
+
 - [ ] Cadence and findings bar recorded in one authoritative place (ADR or `ROADMAP.md`)
 - [ ] Next panel date tied to the Criterion 5 window
 
@@ -61,7 +63,7 @@ things:
 
 ## 3. Make the dormant criteria falsifiable: a use signal, a use-lapse trigger, and the library-growth criterion
 
-**Severity:** medium  **Persona(s):** mission (+ foil, surfaced by rude-qa)  **Labels:** type:docs, area:docs
+**Severity:** medium **Persona(s):** mission (+ foil, surfaced by rude-qa) **Labels:** type:docs, area:docs
 **Constitution section:** Posture layers 1 and 3, Success Criteria
 
 This issue covers three gaps:
@@ -90,6 +92,7 @@ Suggested approach, all small:
    condition or says it has none by design.
 
 **Acceptance criteria**
+
 - [ ] A use signal exists that doesn't add telemetry
 - [ ] The layer 1 → layer 3 trigger is written down
 - [ ] The library-growth criterion states its failure condition, or its absence by design

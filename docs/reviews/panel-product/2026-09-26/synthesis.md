@@ -14,13 +14,13 @@ carries numeric maintenance thresholds (ADR 0017), and library growth is
 
 ## Per-persona verdicts
 
-| Persona | Verdict | Findings (C/H/M/L) |
-|---------|---------|--------------------|
-| Mission Steward | aligned | 0/0/1/2 |
-| Market Strategist | well-positioned | 0/0/1/2 |
-| Roadmap Reviewer | aligned | 0/0/1/2 |
-| Audience Advocate | well-served | 0/0/0/2 |
-| Trust Auditor | trustworthy | 0/0/1/1 |
+| Persona           | Verdict         | Findings (C/H/M/L) |
+| ----------------- | --------------- | ------------------ |
+| Mission Steward   | aligned         | 0/0/1/2            |
+| Market Strategist | well-positioned | 0/0/1/2            |
+| Roadmap Reviewer  | aligned         | 0/0/1/2            |
+| Audience Advocate | well-served     | 0/0/0/2            |
+| Trust Auditor     | trustworthy     | 0/0/1/1            |
 
 Totals: 0 critical, 0 high, 4 medium, 9 low. All HIGH and MEDIUM findings from
 the 2026-09-11 run were verified resolved in code or in ADRs, not only closed as

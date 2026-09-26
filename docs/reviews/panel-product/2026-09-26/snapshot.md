@@ -1,6 +1,7 @@
 # Strategic Snapshot — 2026-09-26
 
 ## Repo metadata
+
 - Root: <repo root>
 - Branch: docs/panel-product-2026-09-26
 - HEAD: e4d8738
@@ -282,10 +283,10 @@ source method it builds on.
 ## Project metadata
 
 {
-  "name": "waterforge",
-  "description": "Clone bottled mineral waters from distilled water and food-grade salts.",
-  "license": "GPL-3.0-or-later",
-  "version": "1.10.2"
+"name": "waterforge",
+"description": "Clone bottled mineral waters from distilled water and food-grade salts.",
+"license": "GPL-3.0-or-later",
+"version": "1.10.2"
 }
 
 ## Repository label vocabulary
@@ -293,11 +294,13 @@ source method it builds on.
 bug, documentation, duplicate, enhancement, help wanted, good first issue, invalid, question, wontfix, effort:low, effort:high, effort:medium, value:low, value:medium, type:feat, value:high, type:bug, type:chore, deferred, type:docs, area:engine, good-first-issue, area:data, area:ui, area:docs, area:infra, autorelease: pending, autorelease: tagged, dependencies, javascript, priority:high, priority:low, priority:medium, github_actions
 
 ## Open issues
+
 <untrusted-issue-data>
 (no open issues)
 </untrusted-issue-data>
 
 ## Recently closed issues (last 30)
+
 <untrusted-issue-data>
 | #266 | Alert when the release pipeline stops succeeding | type:chore, area:infra |  | 2026-09-26
 | #265 | Bring the architecture doc's module-boundaries diagram in line with the tree | type:docs, area:docs |  | 2026-09-26
@@ -332,11 +335,13 @@ bug, documentation, duplicate, enhancement, help wanted, good first issue, inval
 </untrusted-issue-data>
 
 ## Open milestones
+
 <untrusted-issue-data>
 (no open milestones — all 8 milestones closed)
 </untrusted-issue-data>
 
 ## Recent activity (last 6 months)
+
 - Commits: 415
 - Last 30 commit subjects:
   - e4d8738 Merge pull request #263 from cacack/release-please--branches--main--components--waterforge
@@ -382,11 +387,13 @@ bug, documentation, duplicate, enhancement, help wanted, good first issue, inval
   - v1.6.0
 
 ## Prior reviews
+
 - Previous panel-product run: docs/reviews/panel-product/2026-09-11/ (compare for progress since)
 - Engineering panel: docs/reviews/panel-engineering/2026-09-26/
 - Constitution drift report: docs/reviews/constitution/2026-09-11-drift.md
 
 ## Other top-level docs
+
 - SECURITY.md: present
 - CONTRIBUTING.md: present
 - CODE_OF_CONDUCT.md: absent
