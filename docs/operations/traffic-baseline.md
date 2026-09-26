@@ -50,6 +50,30 @@ Browsers seen: Chrome, Firefox, Safari (US) and Chrome (PL).
 
 **The two tables differ by a factor of ~2,000.** That gap _is_ the finding.
 
+## Re-measurement — 2026-09-26
+
+Same queries, 15 days after the baseline.
+
+**Beacon**, window 2026-06-27 → 2026-09-26: still **~40 page loads on 4 days**,
+all US, all direct, zero bots. The window has rolled: two baseline days (and
+the PL visit) aged out, and two new ones arrived — 2026-09-14 and 2026-09-22,
+both **MobileSafari**, the first mobile page loads recorded. Nothing
+distinguishes them from the maintainer on a phone.
+
+**Edge**, 2026-09-11 → 2026-09-26: 59,665 requests, 34,926 "page views", 988
+"uniques", ~204 MB. "Page views" sit flat at ~2,200/day — the uptime-check
+floor. The one uniques spike (140 on 2026-09-22) coincides with a single
+beacon page load; the rest is crawlers.
+
+**GitHub** (14-day traffic window to 2026-09-23): 1 view, no referrers,
+0 stars. 503 clones (157 unique), 283 of them on 2026-09-11 alone — automated,
+not people. All issues and PRs are the maintainer's or bots'.
+
+**One outside signal:** a public fork (created 2026-09-15) carries 14 commits
+extending the engine for a hot-spring water analysis mode, reusing `solver/`
+and `chem/`. No upstream PR or issue. That is someone _using the code_, which
+none of the traffic figures above would show.
+
 ## How to read this
 
 **The edge figures are dominated by traffic that is not a visitor.** A
