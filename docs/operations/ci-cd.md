@@ -113,7 +113,7 @@ and an archive that lags that far behind is a snapshot rather than a mirror.
 ## Dependabot auto-merge (`dependabot-automerge.yml`, `dependabot-retitle.yml`)
 
 Enables GitHub auto-merge on Dependabot PRs and approves them, so a patch or minor
-bump lands on its own once CI and the required GitGuardian check pass. Majors are
+bump lands on its own once the required `check` and GitGuardian checks pass. Majors are
 left for manual review — and so is any bump Dependabot declines to classify, which
 matters here: it omits `update-type` for indirect dependencies, and `dependencies`
 are compiled into `dist/`, so an unreviewed transitive major would be _shipped_
@@ -252,13 +252,14 @@ by integration` ([#240](https://github.com/cacack/waterforge/issues/240)).
    installation. Until that is done the auto-merge job fails at the token step; the
    run goes red rather than quietly skipping.
 
-## Follow-up: making CI checks required
+## Required status checks
 
-The current branch-protection ruleset only requires the "GitGuardian Security
-Checks" status check. To make the `check` job from `ci.yml` a required gate,
-the repo owner must edit the ruleset under **Settings → Rules → Rulesets** and
-add `CI / check` to the required status checks. This is an owner-only operation
-and is out of scope for this PR.
+The `main` ruleset requires two status checks, with branches kept up to date
+before merging: `check` (the `ci.yml` job) and "GitGuardian Security Checks". A
+PR, including a Dependabot auto-merge, cannot land while either is red.
+
+The ruleset is managed as code outside this repository. Change it there, not
+under **Settings → Rules → Rulesets**: the next apply reverts a UI edit.
 
 release-please needs `contents: write` and `pull-requests: write` permissions
 to open release PRs and create tags/releases; these are granted in the
