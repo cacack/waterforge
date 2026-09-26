@@ -8,7 +8,8 @@ name: Site health
 #
 # The domain-registration check has nothing to do with that outage and is here
 # for the same reason: it fails invisibly. A renewal that does not go through
-# produces no error anywhere until the name stops resolving.
+# produces no error anywhere until the name stops resolving. So does the
+# release pipeline: when RELEASE_PLEASE_TOKEN expires, releases just stop.
 
 on:
   schedule:
@@ -18,6 +19,7 @@ on:
 permissions:
   contents: read
   pages: read
+  actions: read
   issues: write
 
 env:
@@ -97,6 +99,32 @@ jobs:
           echo "Domain $DOMAIN expires $expiry ($days days out)"
           if [ "$days" -lt "$DOMAIN_EXPIRY_WARN_DAYS" ]; then
             echo "FAIL: $DOMAIN registration expires in $days days ($expiry) -- renew it at the registrar; nothing in CI can fix this" >> "$RUNNER_TEMP/failures"
+          fi
+
+      - name: Check release pipeline
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          # release-please runs daily and on every push to main, so its latest
+          # completed run is never more than a day old. Any run that did not
+          # succeed means releases have stopped -- most often because the PAT
+          # expired, which leaves the site frozen at the last deploy with no
+          # other symptom. A read failure warns, like the Pages API check above.
+          if ! run=$(gh run list --repo "${{ github.repository }}" --workflow release-please.yml \
+              --branch main --status completed --limit 1 \
+              --json conclusion,createdAt,url --jq '.[0] // empty' 2>&1); then
+            echo "::warning::Could not read release-please runs; check skipped. $run"
+            exit 0
+          fi
+          if [ -z "$run" ]; then
+            echo "::warning::No completed release-please run on main; check skipped."
+            exit 0
+          fi
+          conclusion=$(echo "$run" | jq -r .conclusion)
+          echo "Latest release-please run: $conclusion ($(echo "$run" | jq -r .createdAt))"
+          if [ "$conclusion" != "success" ]; then
+            echo "FAIL: latest release-please run on main concluded '$conclusion' -- $(echo "$run" | jq -r .url). If its log shows 'Bad credentials', rotate RELEASE_PLEASE_TOKEN: ${{ github.server_url }}/${{ github.repository }}/blob/main/docs/operations/ci-cd.md#one-time-manual-steps-repo-owner" >> "$RUNNER_TEMP/failures"
           fi
 
       - name: Check site is reachable

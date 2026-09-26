@@ -55,15 +55,16 @@ See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
 
 ## Site health (`site-health.yml`)
 
-Runs daily on a schedule, and on `workflow_dispatch`. Four checks: the GitHub
+Runs daily on a schedule, and on `workflow_dispatch`. Five checks: the GitHub
 Pages certificate state, the origin certificate's remaining lifetime, the
-domain's registration expiry, and that `https://waterforge.app/` returns `200`.
+domain's registration expiry, that the latest `release-please.yml` run on `main`
+succeeded, and that `https://waterforge.app/` returns `200`.
 On failure it opens a single issue — deduplicated by title so a sustained outage
 does not file one per day — and closes that issue automatically once the checks
 pass again.
 
-No secrets required: the default `GITHUB_TOKEN` with `pages: read` and
-`issues: write` covers all four checks. The job runs without
+No secrets required: the default `GITHUB_TOKEN` with `pages: read`,
+`actions: read` and `issues: write` covers all five checks. The job runs without
 `actions/checkout`, so every `gh` call must pass `--repo` — without it `gh`
 looks for a git remote and dies with "not a git repository", which silently
 disables the alerting rather than failing the check.
@@ -201,7 +202,10 @@ once.
    scoped to this repo with **Contents: read+write** and **Pull requests:
    read+write**, then store it as the repo secret `RELEASE_PLEASE_TOKEN`
    (`gh secret set RELEASE_PLEASE_TOKEN`). The token reference is in
-   `release-please.yml`. PAT expiration is the maintainer's responsibility.
+   `release-please.yml`. PAT expiration is the maintainer's responsibility;
+   when it lapses, the [site-health check](#site-health-site-healthyml) files an
+   issue linking back here. To rotate, regenerate the token and run
+   `gh secret set RELEASE_PLEASE_TOKEN` again.
 
 4. **Allow `v*` tags to deploy to the `github-pages` environment.** The
    environment is created automatically by Pages and defaults to a "selected

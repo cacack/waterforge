@@ -26,7 +26,9 @@ Each of these is held by one person, and each ends the public site if it lapses.
 | **GitHub account**         | Repo, Pages hosting, Actions, releases  | Site, issues and releases go; the source survives in the archive.      |
 | **`RELEASE_PLEASE_TOKEN`** | PAT that lets release-please open PRs   | Releases silently stop; the site freezes at the last deploy.           |
 
-The PAT is the least severe and the easiest to miss — see
+The PAT is the least severe and the easiest to miss, which is why the daily
+[site-health check](./ci-cd.md#site-health-site-healthyml) fails when the latest
+release-please run did not succeed. See
 [ci-cd.md § One-time manual steps](./ci-cd.md#one-time-manual-steps-repo-owner)
 for what it is and how it is provisioned. That page is the authoritative record
 for all owner-only settings; this one does not restate them.
