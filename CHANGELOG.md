@@ -9,6 +9,17 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.10.3](https://github.com/cacack/waterforge/compare/v1.10.2...v1.10.3) (2026-10-03)
+
+
+### Bug Fixes
+
+* **deps:** bump @lucide/svelte from 1.45.0 to 1.48.0 ([469b9f5](https://github.com/cacack/waterforge/commit/469b9f540fe69506ae0975bd5ba3d3583ce7ca82))
+* **deps:** bump brace-expansion from 2.1.4 to 2.1.7 ([3519c7f](https://github.com/cacack/waterforge/commit/3519c7fa241550da05affa77c6f54c5acb2f1f38))
+* **deps:** bump fast-uri from 3.1.7 to 3.1.8 ([6212ce9](https://github.com/cacack/waterforge/commit/6212ce92fd653c66d94e5d481c8922d9d212aaa8))
+* **deps:** bump svelte from 5.57.0 to 5.57.1 ([f85acd5](https://github.com/cacack/waterforge/commit/f85acd54fdab26310a9fbebe9f965ac715a9dce1))
+* **deps:** bump vite from 8.3.0 to 8.3.1 ([571c946](https://github.com/cacack/waterforge/commit/571c946da5f3cbf4b841630b5bd22b7d495ad822))
+
 ## [1.10.2](https://github.com/cacack/waterforge/compare/v1.10.1...v1.10.2) (2026-09-26)
 
 
