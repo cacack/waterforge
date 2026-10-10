@@ -9,6 +9,16 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.10.4](https://github.com/cacack/waterforge/compare/v1.10.3...v1.10.4) (2026-10-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @lucide/svelte from 1.48.0 to 1.52.0 ([f570e36](https://github.com/cacack/waterforge/commit/f570e36fa1b49df6d7d8bd070b91431a1d995473))
+* **deps:** bump bits-ui from 2.19.3 to 2.19.5 ([19d328f](https://github.com/cacack/waterforge/commit/19d328f03da2198fd16f248043087c63eb6ba49b))
+* **deps:** bump postcss-selector-parser from 7.1.5 to 7.1.6 ([321645b](https://github.com/cacack/waterforge/commit/321645bfcd16e497c8b111298a7f4cb84427d0eb))
+* **deps:** bump source-map-js from 1.2.1 to 1.2.2 ([54c2653](https://github.com/cacack/waterforge/commit/54c26537fe9f7a5abb5db5a520ea30cb202a9e8d))
+
 ## [1.10.3](https://github.com/cacack/waterforge/compare/v1.10.2...v1.10.3) (2026-10-04)
 
 
