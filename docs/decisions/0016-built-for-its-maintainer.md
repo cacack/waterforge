@@ -4,6 +4,9 @@
 **Date:** 2026-09-11
 **Amends:** [CONSTITUTION.md](../../CONSTITUTION.md) (the Audience section; adds
 the Posture section, Principle 6, and "How intent is recorded")
+**Amended by:** [ADR 0023](0023-use-signal-and-lapse-trigger.md) (2026-10-25) —
+decision 1's "verifiable" is backed by a quarterly use reading, and the
+layer 1 → layer 3 switch has a written trigger
 
 ## Context
 

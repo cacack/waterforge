@@ -43,8 +43,8 @@ matters more than the labels:
 3. **The backstop** — should that use end, the sourced profile compilation and a
    correct solver are still worth preserving on their own: copyleft, forkable,
    archived. Insurance on an artifact, not service to a population. The switch
-   from layer 1 to here has a written trigger: two quarters with no recorded use
-   ([ADR 0023](docs/decisions/0023-use-signal-and-lapse-trigger.md)).
+   from layer 1 to here has a written trigger: two consecutive quarters with no
+   recorded use ([ADR 0023](docs/decisions/0023-use-signal-and-lapse-trigger.md)).
 4. **Aspiration, not commitment** — if users arrive, good. Serving a user base
    would be a new decision, recorded here when it is made; it is not assumed
    today, and no work is owed to a hypothetical audience.
