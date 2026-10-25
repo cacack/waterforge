@@ -13,7 +13,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.66,
-    "tds": 138,
+    "tds": {
+      "value": 138,
+      "provenance": {
+        "verified": true,
+        "source": "Acqua Panna 2023 Water Analysis Report (Sanpellegrino S.p.A. / Nestlé USA), Total Dissolved Solids; checked via Wayback capture of acquapanna.com/us/sites/g/files/xknfdk971/files/2024-09/AcquaPanna_WA_EN_2023.pdf. A 2025 report (TDS 140, revised ions) now exists.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 2.1 mg/L (reported as 0.48 mg/L nitrate-as-N). HCO₃ derived from total alkalinity 90 mg/L as CaCO₃. K below detection limit. Still water (no CO₂).",
     "url": "https://www.acquapanna.com/us/sites/g/files/xknfdk971/files/2024-09/AcquaPanna_WA_EN_2023.pdf",
     "country": "Italy",
@@ -41,7 +48,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7,
-    "tds": 130,
+    "tds": {
+      "value": 130,
+      "provenance": {
+        "verified": true,
+        "source": "Antipodes producer page antipodes.co.nz/our-water — \"130 Total Dissolved Solids\" (minerality at source, ±20%; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Used for strong, pale, bitter ales. SiO₂ 73 mg/L (dominant mineral). Silica-rich artesian water, Whakatāne, NZ; total minerality ~130 mg/L. Bottler states analysis accurate to ±20%.",
     "url": "https://www.antipodes.co.nz/our-water",
     "country": "New Zealand",
@@ -68,7 +82,7 @@
       "Cl": 130
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 2740,
+    "tds_unpublished": "Producer gives ions only, no residue/TDS; the former 2740 was the exact sum of the listed ions (checked coca-cola.com/de Apollinaris, Open Food Facts labels, 2026-10).",
     "comment": "Used for dark, soft flavored beers. Apollinaris (Bad Neuenahr-Ahrweiler, Coca-Cola) — Apollinaris Classic/Selection mineralisation. Classic/Medium were withdrawn from German retail; Selection remains (gastronomy/export), same source water.",
     "url": "https://www.apollinaris.de/",
     "country": "Germany",
@@ -93,7 +107,7 @@
       "Cl": 32
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 603,
+    "tds_unpublished": "No residue/TDS on the archived producer site (aquarel.de, Wayback 2003–2005); the former 603 was mineralwasser-test.com's sum of the listed ions (checked 2026-10).",
     "comment": "Used for dark, soft flavored beers. HISTORICAL / unverified-current: Nestlé Aquarel (Birken Quelle, Naturell) is no longer marketed in Germany — no current bottler source. Values from mineralwasser-test.com label transcription. Removal-sub-issue candidate.",
     "url": "https://mineralwasser-test.com/wasser/nestle-aquarel-birken-quelle-naturell/",
     "country": "Germany",
@@ -152,7 +166,15 @@
       "Cl": 54
     },
     "alkalinity_unit": "as_HCO3",
-    "comment": "Naturally carbonated. SiO₂ 27 mg/L, F⁻ 1.2 mg/L. Official badoit.fr table omits K, pH, TDS and CO₂; prior Khymos-2015 values for those fields dropped.",
+    "tds": {
+      "value": 1100,
+      "provenance": {
+        "verified": true,
+        "source": "Badoit bottle label, \"Teneur totale en sels minéraux à 180°C : 1100 mg/litre\" (Open Food Facts label photo, EAN 3068320112107); badoit.fr table omits it",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Naturally carbonated. SiO₂ 27 mg/L, F⁻ 1.2 mg/L. Official badoit.fr table omits K, pH, TDS and CO₂; prior Khymos-2015 values for those fields dropped. TDS is from the bottle label.",
     "url": "https://www.badoit.fr/notre-eau-minerale/badoit-composition.html",
     "country": "France",
     "locality": "Saint-Galmier",
@@ -178,7 +200,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 2500,
     "ph": 5.75,
-    "tds": 1490,
+    "tds": {
+      "value": 1490,
+      "provenance": {
+        "verified": false,
+        "source": "Superseded: 1490 not found in any current source. The current Borsec label (WESSLING Romania analysis 2301306, 2023-02-01; Open Food Facts EAN 5942219115845) gives reziduu sec la 180 °C 1500 with revised ions (HCO₃ 1690, Ca 340, Mg 96.4, Na 60); 1490 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Naturally carbonated (Romaqua Group). CO₂ is the label minimum (≥2500 mg/L); TDS is dry residue at 180°C. K, SO₄ and Cl were Khymos-origin and are not on the current product label, so they were dropped.",
     "url": "https://romaqua-group.ro/en/brands/borsec/",
     "country": "Romania",
@@ -237,7 +266,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.4,
-    "tds": 280,
+    "tds": {
+      "value": 280,
+      "provenance": {
+        "verified": true,
+        "source": "Buxton bottle label, \"Dry residue at 180°C 280\" (Open Food Facts label photo, EAN 5015552555132)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Still natural mineral water, St Ann's spring (Buxton, Derbyshire, UK; Nestlé Waters). Still and sparkling share this analysis, differing only in carbonation (sparkling pH ~5.2). NO₃ <0.1 mg/L. TDS is dry residue at 180°C; no F or SiO₂ published.",
     "url": "https://www.buxtonwater.co.uk/faqs/nutritional-information",
     "country": "United Kingdom",
@@ -265,7 +301,14 @@
     },
     "alkalinity_unit": "as_CaCO3",
     "ph": 7.5,
-    "tds": 78,
+    "tds": {
+      "value": 78,
+      "provenance": {
+        "verified": true,
+        "source": "2021 Calistoga Water Analysis Report (BlueTriton Brands), Calistoga Spring Water column, TDS 78 mg/L (linked from calistogawater.com)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Still Spring Water line; springs: Lukens Spring (Baxter, CA) and/or Sopiago Spring (El Dorado County, CA). Source reports alkalinity as CaCO₃ (40 mg/L as CaCO₃; not pre-converted). Cl and NO₃-as-N reported non-detect (Cl omitted). Low-mineral spring water.",
     "url": "https://static1.squarespace.com/static/60d362b2beb14d399efd7738/t/6287a33485f6314970f0c227/1653056309052/Calistoga-WQR-2021.pdf",
     "country": "United States",
@@ -293,7 +336,14 @@
       "Cl": 57
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 665,
+    "tds": {
+      "value": 665,
+      "provenance": {
+        "verified": true,
+        "source": "Carola Rouge bottle label, \"Résidu sec à 180°C 665\" (Open Food Facts label transcription, product 3268650001069)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 1.5 mg/L. Carbonation grade only (Rouge); ion composition is shared across Carola variants. Now classified as eau de source.",
     "url": "https://fr.openfoodfacts.org/produit/3268650001069/carola-rouge",
     "country": "France",
@@ -323,7 +373,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 0,
     "ph": 7.4,
-    "tds": 2078,
+    "tds": {
+      "value": 2078,
+      "provenance": {
+        "verified": true,
+        "source": "Contrex bottle label, résidu sec à 180 °C 2078 mg/L (Open Food Facts label photo, EAN 7613035866386)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 2.9 mg/L. Still water. Major ions and TDS 2078 confirmed against current Contrex/Nestlé label.",
     "url": "https://www.contrex.fr/eau-minerale-contrex/composition",
     "country": "France",
@@ -349,7 +406,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 5.88,
-    "tds": 644,
+    "tds": {
+      "value": 644,
+      "provenance": {
+        "verified": true,
+        "source": "The Coca-Cola Company (Romania), Dorna Poiana Vinului — \"Dry residue at 180°C 644 mg/l\" (coca-cola.com/ro/ro/brands/dorna)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Dorna natural carbonated mineral water (Poiana Vinului source). NO₃ 0.26 mg/L; Cl <5 mg/L (omitted). TDS is dry residue at 180°C. The current bottler declaration publishes a real HCO₃ (680.8 mg/L), so the prior Khymos HCO₃=0 placeholder, plus the Khymos-origin K, SO₄, Cl and CO₂ figures (not on the current declaration), were dropped.",
     "url": "https://www.coca-cola.com/ro/ro/brands/dorna",
     "country": "Romania",
@@ -379,7 +443,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 0,
     "ph": 7.2,
-    "tds": 345,
+    "tds": {
+      "value": 345,
+      "provenance": {
+        "verified": true,
+        "source": "Evian official water quality page, \"Dry residue at 180 °C: 345\" (evian.com/en_int/what-is-mineral-water/water-quality/)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 3.8 mg/L.",
     "url": "https://www.evian.com/en_int/what-is-mineral-water/water-quality/",
     "country": "France",
@@ -407,7 +478,7 @@
       "Cl": 667
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 1400,
+    "tds_unpublished": "Ringnes product page lists ions only; the ~1400 'total mineral content' appears only in secondary sources (checked ringnes.no, 2026-10).",
     "comment": "Carbonated; Si 6 mg/L. Total mineral content ~1400 mg/L. High Na/Cl gives a large charge-balance residual (KNOWN_IMBALANCED). pH not published by the bottler.",
     "url": "https://www.ringnes.no/produkter/farris/farris/",
     "country": "Norway",
@@ -437,8 +508,15 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 2600,
     "ph": 6.2,
-    "tds": 1328,
-    "comment": "Naturally sparkling (\"effervescente naturale\"), Ferrarelle spring, Riardo (Caserta, Campania, Italy). CO₂ is the free-CO₂-at-source figure from the official EPD. NO₃ 3.5 mg/L, F 1.0 mg/L, SiO₂ 84 mg/L. TDS is dry residue at 180°C.",
+    "tds": {
+      "value": 1328,
+      "provenance": {
+        "verified": true,
+        "source": "Ferrarelle S.p.A. Bottled Water Report, Ferrarelle Sparkling, \"Total Dissolved Solids (TDS)\" 1328 mg/L (ferrarelle.it/assets/pdf/certificazioni/ferrarelle-sparkling-english-13-06-2024.pdf; method not stated)",
+        "source_date": "2024-05-20"
+      }
+    },
+    "comment": "Naturally sparkling (\"effervescente naturale\"), Ferrarelle spring, Riardo (Caserta, Campania, Italy). CO₂ is the free-CO₂-at-source figure from the official EPD. NO₃ 3.5 mg/L, F 1.0 mg/L, SiO₂ 84 mg/L. TDS is the bottler report's Total Dissolved Solids (method not stated).",
     "url": "https://www.ferrarelle.it/assets/pdf/certificazioni/ferrarelle-sparkling-english-13-06-2024.pdf",
     "country": "Italy",
     "locality": "Riardo, Campania",
@@ -466,7 +544,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.7,
-    "tds": 222,
+    "tds": {
+      "value": 222,
+      "provenance": {
+        "verified": true,
+        "source": "FIJI Water FAQ, \"Typical Analysis in Milligrams per Liter\", TDS 222 (fijiwater.com.au/faqs; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Silica-rich artesian water, Yaqara Valley aquifer, Viti Levu, Fiji. SiO₂ 93 mg/L (dominant mineral; fills the high-silica chemistry gap). F 0.24 mg/L, NO₃ ~0.27 mg/L. Core ions from the bottler's 'Typical Analysis'; SO₄ and NO₃ are from the FineWaters profile (not in the bottler table) and are lower-confidence.",
     "url": "https://www.fijiwater.com.au/faqs",
     "country": "Fiji",
@@ -495,7 +580,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 5,
     "ph": 7.47,
-    "tds": 150,
+    "tds": {
+      "value": 150,
+      "provenance": {
+        "verified": true,
+        "source": "Acqua Fiuggi producer page, residuo fisso a 180 °C 150 mg/L, \"Rif. analisi 18/01/2022\" (acquafiuggi.com/gamma/everyday)",
+        "source_date": "2022-01-18"
+      }
+    },
     "comment": "NO₃ 3.1 mg/L. SiO₂ ~16–33 mg/L. Cl not published on current analysis (Khymos value dropped). Fonte Fiuggi (FR), Lazio.",
     "url": "https://www.beverfood.com/acqua/fiuggi.html",
     "country": "Italy",
@@ -534,7 +626,7 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 7000,
     "ph": 5.9,
-    "tds": 2488,
+    "tds_unpublished": "Analysis sheet gives only the sum of the listed minerals (2479 mg/L), no Abdampfrückstand; the former 2488 was not on the sheet (checked Analyseblatt Sprudel 2024, gerolsteiner.de, 2026-10).",
     "comment": "NO₃ 5.1 mg/L.",
     "url": "https://assets.ctfassets.net/l6w8pczwr290/7qgVW2RZD4K9WWtoTk8u9N/6f5ccd5de826115e945d59e74fc9f90a/analyseblatt-sprudel_international_2024.pdf",
     "country": "Germany",
@@ -567,6 +659,7 @@
       "Cl": 86
     },
     "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "Producer page lists five ions only; no residue/TDS (checked hassia-sprudel.de and label, 2026-10).",
     "comment": "Hassia Sprudel (Bad Vilbel) — official Hassia mineralisation (SGS Institut Fresenius).",
     "url": "https://www.hassia-sprudel.de/produkte/mineralwasser/sprudel",
     "country": "Germany",
@@ -598,7 +691,14 @@
       "Cl": 8
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 571,
+    "tds": {
+      "value": 571,
+      "provenance": {
+        "verified": true,
+        "source": "henniez.ch/fr-ch/gammes/henniez-verre, \"Composants caractéristiques — Minéralisation totale: 571 mg/L\" (total mineralisation, not résidu sec; read via Wayback 2026-06-07)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 14 mg/L. TDS is total mineralisation (571 mg/L) from the bottler.",
     "url": "https://www.henniez.ch/fr-ch/source-de-vie-fr",
     "country": "Switzerland",
@@ -627,7 +727,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.2,
-    "tds": 2513,
+    "tds": {
+      "value": 2513,
+      "provenance": {
+        "verified": true,
+        "source": "Hépar bottle label, \"Résidu sec à 180°C 2513\" (Open Food Facts label transcription, EAN 7613035024021)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Still water, Vittel (Vosges, France; Nestlé Waters). The most magnesium-rich still natural mineral water on the French market (Mg 119 mg/L) and very high sulfate (SO₄ 1530 mg/L) — fills the high-Mg / high-SO₄ chemistry gap. NO₃ 4.3 mg/L, F 0.4 mg/L. TDS is dry residue at 180°C; no CaCO₃ alkalinity or SiO₂ published.",
     "url": "https://www.nutripro.nestle.fr/sites/default/files/2024-08/Tableau%20des%20eaux%20min%C3%A9rales%20naturelles%20plates.pdf",
     "country": "France",
@@ -661,7 +768,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.8,
-    "tds": 170,
+    "tds": {
+      "value": 170,
+      "provenance": {
+        "verified": true,
+        "source": "Highland Spring \"Average Analysis at source\", \"Dry residue 180°C 170\" (highlandspring.com/product-range/spring-water/)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Still spring water, Blackford (Ochil Hills, Perthshire, UK). NO₃ 3.1 mg/L. Still and sparkling share this 'average analysis at source'; sparkling differs only in carbonation (pH ~4–5). TDS is dry residue at 180°C; no F or SiO₂ published by the bottler.",
     "url": "https://highlandspring.com/product-range/spring-water/",
     "country": "United Kingdom",
@@ -714,7 +828,14 @@
     },
     "alkalinity_unit": "as_CaCO3",
     "ph": 6.5,
-    "tds": 58,
+    "tds": {
+      "value": 58,
+      "provenance": {
+        "verified": true,
+        "source": "Magnetic Springs Spring Water Annual Testing report, National Testing Laboratories sample 439363, \"Total Dissolved Solids, 2540C\" 58 mg/L (magneticsprings.com/wp-content/uploads/2025/05/2022-23-Spring-Water-Annual-Testing.pdf)",
+        "source_date": "2022-12-30"
+      }
+    },
     "comment": "Magnetic Springs Spring water (still), sourced from Pine Grove Springs, Columbus, Ohio — a low-mineralisation US spring. SiO₂ 9.6 mg/L. NO₃ as N 0.78 mg/L (≈ NO₃ 3.5 mg/L). Sulfate below the lab reporting limit (<5 mg/L, treated as absent). Alkalinity reported as CaCO₃ (40 mg/L).",
     "url": "https://magneticsprings.com/wp-content/uploads/2025/05/2022-23-Spring-Water-Annual-Testing.pdf",
     "country": "United States",
@@ -743,7 +864,14 @@
     },
     "alkalinity_unit": "as_CaCO3",
     "ph": 7.7,
-    "tds": 210,
+    "tds": {
+      "value": 210,
+      "provenance": {
+        "verified": true,
+        "source": "Mountain Valley Spring Water 2025 Water Analysis Report, TDS 210 mg/L (a-us.storyblok.com/f/1021132/x/618d7a33c8/mountainvalley_wqr_2025_en.pdf)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "The Mountain Valley® Spring Water (still), Ouachita Mountains, AR. NO₃ as N: ND. Ion values are midpoints of the reported ranges from the 2025 Water Analysis Report (Ca 65–70, Mg 6.1–7.2, Na 1.7–2.5, K ND–1.2, Cl 1.8–2.5, SO₄ 5.2–8.2, pH 7.3–8.1). Alkalinity reported as CaCO₃ (190 mg/L).",
     "url": "https://www.mountainvalleyspring.com/pages/water-quality-report",
     "country": "United States",
@@ -796,6 +924,7 @@
       "Cl": 153
     },
     "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "No residue/TDS on the archived producer site (neuselters.de, Wayback 2015); only third-party ion sums (checked 2026-10).",
     "comment": "HISTORICAL / unverified-current: Neuselters Mineralquellen (Löhnberg) permanently closed Feb 2016 — no current authoritative source exists. Values from mineralwasser-test.com label transcription (Neuselters Still). Removal-sub-issue candidate.",
     "url": "https://mineralwasser-test.com/wasser/neuselters-still/",
     "country": "Germany",
@@ -825,7 +954,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 3500,
     "ph": 5.6,
-    "tds": 635,
+    "tds": {
+      "value": 635,
+      "provenance": {
+        "verified": false,
+        "source": "Superseded: 635 no longer published. perlaharghitei.ro/produse/perla-harghitei (Carbo) now gives reziduu sec la 180 °C 704 with revised ions (Ca 108, Mg 44.6, Na 64.0, HCO₃ 675); 635 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Naturally carbonated flagship (\"Carbo\"), Sâncrăieni source. CO₂ is the label minimum (≥3500 mg/L). The lightly-carbonated \"Ușor Carbo\" variant shares this analysis, differing only in CO₂. No NO₃, F, or SiO₂ published.",
     "url": "https://www.perlaharghitei.ro/produse/perla-harghitei",
     "country": "Romania",
@@ -854,7 +990,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.3,
-    "tds": 347,
+    "tds": {
+      "value": 347,
+      "provenance": {
+        "verified": false,
+        "source": "Superseded: 347 no longer published. perlaharghitei.ro/produse/perla-harghitei (Plată, FH Artezia 2) now gives reziduu sec la 180° 376 with revised ions (Ca 113, HCO₃ 312, Cl 13.2); 347 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Still (\"Plată\") line — chemically distinct from the carbonated Perla Harghitei, drawn from a different spring (FH Artezia 2, Sânsimion): much lower Mg/Na/HCO₃. No NO₃, F, or SiO₂ published.",
     "url": "https://www.perlaharghitei.ro/produse/perla-harghitei",
     "country": "Romania",
@@ -892,7 +1035,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 5.5,
-    "tds": 456,
+    "tds": {
+      "value": 456,
+      "provenance": {
+        "verified": true,
+        "source": "Perrier bottle label, \"Résidu sec à 180°C : 456\" (Open Food Facts label transcription, EAN 7613034579102). Another current label (EAN 7613034579942) reads 479 with different ions.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 7.3 mg/L. Current product label (Vergèze). Nestlé's corporate fact sheet differs (Ca 155, Mg 6.8, SO₄ 33, Cl 22, HCO₃ 430) — Perrier's published composition varies by source/period. carbonation_target ≈5.0 volumes is an unverified estimate (see carbonation_target.provenance), not a producer spec.",
     "url": "https://www.nestle.com/sites/default/files/asset-library/documents/investors/fact-sheets/perrier%20facts%20and%20figures.pdf",
     "country": "France",
@@ -966,6 +1116,7 @@
       "Cl": 142
     },
     "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "Producer page and bottle label list ions only; no residue/TDS (checked rosbacher.de and Open Food Facts label, 2026-10).",
     "comment": "Rosbacher Klassisch (Rosbach v.d.Höhe, Hassia Group) — manufacturer mineralisation; Rosbacher cites Institut Fresenius analysis (Taunusstein, 17.09.2015). Ca:Mg ~2:1.",
     "url": "https://www.rosbacher.de/magazin/ein-geschenk-der-natur",
     "country": "Germany",
@@ -999,7 +1150,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 6.6,
-    "tds": 4774,
+    "tds": {
+      "value": 4774,
+      "provenance": {
+        "verified": true,
+        "source": "Saint-Yorre official composition, \"extrait sec à 180°C : 4774 mg/l\" (st-yorre.com/st-yorre-et-mineralite/st-yorre-riche-mineraux/)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Naturally carbonated (Source Royale). F⁻ < 1.5 mg/L. Very high mineralisation; known charge-imbalanced.",
     "url": "https://www.st-yorre.com/st-yorre-et-mineralite/st-yorre-riche-mineraux/",
     "country": "France",
@@ -1031,6 +1189,7 @@
       "Cl": 61
     },
     "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "Producer analysis extract (Institut Romeis) and bottle label list ions only; no Abdampfrückstand/TDS (checked salvus.de and Open Food Facts label, 2026-10).",
     "comment": "F⁻ 0.16 mg/L. Salvus (Emsdetten) — official Salvus mineralisation (Institut Romeis).",
     "url": "https://www.salvus.de/sortiment/salvus-classic/",
     "country": "Germany",
@@ -1060,7 +1219,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 0,
     "ph": 7.48,
-    "tds": 262,
+    "tds": {
+      "value": 262,
+      "provenance": {
+        "verified": true,
+        "source": "San Benedetto scheda tecnica SB_AQ_ST_304 rev. 1 (2020-07-14), \"Residuo fisso a 180°C 262 mg/l\", analysis Università di Napoli Federico II 04/07/2019 (producer sheet hosted at mybeverages.it/uploads/prodotti/schede/S.BANA33PL.pdf)",
+        "source_date": "2019-07-04"
+      }
+    },
     "comment": "NO₃ 9 mg/L. SiO₂ 16.6 mg/L. Fonte San Benedetto, Scorzè (VE). Still water.",
     "url": "https://www.mybeverages.it/uploads/prodotti/schede/S.BANA33PL.pdf",
     "country": "Italy",
@@ -1088,8 +1254,8 @@
       "Cl": 627
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 3424,
-    "comment": "F⁻ 2.3 mg/L. TDS = dry residue at 180 °C. Naturally carbonated bicarbonate-sodium water (Caldes de Malavella). Bottler confirms \"agua con gas natural\" (natural volcanic CO₂) but publishes no numeric CO₂ figure, so co2 is left unset. Published ion set shows an anion excess (known imbalanced). Prior 2015 \"little gas\" ambiguity resolved.",
+    "tds_unpublished": "sannarciso.com lists ions only for San Narciso (its 'residuo seco 2980' is the sister water Imperial); the former 3424 was untraceable (checked sannarciso.com incl. Wayback 2024-02, 2026-10).",
+    "comment": "F⁻ 2.3 mg/L. Naturally carbonated bicarbonate-sodium water (Caldes de Malavella). Bottler confirms \"agua con gas natural\" (natural volcanic CO₂) but publishes no numeric CO₂ figure, so co2 is left unset. Published ion set shows an anion excess (known imbalanced). Prior 2015 \"little gas\" ambiguity resolved.",
     "url": "https://sannarciso.com/?lang=es",
     "country": "Spain",
     "locality": "Caldes de Malavella, Catalonia",
@@ -1131,7 +1297,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 5.7,
-    "tds": 854,
+    "tds": {
+      "value": 854,
+      "provenance": {
+        "verified": false,
+        "source": "854 not confirmed in a producer source (Wikipedia / retailer only). Current S.Pellegrino labels read résidu sec à 180 °C 853 with slightly revised ions (Na 30.0, Ca 166; Open Food Facts EAN 8002270015328); 854 kept paired with this profile's ion set until the whole analysis is refreshed.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 2.9 mg/L. pH 5.7 as sold (7.6 at source). Previous 2015 Khymos values ran ~14–32% high.",
     "url": "https://en.wikipedia.org/wiki/S.Pellegrino",
     "country": "Italy",
@@ -1181,6 +1354,14 @@
       "Cl": 254
     },
     "alkalinity_unit": "as_HCO3",
+    "tds": {
+      "value": 1508,
+      "provenance": {
+        "verified": true,
+        "source": "selters.de/sortiment/ — Selters Classic, \"1,508 g gelöste, feste Bestandteile\" per SGS Institut Fresenius analysis of 2014-03-13 (dissolved solids from the analysis, not an Abdampfrückstand)",
+        "source_date": "2014-03-13"
+      }
+    },
     "comment": "Original Selters Classic (Löhnberg-Selters) — official mineralisation, SGS Institut Fresenius analysis 2014-03-13. CO₂ figure not published by bottler; Khymos-era value dropped.",
     "url": "https://www.selters.de/sortiment/",
     "country": "Germany",
@@ -1207,7 +1388,14 @@
       "Cl": 55.1
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 152.5,
+    "tds": {
+      "value": 152.5,
+      "provenance": {
+        "verified": true,
+        "source": "US Patent Application 2006/0286263 A1 (Conopco/Unilever), \"Functional water 2\" (Table I)",
+        "source_date": "2026-05-28"
+      }
+    },
     "comment": "\"Functional water 2\" from US 2006/0286263 A1 — the UPPER bound of a tea-brewing water range (paired with 'Functional water 1' as the lower bound). All ion values and TDS confirmed against Table I.",
     "url": "https://patents.google.com/patent/US20060286263A1/en",
     "description": "The upper bound of a patented water range proposed for tea brewing; a reference composition rather than a bottled product.",
@@ -1231,7 +1419,14 @@
       "Cl": 23.7
     },
     "alkalinity_unit": "as_HCO3",
-    "tds": 60.3,
+    "tds": {
+      "value": 60.3,
+      "provenance": {
+        "verified": true,
+        "source": "US Patent Application 2006/0286263 A1 (Conopco/Unilever), \"Functional water 1\" (Table I)",
+        "source_date": "2026-05-28"
+      }
+    },
     "comment": "\"Functional water 1\" from US 2006/0286263 A1 — the LOWER bound of a tea-brewing water range (the patent pairs it with 'Functional water 2' as the upper bound). All ion values and TDS confirmed against Table I.",
     "url": "https://patents.google.com/patent/US20060286263A1/en",
     "description": "The lower bound of a patented water range proposed for tea brewing; a reference composition rather than a bottled product.",
@@ -1247,28 +1442,33 @@
     "slug": "tesanjski",
     "carbonation_style": "sparkling",
     "ions": {
-      "Ca": 64.92,
-      "Mg": 47.62,
-      "Na": 15,
+      "Ca": 67.33,
+      "Mg": 29.16,
+      "Na": 10.97,
       "K": 0.78,
-      "HCO3": 429,
-      "SO4": 34,
-      "Cl": 9
+      "HCO3": 347.7
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 5.5,
-    "tds": 4578,
-    "comment": "Historical entry — Tešanjski dijamant carbonated natural mineral water (Tešanj, Bosnia and Herzegovina). The producer (Dijamant d.o.o.) is active but publishes a numeric analysis only for its still spring-water line (Ca 11.22, Mg 4.37, Na 131.10, K 1.17, HCO₃ 368.44, pH 7.26), which differs from this carbonated-water profile. No current authoritative analysis of the carbonated mineral water is published, so values are retained from the historical source. NO₃ 0.88 mg/L.",
-    "url": "https://dijamant.ba/",
+    "ph": 5.38,
+    "tds": {
+      "value": 477.853,
+      "provenance": {
+        "verified": true,
+        "source": "Tešanjska vrela d.o.o., dijamant.ba/gazirana-prirodna-mineralna-voda/ — \"Mineralizacija 477.853 mg/l\" (total mineralisation, not suhi ostatak; unchanged since Wayback capture 2022-12-08)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Tešanjski dijamant carbonated natural mineral water (Tešanj, Bosnia and Herzegovina), bottled by Tešanjska vrela d.o.o. Ions are the producer's published analysis for the carbonated water; SO₄ and Cl are not published (the owner has described the water as sulfate-free), so they are left unset. CO₂ min 4000 mg/L at source. TDS is the producer's 'Mineralizacija' (total mineralisation). Replaced a historical ion set (Ca 64.92, Mg 47.62, Na 15, HCO₃ 429, SO₄ 34, Cl 9, pH 5.5) and its unsourced TDS 4578, which cannot be a residue for a water the producer calls oligomineral.",
+    "url": "https://dijamant.ba/gazirana-prirodna-mineralna-voda/",
     "country": "Bosnia and Herzegovina",
     "locality": "Tešanj",
-    "description": "Carbonated natural mineral water from Tešanj in Bosnia and Herzegovina; figures are retained from a historical analysis.",
+    "description": "Carbonated natural mineral water from Tešanj in Bosnia and Herzegovina, with calcium, magnesium and bicarbonate and little sodium.",
     "category": "bottled",
     "traits": ["magnesium-rich", "bicarbonate-rich"],
     "provenance": {
-      "verified": false,
-      "source": "Dijamant d.o.o. (dijamant.ba) confirms the brand; no current numeric analysis published for the carbonated mineral water — historical values retained",
-      "source_date": "2026-05-28"
+      "verified": true,
+      "source": "Tešanjska vrela d.o.o. — 'Gazirana prirodna mineralna voda' analysis (dijamant.ba/gazirana-prirodna-mineralna-voda/; unchanged since Wayback capture 2022-12-08)",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -1287,7 +1487,14 @@
     "alkalinity_unit": "as_HCO3",
     "co2": 3500,
     "ph": 5.7,
-    "tds": 780,
+    "tds": {
+      "value": 780,
+      "provenance": {
+        "verified": false,
+        "source": "Superseded: 780 no longer published. perlaharghitei.ro/produse/tiva-harghita now gives reziduu sec la 180° 800 with revised ions (Ca 113, Mg 58.26, HCO₃ 1037); 780 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Naturally carbonated, Sâncrăieni source (F8 ISPIF). CO₂ is the label minimum (≥3500 mg/L); TDS is dry residue at 180°C. No NO₃, F, or SiO₂ published.",
     "url": "https://www.perlaharghitei.ro/produse/tiva-harghita",
     "country": "Romania",
@@ -1325,7 +1532,14 @@
     },
     "alkalinity_unit": "as_CaCO3",
     "ph": 6.2,
-    "tds": 630,
+    "tds": {
+      "value": 630,
+      "provenance": {
+        "verified": true,
+        "source": "Topo Chico Water Annual Analysis 2025 (The Coca-Cola Company), Total Dissolved Solids 630 mg/L (Wayback capture 2025-07-25 of coca-cola.com topo-chico-water-annual-analysis-2025-en.pdf)",
+        "source_date": "2025-07-25"
+      }
+    },
     "comment": "Topo Chico Sparkling Mineral Water, Monterrey, Mexico (Coca-Cola). F 0.20 mg/L; NO₃/NO₂ within FDA SOQ. Alkalinity reported as CaCO₃ (190 mg/L). Cited via Wayback Machine archive (2025-07-25) of the Coca-Cola annual analysis PDF, which 404s to non-browser clients on the live site.",
     "url": "https://web.archive.org/web/20250725072428if_/https://www.coca-cola.com/content/dam/onexp/us/en/brands/topo-chico/water-quality-report/topo-chico-water-annual-analysis-2025-en.pdf",
     "country": "Mexico",
@@ -1353,7 +1567,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 6.8,
-    "tds": 165,
+    "tds": {
+      "value": 165,
+      "provenance": {
+        "verified": true,
+        "source": "Tŷ Nant official water analysis, Dry Residue at 180 °C 165 (tynant.com/water-analysis/)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ <0.1 mg/L. F⁻ 0.148 mg/L. SiO₂ 2 mg/L. TDS = dry residue at 180 °C. Bethania, Ceredigion (Wales).",
     "url": "https://tynant.com/water-analysis/",
     "country": "United Kingdom",
@@ -1382,7 +1603,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 6.21,
-    "tds": 2850,
+    "tds": {
+      "value": 2850,
+      "provenance": {
+        "verified": false,
+        "source": "Vichy Catalan ficha técnica CA-VC-FT-01 (2018), dry residue ~2850 — could not be re-located (2026-10). An older bottler ficha (vichycatalan.com, Wayback c. 2005) gives materia seca (180 ºC) 3052 with different ions.",
+        "source_date": "2026-05-28"
+      }
+    },
     "comment": "High-sodium naturally carbonated Na-HCO₃ water, Caldes de Malavella (Girona, Spain); hyperthermal spring (~60 °C at source). Li 1.7, NO₃ 1.1, SiO₂ ~58 mg/L. Na/K/HCO₃/SO₄/Cl, pH and dry residue (180 °C) are from the bottler's ficha técnica; Ca and Mg (not listed on the bottler sheet) are from the peer-reviewed Tapias et al. analysis.",
     "url": "https://www.mdpi.com/2073-4441/14/21/3581",
     "country": "Spain",
@@ -1416,8 +1644,15 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 6.8,
-    "tds": 3325,
-    "comment": "Very-high-sodium bicarbonate naturally sparkling water, Vichy (Allier, France); Na is principally sodium bicarbonate. F 0.5 mg/L. TDS is the label's total mineralisation (3325 mg/L).",
+    "tds": {
+      "value": 3325,
+      "provenance": {
+        "verified": true,
+        "source": "Vichy Célestins bottle label, \"Minéralisation totale, extrait sec à 180°C : 3325 mg/l\" (Open Food Facts label photo, EAN 3108020266905); same figure on sources-alma.com",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Very-high-sodium bicarbonate naturally sparkling water, Vichy (Allier, France); Na is principally sodium bicarbonate. F 0.5 mg/L. TDS is the label's extrait sec à 180 °C (3325 mg/L).",
     "url": "https://www.sources-alma.com/nos-marques/les-eaux-minerales/marque-vichy-celestin/",
     "country": "France",
     "locality": "Vichy, Allier",
@@ -1443,7 +1678,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.6,
-    "tds": 1084,
+    "tds": {
+      "value": 1084,
+      "provenance": {
+        "verified": true,
+        "source": "Vittel bottle label, \"Résidu sec à 180°C : 1084\" (Open Food Facts label transcription, EAN 7613036249928)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 4.4 mg/L. Official label omits K and Cl; prior Khymos Cl 0 dropped.",
     "url": "https://www.vittel.fr/source-de-vittel-mineralisation-de-son-eau",
     "country": "France",
@@ -1472,7 +1714,14 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7,
-    "tds": 130,
+    "tds": {
+      "value": 130,
+      "provenance": {
+        "verified": true,
+        "source": "Volvic bottle label, \"Teneur totale en sels minéraux à 180°C: 130mg/L\" (Open Food Facts label photo, EAN 3057640262128)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "NO₃ 7.3 mg/L. SiO₂ 32 mg/L.",
     "url": "https://fr.openfoodfacts.org/produit/3057640262128/eau-minerale-naturelle-volvic",
     "country": "France",
@@ -1497,7 +1746,14 @@
       "Cl": 3.8
     },
     "ph": 5.8,
-    "tds": 40,
+    "tds": {
+      "value": 40,
+      "provenance": {
+        "verified": true,
+        "source": "VOSS analysis table, VOSS Still (NO), Total Dissolved Solids 40 (vosswaterglobal.com/pages/analysis-table, via 2026 Wayback capture; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Very low mineralisation artesian water (VOSS Still, Norway). HCO₃ <20 mg/L, SO₄ and K not detected, F 0.1 mg/L on the official analysis.",
     "url": "https://www.vosswaterglobal.com/pages/analysis-table",
     "country": "Norway",
@@ -1525,7 +1781,14 @@
     },
     "alkalinity_unit": "as_CaCO3",
     "ph": 7.8,
-    "tds": 84,
+    "tds": {
+      "value": 84,
+      "provenance": {
+        "verified": true,
+        "source": "Waiākea Bottled Water Quality Report 2026, Typical Mineral Analysis, Total Dissolved Solids 84 (sampling March 2026; linked from waiakea.com/pages/water-quality-report)",
+        "source_date": "2026-10-24"
+      }
+    },
     "comment": "Waiākea® Hawaiian Volcanic Water, a naturally alkaline deep-well water from the Keaʻau aquifer at the eastern base of Mauna Loa, Hilo, Hawaiʻi. SiO₂ 37 mg/L (silica-rich volcanic water). F 0.061 mg/L. NO₃ as N: ND. Alkalinity reported as CaCO₃ (31 mg/L). Note: the bottler's 2026 General Mineral Analysis prints Fluoride 2.9 / Magnesium 0.061; these are transposed — the same report's Product Analysis table independently reports Fluoride 0.061, so the corrected values are F 0.061 / Mg 2.9 (also consistent with prior typical analyses and charge balance).",
     "url": "https://waiakea.com/pages/water-quality-report",
     "country": "United States",
@@ -1551,6 +1814,7 @@
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 8.6,
+    "tds_unpublished": "Defunct brand; archived bottler pages (waiwera.com, Wayback 2011–2020) carry no analysis or TDS figure (checked 2026-10).",
     "comment": "HISTORICAL / unverified-current: claimed good for brewing coffee. Waiwera Group Ltd entered liquidation in 2017 and the brand is discontinued; waiwera.com is offline and no current or archived bottler analysis table survives. Ion values are Khymos-origin and could not be corroborated against any non-Khymos primary source. Removal-sub-issue candidate.",
     "url": "https://web.archive.org/web/20200225194044/http://www.waiwera.com/water",
     "country": "New Zealand",

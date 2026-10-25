@@ -65,7 +65,7 @@ flowchart LR
     G["Gypsum ceiling clamp\n(≤ 2.0 g/L)"] --> H
     H["Forward model\nresult = source + A·x"] --> I
     I["Batch scale\n(× volume in L or gal)"] --> J
-    J["Readouts\nSO₄:Cl · TDS · charge residual"] --> K
+    J["Readouts\nSO₄:Cl · TDS + mineral band · charge residual"] --> K
     H --> L["Saturation indices\n(gypsum · calcite SI)"] --> K
     K["SolveResult"]
 ```
@@ -90,8 +90,9 @@ flowchart LR
    actually produce. Result profile = source + forward output.
 6. **Batch scale** — per-litre doses multiplied by the requested volume (litres or
    US gallons converted via the exact 3.785411784 L/gal factor).
-7. **Readouts** — sulfate:chloride mass ratio, TDS (sum of all modelled ions),
-   charge-balance residual (meq/L).
+7. **Readouts** — sulfate:chloride mass ratio, TDS (sum of all modelled ions)
+   with its mineral band (`mineralBand()`; see ADR 0022), charge-balance
+   residual (meq/L).
 8. **Saturation warnings** — `saturationWarnings(profile)` computes saturation
    indices for gypsum (CaSO₄) and calcite (CaCO₃) and warns when SI ≥ 0
    (activity coefficients assumed = 1, a conservative approximation).

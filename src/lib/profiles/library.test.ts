@@ -158,6 +158,21 @@ describe('PROFILES — all pass validateProfile', () => {
 })
 
 // ---------------------------------------------------------------------------
+// Published TDS — every bottled water records it or says why not (#303)
+// ---------------------------------------------------------------------------
+
+describe('PROFILES — bottled TDS is sourced or noted', () => {
+  it('every bottled profile has exactly one of tds / tds_unpublished', () => {
+    const bad = PROFILES.filter(
+      (p) =>
+        p.category === 'bottled' &&
+        (p.tds === undefined) === (p.tds_unpublished === undefined),
+    ).map((p) => p.slug)
+    expect(bad).toEqual([])
+  })
+})
+
+// ---------------------------------------------------------------------------
 // Spot checks — Evian
 // ---------------------------------------------------------------------------
 
@@ -187,7 +202,7 @@ describe('Evian — exact values from TSV', () => {
   })
 
   it('tds is 345', () => {
-    expect(evian!.tds).toBe(345)
+    expect(evian!.tds?.value).toBe(345)
   })
 
   it('co2 is 0 (source: "no gas")', () => {
@@ -237,7 +252,7 @@ describe('Perrier — exact values from TSV', () => {
   })
 
   it('tds is 456', () => {
-    expect(perrier!.tds).toBe(456)
+    expect(perrier!.tds?.value).toBe(456)
   })
 
   it('NO3 value (7.3 mg/L) is preserved in comment', () => {

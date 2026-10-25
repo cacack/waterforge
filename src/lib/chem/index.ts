@@ -3,3 +3,4 @@
 export * from './constants'
 export * from './conversions'
 export * from './carbonation'
+export * from './mineral-band'

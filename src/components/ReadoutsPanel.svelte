@@ -3,8 +3,11 @@
   import type { SolveResult } from '$lib'
   import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert'
   import SectionCard from './SectionCard.svelte'
+  import { app, computeTdsReadout } from '../state.svelte'
 
   let { result }: { result: SolveResult | null } = $props()
+
+  const tds = $derived(computeTdsReadout(result, app.target))
 
   // ── Readout formatting ────────────────────────────────────────────────────
   const so4cl = $derived(
@@ -31,9 +34,9 @@
   //    levels and the pair noticeably inhibits chalk dissolution when both
   //    exceed these values.
   //
-  // 3. TDS taste note: TDS > 1500 mg/L — strongly mineral taste perceptible by
-  //    most tasters; Evian sits ~350, Gerolsteiner ~2500 is the upper bound for
-  //    popular mineral waters.
+  // 3. TDS taste note: the Bold mineral band (≥ 1500 mg/L, see MINERAL_BANDS) —
+  //    strongly mineral taste perceptible by most tasters; Evian sits ~350,
+  //    Gerolsteiner ~2500 is the upper bound for popular mineral waters.
 
   const guidance = $derived((): GuidanceItem[] => {
     if (!result) return []
@@ -70,7 +73,7 @@
     }
 
     // 3. TDS taste note
-    if (readouts.tds > 1500) {
+    if (tds?.band.id === 'bold') {
       items.push({
         key: 'tds-taste',
         title: 'Strongly mineral taste',
@@ -98,14 +101,42 @@
         <dt class="text-xs text-muted-foreground">SO₄:Cl</dt>
         <dd class="font-mono tabular-nums">{so4cl}</dd>
       </div>
-      <div
-        title="Total dissolved solids — sum of all modelled ion concentrations (mg/L). Typical drinking water: 50–500 mg/L."
-      >
-        <dt class="text-xs text-muted-foreground">TDS</dt>
-        <dd class="font-mono tabular-nums">
-          {Math.round(result.readouts.tds)} mg/L
-        </dd>
-      </div>
+      {#if tds}
+        <div>
+          <dt
+            class="text-xs text-muted-foreground"
+            title="Total dissolved solids — sum of the recipe's modelled ion concentrations (mg/L). Typical drinking water: 50–500 mg/L."
+          >
+            TDS · sum of ions
+          </dt>
+          <dd class="flex flex-wrap items-baseline gap-x-1.5">
+            <span class="font-mono tabular-nums">
+              {Math.round(tds.sumOfIons)} mg/L
+            </span>
+            <span
+              class="rounded-sm bg-muted px-1 text-xs text-muted-foreground"
+              title="Mineral band for this sum of ions."
+            >
+              {tds.band.label}
+            </span>
+          </dd>
+          {#if tds.published}
+            <dd
+              class="text-xs text-muted-foreground"
+              title={`The producer's published TDS. Usually the dried residue at 180 °C, but methods vary, so it can sit above or below the sum of ions.${tds.published.provenance.verified ? '' : ' Not re-confirmed against a current producer source.'} Source: ${tds.published.provenance.source}`}
+            >
+              Published{tds.published.provenance.verified
+                ? ''
+                : ' (unverified)'}
+              <span class="whitespace-nowrap"
+                ><span class="font-mono tabular-nums"
+                  >{Math.round(tds.published.value)}</span
+                > mg/L</span
+              >
+            </dd>
+          {/if}
+        </div>
+      {/if}
       <div
         title="Charge-balance residual (meq/L). Near zero means cation and anion charges balance; a large residual suggests mismatched source data or a unit convention error."
       >
