@@ -255,6 +255,10 @@ and carries no implied value (see the leave-unset rule in
 | `category`    | enum               | High-level kind — see the category enum below.                     |
 | `traits`      | array of trait IDs | Editorially-assigned characteristics — see the traits vocab below. |
 
+> `slug` is an identifier, not metadata: the stable key used by share links,
+> required on bundled profiles and frozen once published — see
+> [ADR 0021](../decisions/0021-compact-share-links-and-slugs.md).
+
 > Carbonation (still/sparkling and bottled carbonation target) is **not**
 > metadata and **not** a trait — it is a first-class field set
 > (`carbonation_style` / `carbonation_target`). See

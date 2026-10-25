@@ -208,6 +208,11 @@ Two rules govern this metadata:
   carries no implied meaning. Don't guess, and don't fill a field just to look
   complete.
 
+Separately from that metadata, every bundled profile needs a `slug` — the
+stable key share links and printed labels use. A new profile needs a unique slug
+matching `^[a-z][a-z0-9-]{0,15}$`; an existing slug must **never** be renamed or
+reused ([ADR 0021](docs/decisions/0021-compact-share-links-and-slugs.md)).
+
 ## Editing USAGE.md
 
 `USAGE.md` is not only a GitHub document — it is also the app's help dialog. The

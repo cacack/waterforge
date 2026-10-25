@@ -163,3 +163,19 @@ still or slightly warm water and stir gently to avoid fizzing.
 mineral salts. The presence of dissolved minerals (especially bicarbonate) can
 affect CO₂ retention, so it is best to get the mineral profile stable first and
 then force-carbonate to your preferred level.
+
+## Sharing a recipe
+
+The actions bar offers two kinds of link:
+
+- **Share** copies a link to the whole recipe: target, source water, salts,
+  batch size and unit, and carbonating temperature. Opening it **replaces
+  everything** in the app with that recipe. There are no accounts, so this is
+  also how you save a recipe — bookmark the link or keep it somewhere. The link
+  is short enough to print as a QR code on a small label.
+- **Link to this water** copies a short, readable link to the selected target
+  alone (for example `waterforge.app/#evian`). Opening it **selects that target
+  and keeps your own** source water, salts, batch, and carbonation settings.
+  It is unavailable until a target is selected.
+
+Share links made by earlier versions of the app keep working.
