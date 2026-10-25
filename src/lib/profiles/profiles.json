@@ -395,6 +395,330 @@
     }
   },
   {
+    "name": "Crystal Geyser (Benton, TN)",
+    "slug": "cg-benton",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 38,
+      "Mg": 4.4,
+      "Na": 2.5,
+      "K": 1.1,
+      "HCO3": 100,
+      "SO4": 3.4,
+      "Cl": 2.5
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.8,
+    "tds": {
+      "value": 120,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Benton, TN, Total Dissolved Solids 120 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Benton, Tennessee. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 100 and Bicarbonate 100 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 1.1 mg/L (≈ NO₃ 4.9 mg/L). Fluoride ND. Barium 0.055 mg/L, bromide 0.012 mg/L. Specific conductance 240 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_2f190582797d498986c76605b024018d.pdf",
+    "country": "United States",
+    "locality": "Benton, Tennessee",
+    "description": "Still spring water bottled at Benton in southeast Tennessee, near the Cherokee National Forest. A moderately hard calcium-bicarbonate water.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Benton, Tennessee, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Johnstown, NY)",
+    "slug": "cg-johnstown",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 52,
+      "Mg": 11,
+      "Na": 14,
+      "K": 0.77,
+      "HCO3": 140,
+      "SO4": 12,
+      "Cl": 33
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 8,
+    "tds": {
+      "value": 230,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Johnstown, NY, Total Dissolved Solids 230 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Johnstown, New York. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 140 and Bicarbonate 140 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). Nitrate ND. F 0.064 mg/L. Barium 0.023 mg/L. Specific conductance 410 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_5398bef9508841e9b7e282e01de50b85.pdf",
+    "country": "United States",
+    "locality": "Johnstown, New York",
+    "description": "The most mineralized of the Crystal Geyser springs, bottled at Johnstown in upstate New York near the Adirondacks. Calcium and bicarbonate lead, with noticeable chloride.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Johnstown, New York, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Moultonborough, NH)",
+    "slug": "cg-moultonboro",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 2,
+      "Mg": 0.3,
+      "Na": 1.5,
+      "K": 0.37,
+      "HCO3": 5,
+      "SO4": 2.7,
+      "Cl": 0.66
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 6.6,
+    "tds": {
+      "value": 21,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Moultonborough, NH, Total Dissolved Solids 21 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Moultonborough, New Hampshire. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 5.0 and Bicarbonate 6.7 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). This report is the only one where Bicarbonate (6.7) differs from Alkalinity (5.0); total alkalinity 5.0 is used, matching the other reports. NO₃ as N 0.23 mg/L (≈ NO₃ 1.0 mg/L). F 0.14 mg/L. Specific conductance 24 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_09b4fdc0036b4d55bc6c1c2ec776d9aa.pdf",
+    "country": "United States",
+    "locality": "Moultonborough, New Hampshire",
+    "description": "Extremely soft, slightly acidic spring water from Moultonborough in New Hampshire's Lakes Region, with almost no dissolved minerals.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Moultonborough, New Hampshire, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Norman, AR)",
+    "slug": "cg-norman",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 32,
+      "Mg": 1.2,
+      "Na": 0.8,
+      "K": 0.28,
+      "HCO3": 82,
+      "SO4": 5.1,
+      "Cl": 1.3
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.6,
+    "tds": {
+      "value": 110,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Norman, AR, Total Dissolved Solids 110 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Norman, Arkansas. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 82 and Bicarbonate 82 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). Nitrate ND. F 0.12 mg/L. Zinc 0.018 mg/L. Specific conductance 180 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_f692dbe278e14847a70273e6eb863659.pdf",
+    "country": "United States",
+    "locality": "Norman, Arkansas",
+    "description": "Spring water from Norman in Arkansas's Ouachita Mountains. Nearly all of its mineral content is calcium bicarbonate, with very little sodium.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Norman, Arkansas, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Olancha, CA – Cabin Bar)",
+    "slug": "cg-cabin-bar",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 15,
+      "Mg": 1.9,
+      "Na": 15,
+      "K": 1.6,
+      "HCO3": 63,
+      "SO4": 7.9,
+      "Cl": 1.1
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.9,
+    "tds": {
+      "value": 110,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Olancha, CA — Cabin Bar spring section, Total Dissolved Solids 110 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Cabin Bar Spring, bottled at the source in Olancha, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 63 and Bicarbonate 63 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.13 mg/L (≈ NO₃ 0.58 mg/L). F 0.76 mg/L. Boron ND. Specific conductance 150 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_7bed06b6606f4a2f938ecb5faa106d90.pdf",
+    "country": "United States",
+    "locality": "Cabin Bar Spring, Olancha, California",
+    "description": "Soft water from the Cabin Bar spring below the Sierra Nevada at Olancha, California, with calcium and sodium in near-equal parts.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Olancha, California (Cabin Bar Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Olancha, CA – Olancha Spring)",
+    "slug": "cg-olancha",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 20,
+      "Mg": 2.1,
+      "Na": 17,
+      "K": 1.9,
+      "HCO3": 65,
+      "SO4": 24,
+      "Cl": 3.2
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 6.8,
+    "tds": {
+      "value": 160,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Olancha, CA — Olancha spring section, Total Dissolved Solids 160 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Olancha Spring, bottled at the source in Olancha, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 65 and Bicarbonate 65 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.32 mg/L (≈ NO₃ 1.4 mg/L). F 0.53 mg/L. Boron 0.13 mg/L. Specific conductance 200 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_7bed06b6606f4a2f938ecb5faa106d90.pdf",
+    "country": "United States",
+    "locality": "Olancha Spring, Olancha, California",
+    "description": "Spring water from the eastern Sierra Nevada at Olancha in California's Owens Valley. Calcium and sodium share the cations; sulfate is higher than at the other springs.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Olancha, California (Olancha Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Salem, SC)",
+    "slug": "cg-salem",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 7.5,
+      "Mg": 0.37,
+      "Na": 3.5,
+      "K": 1.2,
+      "HCO3": 22,
+      "SO4": 7.6,
+      "Cl": 0.67
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.3,
+    "tds": {
+      "value": 53,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Salem, SC, Total Dissolved Solids 53 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Salem, South Carolina. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 22 and Bicarbonate 22 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). Nitrate ND. F 0.22 mg/L. Specific conductance 67 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_a13a0a86adf04a6d84278eecb1096e97.pdf",
+    "country": "United States",
+    "locality": "Salem, South Carolina",
+    "description": "Very soft spring water from Salem in the Blue Ridge foothills of upstate South Carolina, with only a trace of minerals.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Salem, South Carolina, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Weed, CA – Beaughan)",
+    "slug": "cg-weed-beaughan",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 5.9,
+      "Mg": 5.2,
+      "Na": 11,
+      "K": 1.2,
+      "HCO3": 56,
+      "SO4": 1.9,
+      "Cl": 0.82
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.4,
+    "tds": {
+      "value": 100,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Weed, CA — Beaughan spring section, Total Dissolved Solids 100 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Beaughan Spring, bottled at the source in Weed, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 56 and Bicarbonate 56 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.12 mg/L (≈ NO₃ 0.53 mg/L). F 0.28 mg/L. Specific conductance 120 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_e19647699a7f4323a36e0681e4fcff65.pdf",
+    "country": "United States",
+    "locality": "Beaughan Spring, Weed, California",
+    "description": "Soft spring water from the Beaughan spring at Weed, on the slopes of Mount Shasta in far northern California. Sodium, magnesium and calcium are near equal.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Weed, California (Beaughan Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Weed, CA – Mazzei)",
+    "slug": "cg-weed-mazzei",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 6.1,
+      "Mg": 2.8,
+      "Na": 9.4,
+      "K": 1.5,
+      "HCO3": 45,
+      "SO4": 0.62,
+      "Cl": 0.52
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.2,
+    "tds": {
+      "value": 92,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Weed, CA — Mazzei spring section, Total Dissolved Solids 92 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Mazzei Spring, bottled at the source in Weed, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 45 and Bicarbonate 45 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.35 mg/L (≈ NO₃ 1.5 mg/L). F 0.14 mg/L. Barium ND. Specific conductance 95 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_e19647699a7f4323a36e0681e4fcff65.pdf",
+    "country": "United States",
+    "locality": "Mazzei Spring, Weed, California",
+    "description": "Light, low-mineral water from the Mazzei spring near Mount Shasta at Weed, California, a little softer than its Beaughan neighbour.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Weed, California (Mazzei Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "Dorna",
     "slug": "dorna",
     "carbonation_style": "sparkling",
@@ -602,6 +926,32 @@
     }
   },
   {
+    "name": "Font Vella",
+    "slug": "font-vella",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 85.7,
+      "Mg": 28.9,
+      "Na": 7.6,
+      "HCO3": 308,
+      "SO4": 38.5,
+      "Cl": 23.6
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "Product pages list ions and conductivity (558 µS/cm) only, no residue/TDS (checked fontvella.es still and Gas product pages, 2026-10).",
+    "comment": "Font Vella still mineral water. The bottler names two source areas, Les Guilleries (Sant Hilari Sacalm, Girona) and Barranco del Río Dulce (Sigüenza, Guadalajara), but does not say which one this analysis describes. Ca, Mg, Na and HCO₃ (and conductivity 558 µS/cm) are from the still product pages (CNTA-2018). The still pages omit SO₄ and Cl; those figures come from the Font Vella Gas pages, which print the identical CNTA-2018 analysis (same Ca, Mg, Na, HCO₃ and conductivity) for the same water with CO₂ added. K is not reported. No pH or TDS is published. The 0.75 L glass SKU shows a different analysis (Ca 42, HCO₃ 143) and is not used here.",
+    "url": "https://fontvella.es/producto/font-vella-15l/",
+    "country": "Spain",
+    "description": "Widely sold Spanish still mineral water with moderate calcium and magnesium and bicarbonate as the main anion. It is low in sodium.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Font Vella (Aguas Danone) official product pages: Font Vella 1.5 L 'Análisis Químico (en mg/L)', CNTA-2018 (Centro Nacional de Tecnología y Seguridad Alimentaria); SO₄ and Cl from the Font Vella Gas 1 L page (https://fontvella.es/producto/font-vella-gas-1l/), same CNTA-2018 analysis",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "Gerolsteiner",
     "slug": "gerolsteiner",
     "carbonation_style": "sparkling",
@@ -790,6 +1140,107 @@
     }
   },
   {
+    "name": "Icelandic Glacial",
+    "slug": "icelandic",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 5.5,
+      "Mg": 2.2,
+      "Na": 11,
+      "K": 0.7,
+      "HCO3": 29,
+      "SO4": 3.3,
+      "Cl": 12
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 8.49,
+    "tds": {
+      "value": 72,
+      "provenance": {
+        "verified": true,
+        "source": "NSF test report A-00540456 for Icelandic Glacial (source water, sampled 2026-01-26), Total Dissolved Solids 72 mg/L (linked from icelandicglacial.com/pages/water-reports; method not stated)",
+        "source_date": "2026-01-26"
+      }
+    },
+    "comment": "Icelandic Glacial spring water, Ölfus, Iceland. The report covers the source spring water, not the bottled product. HCO₃ field is total alkalinity as CaCO₃ (29 mg/L); the same report lists bicarbonate alone as 28.21 mg/L as CaCO₃. F < 0.1 mg/L (below reporting limit, omitted). NO₃ as N 0.02 mg/L (≈ NO₃ 0.09 mg/L). Bromide 0.037 mg/L. Total hardness 23 mg/L as CaCO₃.",
+    "url": "https://cdn.shopify.com/s/files/1/0289/0132/files/COA_USFDA_50_STATE_Source_2026.pdf",
+    "country": "Iceland",
+    "locality": "Ölfus, South Iceland",
+    "description": "Low-mineral, naturally alkaline spring water from Ölfus in south-west Iceland.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "Icelandic Water Holdings hf. — NSF test report A-00540456 (Source Spring Water, tested to USFDA 21 CFR 165.110; sampled 2026-01-26, final report 2026-02-27), linked from icelandicglacial.com/pages/water-reports",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "La Salvetat",
+    "slug": "la-salvetat",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 160,
+      "Mg": 7.5,
+      "Na": 5,
+      "K": 2,
+      "HCO3": 530,
+      "SO4": 20,
+      "Cl": 5
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6,
+    "tds_unpublished": "Bottler composition page lists ions only, no residue/TDS; a retailer listing gives 520 but no producer source does (checked lasalvetat.fr composition-minerale, 2026-10).",
+    "comment": "Sparkling (\"finement pétillante\") mineral water from the Rieumajou spring at La Salvetat-sur-Agout, Haut-Languedoc. The bottler says the effervescence comes from naturally present CO₂, but publishes no CO₂ figure and does not say whether gas is added. SiO₂ 55 mg/L. No TDS or dry residue is published.",
+    "url": "https://www.lasalvetat.fr/eau-salvetat/composition-minerale.html",
+    "country": "France",
+    "locality": "La Salvetat-sur-Agout, Haut-Languedoc",
+    "description": "Sparkling mineral water from the Rieumajou spring in the Haut-Languedoc hills. It is calcium bicarbonate in character, low in sodium, and carries a notable amount of silica.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich", "silica-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "La Salvetat official site: 'Composition minérale de La Salvetat' page, summary table 'Tableau récapitulatif de la composition' (lab and analysis date not shown)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Levissima",
+    "slug": "levissima",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 23.1,
+      "Mg": 1.8,
+      "Na": 2.1,
+      "K": 1.8,
+      "HCO3": 57.9,
+      "SO4": 22.9
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 2.4,
+    "ph": 7.9,
+    "tds": {
+      "value": 88.3,
+      "provenance": {
+        "verified": true,
+        "source": "Levissima product page, residuo fisso a 180 °C 88.3 mg/L, analysis Università di Pavia 2023-09-04 (levissima.it/prodotti/le-naturali/bottiglia-1-5-litri/)",
+        "source_date": "2023-09-04"
+      }
+    },
+    "comment": "Levissima Naturale (still), from springs in Valtellina at the western edge of the Stelvio National Park. CO₂ is the free-CO₂-at-source figure. pH measured at source temperature (6.0 °C). SiO₂ 5.9 mg/L, NO₃ 1.4 mg/L, F 0.2 mg/L; NO₂ below reporting limit (<0.002 mg/L). Chloride is not reported. TDS is dry residue at 180°C.",
+    "url": "https://www.levissima.it/prodotti/le-naturali/bottiglia-1-5-litri/",
+    "country": "Italy",
+    "locality": "Valtellina, Lombardy",
+    "description": "Still, very lightly mineralized water from high-altitude springs in Valtellina in the Italian Alps. Calcium is the main cation, with bicarbonate and sulfate as the main anions.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "Levissima (Sanpellegrino S.p.A.) official product page, 1.5 L Naturale: 'Analisi chimica e fisico-chimica', Università degli Studi di Pavia, dated Pavia, 4 September 2023",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "London (beer brewing)",
     "slug": "london",
     "ions": {
@@ -812,6 +1263,41 @@
       "verified": true,
       "source": "John Palmer — How to Brew (4th ed.), Table 21 (London Bitter water)",
       "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Luso",
+    "slug": "luso",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 0.8,
+      "Mg": 1.7,
+      "Na": 7.1,
+      "HCO3": 11,
+      "SO4": 1.5,
+      "Cl": 9.5
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 5.8,
+    "tds": {
+      "value": 42,
+      "provenance": {
+        "verified": true,
+        "source": "Água de Luso data sheet FT.001-QSAL v22 (2024-03-01), LNEG report 01/H/2024, dry residue at 180 °C 42 mg/L; the same sheet gives total mineralisation (Mineralização total) 48 mg/L",
+        "source_date": "2024-03-01"
+      }
+    },
+    "comment": "Água de Luso, still natural mineral water from the Luso 1 and Luso 2 sources, Portugal. SiO₂ 14 mg/L, NO₃ 1.6 mg/L. Potassium not reported. TDS is the published total mineralisation (\"Mineralização total\"); dry residue at 180 °C is 42 mg/L. Total hardness 9 mg/L.",
+    "url": "https://cms.centralcervejas.pt/media/j50hlqa5/ft001-%C3%A1gua-de-luso-v22_2024.pdf",
+    "country": "Portugal",
+    "locality": "Luso, Mealhada",
+    "description": "Very lightly mineralised, slightly acidic still water from Luso in central Portugal, with sodium chloride and bicarbonate as its main ions and notable silica.",
+    "category": "bottled",
+    "traits": ["low-mineralization", "silica-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Sociedade Central de Cervejas e Bebidas, S.A. — 'Caracterização de Águas' data sheet FT.001-QSAL v22 (revision 2024-03-01), composition from LNEG report 01/H/2024 (Jan. 2024)",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -847,6 +1333,106 @@
       "verified": true,
       "source": "Magnetic Springs Water Co. — Spring Water Annual Testing report (National Testing Laboratories, NELAP-accredited; sample 439363, collected 2022-12-30)",
       "source_date": "2026-05-31"
+    }
+  },
+  {
+    "name": "Mattoni",
+    "slug": "mattoni",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 84.5,
+      "Mg": 25,
+      "Na": 69.9,
+      "K": 14.8,
+      "HCO3": 528,
+      "SO4": 40,
+      "Cl": 12
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "Bottler gives ions only, no residue/TDS; the 525 seen on a retailer label transcription is not on mattoni.cz (checked mattoni.cz and /prirodni, 2026-10).",
+    "comment": "Mattoni natural mineral water from the Doupov Mountains, Karlovy Vary region, Czech Republic; the bottler states it is enriched with natural CO₂ from the Doupov Mountains. Profiled as the sparkling (perlivá) product; the gently sparkling and still variants carry the same published analysis. F 0.94 mg/L, SiO₂ 55.9 mg/L. NO₃ < 0.5 mg/L and NO₂ < 0.005 mg/L (below reporting limit, omitted). The bottler publishes no TDS or CO₂ figure.",
+    "url": "https://www.mattoni.cz",
+    "country": "Czech Republic",
+    "locality": "Kyselka, Karlovy Vary Region",
+    "description": "Naturally carbonated mineral water from the Doupov Mountains near Karlovy Vary, moderately mineralised with bicarbonate as the main anion and notable silica.",
+    "category": "bottled",
+    "traits": ["bicarbonate-rich", "silica-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Mattoni 1873 a.s. — official mattoni.cz home page, section 'Minerály v Mattoni' (analysis by LaborUnionCZ, Františkovy Lázně, June 2010); same major ions on the mattoni.cz/prirodni product page",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Mondariz",
+    "slug": "mondariz",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 7.7,
+      "Mg": 5.5,
+      "Na": 49,
+      "K": 5.1,
+      "HCO3": 156,
+      "SO4": 1.7,
+      "Cl": 15.2
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6.5,
+    "tds": {
+      "value": 177,
+      "provenance": {
+        "verified": true,
+        "source": "Aguas de Mondariz product page, Agua de Mondariz sin gas, dry residue at 180 °C 177 mg/L (aguasdemondariz.com/productos/agua-de-mondariz-sin-gas/)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Agua de Mondariz sin gas (still), from springs in the Tea river basin in the municipalities of Mondariz and Mondariz-Balneario (Pontevedra, Galicia); classed as mineromedicinal, weakly mineralized. The bottler gives the values as approximate mg/L and the pH as approximate. F 0.5 mg/L. TDS is dry residue at 180°C.",
+    "url": "https://www.aguasdemondariz.com/productos/agua-de-mondariz-sin-gas/",
+    "country": "Spain",
+    "locality": "Mondariz, Pontevedra, Galicia",
+    "description": "Still, weakly mineralized water from granite springs in southern Galicia. It is a soft sodium-bicarbonate water, with little calcium or magnesium.",
+    "category": "bottled",
+    "traits": ["low-mineralization", "sodium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Aguas de Mondariz official product page 'Agua de Mondariz sin gas': 'Composición mineral (mg/l aproximados)' (lab and analysis date not shown)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Mont Roucous",
+    "slug": "mont-roucous",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 2.6,
+      "Mg": 0.49,
+      "Na": 3,
+      "K": 0.36,
+      "HCO3": 9.8,
+      "SO4": 2.5,
+      "Cl": 2.8
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 5.8,
+    "tds": {
+      "value": 33,
+      "provenance": {
+        "verified": true,
+        "source": "Mont Roucous composition page, résidu sec à 180 °C 33 mg/L (mont-roucous.com, composition-mont-roucous)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Still, very lightly mineralized water from the Haut-Languedoc regional natural park, bottled by the Société des Eaux de Mont Roucous at Lacaune (Tarn); it meets the French criteria for infant feeding. SiO₂ 8.0 mg/L, NO₃ 1.6 mg/L; F below reporting limit (<0.1 mg/L). TDS is dry residue at 180°C.",
+    "url": "https://www.mont-roucous.com/eau-tres-faiblement-mineralisee/eau-mont-roucous/composition-mont-roucous",
+    "country": "France",
+    "locality": "Lacaune, Haut-Languedoc (Tarn)",
+    "description": "One of the least mineralized French mineral waters, from the Haut-Languedoc hills, and slightly acidic. It is often chosen for infant feeding.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "Mont Roucous official site: 'Composition de Mont Roucous' page, cations/anions table image (tableau-composition-mont-roucous) plus page text for dry residue (33 mg/L) and pH (5.8); lab and analysis date not shown",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -1104,6 +1690,113 @@
     }
   },
   {
+    "name": "Radenska",
+    "slug": "radenska",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 210,
+      "Mg": 90,
+      "Na": 470,
+      "K": 75,
+      "HCO3": 2000,
+      "SO4": 98,
+      "Cl": 52
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": {
+      "value": 3000,
+      "provenance": {
+        "verified": true,
+        "source": "Radenska Kraljevi vrelec page, total dissolved solids 3000 mg/L (radenska.si/en/our-trademarks/radenska-kraljevi-vrelec; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Radenska Kraljevi vrelec, natural mineral water from Radenci, Slovenia, \"fortified with gas from the spring\" (CO₂ from the same source is added back). The label gives carbon dioxide content min. 3500 mg/L for the bottled product; that is a label minimum, not a source analysis, so it is not recorded as source CO₂. F 0.37 mg/L. TDS as published (\"total dissolved solids\"). Ions as published are about 5% out of charge balance (cation excess).",
+    "url": "https://www.radenska.si/en/our-trademarks/radenska-kraljevi-vrelec",
+    "country": "Slovenia",
+    "locality": "Radenci, Pomurje",
+    "description": "Highly mineralised, naturally carbonated water from Radenci in north-eastern Slovenia, dominated by sodium and bicarbonate.",
+    "category": "bottled",
+    "traits": ["high-mineralization", "sodium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Radenska d.o.o. — official product page 'Radenska Kraljevi vrelec' (radenska.si/en), 'Abstract/extract from analysis'",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Rocchetta",
+    "slug": "rocchetta",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 55.85,
+      "Mg": 4.01,
+      "Na": 4.24,
+      "K": 0.29,
+      "HCO3": 184.7,
+      "SO4": 7.01,
+      "Cl": 8.05
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 6,
+    "ph": 7.7,
+    "tds": {
+      "value": 175.9,
+      "provenance": {
+        "verified": true,
+        "source": "Rocchetta analysis table, residuo fisso a 180 °C 175.9 mg/L (rocchetta.it, tabella-rocchetta-1.jpg)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Rocchetta Naturale (still), an oligomineral water from the Rocchetta spring in Umbria. CO₂ is the free-CO₂-at-source figure. SiO₂ 5.41 mg/L, NO₃ 1.47 mg/L, F 0.17 mg/L, Sr 0.13 mg/L. TDS is dry residue at 180°C.",
+    "url": "https://www.rocchetta.it/acqua-minerale-naturale-rocchetta/",
+    "country": "Italy",
+    "locality": "Rocchetta spring, Umbria",
+    "description": "Still, low-mineral water from the Rocchetta spring in Umbria. It is mainly calcium bicarbonate, with little sodium.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "Rocchetta (Co.Ge.Di. International S.p.A.) official product page 'Acqua Minerale Naturale Rocchetta': label table image 'Leggiamo l'etichetta (Rocchetta)' (wp-content/uploads/2025/11/tabella-rocchetta-1.jpg); lab and analysis date are not shown on the bottler's page",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Römerquelle",
+    "slug": "roemerquelle",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 132,
+      "Mg": 63,
+      "Na": 16.2,
+      "K": 2.6,
+      "HCO3": 413,
+      "SO4": 267,
+      "Cl": 5.1
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": {
+      "value": 622.5,
+      "provenance": {
+        "verified": true,
+        "source": "Römerquelle brand page (Coca-Cola Hungary), total dissolved mineral content (\"összes oldott ásványianyag-tartalom\") 622.5 mg/L (coca-cola.com/hu/hu/brands/romerquelle; total mineralisation, not a dry residue)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Römerquelle natural mineral water from the Edelstal spring, Burgenland, Austria. Profiled as the sparkling product (szénsavas); the still variant (szénsavmentes) carries the same published analysis. F 0.3 mg/L. TDS as published (total dissolved mineral content, \"összes oldott ásványianyag-tartalom\"). The Austrian brand pages publish no analysis; the figures come from the brand's Hungarian page.",
+    "url": "https://www.coca-cola.com/hu/hu/brands/romerquelle",
+    "country": "Austria",
+    "locality": "Edelstal, Burgenland",
+    "description": "Mineral water from the Edelstal spring in Burgenland, eastern Austria, with calcium, magnesium, bicarbonate and sulfate all prominent.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "magnesium-rich", "sulfate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "The Coca-Cola Company — official Römerquelle brand page, Hungary (coca-cola.com/hu), nutrition/analysis panels for Römerquelle sparkling and still natural mineral water",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "Rosbacher Klassich",
     "slug": "rosbacher",
     "ions": {
@@ -1133,6 +1826,48 @@
       "verified": true,
       "source": "Rosbacher official mineralisation — Rosbacher Klassisch (Institut Fresenius, Taunusstein)",
       "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Rozana",
+    "slug": "rozana",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 260,
+      "Mg": 160,
+      "Na": 540,
+      "K": 52,
+      "HCO3": 1770,
+      "SO4": 230,
+      "Cl": 649
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 6,
+    "tds": {
+      "value": 2995,
+      "provenance": {
+        "verified": true,
+        "source": "Rozana official site, \"La gamme Rozana\" composition panel, résidu sec à 180 °C 2995 mg/L (eau-rozana.com/mon-eau-rozana/la-gamme-rozana)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Sparkling mineral water from the Rozana spring in the hamlet of Rouzat, Puy-de-Dôme (Auvergne). Since spring 2024 CO₂ has been added at bottling (\"avec adjonction de gaz carbonique\"), per the bottler's FAQ; no CO₂ figure is published. SiO₂ 105 mg/L, NO₃ 1.5 mg/L; F below reporting limit (<1 mg/L). TDS is dry residue at 180°C. Retailers still show an older analysis.",
+    "url": "https://www.eau-rozana.com/mon-eau-rozana/la-gamme-rozana",
+    "country": "France",
+    "locality": "Rouzat, Puy-de-Dôme, Auvergne",
+    "description": "Heavily mineralized sparkling water from volcanic Auvergne. It is unusually high in magnesium and sodium, with large amounts of bicarbonate and chloride.",
+    "category": "bottled",
+    "traits": [
+      "high-mineralization",
+      "magnesium-rich",
+      "sodium-rich",
+      "bicarbonate-rich",
+      "volcanic"
+    ],
+    "provenance": {
+      "verified": true,
+      "source": "Rozana official site: 'La gamme Rozana' page, 'Composition en mg/L' panel (lab and analysis date not shown); CO₂-addition note from the official 'Foire aux questions' page",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -1376,6 +2111,70 @@
     }
   },
   {
+    "name": "Solán de Cabras",
+    "slug": "solan-de-cabras",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 60,
+      "Mg": 26.7,
+      "Na": 4.8,
+      "K": 1,
+      "HCO3": 284,
+      "SO4": 21.8,
+      "Cl": 8.3
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds_unpublished": "Bottler analysis panel lists ions only, no residue/TDS (checked solandecabras.es/agua-mineral-natural/, 2026-10).",
+    "comment": "Still mineral water from a single spring in the Serranía de Cuenca, at 950 m. The bottler's composition panel does not print units; the values are taken as mg/L, which is consistent with the stated 2:1 calcium-to-magnesium ratio and a 0.8% charge balance. SiO₂ 7.5 mg/L; F below reporting limit (<0.20). The bottler calls it 'ligeramente alcalino' but gives no pH or TDS figure.",
+    "url": "https://www.solandecabras.es/agua-mineral-natural/",
+    "country": "Spain",
+    "locality": "Serranía de Cuenca, Castilla-La Mancha",
+    "description": "Still mineral water from a spring in the Serranía de Cuenca mountains. It has moderate calcium and magnesium in roughly a 2:1 ratio, with bicarbonate as the main anion and little sodium.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Solán de Cabras (Mahou San Miguel) official 'Agua mineral natural' page, 'Composición del agua mineral natural' panel (Spanish and English versions agree; units, lab and analysis date not shown)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Staatl. Fachingen",
+    "slug": "fachingen",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 98.7,
+      "Mg": 59.2,
+      "Na": 564,
+      "K": 16.1,
+      "HCO3": 1846,
+      "SO4": 39,
+      "Cl": 139
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 1510,
+    "tds": {
+      "value": 2800,
+      "provenance": {
+        "verified": true,
+        "source": "Staatl. Fachingen \"Das Wasser\" page, STILL, Gesamtgehalt Mineralstoffe ca. 2800 mg/L (fachingen.de/das_wasser; approximate total mineral content, not an Abdampfrückstand)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Staatl. Fachingen STILL, a licensed German medicinal water (Heilwasser) from the Lahn valley; this is the base product with only its natural spring CO₂ (\"Kohlensäure natürlich aus der Quelle\" 1510 mg/L, no CO₂ added). Marketed as STILL, but the natural CO₂ gives a faint prickle. The MEDIUM product is the same water with CO₂ added to about 4.5 g/L. Li 0.77 mg/L, F 0.3 mg/L. TDS is the bottler's total mineral content (Gesamtgehalt Mineralstoffe, ca. 2800 mg/L). The bottler gives pH as a range, ca. 6.2–6.4, so no single pH is recorded.",
+    "url": "https://www.fachingen.de/das_wasser",
+    "country": "Germany",
+    "locality": "Fachingen, Lahn valley, Rhineland-Palatinate",
+    "description": "Highly mineralised medicinal spring water from the Lahn valley in Germany, dominated by sodium bicarbonate, with a little natural spring carbonation.",
+    "category": "bottled",
+    "traits": ["high-mineralization", "sodium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Staatl. Fachingen (Fachingen Heil- und Mineralbrunnen GmbH) — official 'Das Wasser' page, section 'Die Hauptmineralstoffe – STILL' (label analysis extract)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "Tea brewing (max)",
     "slug": "tea-max",
     "ions": {
@@ -1589,6 +2388,112 @@
     }
   },
   {
+    "name": "Uliveto",
+    "slug": "uliveto",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 171,
+      "Mg": 26,
+      "Na": 64,
+      "K": 7.3,
+      "HCO3": 568,
+      "SO4": 89,
+      "Cl": 76
+    },
+    "alkalinity_unit": "as_HCO3",
+    "co2": 1559,
+    "ph": 5.7,
+    "tds": {
+      "value": 729,
+      "provenance": {
+        "verified": true,
+        "source": "Uliveto label table, residuo fisso a 180 °C 729 mg/L, analysis Università di Camerino (uliveto.it/acqua/)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Naturally effervescent (\"effervescente naturale\"), lightly so, from the Uliveto Terme spring, Vicopisano (Pisa, Tuscany). CO₂ is the label figure, natural (not added). SiO₂ 7.3 mg/L, NO₃ 6.4 mg/L, F 0.9 mg/L, Li 0.17 mg/L. TDS is dry residue at 180°C. Analysis by Università degli Studi di Camerino (date not printed). The brand's homepage label carries older, different figures; this entry uses the /acqua/ label table.",
+    "url": "https://www.uliveto.it/acqua/",
+    "country": "Italy",
+    "locality": "Uliveto Terme, Vicopisano, Tuscany",
+    "description": "Lightly, naturally effervescent mineral water from Uliveto Terme near Pisa. It is moderately mineralized, with calcium and bicarbonate dominant and noticeable sodium, sulfate and chloride.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Uliveto (Co.Ge.Di. International S.p.A.) official 'L'acqua' page: label table 'Elementi caratterizzanti', analysis by Università degli Studi di Camerino (analysis date not shown)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Valser",
+    "slug": "valser",
+    "carbonation_style": "sparkling",
+    "ions": {
+      "Ca": 445,
+      "Mg": 59,
+      "Na": 11.1,
+      "K": 1.6,
+      "HCO3": 380,
+      "SO4": 1010,
+      "Cl": 2.6
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": {
+      "value": 1910,
+      "provenance": {
+        "verified": true,
+        "source": "Valser product page, St. Petersquelle, Totalmineralisation 1910 mg/L, analysis 2025-12-04 (coca-cola.com/ch/de/brands/valser/valser-produkte; total mineralisation, not a dry residue)",
+        "source_date": "2025-12-04"
+      }
+    },
+    "comment": "VALSER Prickelnd from the St. Petersquelle, Vals, Graubünden, Switzerland; natural mineral water with CO₂ added (\"mit Kohlensäure versetzt\") and iron removed (\"enteisent\"). The same spring also supplies \"VALSER Still Calcium + Magnesium\" with the same analysis. Not the same water as Valser Still (St. Paulsquelle). F 0.58 mg/L. TDS is the published total mineralisation (Totalmineralisation).",
+    "url": "https://www.coca-cola.com/ch/de/brands/valser/valser-produkte",
+    "country": "Switzerland",
+    "locality": "Vals, Graubünden",
+    "description": "Sparkling mineral water from the St. Petersquelle at Vals in the Swiss Alps, high in calcium and sulfate.",
+    "category": "bottled",
+    "traits": ["high-mineralization", "calcium-rich", "sulfate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "The Coca-Cola Company — official VALSER products page, Switzerland (coca-cola.com/ch/de), VALSER Prickelnd panel (officially recognised analysis of 2025-12-04, St. Petersquelle)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Valser Still",
+    "slug": "valser-still",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 53,
+      "Mg": 1.6,
+      "Na": 0.6,
+      "K": 0.2,
+      "HCO3": 154,
+      "SO4": 10.2
+    },
+    "alkalinity_unit": "as_HCO3",
+    "tds": {
+      "value": 221,
+      "provenance": {
+        "verified": true,
+        "source": "Valser product page, St. Paulsquelle, Totalmineralisation 221 mg/L, analysis 2025-12-04 (coca-cola.com/ch/de/brands/valser/valser-produkte; total mineralisation, not a dry residue)",
+        "source_date": "2025-12-04"
+      }
+    },
+    "comment": "VALSER Still from the St. Paulsquelle (1806 m above sea level), Vals, Graubünden, Switzerland; still natural mineral water. A different spring from the sparkling Valser (St. Petersquelle). Chloride is not reported. TDS is the published total mineralisation (Totalmineralisation).",
+    "url": "https://www.coca-cola.com/ch/de/brands/valser/valser-produkte",
+    "country": "Switzerland",
+    "locality": "Vals, Graubünden",
+    "description": "Still, lightly mineralised water from the high-altitude St. Paulsquelle at Vals in the Swiss Alps, with calcium bicarbonate as its main content.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "The Coca-Cola Company — official VALSER products page, Switzerland (coca-cola.com/ch/de), VALSER Still panel (officially recognised analysis of 2025-12-04, St. Paulsquelle)",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "Vichy Catalan",
     "slug": "vichy-catalan",
     "carbonation_style": "sparkling",
@@ -1733,6 +2638,42 @@
       "verified": true,
       "source": "Volvic product label (Analyse caractéristique, mg/L) transcribed on Open Food Facts; volvic.fr composition page no longer publishes the numeric table",
       "source_date": "2026-05-28"
+    }
+  },
+  {
+    "name": "Vöslauer",
+    "slug": "voeslauer",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 119,
+      "Mg": 42,
+      "Na": 14.6,
+      "K": 1.65,
+      "HCO3": 260,
+      "SO4": 228,
+      "Cl": 23
+    },
+    "alkalinity_unit": "as_HCO3",
+    "ph": 7.21,
+    "tds": {
+      "value": 709.93,
+      "provenance": {
+        "verified": true,
+        "source": "Vöslauer Quellanalyse, Ursprungsquelle VI (Vollanalyse 2024, W.H.U. GmbH), gelöste feste Stoffe 709.93 mg/L (voeslauer.com/ursprungsquelle/quellanalyse; dissolved solids from the analysis, not an Abdampfrückstand)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Vöslauer Ursprungsquelle VI, Bad Vöslau, Lower Austria: analysis of the water fresh from the spring (quellfrisch). Profiled as the still product (Vöslauer \"Ohne\"); the sparkling variants are this water with CO₂ added. The bottler also publishes Spring VII, which is nearly identical. Metasilicic acid (H₂SiO₃) 20.19 mg/L. F < 1 mg/L (below reporting limit, omitted). TDS is the published dissolved solids (Gelöste Feste Stoffe). Total hardness 26.3 °dH.",
+    "url": "https://www.voeslauer.com/ursprungsquelle/quellanalyse",
+    "country": "Austria",
+    "locality": "Bad Vöslau, Lower Austria",
+    "description": "Still mineral water from Bad Vöslau south of Vienna, moderately mineralised with calcium and sulfate as the main ions.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "sulfate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "Vöslauer Mineralwasser GmbH — official 'Quellanalyse' page, Vöslauer Ursprungsquelle VI (extract of the 2024 full analysis by W.H.U. GmbH, Bischofshofen)",
+      "source_date": "2026-10-24"
     }
   },
   {
