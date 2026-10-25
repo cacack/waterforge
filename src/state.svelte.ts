@@ -8,6 +8,7 @@
 import {
   PROFILES,
   SALT_ORDER,
+  mineralBand,
   profileToIonProfile,
   regulatorPsi,
   solve,
@@ -15,8 +16,10 @@ import {
   toCelsius,
   volumesToGramsPerLitre,
   type IonProfile,
+  type MineralBand,
   type Profile,
   type ProfileProvenance,
+  type PublishedTds,
   type SaltId,
   type SolveResult,
   type TemperatureUnit,
@@ -120,4 +123,36 @@ export function computeCarbonation(): CarbonationReadout {
   if (app.target?.carbonation_style === 'sparkling')
     return { kind: 'sparkling-unknown' }
   return { kind: 'none' }
+}
+
+/** TDS readout for the readouts panel. */
+export interface TdsReadout {
+  /** Sum of modelled ion concentrations of the result profile, mg/L. */
+  sumOfIons: number
+  /** Mineral band of {@link TdsReadout.sumOfIons}. */
+  band: MineralBand
+  /** The target's producer-published TDS, or null when it has none. */
+  published: PublishedTds | null
+}
+
+/**
+ * Build the TDS readout: the solver's sum-of-ions TDS, its mineral band, and
+ * the target's producer-published TDS when the profile carries one. The two
+ * figures measure different things and differ by design — see
+ * docs/decisions/0022-mineral-band-and-published-tds.md.
+ *
+ * `result` must be the solve for `target`; both are passed explicitly so the
+ * published figure can never come from a different water than the sum.
+ */
+export function computeTdsReadout(
+  result: SolveResult | null,
+  target: Profile | null,
+): TdsReadout | null {
+  if (!result) return null
+  const sumOfIons = result.readouts.tds
+  return {
+    sumOfIons,
+    band: mineralBand(sumOfIons),
+    published: target?.tds ?? null,
+  }
 }

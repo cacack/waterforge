@@ -226,7 +226,7 @@ interface SolveResult {
   recipe: SaltDose // grams per batch (scaled to batch volume)
   dosePerLitre: SaltDose // grams per litre (unscaled)
   resultProfile: IonProfile // expected finished water (mg/L)
-  readouts: Readouts // TDS, SO4:Cl ratio, charge residual
+  readouts: Readouts // TDS (sum of ions), SO4:Cl ratio, charge residual
   warnings: SaturationWarning[] // gypsum / calcite SI warnings
 }
 ```
@@ -267,6 +267,27 @@ and carries no implied value (see the leave-unset rule in
 > sourcing bar for a `carbonation_target`: a producer-published figure is
 > `verified: true`; a sourced estimate ships `verified: false` and must say so
 > in its provenance; unsourceable stays unset).
+
+### Published TDS
+
+A profile may record the producer's published TDS — usually dried residue at
+180 °C, which differs from the sum-of-ions TDS the engine computes. Like
+`carbonation_target`, it is a self-contained value carrying its own provenance,
+and it does not affect the recipe math or the mineral band (the band always
+classifies sum-of-ions TDS). The decision, band thresholds, and the reason the
+two figures differ are in
+[ADR 0022](../decisions/0022-mineral-band-and-published-tds.md).
+
+| Field             | Type                    | Notes                                                          |
+| ----------------- | ----------------------- | -------------------------------------------------------------- |
+| `tds`             | `{ value, provenance }` | `value` in mg/L; `provenance` as for ion data. No bare number. |
+| `tds_unpublished` | string                  | Why no figure is recorded and where that was checked.          |
+
+The two fields are mutually exclusive. **Sourcing rule:** `tds` is held to the
+same bar as ion data — a producer-published figure from a primary or
+authoritative source. It is never estimated and never computed from the ions;
+if the producer publishes none, set `tds_unpublished` (or leave both unset if
+not yet checked).
 
 ### Category enum
 

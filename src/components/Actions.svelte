@@ -164,7 +164,12 @@
 
     if (typeof parsed === 'object' && parsed !== null && 'ions' in parsed) {
       // Profile path — validate then convert to IonProfile and load as source.
-      const result = validateProfile(parsed)
+      // Only the ions are used, so drop the TDS fields first: a water report's
+      // own bare-number `tds` must not block importing it as source water.
+      const candidate = { ...(parsed as Record<string, unknown>) }
+      delete candidate['tds']
+      delete candidate['tds_unpublished']
+      const result = validateProfile(candidate)
       if (!result.ok) {
         const msgs = result.errors.slice(0, 3).map((e) => e.message)
         importError = `Invalid profile: ${msgs.join('; ')}`

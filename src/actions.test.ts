@@ -64,7 +64,10 @@ function applyJson(raw: string): string | null {
   }
 
   if (typeof parsed === 'object' && parsed !== null && 'ions' in parsed) {
-    const result = validateProfile(parsed)
+    const candidate = { ...(parsed as Record<string, unknown>) }
+    delete candidate['tds']
+    delete candidate['tds_unpublished']
+    const result = validateProfile(candidate)
     if (!result.ok) {
       const msgs = result.errors.slice(0, 3).map((e) => e.message)
       return `Invalid profile: ${msgs.join('; ')}`
@@ -273,6 +276,12 @@ describe('import — Profile schema', () => {
     const hco3FromCaco3 = app.source.HCO3!
 
     expect(hco3FromHco3).toBeCloseTo(hco3FromCaco3, 0)
+  })
+
+  it('imports a water report whose tds is a bare number', () => {
+    const err = applyJson(JSON.stringify({ ...profileAsHco3, tds: 312 }))
+    expect(err).toBeNull()
+    expect(app.source.Ca).toBe(80)
   })
 
   it('returns an error for a malformed Profile', () => {

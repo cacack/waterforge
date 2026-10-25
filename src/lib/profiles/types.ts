@@ -73,6 +73,24 @@ export interface CarbonationTarget {
 }
 
 /**
+ * The producer's **published** total dissolved solids, in mg/L —
+ * conventionally the dried residue at 180 °C.
+ *
+ * This is distinct from the engine's sum-of-ions TDS readout: the residue
+ * includes species the engine does not track (silica, nitrate, …) and loses
+ * part of the bicarbonate on drying, so the two legitimately differ. It is
+ * **never estimated or derived from the ions** — like
+ * {@link CarbonationTarget}, it is a self-contained value that carries its own
+ * {@link ProfileProvenance}.
+ */
+export interface PublishedTds {
+  /** Published TDS in mg/L. */
+  value: number
+  /** Provenance for this TDS figure — sourced and verified in its own right. */
+  provenance: ProfileProvenance
+}
+
+/**
  * Controlled vocabulary for a profile's high-level {@link Profile.category}.
  *
  * This is the **single source of truth** for the category enum — `schema.ts`
@@ -221,11 +239,15 @@ export interface Profile {
   /** pH, as reported. */
   ph?: number
   /**
-   * Total dissolved solids in mg/L, as reported by the source. May differ from
-   * the sum of the seven tracked ions (other ions, rounding, evaporation
-   * residue vs. calculated TDS).
+   * The producer's published TDS, with its own provenance. Absent = not
+   * recorded; never estimate it from the ions. See {@link PublishedTds}.
    */
-  tds?: number
+  tds?: PublishedTds
+  /**
+   * Short note recording that the producer publishes no TDS figure (why, and
+   * where it was checked). Mutually exclusive with {@link Profile.tds}.
+   */
+  tds_unpublished?: string
   /** Free-text annotation (e.g. notes on measurement method or seasonal variation). */
   comment?: string
   /** URL to the primary source or product page. */

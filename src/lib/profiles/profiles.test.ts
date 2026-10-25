@@ -81,7 +81,7 @@ describe('validateProfile — valid inputs', () => {
       ...EVIAN_LIKE,
       co2: 5,
       ph: 7.2,
-      tds: 309,
+      tds: { value: 309, provenance: EVIAN_LIKE.provenance },
       comment: 'High Alps spring',
       url: 'https://example.com/evian',
     }
@@ -411,6 +411,90 @@ describe('validateProfile — carbonation', () => {
       expect(result.errors.some((e) => e.path === 'carbonation_target')).toBe(
         true,
       )
+    }
+  })
+})
+
+// ---------------------------------------------------------------------------
+// validateProfile — published TDS (tds / tds_unpublished) — #303
+// ---------------------------------------------------------------------------
+
+/** A profile carrying a fully-sourced published TDS. */
+const WITH_TDS: Profile = {
+  ...EVIAN_LIKE,
+  tds: {
+    value: 345,
+    provenance: {
+      verified: true,
+      source: 'Producer analysis, dried residue at 180 °C',
+      source_date: '2025-03-10',
+    },
+  },
+}
+
+describe('validateProfile — published TDS', () => {
+  it('accepts a fully-sourced tds object', () => {
+    const result = validateProfile(WITH_TDS)
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.value.tds?.value).toBe(345)
+      expect(result.value.tds?.provenance.verified).toBe(true)
+    }
+  })
+
+  it('rejects a bare-number tds (the pre-#303 shape)', () => {
+    const bad = { ...EVIAN_LIKE, tds: 345 as never }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      const err = result.errors.find((e) => e.path === 'tds')
+      expect(err?.message).toContain('{ value, provenance }')
+    }
+  })
+
+  it('rejects a tds without provenance', () => {
+    const bad = { ...EVIAN_LIKE, tds: { value: 345 } as never }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(
+        result.errors.some((e) => e.path.startsWith('tds.provenance')),
+      ).toBe(true)
+    }
+  })
+
+  it('rejects a negative tds value', () => {
+    const bad = { ...WITH_TDS, tds: { ...WITH_TDS.tds!, value: -1 } }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'tds.value')).toBe(true)
+    }
+  })
+
+  it('accepts tds_unpublished alone', () => {
+    const p: Profile = {
+      ...EVIAN_LIKE,
+      tds_unpublished: 'Producer label and site list ions only (checked 2026)',
+    }
+    expect(validateProfile(p).ok).toBe(true)
+  })
+
+  it('rejects an empty tds_unpublished', () => {
+    const bad: Profile = { ...EVIAN_LIKE, tds_unpublished: '  ' }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'tds_unpublished')).toBe(true)
+    }
+  })
+
+  it('rejects tds and tds_unpublished together', () => {
+    const bad: Profile = { ...WITH_TDS, tds_unpublished: 'No TDS published' }
+    const result = validateProfile(bad)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'tds_unpublished')).toBe(true)
     }
   })
 })

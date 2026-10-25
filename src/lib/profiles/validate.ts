@@ -61,8 +61,9 @@ function addError(
 
 /**
  * Validate a provenance block (`verified` / `source` / `source_date`) rooted at
- * `pathPrefix`. Shared by the profile-level `provenance` and the
- * `carbonation_target.provenance` so both are held to the same bar.
+ * `pathPrefix`. Shared by the profile-level `provenance`,
+ * `carbonation_target.provenance` and `tds.provenance` so all are held to the
+ * same bar.
  */
 function validateProvenance(
   candidate: unknown,
@@ -115,6 +116,9 @@ function validateProvenance(
  *   required — a carbonation value never travels without its unit and source.
  * - `carbonation_target` is rejected on a `carbonation_style: 'still'` profile;
  *   a still water has no bottled carbonation to record.
+ * - If `tds` is present, it is a `{ value, provenance }` object — a published
+ *   TDS never travels without its source. `tds_unpublished` (a non-empty note)
+ *   is mutually exclusive with `tds`.
  */
 export function validateProfile(raw: unknown): ValidationResult {
   const errors: ValidationError[] = []
@@ -190,14 +194,12 @@ export function validateProfile(raw: unknown): ValidationResult {
   }
 
   // --- optional numeric fields ---
-  for (const field of ['co2', 'tds'] as const) {
-    const v = raw[field]
-    if (v !== undefined) {
-      if (typeof v !== 'number' || !isFinite(v)) {
-        addError(errors, field, 'must be a finite number when present')
-      } else if (v < 0) {
-        addError(errors, field, 'must be >= 0 when present')
-      }
+  const co2 = raw['co2']
+  if (co2 !== undefined) {
+    if (typeof co2 !== 'number' || !isFinite(co2)) {
+      addError(errors, 'co2', 'must be a finite number when present')
+    } else if (co2 < 0) {
+      addError(errors, 'co2', 'must be >= 0 when present')
     }
   }
 
@@ -310,6 +312,46 @@ export function validateProfile(raw: unknown): ValidationResult {
         errors,
         'carbonation_target',
         'must be absent when carbonation_style is "still" — set the style to "sparkling" or remove the target',
+      )
+    }
+  }
+
+  // --- tds / tds_unpublished ---
+  // Self-contained: a published TDS may never be recorded without its
+  // provenance (the same rule as carbonation_target).
+  const tds = raw['tds']
+  if (tds !== undefined) {
+    if (!isPlainObject(tds)) {
+      addError(
+        errors,
+        'tds',
+        'must be an object { value, provenance } — a published TDS carries its own provenance',
+      )
+    } else {
+      const value = tds['value']
+      if (typeof value !== 'number' || !isFinite(value)) {
+        addError(errors, 'tds.value', 'must be a finite number')
+      } else if (value < 0) {
+        addError(errors, 'tds.value', 'must be >= 0')
+      }
+
+      validateProvenance(tds['provenance'], 'tds.provenance', errors)
+    }
+  }
+
+  const tdsUnpublished = raw['tds_unpublished']
+  if (tdsUnpublished !== undefined) {
+    if (
+      typeof tdsUnpublished !== 'string' ||
+      tdsUnpublished.trim().length === 0
+    ) {
+      addError(errors, 'tds_unpublished', 'must be a non-empty string')
+    }
+    if (tds !== undefined) {
+      addError(
+        errors,
+        'tds_unpublished',
+        'must be absent when tds is present — a profile either records a published TDS or notes that none is published',
       )
     }
   }

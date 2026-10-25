@@ -11,6 +11,39 @@
 
 import { PROFILE_CATEGORIES, PROFILE_TRAITS, SLUG_PATTERN } from './types'
 
+/**
+ * Provenance sub-schema (`verified` / `source` / `source_date`). One shape,
+ * shared by the profile-level `provenance` and every self-contained sourced
+ * value (`carbonation_target`, `tds`), so all are held to the same bar.
+ */
+function provenanceSchema(description: string) {
+  return {
+    type: 'object',
+    description,
+    required: ['verified', 'source', 'source_date'],
+    additionalProperties: false,
+    properties: {
+      verified: {
+        type: 'boolean',
+        description:
+          'Whether the data has been cross-checked against a primary source.',
+      },
+      source: {
+        type: 'string',
+        minLength: 1,
+        description:
+          'Human-readable description of the data source (publication, URL, label scan, etc.).',
+      },
+      source_date: {
+        type: 'string',
+        pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+        description:
+          'Date the source data was published or accessed (YYYY-MM-DD). Allows consumers to detect stale data.',
+      },
+    },
+  } as const
+}
+
 /** JSON Schema (draft 2020-12) for a Waterforge mineral-water Profile. */
 export const PROFILE_SCHEMA = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
@@ -21,6 +54,8 @@ export const PROFILE_SCHEMA = {
   type: 'object',
   required: ['name', 'ions', 'provenance'],
   additionalProperties: false,
+  // tds and tds_unpublished are mutually exclusive.
+  not: { required: ['tds', 'tds_unpublished'] },
   properties: {
     name: {
       type: 'string',
@@ -113,32 +148,9 @@ export const PROFILE_SCHEMA = {
           description:
             'Unit the value is expressed in: "volumes" of CO₂ or "gPerL" (g/L). Required when carbonation_target is present.',
         },
-        provenance: {
-          type: 'object',
-          description:
-            'Where the carbonation figure came from and how reliable it is — same authoritative-sourcing bar as ion data.',
-          required: ['verified', 'source', 'source_date'],
-          additionalProperties: false,
-          properties: {
-            verified: {
-              type: 'boolean',
-              description:
-                'Whether the carbonation figure has been cross-checked against a primary source.',
-            },
-            source: {
-              type: 'string',
-              minLength: 1,
-              description:
-                'Human-readable description of the carbonation data source.',
-            },
-            source_date: {
-              type: 'string',
-              pattern: '^\\d{4}-\\d{2}-\\d{2}$',
-              description:
-                'Date the carbonation source was published or accessed (YYYY-MM-DD).',
-            },
-          },
-        },
+        provenance: provenanceSchema(
+          'Where the carbonation figure came from and how reliable it is — same authoritative-sourcing bar as ion data.',
+        ),
       },
     },
     ph: {
@@ -148,10 +160,27 @@ export const PROFILE_SCHEMA = {
       description: 'pH, as reported.',
     },
     tds: {
-      type: 'number',
-      minimum: 0,
+      type: 'object',
       description:
-        'Total dissolved solids in mg/L, as reported. May differ from the sum of the seven tracked ions.',
+        "The producer's published TDS (conventionally dried residue at 180 °C), with its own provenance. Distinct from the engine's sum-of-ions readout; never estimated from ions. Mutually exclusive with tds_unpublished.",
+      required: ['value', 'provenance'],
+      additionalProperties: false,
+      properties: {
+        value: {
+          type: 'number',
+          minimum: 0,
+          description: 'Published TDS in mg/L.',
+        },
+        provenance: provenanceSchema(
+          'Where the TDS figure came from and how reliable it is — same authoritative-sourcing bar as ion data.',
+        ),
+      },
+    },
+    tds_unpublished: {
+      type: 'string',
+      minLength: 1,
+      description:
+        'Short note recording that the producer publishes no TDS figure (why / where checked). Mutually exclusive with tds.',
     },
     comment: {
       type: 'string',
@@ -193,30 +222,8 @@ export const PROFILE_SCHEMA = {
         enum: [...PROFILE_TRAITS],
       },
     },
-    provenance: {
-      type: 'object',
-      description: 'Where the ion values came from and how reliable they are.',
-      required: ['verified', 'source', 'source_date'],
-      additionalProperties: false,
-      properties: {
-        verified: {
-          type: 'boolean',
-          description:
-            'Whether the data has been cross-checked against a primary source. Treated as false when absent.',
-        },
-        source: {
-          type: 'string',
-          minLength: 1,
-          description:
-            'Human-readable description of the data source (publication, URL, label scan, etc.).',
-        },
-        source_date: {
-          type: 'string',
-          pattern: '^\\d{4}-\\d{2}-\\d{2}$',
-          description:
-            'Date the source data was published or accessed (YYYY-MM-DD). Allows consumers to detect stale data.',
-        },
-      },
-    },
+    provenance: provenanceSchema(
+      'Where the ion values came from and how reliable they are.',
+    ),
   },
 } as const

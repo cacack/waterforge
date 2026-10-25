@@ -71,12 +71,27 @@ actually read. See [Weighing the salts](#weighing-the-salts) below.
 The recipe panel shows the grams of each selected salt to add to your batch. It
 also shows four readouts:
 
-| Readout              | What it means                                             |
-| -------------------- | --------------------------------------------------------- |
-| **Sulfate:chloride** | SO₄:Cl mass ratio of the resulting water                  |
-| **TDS**              | Total Dissolved Solids — sum of all modelled ions in mg/L |
-| **Charge residual**  | Ionic charge balance in meq/L — ideally close to zero     |
-| **Saturation index** | Per-salt saturation index; a warning appears when SI ≥ 0  |
+| Readout              | What it means                                                                |
+| -------------------- | ---------------------------------------------------------------------------- |
+| **Sulfate:chloride** | SO₄:Cl mass ratio of the resulting water                                     |
+| **TDS**              | Total Dissolved Solids — sum of all modelled ions in mg/L, with mineral band |
+| **Charge residual**  | Ionic charge balance in meq/L — ideally close to zero                        |
+| **Saturation index** | Per-salt saturation index; a warning appears when SI ≥ 0                     |
+
+The **mineral band** puts the TDS into plain words: **Very light** (under 100
+mg/L), **Light** (100–300), **Medium** (300–700), **Rich** (700–1500), or
+**Bold** (1500 and up). It is based on the sum of ions, so every recipe gets
+one, whether or not the producer publishes a TDS.
+
+When the producer publishes a TDS figure, it is shown next to the readout and
+labelled as published. Expect it to differ from the sum of ions. Most bottlers
+print the residue left after drying the water at 180 °C, which drives off part
+of the bicarbonate as CO₂ and water, so it usually reads lower; others publish
+a total mineralisation or don't state a method. Evian's ions sum to about 500
+mg/L, while its dry residue is 345 mg/L — both are correct for what they
+measure. Hover the published figure to see its source. It is marked
+**unverified** when it couldn't be re-confirmed against a current producer
+source.
 
 ### Weighing the salts
 
