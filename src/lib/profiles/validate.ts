@@ -7,7 +7,7 @@
 
 import { IONS, ION_ORDER } from '../chem/constants'
 import type { IonId } from '../chem/constants'
-import { PROFILE_CATEGORIES, PROFILE_TRAITS } from './types'
+import { PROFILE_CATEGORIES, PROFILE_TRAITS, SLUG_PATTERN } from './types'
 import type { Profile, ProfileIons } from './types'
 
 // ---------------------------------------------------------------------------
@@ -129,6 +129,17 @@ export function validateProfile(raw: unknown): ValidationResult {
   // --- name ---
   if (typeof raw['name'] !== 'string' || raw['name'].trim().length === 0) {
     addError(errors, 'name', 'must be a non-empty string')
+  }
+
+  // --- slug (optional) ---
+  if (raw['slug'] !== undefined) {
+    if (typeof raw['slug'] !== 'string' || !SLUG_PATTERN.test(raw['slug'])) {
+      addError(
+        errors,
+        'slug',
+        'must be a lowercase letter followed by up to 15 of [a-z0-9-]',
+      )
+    }
   }
 
   // --- ions ---

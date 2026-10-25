@@ -89,6 +89,15 @@ describe('validateProfile — valid inputs', () => {
     expect(result.ok).toBe(true)
   })
 
+  it('accepts a profile without a slug', () => {
+    expect(EVIAN_LIKE.slug).toBeUndefined()
+    expect(validateProfile(EVIAN_LIKE).ok).toBe(true)
+  })
+
+  it('accepts a well-formed slug', () => {
+    expect(validateProfile({ ...EVIAN_LIKE, slug: 'evian-like' }).ok).toBe(true)
+  })
+
   it('accepts zero concentrations', () => {
     const p: Profile = {
       name: 'Pure water baseline',
@@ -122,6 +131,19 @@ describe('validateProfile — invalid inputs', () => {
     expect(result.ok).toBe(false)
     if (!result.ok) {
       expect(result.errors.some((e) => e.path === 'name')).toBe(true)
+    }
+  })
+
+  it.each([
+    ['uppercase', 'Evian'],
+    ['leading digit', '1abc'],
+    ['17 chars', 'a'.repeat(17)],
+    ['underscore', 'evian_like'],
+  ])('rejects a malformed slug (%s)', (_label, slug) => {
+    const result = validateProfile({ ...EVIAN_LIKE, slug })
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.errors.some((e) => e.path === 'slug')).toBe(true)
     }
   })
 

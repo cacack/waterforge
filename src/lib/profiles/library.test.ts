@@ -3,7 +3,8 @@
 // Data: CC-BY-SA-4.0 — Martin Lersch / Khymos (Mineral Water Calculator v6).
 
 import { describe, expect, it } from 'vitest'
-import { PROFILES, findProfile } from './library'
+import { PROFILES, findProfile, findProfileBySlug } from './library'
+import { SLUG_PATTERN } from './types'
 import { validateProfile, chargeBalanceResidual } from './validate'
 import { profileToIonProfile } from './convert'
 
@@ -37,6 +38,32 @@ describe('PROFILES — library shape', () => {
       expect(typeof p.name).toBe('string')
       expect(p.name.length).toBeGreaterThan(0)
     }
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Slugs — stable keys for share links and permalinks
+// ---------------------------------------------------------------------------
+
+describe('PROFILES — slugs', () => {
+  it('every profile has a slug matching SLUG_PATTERN', () => {
+    const bad = PROFILES.filter(
+      (p) => p.slug === undefined || !SLUG_PATTERN.test(p.slug),
+    ).map((p) => p.name)
+    expect(bad).toEqual([])
+  })
+
+  it('slugs are unique', () => {
+    const slugs = PROFILES.map((p) => p.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+
+  it('findProfileBySlug returns the matching profile', () => {
+    expect(findProfileBySlug('evian')?.name).toBe('Evian')
+  })
+
+  it('findProfileBySlug returns undefined for an unknown slug', () => {
+    expect(findProfileBySlug('no-such-water')).toBeUndefined()
   })
 })
 
