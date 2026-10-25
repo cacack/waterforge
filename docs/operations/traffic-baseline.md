@@ -74,6 +74,33 @@ extending the engine for a hot-spring water analysis mode, reusing `solver/`
 and `chem/`. No upstream PR or issue. That is someone _using the code_, which
 none of the traffic figures above would show.
 
+## Use readings
+
+One row per calendar quarter, added before beacon retention drops the previous
+quarter ([ADR 0023](../decisions/0023-use-signal-and-lapse-trigger.md)). This
+is the one place a figure from this page feeds a decision. It is evidence of
+one fact, whether the maintainer still uses the app, and not a measure of an
+audience.
+
+- **Beacon days:** distinct days in the window with any page load, from the
+  [beacon query](#how-to-re-measure).
+- **Last attested use:** the date the maintainer last used the app (mixed or
+  planned a batch), or "none".
+
+| Reading    | Beacon window           | Beacon days | Last attested use |
+| ---------- | ----------------------- | ----------- | ----------------- |
+| 2026-09-26 | 2026-06-27 → 2026-09-26 | 4           | (not recorded)    |
+
+**Why the beacon alone can't decide it.** It misses the maintainer whenever a
+script blocker is on, whenever the installed app is opened offline, and always
+on the local dev server. It also samples in steps of 10, so a single real page
+load can come back as zero. A non-zero count corroborates use. A zero count
+only means the attested date has to carry the reading.
+
+**The trigger.** If two consecutive quarters show no use (zero beacon days and
+no attested use inside the quarter), the project switches to artifact mode
+under ADR 0023. A missing row counts as a quarter with no use.
+
 ## How to read this
 
 **The edge figures are dominated by traffic that is not a visitor.** A
@@ -223,5 +250,7 @@ query ($accountTag: String!, $s: Time!, $e: Time!, $siteTag: String!) {
   turned off, and what that does to these numbers.
 - [ADR 0016](../decisions/0016-built-for-its-maintainer.md) — why a traffic
   figure is not a justification for anything.
+- [ADR 0023](../decisions/0023-use-signal-and-lapse-trigger.md) — the quarterly
+  use reading and the trigger for switching to artifact mode.
 - [cloudflare-pages.md](./cloudflare-pages.md) — the proxy these numbers come
   from.
