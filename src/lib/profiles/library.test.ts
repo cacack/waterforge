@@ -267,7 +267,7 @@ describe('Perrier — exact values from TSV', () => {
     expect(perrier!.ions.Ca).toBe(150)
     expect(perrier!.ions.Mg).toBe(3.9)
     expect(perrier!.ions.Na).toBe(9.6)
-    expect(perrier!.ions.K).toBe(0.6)
+    expect(perrier!.ions.K).toBeUndefined()
     expect(perrier!.ions.HCO3).toBe(420)
     expect(perrier!.ions.SO4).toBe(25.3)
     expect(perrier!.ions.Cl).toBe(19.5)
@@ -418,7 +418,7 @@ const KNOWN_IMBALANCED = new Set([
   'Farris', // high Na/Cl, large residual
   'Saint-Yorre', // very high mineralisation, known imbalance
   'San Narciso', // high-mineralisation Na-HCO3 water; published ion set has anion excess
-  'Tiva Harghita', // high-bicarbonate RO carbonated water; published ion set has cation deficit (residual ≈ -2.9 meq/L)
+  'Tiva Harghita', // high-bicarbonate RO carbonated water; published ion set has cation deficit (residual ≈ -3.9 meq/L)
   'Radenska', // high-mineralisation Na-HCO3 water; published ion set has cation excess (residual ≈ +4.0 meq/L)
 ])
 
