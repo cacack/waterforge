@@ -67,7 +67,7 @@ export default defineConfig({
         name: 'Waterforge',
         short_name: 'Waterforge',
         description:
-          'Clone bottled mineral waters from distilled water and food-grade salts.',
+          'Clone bottled mineral waters from distilled (or known-source) water and food-grade salts.',
         // Relative so they resolve at both waterforge.app/ and the GitHub
         // Pages subpath; matches base: './'.
         start_url: '.',
