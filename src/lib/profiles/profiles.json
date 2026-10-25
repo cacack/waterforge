@@ -1,6 +1,7 @@
 [
   {
     "name": "Acqua Panna",
+    "slug": "acqua-panna",
     "carbonation_style": "still",
     "ions": {
       "Ca": 33.1,
@@ -28,6 +29,7 @@
   },
   {
     "name": "Antipodes",
+    "slug": "antipodes",
     "ions": {
       "Ca": 3,
       "Mg": 2,
@@ -55,6 +57,7 @@
   },
   {
     "name": "Apollinaris",
+    "slug": "apollinaris",
     "ions": {
       "Ca": 90,
       "Mg": 120,
@@ -81,6 +84,7 @@
   },
   {
     "name": "Aquarel Birken",
+    "slug": "aquarel-birken",
     "ions": {
       "Ca": 106,
       "Mg": 23,
@@ -104,6 +108,7 @@
   },
   {
     "name": "Artificial mineral water",
+    "slug": "artificial",
     "ions": {
       "Ca": 100,
       "Mg": 100,
@@ -127,6 +132,7 @@
   },
   {
     "name": "Badoit",
+    "slug": "badoit",
     "carbonation_style": "sparkling",
     "carbonation_target": {
       "value": 1.5,
@@ -161,6 +167,7 @@
   },
   {
     "name": "Borsec",
+    "slug": "borsec",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 364.3,
@@ -192,6 +199,7 @@
   },
   {
     "name": "Burton (beer brewing)",
+    "slug": "burton",
     "ions": {
       "Ca": 268,
       "Mg": 62,
@@ -216,6 +224,7 @@
   },
   {
     "name": "Buxton",
+    "slug": "buxton",
     "carbonation_style": "still",
     "ions": {
       "Ca": 55,
@@ -244,6 +253,7 @@
   },
   {
     "name": "Calistoga Spring Water",
+    "slug": "calistoga",
     "carbonation_style": "still",
     "ions": {
       "Ca": 8,
@@ -271,6 +281,7 @@
   },
   {
     "name": "Carola Rouge",
+    "slug": "carola-rouge",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 73,
@@ -298,6 +309,7 @@
   },
   {
     "name": "Contrex",
+    "slug": "contrex",
     "carbonation_style": "still",
     "ions": {
       "Ca": 468,
@@ -327,6 +339,7 @@
   },
   {
     "name": "Dorna",
+    "slug": "dorna",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 211.1,
@@ -352,6 +365,7 @@
   },
   {
     "name": "Evian",
+    "slug": "evian",
     "carbonation_style": "still",
     "ions": {
       "Ca": 80,
@@ -381,6 +395,7 @@
   },
   {
     "name": "Farris",
+    "slug": "farris",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 28,
@@ -408,6 +423,7 @@
   },
   {
     "name": "Ferrarelle",
+    "slug": "ferrarelle",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 400,
@@ -437,6 +453,7 @@
   },
   {
     "name": "Fiji",
+    "slug": "fiji",
     "carbonation_style": "still",
     "ions": {
       "Ca": 18,
@@ -465,6 +482,7 @@
   },
   {
     "name": "Fiuggi",
+    "slug": "fiuggi",
     "carbonation_style": "still",
     "ions": {
       "Ca": 25,
@@ -493,6 +511,7 @@
   },
   {
     "name": "Gerolsteiner",
+    "slug": "gerolsteiner",
     "carbonation_style": "sparkling",
     "carbonation_target": {
       "value": 7,
@@ -536,6 +555,7 @@
   },
   {
     "name": "Hassia Sprudel",
+    "slug": "hassia-sprudel",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 198,
@@ -567,6 +587,7 @@
   },
   {
     "name": "Henniez",
+    "slug": "henniez",
     "ions": {
       "Ca": 104,
       "Mg": 20,
@@ -593,6 +614,7 @@
   },
   {
     "name": "Hépar",
+    "slug": "hepar",
     "carbonation_style": "still",
     "ions": {
       "Ca": 549,
@@ -626,6 +648,7 @@
   },
   {
     "name": "Highland Spring",
+    "slug": "highland-spring",
     "carbonation_style": "still",
     "ions": {
       "Ca": 40.5,
@@ -654,6 +677,7 @@
   },
   {
     "name": "London (beer brewing)",
+    "slug": "london",
     "ions": {
       "Ca": 90,
       "Mg": 4,
@@ -678,6 +702,7 @@
   },
   {
     "name": "Magnetic Springs",
+    "slug": "magnetic-springs",
     "carbonation_style": "still",
     "ions": {
       "Ca": 9.8,
@@ -705,6 +730,7 @@
   },
   {
     "name": "Mountain Valley Spring",
+    "slug": "mountain-valley",
     "carbonation_style": "still",
     "ions": {
       "Ca": 67.5,
@@ -733,6 +759,7 @@
   },
   {
     "name": "Munich (beer brewing)",
+    "slug": "munich",
     "ions": {
       "Ca": 80,
       "Mg": 19,
@@ -757,6 +784,7 @@
   },
   {
     "name": "Neuselters",
+    "slug": "neuselters",
     "carbonation_style": "still",
     "ions": {
       "Ca": 124,
@@ -783,6 +811,7 @@
   },
   {
     "name": "Perla Harghitei",
+    "slug": "perla-harghitei",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 95.9,
@@ -812,6 +841,7 @@
   },
   {
     "name": "Perla Harghitei Plată",
+    "slug": "perla-plata",
     "carbonation_style": "still",
     "ions": {
       "Ca": 103,
@@ -840,6 +870,7 @@
   },
   {
     "name": "Perrier",
+    "slug": "perrier",
     "carbonation_style": "sparkling",
     "carbonation_target": {
       "value": 5,
@@ -877,6 +908,7 @@
   },
   {
     "name": "Pilsen (beer brewing)",
+    "slug": "pilsen",
     "ions": {
       "Ca": 7,
       "Mg": 1,
@@ -901,6 +933,7 @@
   },
   {
     "name": "PurPur (coffee brewing)",
+    "slug": "purpur",
     "ions": {
       "Ca": 24,
       "Mg": 7.3,
@@ -922,6 +955,7 @@
   },
   {
     "name": "Rosbacher Klassich",
+    "slug": "rosbacher",
     "ions": {
       "Ca": 224,
       "Mg": 101,
@@ -952,6 +986,7 @@
   },
   {
     "name": "Saint-Yorre",
+    "slug": "saint-yorre",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 90,
@@ -985,6 +1020,7 @@
   },
   {
     "name": "Salvus",
+    "slug": "salvus",
     "ions": {
       "Ca": 96,
       "Mg": 5.4,
@@ -1010,6 +1046,7 @@
   },
   {
     "name": "San Benedetto",
+    "slug": "san-benedetto",
     "carbonation_style": "still",
     "ions": {
       "Ca": 47.1,
@@ -1039,6 +1076,7 @@
   },
   {
     "name": "San Narciso",
+    "slug": "san-narciso",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 54.9,
@@ -1071,6 +1109,7 @@
   },
   {
     "name": "San Pellegrino",
+    "slug": "san-pellegrino",
     "carbonation_style": "sparkling",
     "carbonation_target": {
       "value": 3,
@@ -1108,6 +1147,7 @@
   },
   {
     "name": "SCA target (coffee brewing)",
+    "slug": "sca-coffee",
     "ions": {
       "Ca": 27,
       "Mg": 0,
@@ -1130,6 +1170,7 @@
   },
   {
     "name": "Selters",
+    "slug": "selters",
     "ions": {
       "Ca": 107,
       "Mg": 39,
@@ -1155,6 +1196,7 @@
   },
   {
     "name": "Tea brewing (max)",
+    "slug": "tea-max",
     "ions": {
       "Ca": 11.1,
       "Mg": 2.2,
@@ -1178,6 +1220,7 @@
   },
   {
     "name": "Tea brewing (min)",
+    "slug": "tea-min",
     "ions": {
       "Ca": 4.3,
       "Mg": 6.8,
@@ -1201,6 +1244,7 @@
   },
   {
     "name": "Tesanjski Dijamant",
+    "slug": "tesanjski",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 64.92,
@@ -1229,6 +1273,7 @@
   },
   {
     "name": "Tiva Harghita",
+    "slug": "tiva-harghita",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 102.2,
@@ -1258,6 +1303,7 @@
   },
   {
     "name": "Topo chico",
+    "slug": "topo-chico",
     "carbonation_style": "sparkling",
     "carbonation_target": {
       "value": 4.8,
@@ -1295,6 +1341,7 @@
   },
   {
     "name": "Ty Nant",
+    "slug": "ty-nant",
     "ions": {
       "Ca": 22.5,
       "Mg": 11.5,
@@ -1322,6 +1369,7 @@
   },
   {
     "name": "Vichy Catalan",
+    "slug": "vichy-catalan",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 44.3,
@@ -1355,6 +1403,7 @@
   },
   {
     "name": "Vichy Célestins",
+    "slug": "vichy-celestins",
     "carbonation_style": "sparkling",
     "ions": {
       "Ca": 103,
@@ -1383,6 +1432,7 @@
   },
   {
     "name": "Vittel",
+    "slug": "vittel",
     "carbonation_style": "still",
     "ions": {
       "Ca": 240,
@@ -1409,6 +1459,7 @@
   },
   {
     "name": "Volvic",
+    "slug": "volvic",
     "carbonation_style": "still",
     "ions": {
       "Ca": 12,
@@ -1437,6 +1488,7 @@
   },
   {
     "name": "Voss",
+    "slug": "voss",
     "carbonation_style": "still",
     "ions": {
       "Ca": 2.7,
@@ -1461,6 +1513,7 @@
   },
   {
     "name": "Waiākea",
+    "slug": "waiakea",
     "carbonation_style": "still",
     "ions": {
       "Ca": 5.6,
@@ -1488,6 +1541,7 @@
   },
   {
     "name": "Waiwera",
+    "slug": "waiwera",
     "ions": {
       "Ca": 12,
       "Mg": 2.6,

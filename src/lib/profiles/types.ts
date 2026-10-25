@@ -123,6 +123,15 @@ export const PROFILE_TRAITS = [
 export type ProfileTrait = (typeof PROFILE_TRAITS)[number]
 
 /**
+ * Format of a profile {@link Profile.slug}: a lowercase letter followed by up
+ * to 15 lowercase letters, digits, or hyphens (16 chars max).
+ *
+ * The **single source of truth** for the slug format — `schema.ts`,
+ * `validate.ts`, and the share-link codec all derive from this constant.
+ */
+export const SLUG_PATTERN = /^[a-z][a-z0-9-]{0,15}$/
+
+/**
  * Ion concentrations in mg/L for a named mineral-water profile.
  *
  * All seven ions tracked by the Waterforge engine are optional; missing ions
@@ -161,6 +170,16 @@ export interface ProfileProvenance {
 export interface Profile {
   /** Canonical name of the water (e.g. `'Evian'`, `'Volvic'`). */
   name: string
+
+  /**
+   * Stable, URL-safe key for the profile (e.g. `'evian'`), matching
+   * {@link SLUG_PATTERN}. Used by share links and `#<slug>` permalinks.
+   *
+   * Required for bundled profiles (enforced in `library.ts`) and **frozen once
+   * shipped** — never rename or reuse a slug. Optional for user-imported
+   * profiles.
+   */
+  slug?: string
 
   /** Ion concentrations, all in mg/L. */
   ions: ProfileIons

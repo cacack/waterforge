@@ -32,10 +32,44 @@ export const PROFILES: Profile[] = (rawProfiles as unknown[]).map(
 )
 
 /**
+ * Throws unless every bundled profile carries a unique slug and a unique name —
+ * share links and `#<slug>` permalinks key on the slug, and decoded snapshots
+ * resolve the target by name. Run at module load, like the validation above.
+ */
+function assertUniqueKeys(profiles: Profile[]): void {
+  const slugs = new Set<string>()
+  const names = new Set<string>()
+  for (const p of profiles) {
+    if (p.slug === undefined) {
+      throw new Error(`profiles.json entry '${p.name}' is missing a slug`)
+    }
+    if (slugs.has(p.slug)) {
+      throw new Error(`profiles.json slug '${p.slug}' is not unique`)
+    }
+    if (names.has(p.name)) {
+      throw new Error(`profiles.json name '${p.name}' is not unique`)
+    }
+    slugs.add(p.slug)
+    names.add(p.name)
+  }
+}
+
+assertUniqueKeys(PROFILES)
+
+/**
  * Look up a profile by name (case-sensitive, exact match).
  *
  * Returns `undefined` when not found.
  */
 export function findProfile(name: string): Profile | undefined {
   return PROFILES.find((p) => p.name === name)
+}
+
+/**
+ * Look up a profile by slug (exact match).
+ *
+ * Returns `undefined` when not found.
+ */
+export function findProfileBySlug(slug: string): Profile | undefined {
+  return PROFILES.find((p) => p.slug === slug)
 }

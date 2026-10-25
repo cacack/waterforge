@@ -1,7 +1,10 @@
 <script lang="ts">
-  // Actions toolbar — export (download / copy) and import (file or paste) for
-  // the current recipe state. Designed to be extensible: issue #23 (share link)
-  // will add a button here as well.
+  // Actions toolbar — export (download / copy), share links, and import (file
+  // or paste) for the current recipe state.
+  //
+  // Share links:
+  //   - Share              compact v2 snapshot link (whole recipe).
+  //   - Link to this water `#<slug>` permalink to the selected target only.
   //
   // Export formats supported:
   //   - AppSnapshot JSON (canonical; round-trips perfectly via applySnapshot).
@@ -19,12 +22,13 @@
   import UploadIcon from '@lucide/svelte/icons/upload'
   import CopyIcon from '@lucide/svelte/icons/copy'
   import Share2Icon from '@lucide/svelte/icons/share-2'
+  import LinkIcon from '@lucide/svelte/icons/link'
   import {
     snapshotState,
     applySnapshot,
     buildRecipeExport,
   } from '../persist.svelte'
-  import { encodeHash, buildShareUrl } from '../share'
+  import { encodeShareHash, buildShareUrl } from '../share'
   import { app } from '../state.svelte'
   import { validateProfile, profileToIonProfile, type Profile } from '$lib'
 
@@ -87,13 +91,28 @@
   let shareTimer: ReturnType<typeof setTimeout> | undefined
 
   async function handleShare() {
-    const hash = encodeHash(snapshotState())
+    const hash = encodeShareHash(snapshotState())
     const url = buildShareUrl(location.origin, location.pathname, hash)
     await navigator.clipboard.writeText(url)
     shareLabel = 'copied'
     clearTimeout(shareTimer)
     shareTimer = setTimeout(() => {
       shareLabel = 'share'
+    }, 2000)
+  }
+
+  let targetLinkLabel = $state<'link' | 'copied'>('link')
+  let targetLinkTimer: ReturnType<typeof setTimeout> | undefined
+  const targetSlug = $derived(app.target?.slug)
+
+  async function handleTargetLink() {
+    if (!targetSlug) return
+    const url = buildShareUrl(location.origin, location.pathname, targetSlug)
+    await navigator.clipboard.writeText(url)
+    targetLinkLabel = 'copied'
+    clearTimeout(targetLinkTimer)
+    targetLinkTimer = setTimeout(() => {
+      targetLinkLabel = 'link'
     }, 2000)
   }
 
@@ -236,7 +255,7 @@
     {/if}
   </Button>
 
-  <!-- Share link — copies a base64url-encoded URL to clipboard -->
+  <!-- Share link — copies a compact v2 snapshot URL to clipboard -->
   <Button
     variant="ghost"
     size="icon"
@@ -248,6 +267,22 @@
       <span class="text-xs font-medium">✓</span>
     {:else}
       <Share2Icon class="size-4" />
+    {/if}
+  </Button>
+
+  <!-- Link to this water — copies a #<slug> target permalink to clipboard -->
+  <Button
+    variant="ghost"
+    size="icon"
+    onclick={handleTargetLink}
+    disabled={!targetSlug}
+    aria-label="Copy link to this water"
+    title="Copy link to this water"
+  >
+    {#if targetLinkLabel === 'copied'}
+      <span class="text-xs font-medium">✓</span>
+    {:else}
+      <LinkIcon class="size-4" />
     {/if}
   </Button>
 

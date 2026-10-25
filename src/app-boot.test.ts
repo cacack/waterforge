@@ -1,16 +1,18 @@
 // Boot-flow integration tests for App.svelte's startup sequence.
 //
-// Issue #63 reported that opening a shared `v1:…` URL showed whatever the
-// previous session had in localStorage rather than the snapshot encoded in
-// the URL. The boot order in App.svelte is:
+// Issue #63 reported that opening a shared URL showed whatever the previous
+// session had in localStorage rather than the snapshot encoded in the URL.
+// The boot order in App.svelte is:
 //
 //   1. loadFromStorage()                          // localStorage → app
-//   2. decodeHash(location.hash.slice(1))         // URL hash → snapshot
-//   3. applySnapshot(decoded)                     // snapshot → app (wins)
+//   2. parseHash(location.hash.slice(1))          // URL hash → snapshot/slug
+//   3. applySnapshot(snapshot) | app.target = …   // hash → app (wins)
 //   4. initPersistence()                          // future writes to storage
 //
-// These tests mirror that sequence exactly to prove that the hash wins over
-// any pre-existing localStorage state.
+// These tests mirror that sequence exactly (`applyHash` below calls the same
+// parseHash + applyParsedHash pair as App.svelte's applyHashIfPresent) to prove that the hash wins over any
+// pre-existing localStorage state, and that a `#<slug>` target link changes
+// only the target (issue #302).
 //
 // Storage is stubbed via vi.stubGlobal because the engine layer doesn't have
 // a real browser localStorage available in the vitest node environment, and
@@ -20,12 +22,12 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { app } from './state.svelte'
 import {
   snapshotState,
-  applySnapshot,
+  applyParsedHash,
   loadFromStorage,
   SNAPSHOT_VERSION,
   type AppSnapshot,
 } from './persist.svelte'
-import { encodeHash, decodeHash } from './share'
+import { encodeShareHash, parseHash } from './share'
 import { PROFILES, SALT_ORDER, findProfile } from '$lib'
 
 // ---------------------------------------------------------------------------
@@ -50,6 +52,12 @@ function createStorageStub(): Storage {
       store.set(k, v)
     },
   }
+}
+
+/** App.svelte's applyHashIfPresent, minus reading `location` and the history update. */
+function applyHash(raw: string): boolean {
+  const parsed = parseHash(raw)
+  return parsed !== null && applyParsedHash(parsed)
 }
 
 function resetApp() {
@@ -117,15 +125,13 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
       salts: [...SALT_ORDER],
       batch: { volume: 1, unit: 'L' },
     }
-    const hash = encodeHash(hashSnap)
+    const hash = encodeShareHash(hashSnap)
 
     // Mirror App.svelte's boot sequence.
     loadFromStorage()
     expect(app.target?.name).toBe('Volvic')
 
-    const decoded = decodeHash(hash)
-    expect(decoded).not.toBeNull()
-    applySnapshot(decoded)
+    expect(applyHash(hash)).toBe(true)
 
     expect(app.target?.name).toBe('Evian')
   })
@@ -152,10 +158,10 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
       // leaves the reset default, which snapshotState then re-emits.
       carbonation: { temp: 4, tempUnit: 'C' },
     }
-    const hash = encodeHash(hashSnap)
+    const hash = encodeShareHash(hashSnap)
 
     loadFromStorage()
-    applySnapshot(decodeHash(hash))
+    applyHash(hash)
 
     const after = snapshotState()
     expect(after).toEqual(hashSnap)
@@ -176,15 +182,14 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
 
     // User had "Artificial mineral water" selected when they hit Share.
     app.target = findProfile('Artificial mineral water') ?? null
-    const hash = encodeHash(snapshotState())
+    const hash = encodeShareHash(snapshotState())
 
     // Simulate a fresh page load: reset state, then run boot sequence.
     resetApp()
     loadFromStorage()
     expect(app.target?.name).toBe('Volvic') // storage applied
 
-    const decoded = decodeHash(hash)
-    applySnapshot(decoded)
+    applyHash(hash)
     expect(app.target?.name).toBe('Artificial mineral water')
   })
 
@@ -220,7 +225,7 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
       salts: [...SALT_ORDER],
       batch: { volume: 1, unit: 'L' },
     }
-    applySnapshot(decodeHash(encodeHash(hashA)))
+    applyHash(encodeShareHash(hashA))
     expect(app.target?.name).toBe('Evian')
 
     // User pastes a shared URL for a different profile into the same tab.
@@ -232,7 +237,47 @@ describe('App boot order — hash wins over localStorage (issue #63)', () => {
       salts: [...SALT_ORDER],
       batch: { volume: 1, unit: 'L' },
     }
-    applySnapshot(decodeHash(encodeHash(hashB)))
+    applyHash(encodeShareHash(hashB))
     expect(app.target?.name).toBe('Volvic')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Target links: `#<slug>` changes only the target (issue #302)
+// ---------------------------------------------------------------------------
+
+describe('App boot — target link (issue #302)', () => {
+  beforeEach(() => {
+    vi.stubGlobal('localStorage', createStorageStub())
+    resetApp()
+    // A custom recipe the target link must not disturb.
+    app.sourceMode = 'known'
+    app.source = { Ca: 12, Mg: 3 }
+    app.salts = ['gypsum', 'epsom']
+    app.batch = { volume: 5, unit: 'gal' }
+    app.carbonation = { temp: 40, tempUnit: 'F' }
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('selects the linked target and leaves everything else untouched', () => {
+    const volvic = findProfile('Volvic')
+    expect(volvic?.slug).toBeTruthy()
+    const before = snapshotState()
+
+    expect(applyHash(volvic!.slug!)).toBe(true)
+
+    expect(app.target?.name).toBe('Volvic')
+    expect(snapshotState()).toEqual({ ...before, targetName: 'Volvic' })
+  })
+
+  it('an unknown slug changes nothing', () => {
+    const before = snapshotState()
+
+    expect(applyHash('no-such-water')).toBe(false)
+
+    expect(snapshotState()).toEqual(before)
   })
 })

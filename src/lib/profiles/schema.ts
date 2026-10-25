@@ -9,7 +9,7 @@
 // (e.g. by validation functions or a future JSON-Schema validator) without
 // bundling a dedicated schema library.
 
-import { PROFILE_CATEGORIES, PROFILE_TRAITS } from './types'
+import { PROFILE_CATEGORIES, PROFILE_TRAITS, SLUG_PATTERN } from './types'
 
 /** JSON Schema (draft 2020-12) for a Waterforge mineral-water Profile. */
 export const PROFILE_SCHEMA = {
@@ -26,6 +26,12 @@ export const PROFILE_SCHEMA = {
       type: 'string',
       minLength: 1,
       description: 'Canonical name of the water (e.g. "Evian", "Volvic").',
+    },
+    slug: {
+      type: 'string',
+      pattern: SLUG_PATTERN.source,
+      description:
+        'Stable, URL-safe profile key (e.g. "evian"). Required for bundled profiles; frozen once shipped — never renamed or reused.',
     },
     ions: {
       type: 'object',

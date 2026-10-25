@@ -13,6 +13,7 @@
 import {
   SALT_ORDER,
   findProfile,
+  findProfileBySlug,
   type CarbonationUnit,
   type IonProfile,
   type Readouts,
@@ -27,6 +28,7 @@ import {
   computeResult,
   type SourceMode,
 } from './state.svelte'
+import type { ParsedHash } from './share'
 
 // ---------------------------------------------------------------------------
 // Snapshot schema
@@ -248,7 +250,9 @@ export function applySnapshot(s: unknown): void {
         typeof id === 'string' &&
         (SALT_ORDER as readonly string[]).includes(id),
     )
-    if (filtered.length > 0) {
+    // An explicitly empty list is a real state (every salt toggled off) and
+    // is applied; a non-empty list with no recognised IDs is ignored.
+    if (filtered.length > 0 || rawSalts.length === 0) {
       app.salts = filtered
     }
   }
@@ -290,6 +294,24 @@ export function applySnapshot(s: unknown): void {
       app.carbonation.tempUnit = tempUnit
     }
   }
+}
+
+/**
+ * Apply a parsed URL hash (see `parseHash` in share.ts) to `app`.
+ *
+ * A snapshot link replaces the recipe via {@link applySnapshot}; a target link
+ * selects that bundled profile and touches nothing else. Returns `true` when
+ * something was applied, `false` for an unknown slug.
+ */
+export function applyParsedHash(parsed: ParsedHash): boolean {
+  if (parsed.kind === 'snapshot') {
+    applySnapshot(parsed.snapshot)
+    return true
+  }
+  const profile = findProfileBySlug(parsed.slug)
+  if (!profile) return false
+  app.target = profile
+  return true
 }
 
 // ---------------------------------------------------------------------------

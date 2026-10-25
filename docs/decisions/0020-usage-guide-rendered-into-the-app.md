@@ -3,6 +3,9 @@
 **Status:** Accepted
 **Date:** 2026-09-11
 **Closes:** [#234](https://github.com/cacack/waterforge/issues/234)
+**Amended by:** [ADR 0021](0021-compact-share-links-and-slugs.md) (2026-10-24) —
+`decodeHash` is now `parseHash`, and a slug-shaped fragment is a target link,
+not ignored
 
 ## Context
 
