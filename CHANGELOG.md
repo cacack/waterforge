@@ -9,6 +9,26 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.11.0](https://github.com/cacack/waterforge/compare/v1.10.3...v1.11.0) (2026-10-25)
+
+
+### Features
+
+* **profiles:** add stable slugs to bundled profiles ([de6c0ba](https://github.com/cacack/waterforge/commit/de6c0bab88e44e7f13a69626ef16c9494b2c9deb)), closes [#302](https://github.com/cacack/waterforge/issues/302)
+* **share:** compact v2 share links ([8df3a91](https://github.com/cacack/waterforge/commit/8df3a91d959a6a95da322c1ec252aca2e88ba369)), closes [#302](https://github.com/cacack/waterforge/issues/302)
+* **ui:** add link to this water action ([4e3a8da](https://github.com/cacack/waterforge/commit/4e3a8da34a26c44a2d6dbf7a45ba704bbb015400)), closes [#302](https://github.com/cacack/waterforge/issues/302)
+
+
+### Bug Fixes
+
+* **deps:** bump @lucide/svelte from 1.48.0 to 1.52.0 ([f570e36](https://github.com/cacack/waterforge/commit/f570e36fa1b49df6d7d8bd070b91431a1d995473))
+* **deps:** bump bits-ui from 2.19.3 to 2.19.5 ([19d328f](https://github.com/cacack/waterforge/commit/19d328f03da2198fd16f248043087c63eb6ba49b))
+* **deps:** bump postcss-selector-parser from 7.1.5 to 7.1.6 ([321645b](https://github.com/cacack/waterforge/commit/321645bfcd16e497c8b111298a7f4cb84427d0eb))
+* **deps:** bump source-map-js from 1.2.1 to 1.2.2 ([54c2653](https://github.com/cacack/waterforge/commit/54c26537fe9f7a5abb5db5a520ea30cb202a9e8d))
+* **deps:** bump vite from 8.3.1 to 8.3.4 ([b883ac4](https://github.com/cacack/waterforge/commit/b883ac4dea204f577e19f51da567bf4a0f258c40))
+* **deps:** bump vite-plugin-pwa from 1.3.0 to 2.0.0 ([52e4323](https://github.com/cacack/waterforge/commit/52e43234ca6a6f582b55e957b58c413759909151))
+* **share:** pin the v2 link contract and apply shared state faithfully ([a61ce90](https://github.com/cacack/waterforge/commit/a61ce9011479f4f434e1052aa7978630601f5998)), closes [#302](https://github.com/cacack/waterforge/issues/302)
+
 ## [1.10.3](https://github.com/cacack/waterforge/compare/v1.10.2...v1.10.3) (2026-10-04)
 
 
