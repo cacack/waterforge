@@ -61,14 +61,14 @@ describe('computeTdsReadout', () => {
 
   // Catalog spot-check (issue #303 acceptance example). Tied to profile data:
   // a refresh of San Pellegrino's analysis may legitimately move these numbers.
-  it('San Pellegrino: sum ≈ 941, published 854, band Rich', () => {
+  it('San Pellegrino: sum ≈ 953, published 860, band Rich', () => {
     const readout = readoutFor(
       PROFILES.find((p) => p.slug === 'san-pellegrino')!,
     )
     // The readout is the recipe's sum of ions; the solver's best fit lands
-    // within a couple of mg/L of the target's 941.
-    expect(Math.abs(readout!.sumOfIons - 941)).toBeLessThanOrEqual(2)
+    // within a couple of mg/L of the target's 953.6.
+    expect(Math.abs(readout!.sumOfIons - 953)).toBeLessThanOrEqual(2)
     expect(readout!.band.id).toBe('rich')
-    expect(readout!.published?.value).toBe(854)
+    expect(readout!.published?.value).toBe(860)
   })
 })

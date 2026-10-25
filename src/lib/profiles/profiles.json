@@ -4,25 +4,26 @@
     "slug": "acqua-panna",
     "carbonation_style": "still",
     "ions": {
-      "Ca": 33.1,
-      "Mg": 6.6,
-      "Na": 6.5,
-      "HCO3": 110,
-      "SO4": 20.8,
-      "Cl": 8.3
+      "Ca": 32,
+      "Mg": 6.7,
+      "Na": 7,
+      "K": 0.89,
+      "HCO3": 112,
+      "SO4": 20,
+      "Cl": 7.9
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 7.66,
+    "ph": 8.1,
     "tds": {
-      "value": 138,
+      "value": 140,
       "provenance": {
         "verified": true,
-        "source": "Acqua Panna 2023 Water Analysis Report (Sanpellegrino S.p.A. / Nestlé USA), Total Dissolved Solids; checked via Wayback capture of acquapanna.com/us/sites/g/files/xknfdk971/files/2024-09/AcquaPanna_WA_EN_2023.pdf. A 2025 report (TDS 140, revised ions) now exists.",
+        "source": "2025 Acqua Panna Water Analysis Report (Nestlé USA), Total Dissolved Solids 140 mg/L (method not stated); checked via Wayback capture of acquapanna.com/us/sites/g/files/xknfdk971/files/2026-04/AcquaPanna_EN_2025_April_6_2026.pdf",
         "source_date": "2026-10-24"
       }
     },
-    "comment": "NO₃ 2.1 mg/L (reported as 0.48 mg/L nitrate-as-N). HCO₃ derived from total alkalinity 90 mg/L as CaCO₃. K below detection limit. Still water (no CO₂).",
-    "url": "https://www.acquapanna.com/us/sites/g/files/xknfdk971/files/2024-09/AcquaPanna_WA_EN_2023.pdf",
+    "comment": "NO₃ 2.3 mg/L (reported as 0.52 mg/L nitrate-as-N). F 0.05 mg/L. HCO₃ derived from total alkalinity 92 mg/L as CaCO₃ (× 1.2193). Conductivity 250 µS/cm; hardness 110 mg/L as CaCO₃. Still water (no CO₂). Replaces the 2023 report (Ca 33.1, Mg 6.6, Na 6.5, HCO₃ 110, SO₄ 20.8, Cl 8.3, pH 7.66, TDS 138; K below detection).",
+    "url": "https://www.acquapanna.com/us/sites/g/files/xknfdk971/files/2026-04/AcquaPanna_EN_2025_April_6_2026.pdf",
     "country": "Italy",
     "locality": "Scarperia, Tuscany",
     "description": "Still natural mineral water from the Panna spring in the Tuscan Apennines near Florence, with a light overall mineral content.",
@@ -30,20 +31,20 @@
     "traits": ["low-mineralization"],
     "provenance": {
       "verified": true,
-      "source": "Acqua Panna Water Analysis Report 2023 (Sanpellegrino S.p.A.); Panna Spring, Scarperia (Florence), Italy",
-      "source_date": "2026-05-28"
+      "source": "2025 Acqua Panna Water Analysis Report (Nestlé USA; posted 2026-04); Panna Spring, Scarperia (Florence), Italy",
+      "source_date": "2026-10-24"
     }
   },
   {
     "name": "Antipodes",
     "slug": "antipodes",
     "ions": {
-      "Ca": 3,
-      "Mg": 2,
+      "Ca": 3.5,
+      "Mg": 1.8,
       "Na": 11,
-      "K": 3,
+      "K": 3.3,
       "HCO3": 35,
-      "SO4": 5,
+      "SO4": 4.5,
       "Cl": 7
     },
     "alkalinity_unit": "as_HCO3",
@@ -56,7 +57,7 @@
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Used for strong, pale, bitter ales. SiO₂ 73 mg/L (dominant mineral). Silica-rich artesian water, Whakatāne, NZ; total minerality ~130 mg/L. Bottler states analysis accurate to ±20%.",
+    "comment": "Used for strong, pale, bitter ales. SiO₂ 73 mg/L (dominant mineral; the live page now reads 78). NO₃ 1.5 mg/L. Silica-rich artesian water, Whakatāne, NZ; total minerality ~130 mg/L. Bottler states analysis accurate to ±20%.",
     "url": "https://www.antipodes.co.nz/our-water",
     "country": "New Zealand",
     "locality": "Whakatāne",
@@ -65,8 +66,8 @@
     "traits": ["artesian", "silica-rich"],
     "provenance": {
       "verified": true,
-      "source": "Antipodes official typical analysis (antipodes.co.nz; full ion set via Fonsapor distributor reproduction)",
-      "source_date": "2026-05-28"
+      "source": "Antipodes producer page antipodes.co.nz/our-water, 'Raw Water Analysis' (Wayback capture 2022-03-28); live page (2026-10) unchanged for Ca 3.5, Mg 1.8, Na 11, pH 7.0, TDS 130",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -161,11 +162,13 @@
       "Ca": 153,
       "Mg": 80,
       "Na": 180,
+      "K": 11,
       "HCO3": 1250,
       "SO4": 35,
       "Cl": 54
     },
     "alkalinity_unit": "as_HCO3",
+    "ph": 6,
     "tds": {
       "value": 1100,
       "provenance": {
@@ -174,7 +177,7 @@
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Naturally carbonated. SiO₂ 27 mg/L, F⁻ 1.2 mg/L. Official badoit.fr table omits K, pH, TDS and CO₂; prior Khymos-2015 values for those fields dropped. TDS is from the bottle label.",
+    "comment": "Naturally carbonated. SiO₂ 27 mg/L, F⁻ 1.2 mg/L. Official badoit.fr table omits K, pH, TDS and CO₂; K 11, pH 6 and TDS 1100 are from the bottle label, whose other ions match badoit.fr exactly.",
     "url": "https://www.badoit.fr/notre-eau-minerale/badoit-composition.html",
     "country": "France",
     "locality": "Saint-Galmier",
@@ -183,7 +186,7 @@
     "traits": ["sodium-rich", "bicarbonate-rich", "magnesium-rich"],
     "provenance": {
       "verified": true,
-      "source": "Badoit official composition page (badoit.fr — Tableau de composition, valeurs moyennes pour 1 litre)",
+      "source": "Badoit official composition page (badoit.fr) and bottle label (OFF EAN 3068320112107, identical ions; label adds K, pH, TDS)",
       "source_date": "2026-05-28"
     }
   },
@@ -192,24 +195,24 @@
     "slug": "borsec",
     "carbonation_style": "sparkling",
     "ions": {
-      "Ca": 364.3,
-      "Mg": 110.5,
-      "Na": 78.33,
-      "HCO3": 1962.8
+      "Ca": 340,
+      "Mg": 96.4,
+      "Na": 60,
+      "HCO3": 1690
     },
     "alkalinity_unit": "as_HCO3",
     "co2": 2500,
-    "ph": 5.75,
+    "ph": 5.72,
     "tds": {
-      "value": 1490,
+      "value": 1500,
       "provenance": {
-        "verified": false,
-        "source": "Superseded: 1490 not found in any current source. The current Borsec label (WESSLING Romania analysis 2301306, 2023-02-01; Open Food Facts EAN 5942219115845) gives reziduu sec la 180 °C 1500 with revised ions (HCO₃ 1690, Ca 340, Mg 96.4, Na 60); 1490 kept paired with this profile's older ion set until the whole analysis is refreshed.",
-        "source_date": "2026-10-24"
+        "verified": true,
+        "source": "Borsec 1.5 L back label, \"reziduu sec la 180 °C\" 1500 mg/L (WESSLING Romania SRL analysis 2301306/1/01.02.2023; Open Food Facts label photo, EAN 5942219115845)",
+        "source_date": "2023-02-01"
       }
     },
-    "comment": "Naturally carbonated (Romaqua Group). CO₂ is the label minimum (≥2500 mg/L); TDS is dry residue at 180°C. K, SO₄ and Cl were Khymos-origin and are not on the current product label, so they were dropped.",
-    "url": "https://romaqua-group.ro/en/brands/borsec/",
+    "comment": "Naturally carbonated (Romaqua Group). CO₂ is the label minimum (\"CO₂ minim 2500 mg/l\"); TDS is dry residue at 180°C. K, SO₄ and Cl are not given on the label. Replaces an older set (Ca 364.3, Mg 110.5, Na 78.33, HCO₃ 1962.8, pH 5.75, residue 1490) superseded by the WESSLING 2023 label analysis.",
+    "url": "https://world.openfoodfacts.org/product/5942219115845",
     "country": "Romania",
     "locality": "Borsec",
     "description": "Naturally carbonated mineral water from the Borsec resort in the Romanian Eastern Carpathians, rich in calcium, magnesium and bicarbonate.",
@@ -222,8 +225,8 @@
     ],
     "provenance": {
       "verified": true,
-      "source": "Romaqua Group — Borsec natural carbonated mineral water product label / analysis (Ca 364.3, Mg 110.5, Na 78.33, HCO₃ 1962.8 mg/L, pH 5.75, CO₂ ≥2500 mg/L, dry residue 1490 mg/L)",
-      "source_date": "2026-05-28"
+      "source": "Borsec 1.5 L back label, \"După analiza WESSLING Romania SRL, 2301306/1/01.02.2023\" (Open Food Facts EAN 5942219115845, image 4: images.openfoodfacts.org/images/products/594/221/911/5845/4.jpg); the Romaqua brand page publishes no figures",
+      "source_date": "2023-02-01"
     }
   },
   {
@@ -1085,7 +1088,7 @@
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Still water, Vittel (Vosges, France; Nestlé Waters). The most magnesium-rich still natural mineral water on the French market (Mg 119 mg/L) and very high sulfate (SO₄ 1530 mg/L) — fills the high-Mg / high-SO₄ chemistry gap. NO₃ 4.3 mg/L, F 0.4 mg/L. TDS is dry residue at 180°C; no CaCO₃ alkalinity or SiO₂ published.",
+    "comment": "Still water, Vittel (Vosges, France; Nestlé Waters). The most magnesium-rich still natural mineral water on the French market (Mg 119 mg/L) and very high sulfate (SO₄ 1530 mg/L) — fills the high-Mg / high-SO₄ chemistry gap. NO₃ 4.3 mg/L, F 0.4 mg/L. TDS is dry residue at 180°C; no CaCO₃ alkalinity or SiO₂ published. Checked 2026-10: the current bottle label (OFF EAN 7613035024021) reads HCO₃ 387.3 and pH 7.5 but omits K and Cl; kept the complete June 2024 Nestlé table analysis (HCO₃ 384, pH 7.2).",
     "url": "https://www.nutripro.nestle.fr/sites/default/files/2024-08/Tableau%20des%20eaux%20min%C3%A9rales%20naturelles%20plates.pdf",
     "country": "France",
     "locality": "Vittel, Vosges",
@@ -1501,27 +1504,27 @@
     "slug": "neuselters",
     "carbonation_style": "still",
     "ions": {
-      "Ca": 124,
-      "Mg": 35,
-      "Na": 149,
-      "K": 9,
-      "HCO3": 680,
-      "SO4": 16,
-      "Cl": 153
+      "Ca": 102,
+      "Mg": 45.1,
+      "Na": 15.5,
+      "K": 2.2,
+      "HCO3": 472,
+      "SO4": 47,
+      "Cl": 32
     },
     "alkalinity_unit": "as_HCO3",
-    "tds_unpublished": "No residue/TDS on the archived producer site (neuselters.de, Wayback 2015); only third-party ion sums (checked 2026-10).",
-    "comment": "HISTORICAL / unverified-current: Neuselters Mineralquellen (Löhnberg) permanently closed Feb 2016 — no current authoritative source exists. Values from mineralwasser-test.com label transcription (Neuselters Still). Removal-sub-issue candidate.",
-    "url": "https://mineralwasser-test.com/wasser/neuselters-still/",
+    "tds_unpublished": "No residue/TDS on the archived producer product pages (neuselters.de Naturell/Classic/Medium, Wayback 2015-09); the linked Produktblatt PDF (Neuselters-Produktblatt_MiWa_06.15.pdf) was not archived (checked 2026-10-24).",
+    "comment": "HISTORICAL: Neuselters Mineralquellen (Löhnberg) closed in 2016 (2016 AGB \"Neuselters Mineralquellen i.L.\"), so no current source exists. Values are the producer's own \"Auszug aus der Analyse der SGS Institut Fresenius GmbH vom 18.12.2014\" (Neuselters Naturell page, labelled \"NATRIUMARM\"). Replaces a mineralwasser-test.com transcription (Ca 124, Mg 35, Na 149, K 9, HCO₃ 680, SO₄ 16, Cl 153) that did not match the producer's analysis.",
+    "url": "https://web.archive.org/web/20150920022955/http://neuselters.de/sortiment/neuselters-naturell/",
     "country": "Germany",
     "locality": "Löhnberg",
-    "description": "A formerly marketed German mineral water from Löhnberg; the source closed in 2016 and the figures come from a historical label transcription.",
+    "description": "A formerly marketed German mineral water from Löhnberg; the source closed in 2016 and the figures come from the producer's archived 2014 analysis.",
     "category": "bottled",
-    "traits": ["sodium-rich", "bicarbonate-rich", "chloride-rich"],
+    "traits": ["calcium-rich", "magnesium-rich", "bicarbonate-rich"],
     "provenance": {
-      "verified": false,
-      "source": "mineralwasser-test.com label transcription (Neuselters Still) — brand discontinued 2016, no current source",
-      "source_date": "2021-08-31"
+      "verified": true,
+      "source": "Neuselters Mineralquellen — \"Neuselters Naturell\" product page, \"Auszug aus der Analyse der SGS Institut Fresenius GmbH vom 18.12.2014\" (neuselters.de, Wayback capture 2015-09-20); brand discontinued 2016",
+      "source_date": "2014-12-18"
     }
   },
   {
@@ -1529,26 +1532,26 @@
     "slug": "perla-harghitei",
     "carbonation_style": "sparkling",
     "ions": {
-      "Ca": 95.9,
-      "Mg": 38.6,
-      "Na": 59.0,
-      "K": 9.08,
-      "HCO3": 694,
-      "SO4": 1.18,
-      "Cl": 16.8
+      "Ca": 108,
+      "Mg": 44.6,
+      "Na": 64.0,
+      "K": 9.3,
+      "HCO3": 675,
+      "SO4": 0.54,
+      "Cl": 19.1
     },
     "alkalinity_unit": "as_HCO3",
     "co2": 3500,
-    "ph": 5.6,
+    "ph": 5.5,
     "tds": {
-      "value": 635,
+      "value": 704,
       "provenance": {
-        "verified": false,
-        "source": "Superseded: 635 no longer published. perlaharghitei.ro/produse/perla-harghitei (Carbo) now gives reziduu sec la 180 °C 704 with revised ions (Ca 108, Mg 44.6, Na 64.0, HCO₃ 675); 635 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "verified": true,
+        "source": "S.C. Perla Harghitei S.A. product page, \"carbo\" tab, \"Reziduu sec la 180°\" 704 mg/L (perlaharghitei.ro/produse/perla-harghitei; page undated, read 2026-10-24)",
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Naturally carbonated flagship (\"Carbo\"), Sâncrăieni source. CO₂ is the label minimum (≥3500 mg/L). The lightly-carbonated \"Ușor Carbo\" variant shares this analysis, differing only in CO₂. No NO₃, F, or SiO₂ published.",
+    "comment": "Naturally carbonated flagship (\"Carbo\"), Sâncrăieni source (F1 SNAM, F2 SNAM, FI ISPIF). CO₂ is the label minimum (≥3500 mg/L); TDS is dry residue at 180°C. The partially decarbonated \"Ușor Carbo\" variant now has its own lower-mineral analysis (Ca 99.3, Mg 39.7, Na 60.4, K 8.74, HCO₃ 658, SO₄ 0.74, Cl 15.2, pH 6.1, residue 657), not modelled here. No NO₃, F, or SiO₂ published. Replaces an older set (Ca 95.9, Mg 38.6, Na 59.0, K 9.08, HCO₃ 694, SO₄ 1.18, Cl 16.8, pH 5.6, residue 635).",
     "url": "https://www.perlaharghitei.ro/produse/perla-harghitei",
     "country": "Romania",
     "locality": "Sâncrăieni, Harghita",
@@ -1557,8 +1560,8 @@
     "traits": ["calcium-rich", "magnesium-rich", "bicarbonate-rich"],
     "provenance": {
       "verified": true,
-      "source": "S.C. Perla Harghitei S.A. — \"Perla Harghitei\" (Carbo) product page, published mineral-water analysis (Sâncrăieni, Harghita), perlaharghitei.ro",
-      "source_date": "2026-05-28"
+      "source": "S.C. Perla Harghitei S.A. — \"Perla Harghitei\" product page, \"carbo\" tab \"Compoziția chimică\" (Sâncrăieni; sources F1 SNAM, F2 SNAM, FI ISPIF), perlaharghitei.ro/produse/perla-harghitei; page undated, read 2026-10-24",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -1566,25 +1569,25 @@
     "slug": "perla-plata",
     "carbonation_style": "still",
     "ions": {
-      "Ca": 103,
-      "Mg": 9.99,
-      "Na": 7.69,
-      "K": 1.71,
-      "HCO3": 332,
-      "SO4": 11.88,
-      "Cl": 16.1
+      "Ca": 113,
+      "Mg": 9.87,
+      "Na": 6.78,
+      "K": 1.49,
+      "HCO3": 312,
+      "SO4": 13.6,
+      "Cl": 13.2
     },
     "alkalinity_unit": "as_HCO3",
     "ph": 7.3,
     "tds": {
-      "value": 347,
+      "value": 376,
       "provenance": {
-        "verified": false,
-        "source": "Superseded: 347 no longer published. perlaharghitei.ro/produse/perla-harghitei (Plată, FH Artezia 2) now gives reziduu sec la 180° 376 with revised ions (Ca 113, HCO₃ 312, Cl 13.2); 347 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "verified": true,
+        "source": "S.C. Perla Harghitei S.A. product page, \"plată\" tab, \"Reziduu sec la 180°\" 376 mg/L (perlaharghitei.ro/produse/perla-harghitei; page undated, read 2026-10-24)",
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Still (\"Plată\") line — chemically distinct from the carbonated Perla Harghitei, drawn from a different spring (FH Artezia 2, Sânsimion): much lower Mg/Na/HCO₃. No NO₃, F, or SiO₂ published.",
+    "comment": "Still (\"Plată\") line — chemically distinct from the carbonated Perla Harghitei, drawn from a different spring (FH Artezia 2, Sânsimion): much lower Mg/Na/HCO₃. TDS is dry residue at 180°C. No NO₃, F, or SiO₂ published. Replaces an older set (Ca 103, Mg 9.99, Na 7.69, K 1.71, HCO₃ 332, SO₄ 11.88, Cl 16.1, residue 347).",
     "url": "https://www.perlaharghitei.ro/produse/perla-harghitei",
     "country": "Romania",
     "locality": "Sânsimion, Harghita",
@@ -1593,8 +1596,8 @@
     "traits": ["calcium-rich", "bicarbonate-rich"],
     "provenance": {
       "verified": true,
-      "source": "S.C. Perla Harghitei S.A. — \"Perla Harghitei\" (Plată) product page, published mineral-water analysis (FH Artezia 2, Sânsimion), perlaharghitei.ro",
-      "source_date": "2026-05-28"
+      "source": "S.C. Perla Harghitei S.A. — \"Perla Harghitei\" product page, \"plată\" tab \"Compoziția chimică\" (FH Artezia 2, Sânsimion), perlaharghitei.ro/produse/perla-harghitei; page undated, read 2026-10-24",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -1614,7 +1617,6 @@
       "Ca": 150,
       "Mg": 3.9,
       "Na": 9.6,
-      "K": 0.6,
       "HCO3": 420,
       "SO4": 25.3,
       "Cl": 19.5
@@ -1629,7 +1631,7 @@
         "source_date": "2026-10-24"
       }
     },
-    "comment": "NO₃ 7.3 mg/L. Current product label (Vergèze). Nestlé's corporate fact sheet differs (Ca 155, Mg 6.8, SO₄ 33, Cl 22, HCO₃ 430) — Perrier's published composition varies by source/period. carbonation_target ≈5.0 volumes is an unverified estimate (see carbonation_target.provenance), not a producer spec.",
+    "comment": "NO₃ 7.3 mg/L. K <1 mg/L (not quantified on the label; the former K 0.6 was not from this analysis and was dropped). Current product label (Vergèze). Checked 2026-10: newer labels read TDS 479 and 496 with different ions; kept the 456 label paired with these ions. Nestlé's corporate fact sheet differs (Ca 155, Mg 6.8, SO₄ 33, Cl 22, HCO₃ 430) — Perrier's published composition varies by source/period. carbonation_target ≈5.0 volumes is an unverified estimate (see carbonation_target.provenance), not a producer spec.",
     "url": "https://www.nestle.com/sites/default/files/asset-library/documents/investors/fact-sheets/perrier%20facts%20and%20figures.pdf",
     "country": "France",
     "locality": "Vergèze, Gard",
@@ -2022,26 +2024,26 @@
       }
     },
     "ions": {
-      "Ca": 164,
-      "Mg": 49.5,
+      "Ca": 169,
+      "Mg": 49.2,
       "Na": 31.2,
-      "K": 2.2,
-      "HCO3": 243,
-      "SO4": 402,
-      "Cl": 49.4
+      "K": 2.4,
+      "HCO3": 249,
+      "SO4": 403,
+      "Cl": 49.8
     },
     "alkalinity_unit": "as_HCO3",
-    "ph": 5.7,
+    "ph": 7.6,
     "tds": {
-      "value": 854,
+      "value": 860,
       "provenance": {
-        "verified": false,
-        "source": "854 not confirmed in a producer source (Wikipedia / retailer only). Current S.Pellegrino labels read résidu sec à 180 °C 853 with slightly revised ions (Na 30.0, Ca 166; Open Food Facts EAN 8002270015328); 854 kept paired with this profile's ion set until the whole analysis is refreshed.",
+        "verified": true,
+        "source": "S.Pellegrino \"1 litre PET Bottle\" Typical analysis, \"Total Dissolved Solids at 180°C\" 860 mg/L (sanpellegrino.com/water/1-l-pet-bottle, page undated; Wayback capture 2026-04-23)",
         "source_date": "2026-10-24"
       }
     },
-    "comment": "NO₃ 2.9 mg/L. pH 5.7 as sold (7.6 at source). Previous 2015 Khymos values ran ~14–32% high.",
-    "url": "https://en.wikipedia.org/wiki/S.Pellegrino",
+    "comment": "NO₃ 3 mg/L, F 0.5 mg/L, SiO₂ 7.2 mg/L, Sr 2.7 mg/L. Conductivity 1080 µS/cm at 20 °C; source temperature 21.7 °C. pH 7.6 is at source (same analysis as the ions); as sold, carbonation brings it to ≈ 5.4–5.7 (Nestlé USA 2025 report reads 5.4). Earlier producer tables read TDS 853 (2025-09, matching the bottle label) and 862 (2025-12). Replaces a Wikipedia-sourced set (Ca 164, Mg 49.5, K 2.2, HCO₃ 243, SO₄ 402, Cl 49.4, pH 5.7 as sold, TDS 854).",
+    "url": "https://www.sanpellegrino.com/water/1-l-pet-bottle",
     "country": "Italy",
     "locality": "San Pellegrino Terme, Lombardy",
     "description": "Carbonated mineral water from San Pellegrino Terme in Lombardy, high in calcium and sulfate.",
@@ -2049,8 +2051,8 @@
     "traits": ["calcium-rich", "sulfate-rich"],
     "provenance": {
       "verified": true,
-      "source": "S.Pellegrino Water Analysis Report 2021 (via Wikipedia / S.Pellegrino US)",
-      "source_date": "2026-05-27"
+      "source": "Sanpellegrino S.p.A. — S.Pellegrino \"1 litre PET Bottle\" product page, Typical analysis (sanpellegrino.com/water/1-l-pet-bottle; live page blocks non-browser clients, read via Wayback capture 2026-04-23: web.archive.org/web/20260423035949/https://www.sanpellegrino.com/water/1-l-pet-bottle)",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -2275,26 +2277,25 @@
     "slug": "tiva-harghita",
     "carbonation_style": "sparkling",
     "ions": {
-      "Ca": 102.2,
-      "Mg": 50.78,
-      "Na": 68.76,
-      "K": 10.35,
-      "HCO3": 915,
-      "SO4": 2.06,
-      "Cl": 15.46
+      "Ca": 113,
+      "Mg": 58.26,
+      "Na": 67.79,
+      "K": 10.7,
+      "HCO3": 1037,
+      "Cl": 20.92
     },
     "alkalinity_unit": "as_HCO3",
     "co2": 3500,
-    "ph": 5.7,
+    "ph": 5.6,
     "tds": {
-      "value": 780,
+      "value": 800,
       "provenance": {
-        "verified": false,
-        "source": "Superseded: 780 no longer published. perlaharghitei.ro/produse/tiva-harghita now gives reziduu sec la 180° 800 with revised ions (Ca 113, Mg 58.26, HCO₃ 1037); 780 kept paired with this profile's older ion set until the whole analysis is refreshed.",
+        "verified": true,
+        "source": "S.C. Perla Harghitei S.A. \"Tiva Harghita\" product page, \"Reziduu sec la 180°\" 800 mg/L (perlaharghitei.ro/produse/tiva-harghita; page undated, read 2026-10-24)",
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Naturally carbonated, Sâncrăieni source (F8 ISPIF). CO₂ is the label minimum (≥3500 mg/L); TDS is dry residue at 180°C. No NO₃, F, or SiO₂ published.",
+    "comment": "Naturally carbonated, Sâncrăieni source (F8 ISPIF). CO₂ is the label minimum (≥3500 mg/L); TDS is dry residue at 180°C. SO₄ <4 mg/L (omitted). No NO₃, F, or SiO₂ published. The producer's figures carry a persistent cation deficit (HCO₃ high relative to the cations; charge-balance residual ≈ -3.9 meq/L). Replaces an older set (Ca 102.2, Mg 50.78, Na 68.76, K 10.35, HCO₃ 915, SO₄ 2.06, Cl 15.46, pH 5.7, residue 780).",
     "url": "https://www.perlaharghitei.ro/produse/tiva-harghita",
     "country": "Romania",
     "locality": "Sâncrăieni, Harghita",
@@ -2303,8 +2304,8 @@
     "traits": ["calcium-rich", "magnesium-rich", "bicarbonate-rich"],
     "provenance": {
       "verified": true,
-      "source": "S.C. Perla Harghitei S.A. — \"Tiva Harghita\" product page, published mineral-water analysis (Sâncrăieni, source F8 ISPIF), perlaharghitei.ro",
-      "source_date": "2026-05-28"
+      "source": "S.C. Perla Harghitei S.A. — \"Tiva Harghita\" product page, \"Compoziția chimică\" (Sâncrăieni, source F8 ISPIF), perlaharghitei.ro/produse/tiva-harghita; page undated, read 2026-10-24",
+      "source_date": "2026-10-24"
     }
   },
   {
@@ -2374,7 +2375,7 @@
         "source_date": "2026-10-24"
       }
     },
-    "comment": "NO₃ <0.1 mg/L. F⁻ 0.148 mg/L. SiO₂ 2 mg/L. TDS = dry residue at 180 °C. Bethania, Ceredigion (Wales).",
+    "comment": "NO₃ <0.1 mg/L. F⁻ 0.148 mg/L. SiO₂ 2 mg/L. TDS = dry residue at 180 °C. Bethania, Ceredigion (Wales). Checked 2026-10: tynant.com/water-analysis lists no bicarbonate for Tŷ Nant; HCO₃ 116 is from FineWaters only (charge balance leaves a +0.68 meq/L cation excess).",
     "url": "https://tynant.com/water-analysis/",
     "country": "United Kingdom",
     "locality": "Bethania, Ceredigion",
@@ -2511,13 +2512,13 @@
     "tds": {
       "value": 2850,
       "provenance": {
-        "verified": false,
-        "source": "Vichy Catalan ficha técnica CA-VC-FT-01 (2018), dry residue ~2850 — could not be re-located (2026-10). An older bottler ficha (vichycatalan.com, Wayback c. 2005) gives materia seca (180 ºC) 3052 with different ions.",
-        "source_date": "2026-05-28"
+        "verified": true,
+        "source": "Vichy Catalan \"FICHA TÉCNICA Agua Mineral natural VICHY CATALAN\" CA-VC-FT-01 (14 March 2018), residuo seco a 180 °C ~2850 mg/L (gestiona.alimentiumconnect.com/Multimedia/Data_19566/4244b69d-53a1-41dd-8c37-8604d420f280.pdf). An older bottler ficha (vichycatalan.com, Wayback c. 2005) gives materia seca (180 ºC) 3052 with different ions.",
+        "source_date": "2018-03-14"
       }
     },
-    "comment": "High-sodium naturally carbonated Na-HCO₃ water, Caldes de Malavella (Girona, Spain); hyperthermal spring (~60 °C at source). Li 1.7, NO₃ 1.1, SiO₂ ~58 mg/L. Na/K/HCO₃/SO₄/Cl, pH and dry residue (180 °C) are from the bottler's ficha técnica; Ca and Mg (not listed on the bottler sheet) are from the peer-reviewed Tapias et al. analysis.",
-    "url": "https://www.mdpi.com/2073-4441/14/21/3581",
+    "comment": "High-sodium naturally carbonated Na-HCO₃ water, Caldes de Malavella (Girona, Spain); hyperthermal spring (~60 °C at source); the ficha notes \"con gas carbónico añadido\". Na/K/HCO₃/SO₄/Cl, pH and dry residue (180 °C) are from the bottler's 2018 ficha técnica, which also lists Li 1.7 mg/L. Ca and Mg come from Tapias et al. 2022 because the ficha omits them — a disclosed exception to the single-analysis rule. NO₃ 1.1 and SiO₂ ~58 mg/L are also from Tapias et al. An older bottler ficha gives materia seca 3052.",
+    "url": "https://gestiona.alimentiumconnect.com/Multimedia/Data_19566/4244b69d-53a1-41dd-8c37-8604d420f280.pdf",
     "country": "Spain",
     "locality": "Caldes de Malavella, Catalonia",
     "description": "Naturally carbonated sodium-bicarbonate water from a hyperthermal spring at Caldes de Malavella in Catalonia.",
@@ -2530,7 +2531,7 @@
     ],
     "provenance": {
       "verified": true,
-      "source": "Vichy Catalan Corporation ficha técnica CA-VC-FT-01 (2018) for Na 1080, K 47.3, HCO₃ 1990, SO₄ 53.3, Cl 605, pH 6.21, dry residue ~2850; Ca 44.3 and Mg 9.46 from Tapias et al., 'Geochemical Characterisation … Mineral Bottled Waters in Catalonia', Water 2022, 14(21), 3581 (supplementary dataset, Vichy Catalan sparkling)",
+      "source": "Vichy Catalan Corporation ficha técnica CA-VC-FT-01 (2018-03-14; gestiona.alimentiumconnect.com/Multimedia/Data_19566/4244b69d-53a1-41dd-8c37-8604d420f280.pdf) for Na 1080, K 47.3, HCO₃ 1990, SO₄ 53.3, Cl 605, pH 6.21, dry residue ~2850; Ca 44.3 and Mg 9.46 from Tapias et al., 'Geochemical Characterisation … Mineral Bottled Waters in Catalonia', Water 2022, 14(21), 3581 (supplementary dataset, Vichy Catalan sparkling)",
       "source_date": "2026-05-28"
     }
   },
@@ -2714,8 +2715,9 @@
     "carbonation_style": "still",
     "ions": {
       "Ca": 5.6,
-      "Mg": 2.9,
+      "Mg": 3.0,
       "Na": 6.1,
+      "K": 2.0,
       "HCO3": 31,
       "SO4": 4.9,
       "Cl": 3
@@ -2730,7 +2732,7 @@
         "source_date": "2026-10-24"
       }
     },
-    "comment": "Waiākea® Hawaiian Volcanic Water, a naturally alkaline deep-well water from the Keaʻau aquifer at the eastern base of Mauna Loa, Hilo, Hawaiʻi. SiO₂ 37 mg/L (silica-rich volcanic water). F 0.061 mg/L. NO₃ as N: ND. Alkalinity reported as CaCO₃ (31 mg/L). Note: the bottler's 2026 General Mineral Analysis prints Fluoride 2.9 / Magnesium 0.061; these are transposed — the same report's Product Analysis table independently reports Fluoride 0.061, so the corrected values are F 0.061 / Mg 2.9 (also consistent with prior typical analyses and charge balance).",
+    "comment": "Waiākea® Hawaiian Volcanic Water, a naturally alkaline deep-well water from the Keaʻau aquifer at the eastern base of Mauna Loa, Hilo, Hawaiʻi. SiO₂ 37 mg/L (silica-rich volcanic water). F 0.061 mg/L. NO₃ as N: ND. Alkalinity reported as CaCO₃ (31 mg/L). The bottler's 2026 General Mineral Analysis prints Fluoride 2.9 / Magnesium 0.061 (transposed); the same report's Other Chemicals table prints Magnesium 3.0 and Potassium 2.0, used here.",
     "url": "https://waiakea.com/pages/water-quality-report",
     "country": "United States",
     "locality": "Hilo, Hawaii",
