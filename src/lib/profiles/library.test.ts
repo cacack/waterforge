@@ -13,7 +13,7 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains 54 profiles (seed minus removed rows plus #98 Batches 1–5)', () => {
+  it('contains 72 profiles (seed minus removed rows plus Batches 1–6)', () => {
     // Seed history: 46 TSV rows − "test" row = 45; minus Kessel (#67/#85) and
     // Harghita (#94), both removed as unverifiable provenance = 43. Issue #98
     // Batch 1 then retired the two unverifiable Calistoga rows (Sparkling,
@@ -25,7 +25,9 @@ describe('PROFILES — library shape', () => {
     // Ferrarelle: 49 + 3 = 52. Batch 5 (US coverage) then added Magnetic Springs
     // (Ohio, low-mineralisation) and Waiākea (Hawaiʻi, high-silica volcanic):
     // 52 + 2 = 54. (Mountain Valley, also US, was already added earlier.)
-    expect(PROFILES.length).toBe(54)
+    // Batch 6 (notable European waters plus Icelandic Glacial) then added 18
+    // profiles from 17 waters (Valser's two springs are separate): 54 + 18 = 72.
+    expect(PROFILES.length).toBe(72)
   })
 
   it('does not contain the "test" row', () => {
@@ -83,17 +85,26 @@ describe('PROFILES — slugs', () => {
     'contrex',
     'dorna',
     'evian',
+    'fachingen',
     'farris',
     'ferrarelle',
     'fiji',
     'fiuggi',
+    'font-vella',
     'gerolsteiner',
     'hassia-sprudel',
     'henniez',
     'hepar',
     'highland-spring',
+    'icelandic',
+    'la-salvetat',
+    'levissima',
     'london',
+    'luso',
     'magnetic-springs',
+    'mattoni',
+    'mondariz',
+    'mont-roucous',
     'mountain-valley',
     'munich',
     'neuselters',
@@ -102,7 +113,11 @@ describe('PROFILES — slugs', () => {
     'perrier',
     'pilsen',
     'purpur',
+    'radenska',
+    'rocchetta',
+    'roemerquelle',
     'rosbacher',
+    'rozana',
     'saint-yorre',
     'salvus',
     'san-benedetto',
@@ -110,15 +125,20 @@ describe('PROFILES — slugs', () => {
     'san-pellegrino',
     'sca-coffee',
     'selters',
+    'solan-de-cabras',
     'tea-max',
     'tea-min',
     'tesanjski',
     'tiva-harghita',
     'topo-chico',
     'ty-nant',
+    'uliveto',
+    'valser',
+    'valser-still',
     'vichy-catalan',
     'vichy-celestins',
     'vittel',
+    'voeslauer',
     'volvic',
     'voss',
     'waiakea',
@@ -389,6 +409,7 @@ const KNOWN_IMBALANCED = new Set([
   'Saint-Yorre', // very high mineralisation, known imbalance
   'San Narciso', // high-mineralisation Na-HCO3 water; published ion set has anion excess
   'Tiva Harghita', // high-bicarbonate RO carbonated water; published ion set has cation deficit (residual ≈ -2.9 meq/L)
+  'Radenska', // high-mineralisation Na-HCO3 water; published ion set has cation excess (residual ≈ +4.0 meq/L)
 ])
 
 describe('charge-balance sanity', () => {
