@@ -9,28 +9,38 @@
   import RecipePanel from './components/RecipePanel.svelte'
   import ReadoutsPanel from './components/ReadoutsPanel.svelte'
   import HelpDialog from './components/HelpDialog.svelte'
-  import { computeResult } from './state.svelte'
+  import { app, computeResult } from './state.svelte'
   import { applyTheme } from './theme.svelte'
   import {
     loadFromStorage,
     initPersistence,
     applySnapshot,
   } from './persist.svelte'
-  import { decodeHash } from './share'
+  import { parseHash } from './share'
+  import { findProfileBySlug } from '$lib'
 
   const result = $derived(computeResult())
 
   // Restore persisted state before first render.
-  // URL hash wins over localStorage: if the hash decodes to a valid snapshot,
-  // it is applied after loadFromStorage() so the shared link always takes
-  // precedence. The hash is then cleared so subsequent manual edits are not
-  // "stuck" on the shared URL.
+  // URL hash wins over localStorage: it is applied after loadFromStorage() so
+  // a shared link always takes precedence. A snapshot link (`#v1:…`, `#2…`)
+  // replaces the whole recipe; a target link (`#<slug>`) selects that target
+  // and leaves source, salts, batch and carbonation alone. Unknown or
+  // malformed hashes are ignored and left in place. When something was
+  // applied, the hash is cleared so later manual edits are not "stuck" on the
+  // shared URL.
   function applyHashIfPresent() {
     const rawHash = location.hash.slice(1) // strip leading '#'
     if (!rawHash) return
-    const decoded = decodeHash(rawHash)
-    if (decoded === null) return
-    applySnapshot(decoded)
+    const parsed = parseHash(rawHash)
+    if (parsed === null) return
+    if (parsed.kind === 'snapshot') {
+      applySnapshot(parsed.snapshot)
+    } else {
+      const profile = findProfileBySlug(parsed.slug)
+      if (!profile) return
+      app.target = profile
+    }
     // Remove the hash from the address bar without creating a history entry
     // so the back-button still works as expected.
     history.replaceState(null, '', location.pathname + location.search)
