@@ -68,12 +68,7 @@ export const IONS: Record<IonId, Ion> = {
   Cl: { id: 'Cl', charge: -1, molarMass: ATOMIC_WEIGHTS.Cl },
 }
 
-/**
- * Stable iteration order for ions (cations then anions).
- *
- * Frozen: the v2 share-link ion block is laid out in this order (ADR 0021),
- * so reordering or inserting would silently remap printed links.
- */
+/** Stable iteration order for ions (cations then anions). */
 export const ION_ORDER: readonly IonId[] = [
   'Ca',
   'Mg',
@@ -170,13 +165,7 @@ export const SALTS: Record<SaltId, Salt> = {
   },
 }
 
-/**
- * Stable iteration order for salts (the source method's dosing priority).
- *
- * Frozen: each salt's index is its bit in the v2 share-link flags (ADR 0021),
- * so this list is append-only and limited to 9 entries (bits 0–8). Changing
- * dosing priority must not reorder it.
- */
+/** Stable iteration order for salts (the source method's dosing priority). */
 export const SALT_ORDER: readonly SaltId[] = [
   'gypsum',
   'epsom',

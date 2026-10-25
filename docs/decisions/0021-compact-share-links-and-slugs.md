@@ -49,14 +49,14 @@ editorial and do change; they are not safe to print on a label.
 
 3. **v2 byte layout** (big-endian, after the `2` prefix):
 
-   | Field            | Size                | Encoding                                                                                                                                                                                      |
-   | ---------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | flags            | 2 B                 | bits 0–8: salt enabled, by position in `SALT_ORDER`; bit 9: source mode is known; bit 10: unit is US gallon; bit 11: temperature unit is °F; bits 12–15 reserved (written 0, ignored on read) |
-   | batch volume     | 3 B                 | uint24, thousandths (the input minimum is 0.001) — max 16777.215                                                                                                                              |
-   | carbonation temp | 2 B                 | int16, tenths of a degree                                                                                                                                                                     |
-   | slug length      | 1 B                 | 0 = no target                                                                                                                                                                                 |
-   | slug             | 0–16 B              | ASCII                                                                                                                                                                                         |
-   | source ions      | 14 B, only if known | seven uint16 in `ION_ORDER`, tenths of mg/L                                                                                                                                                   |
+   | Field            | Size                | Encoding                                                                                                                                                                                     |
+   | ---------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | flags            | 2 B                 | bits 0–8: salt enabled, per `V2_SALT_BITS`; bit 9: source mode is known; bit 10: unit is US gallon; bit 11: temperature unit is °F; bits 12–15 free for new salts (written 0 until assigned) |
+   | batch volume     | 3 B                 | uint24, thousandths (the input minimum is 0.001) — max 16777.215                                                                                                                             |
+   | carbonation temp | 2 B                 | int16, tenths of a degree                                                                                                                                                                    |
+   | slug length      | 1 B                 | 0 = no target                                                                                                                                                                                |
+   | slug             | 0–16 B              | ASCII                                                                                                                                                                                        |
+   | source ions      | 14 B, only if known | seven uint16 in `V2_IONS` order, tenths of mg/L                                                                                                                                              |
 
    Values round to field precision (source ions to 0.1 mg/L) and out-of-range
    values clamp — volume to at least 0.001 so the receiver never rejects it.
@@ -77,12 +77,16 @@ editorial and do change; they are not safe to print on a label.
 
 - A full recipe fits on a small label as a QR code, and a target-only link is
   short and human-readable.
-- **The v2 layout is frozen.** Any change — a new field, a new salt beyond the
-  flag bits, a different precision — ships as a new format version (`3…`)
-  alongside v2, never as an edit to it. Old links decode forever. Because salt
-  bits and the ion block are positional, `SALT_ORDER` (≤ 9 entries) and
-  `ION_ORDER` are frozen with it; `src/share.test.ts` pins both, and
-  `src/lib/profiles/library.test.ts` pins the published slugs.
+- **The v2 layout is frozen.** Any change — a new field, a new ion, a
+  different precision — ships as a new format version (`3…`) alongside v2,
+  never as an edit to it. Old links decode forever.
+- **The wire mapping is its own frozen table, not the solver's order.** Salt
+  bits come from `V2_SALT_BITS` and the ion block from `V2_IONS` in
+  `src/share.ts`, so `SALT_ORDER` (dosing priority) and `ION_ORDER` stay free to
+  change. `V2_SALT_BITS` is typed over every salt, so a new salt fails
+  type-check until it is assigned the next free bit of 12–15 — four new salts
+  fit in v2, because old links leave those bits 0. `src/share.test.ts` pins both
+  tables and `src/lib/profiles/library.test.ts` pins the published slugs.
 - **`location.hash` now carries target links too.** This amends
   [ADR 0020](0020-usage-guide-rendered-into-the-app.md): a stray fragment shaped
   like a slug is read as a target link, which is another reason USAGE.md's

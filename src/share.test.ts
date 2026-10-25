@@ -2,7 +2,13 @@
 // legacy v1 decoding, URL length budget, and malformed-input tolerance.
 
 import { describe, it, expect, beforeEach } from 'vitest'
-import { encodeShareHash, parseHash, buildShareUrl } from './share'
+import {
+  encodeShareHash,
+  parseHash,
+  buildShareUrl,
+  V2_IONS,
+  V2_SALT_BITS,
+} from './share'
 import { app } from './state.svelte'
 import {
   snapshotState,
@@ -163,28 +169,54 @@ describe('encodeShareHash / parseHash — round-trips', () => {
 })
 
 // ---------------------------------------------------------------------------
-// Frozen wire order (ADR 0021): salt bits and the ion block are positional,
-// so these lists must never be reordered — only appended within the limits.
+// Frozen wire mapping (ADR 0021): salt bits and the ion block are positional
+// and independent of SALT_ORDER / ION_ORDER. Published entries never change.
 // ---------------------------------------------------------------------------
 
-describe('v2 wire order is pinned', () => {
-  it('SALT_ORDER matches the published bit order and fits bits 0–8', () => {
-    expect(SALT_ORDER.slice(0, 9)).toEqual([
-      'gypsum',
-      'epsom',
-      'tableSalt',
-      'calciumChloride',
-      'calciumChlorideAnhydrous',
-      'bakingSoda',
-      'chalk',
-      'magnesiumChloride',
-      'potassiumBicarbonate',
-    ])
-    expect(SALT_ORDER.length).toBeLessThanOrEqual(9)
+describe('v2 wire mapping is pinned', () => {
+  beforeEach(resetApp)
+
+  it('published salt bits are unchanged', () => {
+    expect(V2_SALT_BITS).toMatchObject({
+      gypsum: 0,
+      epsom: 1,
+      tableSalt: 2,
+      calciumChloride: 3,
+      calciumChlorideAnhydrous: 4,
+      bakingSoda: 5,
+      chalk: 6,
+      magnesiumChloride: 7,
+      potassiumBicarbonate: 8,
+    })
   })
 
-  it('ION_ORDER matches the published ion-block order', () => {
-    expect(ION_ORDER).toEqual(['Ca', 'Mg', 'Na', 'K', 'HCO3', 'SO4', 'Cl'])
+  it('salt bits are unique and avoid the flag bits 9–11', () => {
+    const bits = Object.values(V2_SALT_BITS)
+    expect(new Set(bits).size).toBe(bits.length)
+    for (const bit of bits) {
+      expect(bit < 9 || (bit >= 12 && bit <= 15)).toBe(true)
+    }
+  })
+
+  it('every salt the app knows has a bit', () => {
+    expect(SALT_ORDER.filter((id) => !(id in V2_SALT_BITS))).toEqual([])
+  })
+
+  it('the ion block order is unchanged', () => {
+    expect(V2_IONS).toEqual(['Ca', 'Mg', 'Na', 'K', 'HCO3', 'SO4', 'Cl'])
+  })
+
+  it('the ion block carries every ion the app knows', () => {
+    // A new ion cannot join the fixed v2 block — it needs a new format version.
+    expect(ION_ORDER.filter((ion) => !V2_IONS.includes(ion))).toEqual([])
+  })
+
+  it('round-trips the salt set independently of SALT_ORDER position', () => {
+    for (const id of SALT_ORDER) {
+      app.salts = [id]
+      const decoded = roundTrip(snapshotState()) as AppSnapshot
+      expect(decoded.salts).toEqual([id])
+    }
   })
 })
 

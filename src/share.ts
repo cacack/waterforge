@@ -13,25 +13,26 @@
 //
 // v2 binary layout (big-endian), produced by `encodeShareHash`:
 //
-//   flags          uint16  bits 0–8: salt active, by SALT_ORDER index
+//   flags          uint16  bits 0–8: salt active, per V2_SALT_BITS
 //                          bit 9: sourceMode 'known'; bit 10: batch unit 'gal';
-//                          bit 11: temp unit 'F'; bits 12–15: 0, ignored on read
+//                          bit 11: temp unit 'F'; bits 12–15: free for new
+//                          salts (written 0 until assigned)
 //   batch volume   uint24  thousandths (0.001 … 16777.215)
 //   carb. temp     int16   tenths of a degree
 //   slug length    uint8   0 = no target
 //   slug           ASCII   `slugLength` bytes
-//   source ions    7 × uint16 tenths of mg/L in ION_ORDER — only when bit 9 set
+//   source ions    7 × uint16 tenths of mg/L in V2_IONS order — only when bit 9 set
 //
 // Values are rounded to field precision and clamped to field range on encode.
 // Decoding rebuilds a version-1 AppSnapshot so `applySnapshot` stays the
 // single validator. Malformed input of any kind decodes to `null`.
 
 import {
-  ION_ORDER,
   SALT_ORDER,
   SLUG_PATTERN,
   findProfile,
   findProfileBySlug,
+  type IonId,
   type IonProfile,
   type SaltId,
 } from '$lib'
@@ -49,7 +50,41 @@ const FLAG_TEMP_F = 1 << 11
 
 /** Fixed-size v2 header: flags (2) + volume (3) + temp (2) + slug length (1). */
 const V2_HEADER_BYTES = 8
-const V2_IONS_BYTES = ION_ORDER.length * 2
+
+/**
+ * Flag bit for each salt — the frozen v2 wire mapping, deliberately separate
+ * from SALT_ORDER (the solver's dosing priority, free to change). Typed over
+ * every SaltId, so a new salt fails type-check until it is given a bit. Bits
+ * 9–11 are taken; a new salt takes the next free bit of 12–15 (ADR 0021).
+ * Never renumber an existing entry.
+ */
+export const V2_SALT_BITS: Readonly<Record<SaltId, number>> = {
+  gypsum: 0,
+  epsom: 1,
+  tableSalt: 2,
+  calciumChloride: 3,
+  calciumChlorideAnhydrous: 4,
+  bakingSoda: 5,
+  chalk: 6,
+  magnesiumChloride: 7,
+  potassiumBicarbonate: 8,
+}
+
+/**
+ * Ion order of the v2 source-ion block — frozen, separate from ION_ORDER.
+ * The block is fixed at these seven ions; carrying a new ion needs a new
+ * format version (ADR 0021).
+ */
+export const V2_IONS: readonly IonId[] = [
+  'Ca',
+  'Mg',
+  'Na',
+  'K',
+  'HCO3',
+  'SO4',
+  'Cl',
+]
+const V2_IONS_BYTES = V2_IONS.length * 2
 
 /** App default carbonating temperature (°C), used when a snapshot omits it. */
 const DEFAULT_CARBONATION = { temp: 4, tempUnit: 'C' } as const
@@ -118,9 +153,9 @@ export function encodeShareHash(snapshot: AppSnapshot): string {
   const carbonation = snapshot.carbonation ?? DEFAULT_CARBONATION
 
   let flags = 0
-  SALT_ORDER.forEach((id, i) => {
-    if (snapshot.salts.includes(id)) flags |= 1 << i
-  })
+  for (const id of SALT_ORDER) {
+    if (snapshot.salts.includes(id)) flags |= 1 << V2_SALT_BITS[id]
+  }
   if (known) flags |= FLAG_SOURCE_KNOWN
   if (snapshot.batch.unit === 'gal') flags |= FLAG_UNIT_GAL
   if (carbonation.tempUnit === 'F') flags |= FLAG_TEMP_F
@@ -141,7 +176,7 @@ export function encodeShareHash(snapshot: AppSnapshot): string {
   }
   if (known) {
     const ionsAt = V2_HEADER_BYTES + slug.length
-    ION_ORDER.forEach((ion, i) => {
+    V2_IONS.forEach((ion, i) => {
       view.setUint16(
         ionsAt + i * 2,
         toField(snapshot.source[ion] ?? 0, 10, 0, 0xffff),
@@ -199,12 +234,14 @@ function decodeV2(b64url: string): AppSnapshot | null {
   const source: IonProfile = {}
   if (known) {
     const ionsAt = V2_HEADER_BYTES + slugLength
-    ION_ORDER.forEach((ion, i) => {
+    V2_IONS.forEach((ion, i) => {
       const tenths = view.getUint16(ionsAt + i * 2)
       if (tenths !== 0) source[ion] = tenths / 10
     })
   }
-  const salts: SaltId[] = SALT_ORDER.filter((_, i) => (flags & (1 << i)) !== 0)
+  const salts: SaltId[] = SALT_ORDER.filter(
+    (id) => (flags & (1 << V2_SALT_BITS[id])) !== 0,
+  )
   const volume = ((view.getUint16(2) << 8) | view.getUint8(4)) / 1000
 
   return {
