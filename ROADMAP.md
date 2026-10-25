@@ -9,8 +9,8 @@ project, see [CONSTITUTION.md](CONSTITUTION.md); for what shipped, see
 **Waterforge is feature-complete against its [mission](CONSTITUTION.md).** As of
 v1.5.0 the build-out criteria are met: an exact (golden-test-verified) solver,
 the unbroken target → recipe flow with readouts and saturation warnings, a
-browsable sourced library (54 profiles across 14 countries — bottled, brewing,
-coffee, and synthetic references), and the live app at
+browsable sourced library (now 81 profiles across 18 countries — bottled,
+brewing, coffee, and synthetic references), and the live app at
 [waterforge.app](https://waterforge.app) (installable + offline).
 
 The project is now in **sustained maintenance**, which the constitution's fifth
@@ -34,10 +34,12 @@ time, and versions are cut automatically by release-please from the commit log.
 ## Opportunistic — no backlog is maintained
 
 - **Grow the water library.** The expand-beyond-the-Khymos-seed push
-  ([#98](https://github.com/cacack/waterforge/issues/98)) closed 2026-06-01, and
-  nothing has been queued behind it since. That is the intended state, not
-  neglect: under **Principle 6** (_real use over assumed demand_), profiles get
-  added when the maintainer wants one, and a standing backlog is owed to nobody.
+  ([#98](https://github.com/cacack/waterforge/issues/98)) closed 2026-06-01. A
+  later batch ([#310](https://github.com/cacack/waterforge/pull/310)) added
+  notable European waters, Icelandic Glacial, and Crystal Geyser's US springs,
+  with nothing queued behind it. That is the intended state, not neglect: under
+  **Principle 6** (_real use over assumed demand_), profiles get added when the
+  maintainer wants one, and a standing backlog is owed to nobody.
   New waters fill geographic and chemistry gaps and are held to the
   authoritative-sourcing standard in [ADR 0011](docs/decisions).
 
