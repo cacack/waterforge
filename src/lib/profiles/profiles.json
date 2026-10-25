@@ -395,6 +395,330 @@
     }
   },
   {
+    "name": "Crystal Geyser (Benton, TN)",
+    "slug": "cg-benton",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 38,
+      "Mg": 4.4,
+      "Na": 2.5,
+      "K": 1.1,
+      "HCO3": 100,
+      "SO4": 3.4,
+      "Cl": 2.5
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.8,
+    "tds": {
+      "value": 120,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Benton, TN, Total Dissolved Solids 120 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Benton, Tennessee. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 100 and Bicarbonate 100 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 1.1 mg/L (≈ NO₃ 4.9 mg/L). Fluoride ND. Barium 0.055 mg/L, bromide 0.012 mg/L. Specific conductance 240 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_2f190582797d498986c76605b024018d.pdf",
+    "country": "United States",
+    "locality": "Benton, Tennessee",
+    "description": "Still spring water bottled at Benton in southeast Tennessee, near the Cherokee National Forest. A moderately hard calcium-bicarbonate water.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Benton, Tennessee, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Johnstown, NY)",
+    "slug": "cg-johnstown",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 52,
+      "Mg": 11,
+      "Na": 14,
+      "K": 0.77,
+      "HCO3": 140,
+      "SO4": 12,
+      "Cl": 33
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 8,
+    "tds": {
+      "value": 230,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Johnstown, NY, Total Dissolved Solids 230 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Johnstown, New York. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 140 and Bicarbonate 140 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). Nitrate ND. F 0.064 mg/L. Barium 0.023 mg/L. Specific conductance 410 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_5398bef9508841e9b7e282e01de50b85.pdf",
+    "country": "United States",
+    "locality": "Johnstown, New York",
+    "description": "The most mineralized of the Crystal Geyser springs, bottled at Johnstown in upstate New York near the Adirondacks. Calcium and bicarbonate lead, with noticeable chloride.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Johnstown, New York, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Moultonborough, NH)",
+    "slug": "cg-moultonboro",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 2,
+      "Mg": 0.3,
+      "Na": 1.5,
+      "K": 0.37,
+      "HCO3": 5,
+      "SO4": 2.7,
+      "Cl": 0.66
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 6.6,
+    "tds": {
+      "value": 21,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Moultonborough, NH, Total Dissolved Solids 21 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Moultonborough, New Hampshire. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 5.0 and Bicarbonate 6.7 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). This report is the only one where Bicarbonate (6.7) differs from Alkalinity (5.0); total alkalinity 5.0 is used, matching the other reports. NO₃ as N 0.23 mg/L (≈ NO₃ 1.0 mg/L). F 0.14 mg/L. Specific conductance 24 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_09b4fdc0036b4d55bc6c1c2ec776d9aa.pdf",
+    "country": "United States",
+    "locality": "Moultonborough, New Hampshire",
+    "description": "Extremely soft, slightly acidic spring water from Moultonborough in New Hampshire's Lakes Region, with almost no dissolved minerals.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Moultonborough, New Hampshire, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Norman, AR)",
+    "slug": "cg-norman",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 32,
+      "Mg": 1.2,
+      "Na": 0.8,
+      "K": 0.28,
+      "HCO3": 82,
+      "SO4": 5.1,
+      "Cl": 1.3
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.6,
+    "tds": {
+      "value": 110,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Norman, AR, Total Dissolved Solids 110 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Norman, Arkansas. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 82 and Bicarbonate 82 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). Nitrate ND. F 0.12 mg/L. Zinc 0.018 mg/L. Specific conductance 180 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_f692dbe278e14847a70273e6eb863659.pdf",
+    "country": "United States",
+    "locality": "Norman, Arkansas",
+    "description": "Spring water from Norman in Arkansas's Ouachita Mountains. Nearly all of its mineral content is calcium bicarbonate, with very little sodium.",
+    "category": "bottled",
+    "traits": ["calcium-rich", "bicarbonate-rich"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Norman, Arkansas, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Olancha, CA – Cabin Bar)",
+    "slug": "cg-cabin-bar",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 15,
+      "Mg": 1.9,
+      "Na": 15,
+      "K": 1.6,
+      "HCO3": 63,
+      "SO4": 7.9,
+      "Cl": 1.1
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.9,
+    "tds": {
+      "value": 110,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Olancha, CA — Cabin Bar spring section, Total Dissolved Solids 110 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Cabin Bar Spring, bottled at the source in Olancha, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 63 and Bicarbonate 63 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.13 mg/L (≈ NO₃ 0.58 mg/L). F 0.76 mg/L. Boron ND. Specific conductance 150 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_7bed06b6606f4a2f938ecb5faa106d90.pdf",
+    "country": "United States",
+    "locality": "Cabin Bar Spring, Olancha, California",
+    "description": "Soft water from the Cabin Bar spring below the Sierra Nevada at Olancha, California, with calcium and sodium in near-equal parts.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Olancha, California (Cabin Bar Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Olancha, CA – Olancha Spring)",
+    "slug": "cg-olancha",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 20,
+      "Mg": 2.1,
+      "Na": 17,
+      "K": 1.9,
+      "HCO3": 65,
+      "SO4": 24,
+      "Cl": 3.2
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 6.8,
+    "tds": {
+      "value": 160,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Olancha, CA — Olancha spring section, Total Dissolved Solids 160 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Olancha Spring, bottled at the source in Olancha, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 65 and Bicarbonate 65 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.32 mg/L (≈ NO₃ 1.4 mg/L). F 0.53 mg/L. Boron 0.13 mg/L. Specific conductance 200 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_7bed06b6606f4a2f938ecb5faa106d90.pdf",
+    "country": "United States",
+    "locality": "Olancha Spring, Olancha, California",
+    "description": "Spring water from the eastern Sierra Nevada at Olancha in California's Owens Valley. Calcium and sodium share the cations; sulfate is higher than at the other springs.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Olancha, California (Olancha Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Salem, SC)",
+    "slug": "cg-salem",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 7.5,
+      "Mg": 0.37,
+      "Na": 3.5,
+      "K": 1.2,
+      "HCO3": 22,
+      "SO4": 7.6,
+      "Cl": 0.67
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.3,
+    "tds": {
+      "value": 53,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Salem, SC, Total Dissolved Solids 53 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), bottled at the source in Salem, South Carolina. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 22 and Bicarbonate 22 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). Nitrate ND. F 0.22 mg/L. Specific conductance 67 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_a13a0a86adf04a6d84278eecb1096e97.pdf",
+    "country": "United States",
+    "locality": "Salem, South Carolina",
+    "description": "Very soft spring water from Salem in the Blue Ridge foothills of upstate South Carolina, with only a trace of minerals.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Salem, South Carolina, linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Weed, CA – Beaughan)",
+    "slug": "cg-weed-beaughan",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 5.9,
+      "Mg": 5.2,
+      "Na": 11,
+      "K": 1.2,
+      "HCO3": 56,
+      "SO4": 1.9,
+      "Cl": 0.82
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.4,
+    "tds": {
+      "value": 100,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Weed, CA — Beaughan spring section, Total Dissolved Solids 100 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Beaughan Spring, bottled at the source in Weed, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 56 and Bicarbonate 56 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.12 mg/L (≈ NO₃ 0.53 mg/L). F 0.28 mg/L. Specific conductance 120 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_e19647699a7f4323a36e0681e4fcff65.pdf",
+    "country": "United States",
+    "locality": "Beaughan Spring, Weed, California",
+    "description": "Soft spring water from the Beaughan spring at Weed, on the slopes of Mount Shasta in far northern California. Sodium, magnesium and calcium are near equal.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Weed, California (Beaughan Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
+    "name": "Crystal Geyser (Weed, CA – Mazzei)",
+    "slug": "cg-weed-mazzei",
+    "carbonation_style": "still",
+    "ions": {
+      "Ca": 6.1,
+      "Mg": 2.8,
+      "Na": 9.4,
+      "K": 1.5,
+      "HCO3": 45,
+      "SO4": 0.62,
+      "Cl": 0.52
+    },
+    "alkalinity_unit": "as_CaCO3",
+    "ph": 7.2,
+    "tds": {
+      "value": 92,
+      "provenance": {
+        "verified": true,
+        "source": "Crystal Geyser Spring Water Finished Product Analysis Report 2026 (CG Roxane LLC), Weed, CA — Mazzei spring section, Total Dissolved Solids 92 mg/L (crystalgeyserplease.com/contact; method not stated)",
+        "source_date": "2026-10-24"
+      }
+    },
+    "comment": "Crystal Geyser Alpine Spring Water (still), from Mazzei Spring, bottled at the source in Weed, California. Crystal Geyser Alpine Spring Water is bottled at several springs, so check the source line on your bottle before choosing a profile. The report lists Alkalinity 45 and Bicarbonate 45 in mg/L, with no method or 'as CaCO₃' wording; the figures are read as CaCO₃ because the charge balance only closes that way (the report's hardness figures are also as CaCO₃). NO₃ as N 0.35 mg/L (≈ NO₃ 1.5 mg/L). F 0.14 mg/L. Barium ND. Specific conductance 95 µS/cm. Treated by micron filtration and ozonation. TDS as reported.",
+    "url": "https://www.crystalgeyserplease.com/_files/ugd/700b27_e19647699a7f4323a36e0681e4fcff65.pdf",
+    "country": "United States",
+    "locality": "Mazzei Spring, Weed, California",
+    "description": "Light, low-mineral water from the Mazzei spring near Mount Shasta at Weed, California, a little softer than its Beaughan neighbour.",
+    "category": "bottled",
+    "traits": ["low-mineralization"],
+    "provenance": {
+      "verified": true,
+      "source": "CG Roxane LLC — 'Spring Water Finished Product Analysis Report 2026', Bottled at the Source, Weed, California (Mazzei Spring section of the combined report), linked from crystalgeyserplease.com/contact",
+      "source_date": "2026-10-24"
+    }
+  },
+  {
     "name": "Dorna",
     "slug": "dorna",
     "carbonation_style": "sparkling",

@@ -13,7 +13,7 @@ import { profileToIonProfile } from './convert'
 // ---------------------------------------------------------------------------
 
 describe('PROFILES — library shape', () => {
-  it('contains 72 profiles (seed minus removed rows plus Batches 1–6)', () => {
+  it('contains 81 profiles (seed minus removed rows plus Batches 1–6)', () => {
     // Seed history: 46 TSV rows − "test" row = 45; minus Kessel (#67/#85) and
     // Harghita (#94), both removed as unverifiable provenance = 43. Issue #98
     // Batch 1 then retired the two unverifiable Calistoga rows (Sparkling,
@@ -25,9 +25,10 @@ describe('PROFILES — library shape', () => {
     // Ferrarelle: 49 + 3 = 52. Batch 5 (US coverage) then added Magnetic Springs
     // (Ohio, low-mineralisation) and Waiākea (Hawaiʻi, high-silica volcanic):
     // 52 + 2 = 54. (Mountain Valley, also US, was already added earlier.)
-    // Batch 6 (notable European waters plus Icelandic Glacial) then added 18
-    // profiles from 17 waters (Valser's two springs are separate): 54 + 18 = 72.
-    expect(PROFILES.length).toBe(72)
+    // Batch 6 then added 18 profiles from 17 notable European waters and
+    // Icelandic Glacial (Valser's two springs are separate), plus 9 Crystal
+    // Geyser profiles, one per published spring report: 54 + 18 + 9 = 81.
+    expect(PROFILES.length).toBe(81)
   })
 
   it('does not contain the "test" row', () => {
@@ -82,6 +83,15 @@ describe('PROFILES — slugs', () => {
     'buxton',
     'calistoga',
     'carola-rouge',
+    'cg-benton',
+    'cg-cabin-bar',
+    'cg-johnstown',
+    'cg-moultonboro',
+    'cg-norman',
+    'cg-olancha',
+    'cg-salem',
+    'cg-weed-beaughan',
+    'cg-weed-mazzei',
     'contrex',
     'dorna',
     'evian',
