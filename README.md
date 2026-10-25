@@ -98,6 +98,9 @@ What happens to this project if its maintainer stops is written down in
 
 ## Getting help
 
+Waterforge has a single maintainer, so issues are handled on a best-effort
+basis with no response-time guarantee (as [SECURITY.md](SECURITY.md) states).
+
 - **A question, or unsure what a readout means?** Open a
   [question issue](https://github.com/cacack/waterforge/issues/new?labels=question&template=question.md).
 - **Found a bug or a wrong number?** File a
