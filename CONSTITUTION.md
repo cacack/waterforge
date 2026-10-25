@@ -43,7 +43,9 @@ matters more than the labels:
    documented, precise. That standard is freely chosen, not a debt owed.
 3. **The backstop** — should that use end, the sourced profile compilation and a
    correct solver are still worth preserving on their own: copyleft, forkable,
-   archived. Insurance on an artifact, not service to a population.
+   archived. Insurance on an artifact, not service to a population. The switch
+   from layer 1 to here has a written trigger: two consecutive quarters with no
+   recorded use ([ADR 0024](docs/decisions/0024-use-signal-and-lapse-trigger.md)).
 4. **Aspiration, not commitment** — if users arrive, good. Serving a user base
    would be a new decision, recorded here when it is made; it is not assumed
    today, and no work is owed to a hypothetical audience.
@@ -102,6 +104,9 @@ We'll know this is working if:
 - A browsable library of sourced target profiles ships — bottled, brewing,
   coffee, and synthetic references. It grows opportunistically, with every new
   profile held to the same authoritative-sourcing standard (see ADR 0011).
+  It fails if a shipped profile falls short of that standard, and it has no
+  growth failure condition by design: a quiet library is not a failing one
+  ([ADR 0024](docs/decisions/0024-use-signal-and-lapse-trigger.md)).
 - The app is live and usable at [waterforge.app](https://waterforge.app), no
   install required — and installable for offline use.
 - Once feature-complete, it stays that way — a released version is always
