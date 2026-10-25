@@ -91,16 +91,10 @@ audience.
 | ---------- | ----------------------- | ----------- | ----------------- |
 | 2026-09-26 | 2026-06-27 → 2026-09-26 | 4           | (not recorded)    |
 
-**Why the beacon alone can't decide it.** It misses the maintainer whenever a
-script blocker is on, whenever the installed app is opened offline, and always
-on the local dev server. It also samples in steps of 10, so a single real page
-load can come back as zero. And it counts any visitor, not just the
-maintainer. So the attested date decides the reading: a non-zero count
-corroborates it but never stands in for it.
-
-**The trigger.** If two consecutive quarters show no use (no attested use
-inside the quarter, whatever the beacon shows), the project switches to artifact mode
-under ADR 0024. A missing row counts as a quarter with no use.
+The attested date decides each reading; the beacon count only corroborates it.
+What counts as no use, and the two-quarter trigger for artifact mode, are set
+in [ADR 0024](../decisions/0024-use-signal-and-lapse-trigger.md) (decisions 1
+and 2).
 
 ## How to read this
 
