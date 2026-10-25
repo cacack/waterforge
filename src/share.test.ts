@@ -100,6 +100,22 @@ describe('encodeShareHash / parseHash — round-trips', () => {
     expect(decoded.carbonation?.temp).toBe(-3276.8)
   })
 
+  it('clamps a sub-resolution volume to 0.001, not 0', () => {
+    app.batch = { volume: 0.0004, unit: 'L' }
+    const decoded = roundTrip(snapshotState()) as AppSnapshot
+    expect(decoded.batch.volume).toBe(0.001)
+  })
+
+  it('round-trips an empty salt list and applies it', () => {
+    app.salts = []
+    const hash = encodeShareHash(snapshotState())
+    app.salts = [...SALT_ORDER]
+    const parsed = parseHash(hash)
+    expect(parsed?.kind).toBe('snapshot')
+    if (parsed?.kind === 'snapshot') applySnapshot(parsed.snapshot)
+    expect(app.salts).toEqual([])
+  })
+
   it('lists salts in SALT_ORDER regardless of input order', () => {
     app.salts = ['bakingSoda', 'gypsum']
     const decoded = roundTrip(snapshotState()) as AppSnapshot
@@ -143,6 +159,32 @@ describe('encodeShareHash / parseHash — round-trips', () => {
       kind: 'snapshot',
       snapshot: { targetName: null },
     })
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Frozen wire order (ADR 0021): salt bits and the ion block are positional,
+// so these lists must never be reordered — only appended within the limits.
+// ---------------------------------------------------------------------------
+
+describe('v2 wire order is pinned', () => {
+  it('SALT_ORDER matches the published bit order and fits bits 0–8', () => {
+    expect(SALT_ORDER.slice(0, 9)).toEqual([
+      'gypsum',
+      'epsom',
+      'tableSalt',
+      'calciumChloride',
+      'calciumChlorideAnhydrous',
+      'bakingSoda',
+      'chalk',
+      'magnesiumChloride',
+      'potassiumBicarbonate',
+    ])
+    expect(SALT_ORDER.length).toBeLessThanOrEqual(9)
+  })
+
+  it('ION_ORDER matches the published ion-block order', () => {
+    expect(ION_ORDER).toEqual(['Ca', 'Mg', 'Na', 'K', 'HCO3', 'SO4', 'Cl'])
   })
 })
 

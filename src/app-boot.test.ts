@@ -9,8 +9,8 @@
 //   3. applySnapshot(snapshot) | app.target = …   // hash → app (wins)
 //   4. initPersistence()                          // future writes to storage
 //
-// These tests mirror that sequence exactly (`applyHash` below mirrors
-// App.svelte's applyHashIfPresent) to prove that the hash wins over any
+// These tests mirror that sequence exactly (`applyHash` below calls the same
+// parseHash + applyParsedHash pair as App.svelte's applyHashIfPresent) to prove that the hash wins over any
 // pre-existing localStorage state, and that a `#<slug>` target link changes
 // only the target (issue #302).
 //
@@ -22,13 +22,13 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { app } from './state.svelte'
 import {
   snapshotState,
-  applySnapshot,
+  applyParsedHash,
   loadFromStorage,
   SNAPSHOT_VERSION,
   type AppSnapshot,
 } from './persist.svelte'
 import { encodeShareHash, parseHash } from './share'
-import { PROFILES, SALT_ORDER, findProfile, findProfileBySlug } from '$lib'
+import { PROFILES, SALT_ORDER, findProfile } from '$lib'
 
 // ---------------------------------------------------------------------------
 // In-memory localStorage stub
@@ -54,18 +54,10 @@ function createStorageStub(): Storage {
   }
 }
 
-/** Mirrors App.svelte's applyHashIfPresent (minus the history update). */
+/** App.svelte's applyHashIfPresent, minus reading `location` and the history update. */
 function applyHash(raw: string): boolean {
   const parsed = parseHash(raw)
-  if (parsed === null) return false
-  if (parsed.kind === 'snapshot') {
-    applySnapshot(parsed.snapshot)
-    return true
-  }
-  const profile = findProfileBySlug(parsed.slug)
-  if (!profile) return false
-  app.target = profile
-  return true
+  return parsed !== null && applyParsedHash(parsed)
 }
 
 function resetApp() {

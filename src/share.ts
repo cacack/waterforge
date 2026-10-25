@@ -130,7 +130,8 @@ export function encodeShareHash(snapshot: AppSnapshot): string {
   )
   const view = new DataView(bytes.buffer)
   view.setUint16(0, flags)
-  const volume = toField(snapshot.batch.volume, 1000, 0, 0xffffff)
+  // Min 1 (0.001), not 0: applySnapshot rejects a zero volume.
+  const volume = toField(snapshot.batch.volume, 1000, 1, 0xffffff)
   view.setUint16(2, volume >>> 8)
   view.setUint8(4, volume & 0xff)
   view.setInt16(5, toField(carbonation.temp, 10, -0x8000, 0x7fff))

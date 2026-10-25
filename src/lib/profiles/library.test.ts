@@ -65,6 +65,77 @@ describe('PROFILES — slugs', () => {
   it('findProfileBySlug returns undefined for an unknown slug', () => {
     expect(findProfileBySlug('no-such-water')).toBeUndefined()
   })
+
+  // Published slugs are frozen (ADR 0021): printed links and QR labels key on
+  // them. This list is append-only — add new slugs, never edit or remove one.
+  const PUBLISHED_SLUGS = [
+    'acqua-panna',
+    'antipodes',
+    'apollinaris',
+    'aquarel-birken',
+    'artificial',
+    'badoit',
+    'borsec',
+    'burton',
+    'buxton',
+    'calistoga',
+    'carola-rouge',
+    'contrex',
+    'dorna',
+    'evian',
+    'farris',
+    'ferrarelle',
+    'fiji',
+    'fiuggi',
+    'gerolsteiner',
+    'hassia-sprudel',
+    'henniez',
+    'hepar',
+    'highland-spring',
+    'london',
+    'magnetic-springs',
+    'mountain-valley',
+    'munich',
+    'neuselters',
+    'perla-harghitei',
+    'perla-plata',
+    'perrier',
+    'pilsen',
+    'purpur',
+    'rosbacher',
+    'saint-yorre',
+    'salvus',
+    'san-benedetto',
+    'san-narciso',
+    'san-pellegrino',
+    'sca-coffee',
+    'selters',
+    'tea-max',
+    'tea-min',
+    'tesanjski',
+    'tiva-harghita',
+    'topo-chico',
+    'ty-nant',
+    'vichy-catalan',
+    'vichy-celestins',
+    'vittel',
+    'volvic',
+    'voss',
+    'waiakea',
+    'waiwera',
+  ]
+
+  it('every published slug still resolves to a profile', () => {
+    const missing = PUBLISHED_SLUGS.filter((s) => !findProfileBySlug(s))
+    expect(missing).toEqual([])
+  })
+
+  it('every profile slug is in the published list', () => {
+    const unlisted = PROFILES.map((p) => p.slug).filter(
+      (s) => !PUBLISHED_SLUGS.includes(s as string),
+    )
+    expect(unlisted).toEqual([])
+  })
 })
 
 // ---------------------------------------------------------------------------

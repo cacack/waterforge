@@ -9,15 +9,14 @@
   import RecipePanel from './components/RecipePanel.svelte'
   import ReadoutsPanel from './components/ReadoutsPanel.svelte'
   import HelpDialog from './components/HelpDialog.svelte'
-  import { app, computeResult } from './state.svelte'
+  import { computeResult } from './state.svelte'
   import { applyTheme } from './theme.svelte'
   import {
     loadFromStorage,
     initPersistence,
-    applySnapshot,
+    applyParsedHash,
   } from './persist.svelte'
   import { parseHash } from './share'
-  import { findProfileBySlug } from '$lib'
 
   const result = $derived(computeResult())
 
@@ -33,14 +32,7 @@
     const rawHash = location.hash.slice(1) // strip leading '#'
     if (!rawHash) return
     const parsed = parseHash(rawHash)
-    if (parsed === null) return
-    if (parsed.kind === 'snapshot') {
-      applySnapshot(parsed.snapshot)
-    } else {
-      const profile = findProfileBySlug(parsed.slug)
-      if (!profile) return
-      app.target = profile
-    }
+    if (parsed === null || !applyParsedHash(parsed)) return
     // Remove the hash from the address bar without creating a history entry
     // so the back-button still works as expected.
     history.replaceState(null, '', location.pathname + location.search)
