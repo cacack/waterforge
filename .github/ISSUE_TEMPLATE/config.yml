@@ -2,4 +2,4 @@ blank_issues_enabled: true
 contact_links:
   - name: Question or usage help
     url: https://github.com/cacack/waterforge/issues/new?labels=question&template=question.md
-    about: Not sure how to use Waterforge, or what a readout means? Ask here.
+    about: Not sure how to use Waterforge, or what a readout means? Ask here. Answered on a best-effort basis by a single maintainer.

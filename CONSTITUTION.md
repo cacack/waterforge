@@ -10,10 +10,11 @@ Waterforge turns distilled (or known-source) water and food-grade salts into
 faithful clones of bottled mineral waters. It's a static, client-side web app
 that takes a target water profile, subtracts what's already in your source
 water, and computes the exact salt additions needed to hit it — and, for a
-sparkling target, the regulator pressure to carbonate it to match — so anyone can
-reproduce a named mineral water at home, precisely and reproducibly. Its recipe
-method descends from Martin Lersch's (Khymos) freely published work; the profile
-data is now an independently-sourced compilation, and the whole stays free.
+sparkling target, the regulator pressure to carbonate it to match — so its
+maintainer, or anyone who finds it, can reproduce a named mineral water at home,
+precisely and reproducibly. Its recipe method descends from Martin Lersch's
+(Khymos) freely published work; the profile data is now an independently-sourced
+compilation, and the whole stays free.
 
 ## Audience
 
