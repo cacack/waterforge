@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.12.1](https://github.com/cacack/waterforge/compare/v1.12.0...v1.12.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* **profiles:** source Tŷ Nant bicarbonate from the producer's 1997 analysis ([0f10476](https://github.com/cacack/waterforge/commit/0f10476967a17590ea72a1f64f71174dc98f1a13)), closes [#312](https://github.com/cacack/waterforge/issues/312)
+
 ## [1.12.0](https://github.com/cacack/waterforge/compare/v1.11.0...v1.12.0) (2026-10-25)
 
 
