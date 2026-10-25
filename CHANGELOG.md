@@ -9,6 +9,22 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.12.0](https://github.com/cacack/waterforge/compare/v1.11.0...v1.12.0) (2026-10-25)
+
+
+### Features
+
+* **profiles:** add 18 sourced profiles from 17 notable waters ([2436a6a](https://github.com/cacack/waterforge/commit/2436a6acc9536fa6bcacc5d53572886e72da075c))
+* **profiles:** add Crystal Geyser profiles, one per spring report ([b89ba8e](https://github.com/cacack/waterforge/commit/b89ba8e6d7e2cc525892c4a88fb6ffc5588f90db))
+* **profiles:** show a mineral band and the published TDS beside the TDS readout ([4b7a41b](https://github.com/cacack/waterforge/commit/4b7a41b11fb298bd2ab05389e88b4c22d1f1f884)), closes [#303](https://github.com/cacack/waterforge/issues/303)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-uri from 3.1.8 to 3.1.9 ([3b53583](https://github.com/cacack/waterforge/commit/3b53583bd921ecb4948484102b03da55293ba770))
+* **deps:** bump serialize-javascript from 7.0.5 to 7.1.4 ([f2c4b17](https://github.com/cacack/waterforge/commit/f2c4b174df575f8f6267c91a883a29a90b05cd5e))
+* **profiles:** refresh outdated bottled profiles from current producer analyses ([dd6145a](https://github.com/cacack/waterforge/commit/dd6145a206c93d51038b031a2542a9db028e5f90)), closes [#309](https://github.com/cacack/waterforge/issues/309)
+
 ## [1.11.0](https://github.com/cacack/waterforge/compare/v1.10.3...v1.11.0) (2026-10-25)
 
 
