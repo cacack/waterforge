@@ -21,6 +21,10 @@ a rolling 90 days.
 
 There is no fixed release schedule. Work happens opportunistically, one PR at a
 time, and versions are cut automatically by release-please from the commit log.
+Periodic panel reviews are one chosen input to that work. Their cadence, the
+date of the next product panel, and the bar a finding must clear before it
+becomes an issue are set in
+[ADR 0023](docs/decisions/0023-panel-review-cadence.md).
 
 ## Active direction
 

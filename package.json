@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.12.1",
   "type": "module",
-  "description": "Clone bottled mineral waters from distilled water and food-grade salts.",
+  "description": "Clone bottled mineral waters from distilled (or known-source) water and food-grade salts.",
   "license": "GPL-3.0-or-later",
   "engines": {
     "node": ">=26"
