@@ -1,4 +1,4 @@
-# ADR 0023 — Maintainer use is read quarterly, and its lapse has a written trigger
+# ADR 0024 — Maintainer use is read quarterly, and its lapse has a written trigger
 
 **Status:** Accepted
 **Date:** 2026-10-25
@@ -48,17 +48,19 @@ weeks is one quarter.
    - **Attested:** the date the maintainer last used the app (mixed a batch or
      planned one), or "none". This is a date, not a log.
 
-   Each part covers the other's blind spot. The beacon misses the maintainer in
-   known ways: script blockers, an installed app opened offline, the local dev
-   server, and sampling that reports in steps of 10, so one real load can come
-   back as zero. Attestation is self-report, and the beacon is the outside
-   check on it.
+   The attested date decides the reading; the beacon only corroborates it. The
+   beacon misses the maintainer in known ways: script blockers, an installed
+   app opened offline, the local dev server, and sampling that reports in steps
+   of 10, so one real load can come back as zero. And it counts any visitor, so
+   a non-zero count cannot show that the maintainer in particular used the app.
 
 2. **The lapse trigger: two consecutive quarterly readings with no use.** A
-   reading shows no use when the beacon reports zero page-load days **and** the
-   attestation is "none" or falls before the quarter began. **A quarter with no
-   reading recorded counts as a quarter with no use.** Without that rule, a
-   lapse that stops the readings would also hide itself.
+   reading shows no use when the attestation is "none", is missing, or falls
+   before the quarter began, **whatever the beacon shows**. A stranger's page
+   load must not be able to keep the project in layer 1 after the maintainer
+   has stopped. **A quarter with no reading recorded counts as a quarter with no
+   use.** Without that rule, a lapse that stops the readings would also hide
+   itself.
 
 3. **When the trigger fires, the project enters artifact mode (Posture layer 3),
    recorded by a new ADR.** In artifact mode:
@@ -86,6 +88,9 @@ weeks is one quarter.
 - **A private use log only**, as the foil first suggested. A reviewer can't
   check a log nobody else can see, so "verifiable" would still be false. The
   attested date is the same information, reduced to one public line per quarter.
+- **Beacon or attestation, either one counting as use.** A single page load
+  from any visitor would then block the trigger, so a lapse could still go
+  unnoticed whenever the site has even occasional strangers.
 - **Explaining the beacon's blind spots only.** That explains why the beacon
   can't decide the question, and leaves the question open.
 - **Git activity as the use signal.** Commits show the maintainer working on the
@@ -100,8 +105,9 @@ weeks is one quarter.
 
 - **The first reading is the 2026-09-26 re-measurement:** page loads on 4 days,
   two of them mobile (2026-09-14 and 2026-09-22). That is consistent with the
-  maintainer, but nobody attested to it, so its Attested cell is left blank. The
-  next reading is due in Q4 2026. It should come from the same December pull
+  maintainer, but nobody attested to it, so its Attested cell is left blank.
+  Under decision 2 it counts as a quarter with no use unless the maintainer
+  fills in a date. The next reading is due in Q4 2026. It should come from the same December pull
   that scores Criterion 5's first full site-health window.
 - **Re-measuring traffic becomes a quarterly duty, not just curiosity.** The
   traffic figures themselves still justify nothing (ADR 0016). Only the
