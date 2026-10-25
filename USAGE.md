@@ -172,7 +172,8 @@ The actions bar offers two kinds of link:
   batch size and unit, and carbonating temperature. Opening it **replaces
   everything** in the app with that recipe. There are no accounts, so this is
   also how you save a recipe — bookmark the link or keep it somewhere. The link
-  is short enough to print as a QR code on a small label.
+  is short enough to print as a QR code on a small label. Source-water values
+  are kept to 0.1 mg/L.
 - **Link to this water** copies a short, readable link to the selected target
   alone (for example `waterforge.app/#evian`). Opening it **selects that target
   and keeps your own** source water, salts, batch, and carbonation settings.

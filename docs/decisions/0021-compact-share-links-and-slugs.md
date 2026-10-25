@@ -38,7 +38,9 @@ editorial and do change; they are not safe to print on a label.
      base64url. Only `2` is defined.
    - matches the slug pattern — target permalink.
    - anything else — ignored. Unknown versions, malformed payloads, and
-     unknown slugs change nothing and raise no error.
+     unknown `#<slug>` target links change nothing and raise no error. A
+     snapshot link whose embedded slug is unknown (e.g. made by a newer build)
+     still applies the rest of the recipe, with no target.
 
 2. **The format version is a 1-character prefix, not a payload byte.** This
    deviates from the issue's proposal. A prefix costs one character instead of
@@ -56,7 +58,9 @@ editorial and do change; they are not safe to print on a label.
    | slug             | 0–16 B              | ASCII                                                                                                                                                                                         |
    | source ions      | 14 B, only if known | seven uint16 in `ION_ORDER`, tenths of mg/L                                                                                                                                                   |
 
-   Out-of-range values clamp; decoded zero ions are omitted (the solver treats a
+   Values round to field precision (source ions to 0.1 mg/L) and out-of-range
+   values clamp — volume to at least 0.001 so the receiver never rejects it.
+   An empty salt set is a real state and is applied. Decoded zero ions are omitted (the solver treats a
    missing ion as zero). Worst case is 24 (`https://waterforge.app/#`) + 1
    (prefix) + ⌈38 · 4/3⌉ (a 38-byte payload) = **76 characters**. The payload
    decodes into the same snapshot shape the app already validates,
@@ -75,7 +79,14 @@ editorial and do change; they are not safe to print on a label.
   short and human-readable.
 - **The v2 layout is frozen.** Any change — a new field, a new salt beyond the
   flag bits, a different precision — ships as a new format version (`3…`)
-  alongside v2, never as an edit to it. Old links decode forever.
+  alongside v2, never as an edit to it. Old links decode forever. Because salt
+  bits and the ion block are positional, `SALT_ORDER` (≤ 9 entries) and
+  `ION_ORDER` are frozen with it; `src/share.test.ts` pins both, and
+  `src/lib/profiles/library.test.ts` pins the published slugs.
+- **`location.hash` now carries target links too.** This amends
+  [ADR 0020](0020-usage-guide-rendered-into-the-app.md): a stray fragment shaped
+  like a slug is read as a target link, which is another reason USAGE.md's
+  in-document links must not be real `#` anchors.
 - **Slugs are frozen.** Once published, a slug is never renamed and never
   reused for a different water, because it may already be printed on a label.
 - **Display names stay free to change.** Nothing printed depends on them.
