@@ -9,6 +9,14 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.12.2](https://github.com/cacack/waterforge/compare/v1.12.1...v1.12.2) (2026-10-30)
+
+
+### Bug Fixes
+
+* **deps:** bump svelte from 5.57.1 to 5.57.2 ([ec7da86](https://github.com/cacack/waterforge/commit/ec7da86b1eba5ffdc7d5776afc139bfbff70e4ca))
+* **deps:** bump vite from 8.3.4 to 8.3.5 ([9a48dfe](https://github.com/cacack/waterforge/commit/9a48dfe42578242345276c8a8e3f9c0e32de1cb3))
+
 ## [1.12.1](https://github.com/cacack/waterforge/compare/v1.12.0...v1.12.1) (2026-10-25)
 
 
