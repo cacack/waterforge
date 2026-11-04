@@ -28,7 +28,7 @@ permissions:
 
 jobs:
   watch:
-    uses: cacack/workflows/.github/workflows/dependabot-watch.yml@8c32eefebab14d35b588034d5bca5178d781acf6 # v2.4.0
+    uses: cacack/workflows/.github/workflows/dependabot-watch.yml@48676c738ce02a31811733fcb69236c5220dc665 # v2.5.0
     with:
       # Empty on a scheduled run, which the called workflow resolves to its
       # default of 7 -- the same number ADR 0017 sets. Passed through rather
