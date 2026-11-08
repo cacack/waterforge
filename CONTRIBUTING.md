@@ -145,6 +145,11 @@ exists to tell Dependabot which bumps need a release: `dependencies` get a
 either ships a silent change or cuts a release nobody needed — when adding
 one, ask whether `dist/` would differ.
 
+`overrides` in `package.json` force patched transitive versions for security
+advisories the upstream packages haven't picked up yet — each is scoped to the
+vulnerable major only (e.g. `minimatch@^10`). Drop an entry once `npm ls
+<pkg> --all` shows every parent already resolves a patched version on its own.
+
 ### Branch and PR workflow
 
 `main` is **PR-only** — no direct pushes. The workflow is:
