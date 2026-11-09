@@ -9,6 +9,20 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.13.0](https://github.com/cacack/waterforge/compare/v1.12.1...v1.13.0) (2026-11-09)
+
+
+### Features
+
+* **analytics:** serve DNS-only from Pages and add the beacon at deploy build ([46913d9](https://github.com/cacack/waterforge/commit/46913d9aa57d242be7749df5155112d995cce39b)), closes [#338](https://github.com/cacack/waterforge/issues/338)
+
+
+### Bug Fixes
+
+* **deps:** bump @lucide/svelte from 1.52.0 to 1.66.0 ([77e552c](https://github.com/cacack/waterforge/commit/77e552c99cfb4e2e03ad3a9b4236dba33a1051b1))
+* **deps:** bump svelte from 5.57.1 to 5.57.2 ([ec7da86](https://github.com/cacack/waterforge/commit/ec7da86b1eba5ffdc7d5776afc139bfbff70e4ca))
+* **deps:** bump vite from 8.3.4 to 8.3.5 ([9a48dfe](https://github.com/cacack/waterforge/commit/9a48dfe42578242345276c8a8e3f9c0e32de1cb3))
+
 ## [1.12.1](https://github.com/cacack/waterforge/compare/v1.12.0...v1.12.1) (2026-10-25)
 
 
