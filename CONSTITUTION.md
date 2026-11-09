@@ -72,10 +72,12 @@ When in doubt, prefer:
 5. **Static and client-side over backend convenience** — everything runs in the
    browser. No servers, no accounts, and no tracking of the people who use it:
    cheaper to host, private by default, durable — and installable, so it keeps
-   working offline at the counter. Anonymous, aggregate page counts at the CDN
-   are permitted and in use; the bar is that no individual can be singled out or
-   re-identified, and nothing about it ships in the bundle
-   ([ADR 0018](docs/decisions/0018-client-side-analytics-scope.md)).
+   working offline at the counter. Anonymous, aggregate page counts are
+   permitted and in use; the bar is that no individual can be singled out or
+   re-identified, and only the official deployment's build adds the beacon, so
+   the source, forks and archived copies carry none
+   ([ADR 0018](docs/decisions/0018-client-side-analytics-scope.md),
+   [ADR 0025](docs/decisions/0025-cloudflare-dns-only.md)).
 6. **Real use over assumed demand** — effort is justified by the maintainer's own
    use of the app, by correctness under Principle 3, or by the durability of the
    artifact. Never by an assumed audience. "Users might want this" is not a

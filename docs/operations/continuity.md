@@ -19,12 +19,12 @@ page is about the practical half.
 
 Each of these is held by one person, and each ends the public site if it lapses.
 
-| Dependency                 | What it does                            | If it lapses                                                           |
-| -------------------------- | --------------------------------------- | ---------------------------------------------------------------------- |
-| **Domain registration**    | `waterforge.app`                        | Site stops resolving. Recoverable only until the name is re-sold.      |
-| **CloudFlare account**     | DNS + proxy (CDN/WAF) in front of Pages | DNS stops resolving; see [cloudflare-pages.md](./cloudflare-pages.md). |
-| **GitHub account**         | Repo, Pages hosting, Actions, releases  | Site, issues and releases go; the source survives in the archive.      |
-| **`RELEASE_PLEASE_TOKEN`** | PAT that lets release-please open PRs   | Releases silently stop; the site freezes at the last deploy.           |
+| Dependency                 | What it does                           | If it lapses                                                           |
+| -------------------------- | -------------------------------------- | ---------------------------------------------------------------------- |
+| **Domain registration**    | `waterforge.app`                       | Site stops resolving. Recoverable only until the name is re-sold.      |
+| **Cloudflare account**     | DNS only for `waterforge.app`          | DNS stops resolving; see [cloudflare-pages.md](./cloudflare-pages.md). |
+| **GitHub account**         | Repo, Pages hosting, Actions, releases | Site, issues and releases go; the source survives in the archive.      |
+| **`RELEASE_PLEASE_TOKEN`** | PAT that lets release-please open PRs  | Releases silently stop; the site freezes at the last deploy.           |
 
 The PAT is the least severe and the easiest to miss, which is why the daily
 [site-health check](./ci-cd.md#site-health-site-healthyml) fails when the latest
@@ -58,10 +58,14 @@ until it is gone.
   to catch: a project going quiet. Treat a long silence as the point at which
   monitoring must be assumed absent, not as evidence that nothing is wrong.
 
-- **The custom domain can be un-set without anyone touching it.** GitHub
-  periodically re-verifies the custom domain, sees CloudFlare's IPs, and silently
-  clears the setting. Fully documented, with the durable fix, in
-  [cloudflare-pages.md](./cloudflare-pages.md).
+- **A re-proxied DNS record breaks certificate renewal a month before the
+  outage.** GitHub Pages cannot renew its certificate through the Cloudflare
+  proxy, so the renewal wedges about 30 days before the old certificate expires,
+  while the site still looks fine. The daily
+  [site-health check](./ci-cd.md#site-health-site-healthyml) fails as soon as
+  apex or `www` stops pointing at GitHub Pages, and again on the wedged
+  certificate. The recovery is in [cloudflare-pages.md](./cloudflare-pages.md);
+  the decision is [ADR 0025](../decisions/0025-cloudflare-dns-only.md).
 
 - **Alerts need somewhere to land.** The health check opens a GitHub issue. That
   is only an alert if someone still reads notifications for this repo.

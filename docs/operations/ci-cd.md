@@ -55,16 +55,16 @@ See [ADR 0010](../decisions/0010-release-please.md) for the rationale and
 
 ## Site health (`site-health.yml`)
 
-Runs daily on a schedule, and on `workflow_dispatch`. Five checks: the GitHub
-Pages certificate state, the origin certificate's remaining lifetime, the
-domain's registration expiry, that the latest `release-please.yml` run on `main`
-succeeded, and that `https://waterforge.app/` returns `200`.
+Runs daily on a schedule, and on `workflow_dispatch`. Six checks: the GitHub
+Pages certificate state, the origin certificate's remaining lifetime, that the
+DNS points at GitHub Pages, the domain's registration expiry, that the latest
+`release-please.yml` run on `main` succeeded, and that `https://waterforge.app/` returns `200`.
 On failure it opens a single issue — deduplicated by title so a sustained outage
 does not file one per day — and closes that issue automatically once the checks
 pass again.
 
 No secrets required: the default `GITHUB_TOKEN` with `pages: read`,
-`actions: read` and `issues: write` covers all five checks. The job runs without
+`actions: read` and `issues: write` covers all six checks. The job runs without
 `actions/checkout`, so every `gh` call must pass `--repo` — without it `gh`
 looks for a git remote and dies with "not a git repository", which silently
 disables the alerting rather than failing the check.
@@ -79,17 +79,17 @@ warns rather than failing — the renewal is diarised off-repo as well
 ([continuity.md](./continuity.md#owner-checklist)), so a flaky third-party
 redirector must not file an issue every night.
 
-CloudFlare's bot management returns `403` to some datacenter ranges, GitHub's
-runners included, so the reachability check treats a `403` as inconclusive and
-warns instead of filing an issue. `404`, `526`, `5xx` and connection failures
-stay hard failures. The gatus probe in the homelab covers that same public path
-from a residential IP, where the `403` does not occur.
+A DNS check fails if the apex `A`/`AAAA` records are not the GitHub Pages IPs
+or `www` is not `CNAME cacack.github.io.`. A re-proxied record is what wedges
+certificate renewal ([ADR 0025](../decisions/0025-cloudflare-dns-only.md)), so
+this catches it a month before the certificate runs out. The reachability check
+fails on any non-`200` response or connection failure.
 
 Scheduled workflows only run from the **default branch**, so this takes effect
 once merged to `main`, not on the PR branch. GitHub also disables cron
 workflows after 60 days of repository inactivity.
 
-See [CloudFlare in front of GitHub Pages](./cloudflare-pages.md#monitoring) for
+See [Cloudflare DNS for GitHub Pages](./cloudflare-pages.md#monitoring) for
 what each check catches and the runbook the alert links to.
 
 ## Archive (`archive.yml`)
@@ -255,6 +255,28 @@ by integration` ([#240](https://github.com/cacack/waterforge/issues/240)).
    waterforge-steward → Permissions**, then accept the permission request on the
    installation. Until that is done the auto-merge job fails at the token step; the
    run goes red rather than quietly skipping.
+
+6. **Set the Web Analytics beacon token.** `deploy.yml` passes the repo
+   variable `CF_BEACON_TOKEN` to the build, which adds the Cloudflare Web
+   Analytics beacon only when it is set
+   ([ADR 0025](../decisions/0025-cloudflare-dns-only.md)). Copy the site token
+   for `waterforge.app` from **Cloudflare dashboard → Web Analytics**, set that
+   site to **manual** install, then:
+
+   ```bash
+   gh variable set CF_BEACON_TOKEN --body '<site-token>'
+   ```
+
+   The token is public once deployed, since it appears in the page, but it is
+   deliberately not committed: a repo variable is not inherited by forks, so
+   their builds carry no beacon. Without it, deploys succeed and ship no beacon,
+   and the Build step logs a "No analytics beacon" warning. A value that is not
+   32 lowercase hex fails the build; surrounding whitespace is ignored.
+
+   After the next deploy, confirm the beacon reports: load the site with
+   devtools open and check for a successful POST to
+   `cloudflareinsights.com/cdn-cgi/rum`, then see the page load in the Web
+   Analytics dashboard.
 
 ## Required status checks
 

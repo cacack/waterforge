@@ -12,6 +12,11 @@ that matters most — **how to read the numbers without fooling yourself**.
 > work, and a small one does not license less. This page exists because the
 > maintainer likes metrics, which is a complete reason on its own.
 
+> **Edge figures end 2026-11-08.** The Cloudflare proxy came off that day
+> ([ADR 0025](../decisions/0025-cloudflare-dns-only.md)), so the zone no longer
+> sees HTTP traffic. From then on the browser beacon is the only source. The
+> edge tables below are kept as history.
+
 ## Baseline — measured 2026-09-11
 
 Two independent measurements, because they answer different questions.
@@ -247,5 +252,5 @@ query ($accountTag: String!, $s: Time!, $e: Time!, $siteTag: String!) {
   figure is not a justification for anything.
 - [ADR 0024](../decisions/0024-use-signal-and-lapse-trigger.md) — the quarterly
   use reading and the trigger for switching to artifact mode.
-- [cloudflare-pages.md](./cloudflare-pages.md) — the proxy these numbers come
-  from.
+- [cloudflare-pages.md](./cloudflare-pages.md) — the Cloudflare DNS setup,
+  and the history of the proxy the edge numbers came from.

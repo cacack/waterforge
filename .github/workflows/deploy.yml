@@ -29,7 +29,14 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: |
+          if [ -z "${CF_BEACON_TOKEN//[[:space:]]/}" ]; then
+            echo "::warning title=No analytics beacon::CF_BEACON_TOKEN repo variable is unset, so this deploy ships without the Web Analytics beacon (ADR 0025)."
+          fi
+          npm run build
+        env:
+          # Repo variable, not a secret; forks lack it, so their builds carry no beacon.
+          CF_BEACON_TOKEN: ${{ vars.CF_BEACON_TOKEN }}
 
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 

@@ -1,10 +1,11 @@
 name: Site health
 
-# Watches the two things that took the site down on 2026-09-05: GitHub Pages'
-# Let's Encrypt renewal wedging in `bad_authz`, and the resulting expired origin
-# cert that Cloudflare (Full strict) rejects with a 526. The certificate *state*
-# check is the early warning -- it goes bad ~30 days before the cert expires,
-# while everything still looks fine to visitors.
+# Watches the failure behind the 2026-09-05 and 2026-11-08 outages: GitHub
+# Pages' Let's Encrypt renewal wedging in `bad_authz`, which happens whenever
+# the Cloudflare proxy is on. The proxy is off for good (ADR 0025); the DNS
+# check catches a record switched back to proxied, and the certificate *state*
+# check is the early warning for a wedged renewal -- it goes bad ~30 days
+# before the cert expires, while everything still looks fine to visitors.
 #
 # The domain-registration check has nothing to do with that outage and is here
 # for the same reason: it fails invisibly. A renewal that does not go through
@@ -24,7 +25,12 @@ permissions:
 
 env:
   DOMAIN: waterforge.app
-  ORIGIN_IP: 185.199.108.153
+  # GitHub Pages' published addresses for an apex domain, and the CNAME target
+  # for www. Anything else in the zone means the records no longer point
+  # straight at Pages.
+  PAGES_A: 185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153
+  PAGES_AAAA: 2606:50c0:8000::153 2606:50c0:8001::153 2606:50c0:8002::153 2606:50c0:8003::153
+  PAGES_CNAME: cacack.github.io.
   EXPIRY_WARN_DAYS: 21
   # Wider than the certificate window on purpose: a stuck renewal is a support
   # ticket at a registrar, not something a CI fix or a redeploy can clear.
@@ -34,6 +40,69 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: Check DNS points at GitHub Pages
+        run: |
+          set -uo pipefail
+          # A proxied record wedges Pages' Let's Encrypt renewal in `bad_authz`
+          # (#336), and nothing visibly breaks until the cert expires ~30 days
+          # later. Proxied, Cloudflare answers the apex with its own anycast IPs
+          # and flattens www's CNAME into A records, so both show up here.
+          #
+          # Ask the zone's authoritative nameserver directly so no resolver cache
+          # can mask a change. A failed lookup warns rather than fails, like the
+          # other checks' read failures.
+          ns=$(dig +short NS "$DOMAIN" 2>/dev/null | head -1)
+          if [ -z "$ns" ]; then
+            echo "::warning::Could not resolve a nameserver for $DOMAIN; DNS check skipped."
+            exit 0
+          fi
+          echo "Querying $ns"
+          cause="likely re-proxied in Cloudflare; set it to DNS-only"
+
+          # lookup TYPE NAME: print NAME's answer set for TYPE. Returns non-zero
+          # when the query fails or the server answers anything but NOERROR
+          # (SERVFAIL, REFUSED), so a nameserver hiccup warns instead of reading
+          # as "no records".
+          lookup() {
+            local out
+            out=$(dig +tries=2 +noall +comments +answer "$1" "$2" "@$ns") || return 1
+            grep -q 'status: NOERROR' <<<"$out" || return 1
+            awk -v t="$1" '!/^;/ && $4 == t {print $5}' <<<"$out" | sort -u
+          }
+
+          # check_set TYPE EXPECTED ALLOW_EMPTY: fail if the answer set is empty
+          # (unless allowed) or holds any address outside EXPECTED.
+          check_set() {
+            local type=$1 expected=$2 allow_empty=$3 got shown unexpected
+            if ! got=$(lookup "$type" "$DOMAIN"); then
+              echo "::warning::$type lookup for $DOMAIN at $ns failed; skipped."
+              return
+            fi
+            shown=$(echo "$got" | paste -sd ' ' -)
+            echo "$DOMAIN $type: ${shown:-none}"
+            if [ -z "$got" ]; then
+              if [ "$allow_empty" != yes ]; then
+                echo "FAIL: $DOMAIN has no $type records (expected $expected) -- $cause" >> "$RUNNER_TEMP/failures"
+              fi
+              return
+            fi
+            unexpected=$(comm -23 <(echo "$got") <(tr ' ' '\n' <<<"$expected" | sort -u))
+            if [ -n "$unexpected" ]; then
+              echo "FAIL: $DOMAIN $type returned $shown (expected only $expected) -- $cause" >> "$RUNNER_TEMP/failures"
+            fi
+          }
+          check_set A "$PAGES_A" no
+          check_set AAAA "$PAGES_AAAA" yes
+
+          if ! cname=$(lookup CNAME "www.$DOMAIN"); then
+            echo "::warning::CNAME lookup for www.$DOMAIN at $ns failed; skipped."
+          else
+            echo "www.$DOMAIN CNAME: ${cname:-none}"
+            if [ "$cname" != "$PAGES_CNAME" ]; then
+              echo "FAIL: www.$DOMAIN CNAME is '${cname:-none}' (expected $PAGES_CNAME) -- $cause" >> "$RUNNER_TEMP/failures"
+            fi
+          fi
+
       - name: Check Pages certificate state
         id: cert_state
         env:
@@ -58,10 +127,12 @@ jobs:
       - name: Check origin certificate expiry
         run: |
           set -uo pipefail
-          cert=$(echo | openssl s_client -connect "$ORIGIN_IP:443" -servername "$DOMAIN" 2>/dev/null \
+          # Any Pages address serves the cert; the first one will do.
+          origin_ip=${PAGES_A%% *}
+          cert=$(echo | openssl s_client -connect "$origin_ip:443" -servername "$DOMAIN" 2>/dev/null \
             | openssl x509 -outform pem 2>/dev/null)
           if [ -z "$cert" ]; then
-            echo "FAIL: could not read origin certificate from $ORIGIN_IP" >> "$RUNNER_TEMP/failures"
+            echo "FAIL: could not read origin certificate from $origin_ip" >> "$RUNNER_TEMP/failures"
             exit 0
           fi
           not_after=$(echo "$cert" | openssl x509 -noout -enddate | cut -d= -f2)
@@ -130,20 +201,14 @@ jobs:
       - name: Check site is reachable
         run: |
           set -uo pipefail
-          # A browser-like UA reduces CloudFlare bot-management false positives,
-          # but its edge still 403s some datacenter ranges and GitHub's runners
-          # sit in one. A 403 from the edge is a bot challenge, not an outage, so
-          # it warns rather than pages. The failure modes this check exists for --
-          # 404 (custom-domain auto-unset), 526 (dead origin cert), 5xx and 000 --
-          # all stay hard failures.
-          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-          code=$(curl -sS -o /dev/null -w '%{http_code}' -A "$UA" --max-time 30 "https://$DOMAIN/" || echo "000")
+          # Requests go straight to GitHub Pages, which has no bot management, so
+          # curl's default UA is fine and any non-200 is a real failure: 404
+          # (custom-domain auto-unset), 5xx, or 000 (no connection or a bad cert).
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://$DOMAIN/" || echo "000")
           echo "GET https://$DOMAIN/ -> $code"
-          case "$code" in
-            200) ;;
-            403) echo "::warning::CloudFlare returned 403 to this runner (bot management, not an outage); reachability inconclusive. The gatus probe covers this path from a residential IP." ;;
-            *) echo "FAIL: https://$DOMAIN/ returned $code (expected 200)" >> "$RUNNER_TEMP/failures" ;;
-          esac
+          if [ "$code" != "200" ]; then
+            echo "FAIL: https://$DOMAIN/ returned $code (expected 200)" >> "$RUNNER_TEMP/failures"
+          fi
 
       - name: Report
         env:
