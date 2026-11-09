@@ -6,6 +6,9 @@
 "no telemetry" clause)
 **Amended by:** [ADR 0019](0019-bot-fight-mode-off.md) (2026-09-11) — decision #4
 is reversed; Bot Fight Mode is off
+**Amended by:** [ADR 0025](0025-cloudflare-dns-only.md) (2026-11-08) — decision
+#3's "No bundle change" boundary; the official deploy build now adds the beacon,
+and the "No third-party analytics" boundary is re-examined
 
 ## Context
 
@@ -91,6 +94,12 @@ The decision is scoped, and any of these being breached re-opens it:
   Waterforge carries no telemetry at all. This preserves
   [continuity](../operations/continuity.md) and the artifact-preservation
   backstop of [ADR 0016](0016-built-for-its-maintainer.md).
+
+  > **Amended by [ADR 0025](0025-cloudflare-dns-only.md) (2026-11-08).** With
+  > the proxy off there is no edge to inject from, so the official deployment's
+  > build adds the tag instead. The intent is unchanged: forks, local builds and
+  > the archive carry no telemetry, and the repository holds no beacon token.
+
 - **No cookies, no client-side storage, no cross-site identifiers.** If the
   vendor ever changes this, the beacon goes.
 - **No custom events, no user-defined tags, no funnel or session instrumentation.**
@@ -98,6 +107,12 @@ The decision is scoped, and any of these being breached re-opens it:
   inside the app would be tracking by the test above.
 - **No third-party analytics.** This decision is about one vendor already in the
   serving path, not a general opening.
+
+  > **Re-examined by [ADR 0025](0025-cloudflare-dns-only.md) (2026-11-08).**
+  > With the proxy off, Cloudflare remains the DNS host but no longer carries
+  > page requests. The vendor and the data are unchanged, so Cloudflare stays
+  > the one permitted vendor; the beacon now reports to a Cloudflare host rather
+  > than the site's own domain.
 
 ### 4. Bot Fight Mode's JS Detections is accepted on the same test, separately
 

@@ -85,6 +85,11 @@ which is itself part of why the metric below is defined the way it is.
    real signal, and roughly one per quarter is the most that should pass without
    comment.
 
+   > **Amended by [ADR 0025](0025-cloudflare-dns-only.md) (2026-11-08).** The
+   > Cloudflare proxy is off, so the 403 path no longer exists and a 403 now
+   > fails. Read-failure downgrades (Pages API, DNS lookups) still apply, and
+   > the 99% bar stands.
+
 4. **The bars are set just beyond current practice, and that is the point.** Each
    one would have been breached by the recorded history: four high-severity
    advisories exceeded 7 days, four Dependabot PRs exceeded 14. A threshold the

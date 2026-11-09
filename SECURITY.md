@@ -1,8 +1,11 @@
 # Security Policy
 
 Waterforge is a static, client-side web app. It has no backend, no accounts, no
-server-side state, and no telemetry — everything runs in your browser, and
-nothing you enter leaves it. That shape rules out whole categories of
+server-side state, and no tracking — everything runs in your browser, and
+nothing you enter leaves it. The official deployment counts anonymous,
+aggregate page loads with a cookieless beacon
+([ADR 0018](docs/decisions/0018-client-side-analytics-scope.md)); forks and
+local builds carry none. That shape rules out whole categories of
 vulnerability, and it also means the ones that remain are worth taking
 seriously.
 
@@ -62,8 +65,8 @@ latest release.
 - Self-hosted forks and the infrastructure they run on. You are free to fork and
   self-host (see the [README](README.md#fork-and-self-host)), but the operator of
   a fork owns its security.
-- Findings against the GitHub Pages or CloudFlare infrastructure in front of the
-  site — report those to the respective vendor.
+- Findings against GitHub Pages, which hosts the site, or Cloudflare, which
+  serves its DNS and analytics beacon — report those to the respective vendor.
 - Denial of service against a static site with no server-side compute.
 
 ## Dependencies

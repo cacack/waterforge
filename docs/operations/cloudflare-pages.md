@@ -1,191 +1,16 @@
-# CloudFlare in front of GitHub Pages
+# Cloudflare DNS for GitHub Pages
 
 Waterforge is served on the custom domain **`waterforge.app`** from GitHub
-Pages (see [CI/CD](./ci-cd.md)). The domain is fronted by CloudFlare with the
-orange-cloud **proxy** (CDN + WAF) enabled. This page documents how to make that
-combination work and how to recover when the site starts returning 404 or a
-CloudFlare **526**.
+Pages (see [CI/CD](./ci-cd.md)). Cloudflare hosts the DNS zone and nothing else.
+Every record is **DNS only** (grey cloud), so requests go straight to Pages, and
+Pages owns TLS, including its Let's Encrypt certificate.
 
-## Symptom: GitHub Pages 404 through the proxy
+**Do not turn the proxy back on.** Pages cannot renew its certificate through
+it. [ADR 0025](../decisions/0025-cloudflare-dns-only.md) records the decision,
+and [History](#history) has the background.
 
-The site loads, then days later returns a **404** even though deploys are green
-and `public/CNAME` is intact.
-
-Confirm the source of the 404:
-
-```sh
-curl -sI https://waterforge.app | grep -i -E 'http/|server|x-github'
-```
-
-If the response is `404` with `server: cloudflare` **and** an `x-github-request-id`
-header (plus a `content-security-policy: default-src 'none'…`), the 404 is
-GitHub Pages' **own** error page, proxied back through CloudFlare. GitHub
-received the request but **no longer recognizes `waterforge.app` as a configured
-custom domain**.
-
-### Root cause
-
-With the proxy on, GitHub periodically re-verifies the custom domain by
-resolving its DNS. It expects the Pages IPs (`185.199.108–111.153`) or
-`cacack.github.io`; instead it sees **CloudFlare's** IPs, decides the domain is
-misconfigured, and **silently clears the custom domain** from the repo's
-Settings → Pages. The next request then 404s. Because this is a periodic sweep,
-the site "works for a while" before breaking — it is not an SSL handshake
-failure between CloudFlare and the origin.
-
-## Fix
-
-### Step 1 — Verify the domain at the GitHub account level (the durable fix)
-
-This is the one step that stops the auto-unset permanently.
-
-1. github.com → account **Settings → Pages → Verified domains → Add a domain** →
-   `waterforge.app`.
-2. GitHub returns a TXT record, e.g.
-   `_github-pages-challenge-cacack` → `<token>`.
-3. Add it in CloudFlare DNS (TXT records are always DNS-only; the proxy does not
-   apply), then click **Verify**.
-
-A _verified_ domain is immune to the auto-unset even though DNS resolves to
-CloudFlare.
-
-### Step 2 — Bootstrap GitHub's TLS certificate with the proxy off (one-time)
-
-GitHub provisions a Let's Encrypt cert via an ACME challenge that must reach the
-origin directly.
-
-1. In CloudFlare DNS, flip the apex `A`/`AAAA` and the `www` `CNAME` to
-   **DNS only (grey cloud)**.
-2. In the **repo** Settings → Pages, re-enter custom domain `waterforge.app`,
-   wait for "DNS check successful," then enable **Enforce HTTPS**.
-
-**Both names must be grey.** GitHub orders a _single_ certificate covering
-`waterforge.app` **and** `www.waterforge.app`, and an ACME order succeeds or
-fails as a unit. Leaving `www` proxied while the apex is DNS-only is enough to
-wedge issuance for both names. Check before starting — a proxied `www` answers
-as an `A` record pointing at CloudFlare, a DNS-only one reveals the underlying
-`CNAME`:
-
-```sh
-ns=$(dig +short NS waterforge.app | head -1)
-dig +short @"$ns" waterforge.app A
-dig +short @"$ns" www.waterforge.app
-```
-
-Expect the four `185.199.108-111.153` Pages IPs for the apex and
-`cacack.github.io.` for `www`.
-
-### Step 3 — Re-enable the proxy with the correct SSL mode
-
-1. Flip the DNS records back to **Proxied (orange cloud)**.
-2. CloudFlare → **SSL/TLS → Overview → Full (strict)**. Never use **Flexible**
-   (causes redirect loops and an unencrypted CloudFlare↔origin hop). Full
-   (strict) validates because Step 2 gave the origin a valid cert.
-3. **Purge the CloudFlare cache** — it caches the 404 (watch the `age:` header),
-   so without a purge the fix appears not to work.
-
-## Symptom: CloudFlare 526 (Invalid SSL certificate)
-
-CloudFlare's own error page — **"Invalid SSL certificate", error code 526** —
-with the _Host_ leg marked red. Deploys are green and the custom domain is still
-configured; what has failed is the TLS handshake between CloudFlare and the
-GitHub Pages origin.
-
-Confirm by reading the origin certificate directly, bypassing the proxy:
-
-```sh
-echo | openssl s_client -connect 185.199.108.153:443 -servername waterforge.app 2>/dev/null \
-  | openssl x509 -noout -subject -dates
-```
-
-An expired `notAfter` confirms it. Then ask GitHub why renewal stalled:
-
-```sh
-gh api repos/cacack/waterforge/pages --jq '.https_certificate'
-```
-
-### Root cause
-
-GitHub renews the Pages Let's Encrypt certificate automatically, roughly 30 days
-before expiry. When that ACME authorization fails repeatedly the certificate
-state sticks at **`bad_authz`** — _"The ACME authorization is in a bad state. We
-need to start over."_ GitHub neither recovers on its own nor warns anyone, so
-the existing certificate simply runs out. The usual trigger is one of the two
-certificate names becoming unreachable for the ACME challenge — most easily
-`www`, which is quietly re-proxied more often than the apex. Because
-[SSL/TLS mode is Full (strict)](#step-3--re-enable-the-proxy-with-the-correct-ssl-mode),
-CloudFlare then refuses the expired origin certificate and returns 526.
-
-Note the roughly one-month gap between the renewal wedging and the site actually
-going down — everything looks healthy to visitors for that whole window, which is
-what [Monitoring](#monitoring) exists to close.
-
-### Fix — restart the ACME authorization
-
-`bad_authz` does not clear by waiting or by re-running the DNS check; the custom
-domain has to be removed and re-added so GitHub begins a fresh authorization.
-That is [Step 2](#step-2--bootstrap-githubs-tls-certificate-with-the-proxy-off-one-time)
-performed again:
-
-1. CloudFlare DNS → flip the apex `A`/`AAAA` and the `www` `CNAME` to **DNS only
-   (grey cloud)** so the ACME challenge reaches Pages directly.
-2. Repo **Settings → Pages** → uncheck **Enforce HTTPS**, clear the custom
-   domain, **Save**.
-3. Wait ~30s, re-enter `waterforge.app`, **Save**, then poll until the
-   certificate issues (usually minutes):
-
-   ```sh
-   gh api repos/cacack/waterforge/pages --jq '.https_certificate.state'
-   ```
-
-   Re-check **Enforce HTTPS** once it reads `approved`.
-
-4. Flip DNS back to **Proxied (orange cloud)** and confirm SSL/TLS is **Full
-   (strict)**.
-5. Purge the CloudFlare cache, then [verify](#verify-the-fix).
-
-Do not run `terraform apply` against `git-repositories` while the custom domain
-is cleared — that module asserts `cname = "waterforge.app"` and would fight the
-recovery. Once the domain is re-added the value matches again and no drift
-remains.
-
-#### When the remove/re-add does not clear it immediately
-
-It frequently does not work on the first attempt. Verified across several
-attempts on 2026-09-07, with DNS confirmed correct on both names (`A`, `AAAA`
-and the `www` `CNAME` all resolving to Pages, and no `CAA` record):
-
-- Clearing the domain via the API, holding it cleared for 11 minutes until the
-  certificate record read `none`, and re-adding it returned `bad_authz` within
-  one second — unchanged 45 minutes later.
-- Deleting the Pages site outright did not help either. A freshly created site
-  reports `https_certificate.state: null`, but attaching the domain restored
-  `bad_authz` one second later. **The certificate record is keyed to the domain,
-  not to the repository's Pages site.** Do not delete the site: it destroys the
-  published deployment and gains nothing.
-- A later remove/re-add through **Settings → Pages**, after a few minutes' wait,
-  cleared the stuck DNS check and the certificate issued normally.
-
-The operative variable looks like _time between attempts_, not the mechanism.
-Let's Encrypt allows 5 failed validations per hostname per hour; once that
-allowance is spent every further attempt fails instantly no matter how correct
-the configuration is, which is indistinguishable from a permanently wedged
-authorization. Rapid cycling is therefore self-defeating — it is what keeps the
-allowance exhausted.
-
-**So space the attempts out.** If a remove/re-add has not issued a certificate
-within ~15 minutes, leave the domain configured with DNS correct, wait at least
-an hour, and try once more through the Settings UI. Escalate to GitHub Support
-only after several well-spaced attempts have failed.
-
-One incidental gotcha if you ever do recreate the site: for `build_type:
-workflow` the artifact's `public/CNAME` does **not** restore the custom domain on
-republish — that is branch-build behaviour only. Set the domain explicitly.
-
-#### Stopgap: serve through CloudFlare while the origin cert is broken
-
-**`waterforge.app` cannot fall back to HTTP.** The `.app` TLD is HSTS-preloaded
-at the registry level, which `waterforge.app` inherits:
+**An HTTPS failure is a hard outage.** The `.app` TLD is HSTS-preloaded at the
+registry level, which `waterforge.app` inherits:
 
 ```sh
 curl -s "https://hstspreload.org/api/v2/status?domain=waterforge.app"
@@ -193,53 +18,137 @@ curl -s "https://hstspreload.org/api/v2/status?domain=waterforge.app"
 ```
 
 Browsers therefore force HTTPS and offer **no click-through** past an expired
-certificate. Grey-clouded with a dead origin cert, the site is hard-down for
-real users even while `curl http://waterforge.app/` happily returns 200 — do not
-read that 200 as "partly working."
+certificate. With a dead certificate the site is down for real users even while
+`curl http://waterforge.app/` returns 200. Do not read that 200 as "partly
+working."
 
-The only fast way back up without a valid origin certificate is to let
-CloudFlare terminate TLS with its own (valid) edge certificate:
+## DNS layout
 
-1. Flip apex and `www` back to **Proxied (orange cloud)**.
-2. CloudFlare → **SSL/TLS → Overview → Full** — deliberately _not_ Full
-   (strict), which is what rejects the expired origin cert with a 526. Still
-   never **Flexible**.
-3. Purge the CloudFlare cache.
+| Type  | Name                             | Value                                                 | Proxy    |
+| ----- | -------------------------------- | ----------------------------------------------------- | -------- |
+| A     | `@`                              | `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` | DNS only |
+| AAAA  | `@`                              | `2606:50c0:8000::153` … `8003::153`                   | DNS only |
+| CNAME | `www`                            | `cacack.github.io`                                    | DNS only |
+| TXT   | `_github-pages-challenge-cacack` | `<token from account verification>`                   | n/a      |
 
-This is a temporary deviation from [Step 3](#step-3--re-enable-the-proxy-with-the-correct-ssl-mode).
-It restores the site for visitors but stops validating the origin, so
-CloudFlare↔origin is encrypted but unauthenticated. **Return to Full (strict)
-as soon as the certificate is issued.** Because the SSL/TLS mode is per-zone and
-`waterforge.app` is its own zone, this does not weaken `theclonchs.com`.
+GitHub orders a **single** certificate covering `waterforge.app` and
+`www.waterforge.app`, and an ACME order succeeds or fails as a unit, so both
+names matter. Check them against the authoritative nameserver. A proxied `www`
+answers as an `A` record pointing at Cloudflare, while a DNS-only one shows the
+`CNAME`:
 
-Note that Full masks the expired origin certificate from anything probing the
-public URL — the end-to-end `200` check goes green while the origin is still
-broken. The [monitoring](#monitoring) certificate checks read the Pages API and
-the origin certificate directly rather than through the proxy, so they keep
-telling the truth in this state; a naive uptime check would not.
+```sh
+ns=$(dig +short NS waterforge.app | head -1)
+dig +short @"$ns" waterforge.app A
+dig +short @"$ns" waterforge.app AAAA
+dig +short @"$ns" www.waterforge.app
+```
+
+Expect the four `185.199.108-111.153` Pages IPs for the apex, the
+`2606:50c0:800[0-3]::153` addresses for `AAAA`, and `cacack.github.io.` for
+`www`. The daily [site-health check](#monitoring) runs the same comparison.
+
+## Domain verification at the account level
+
+`waterforge.app` is verified on the GitHub account, which stops another
+account's Pages site from claiming it, including while the repo's custom domain
+is cleared during the [recovery below](#fix--restart-the-acme-authorization).
+To set it up again:
+
+1. github.com → account **Settings → Pages → Verified domains → Add a domain** →
+   `waterforge.app`.
+2. GitHub returns a TXT record, e.g.
+   `_github-pages-challenge-cacack` → `<token>`.
+3. Add it in Cloudflare DNS, then click **Verify**.
+
+## Symptom: certificate stuck in `bad_authz`
+
+GitHub renews the Pages certificate automatically, roughly 30 days before
+expiry. When the ACME authorization fails repeatedly, the certificate state
+sticks at **`bad_authz`**: _"The ACME authorization is in a bad state. We need
+to start over."_ GitHub does not recover from it on its own and warns no one,
+so the existing certificate runs out about a month later. Visitors see nothing
+wrong in between, which is the gap [Monitoring](#monitoring) closes.
+
+Check the state, and the certificate actually being served:
+
+```sh
+gh api repos/cacack/waterforge/pages --jq '.https_certificate'
+echo | openssl s_client -connect 185.199.108.153:443 -servername waterforge.app 2>/dev/null \
+  | openssl x509 -noout -subject -dates
+```
+
+The known cause is a proxied record. Check the [DNS layout](#dns-layout)
+first; if any apex or `www` record is proxied, set it to DNS only before
+anything else.
+
+### Fix — restart the ACME authorization
+
+`bad_authz` does not clear by waiting or by re-running the DNS check. The custom
+domain has to be removed and re-added so GitHub starts a fresh authorization.
+**Do it through the Settings UI.** On both 2026-09-07 and 2026-11-08, re-adding
+the domain through the API returned `bad_authz` instantly, and a remove/re-add
+in the UI issued the certificate.
+
+1. Confirm both names match the [DNS layout](#dns-layout).
+2. Repo **Settings → Pages** → clear the custom domain, **Save**. Leave
+   **Enforce HTTPS** alone: GitHub refuses to change it while the certificate is
+   unissued (the API answers `404` "certificate has not finished being issued").
+3. Wait a few minutes, re-enter `waterforge.app`, **Save**, then poll until the
+   certificate issues (usually minutes):
+
+   ```sh
+   gh api repos/cacack/waterforge/pages --jq '.https_certificate.state'
+   ```
+
+4. Once it reads `approved`, confirm **Enforce HTTPS** is checked and re-check
+   it if not.
+5. Clearing the domain can deactivate the live deployment. If HTTPS serves
+   "Site not found", [republish](#symptom-site-not-found-with-settings-that-look-correct).
+   This happened on 2026-11-08.
+6. [Verify](#verify-the-fix).
+
+Do not run `terraform apply` against `git-repositories` while the custom domain
+is cleared. That module asserts `cname = "waterforge.app"` and would fight the
+recovery. Once the domain is re-added the value matches again and no drift
+remains.
+
+#### When the remove/re-add does not clear it
+
+**Space the attempts out.** Let's Encrypt allows 5 failed validations per
+hostname per hour. Once that allowance is spent, every further attempt fails
+instantly however correct the configuration is, which looks exactly like a
+permanently wedged authorization. Rapid cycling keeps the allowance exhausted.
+If a remove/re-add has not issued a certificate within ~15 minutes, leave the
+domain configured with DNS correct, wait at least an hour, and try once more
+through the Settings UI. Escalate to GitHub Support only after several
+well-spaced attempts have failed.
+
+Do not delete the Pages site to reset it. On 2026-09-07 a freshly created site
+reported `https_certificate.state: null`, but attaching the domain restored
+`bad_authz` one second later. **The certificate record is keyed to the domain,
+not to the repository's Pages site.** Deleting the site destroys the published
+deployment and gains nothing. If you ever do recreate it: for `build_type:
+workflow` the artifact's `public/CNAME` does **not** restore the custom domain
+on republish (that is branch-build behaviour only), so set the domain
+explicitly.
 
 ## Symptom: "Site not found" with settings that look correct
 
-A distinct failure from the auto-unset above. The site returns 404 and
-`https://waterforge.app/` shows GitHub's **"Site not found · GitHub Pages"**
-page, yet `gh api repos/cacack/waterforge/pages` reports everything correct
-(`cname: waterforge.app`, `protected_domain_state: verified`, an approved
-certificate, `https_enforced: true`). Hitting a Pages IP directly with the right
-host header still 404s:
-
-```sh
-curl -sI --resolve waterforge.app:443:185.199.108.153 https://waterforge.app
-```
+The site returns 404 and `https://waterforge.app/` shows GitHub's **"Site not
+found · GitHub Pages"** page, yet `gh api repos/cacack/waterforge/pages` reports
+everything correct (`cname: waterforge.app`, `protected_domain_state: verified`,
+an approved certificate, `https_enforced: true`).
 
 ### Root cause
 
 GitHub's Pages routing layer has **no active published deployment** mapped to
 the hostname, even though the repo settings still record the domain. This
 happens when the live deployment gets deactivated while the domain is
-re-verified or the certificate is re-provisioned (e.g. during the recovery steps
-above). The most recent `deploy.yml` run may still read `success` — deployment
-_statuses_ are immutable history; what matters is whether the deployment is the
-currently _active_ one.
+re-verified or the certificate is re-provisioned, as in the recovery above. The
+most recent `deploy.yml` run may still read `success`. Deployment _statuses_ are
+immutable history; what matters is whether the deployment is the currently
+_active_ one.
 
 ### Fix — republish
 
@@ -250,31 +159,21 @@ gh workflow run deploy.yml --ref main
 gh run watch "$(gh run list --workflow=deploy.yml --limit 1 --json databaseId --jq '.[0].databaseId')"
 ```
 
-Or repo **Actions → Deploy to GitHub Pages → Run workflow → main**. Then verify
-with the `curl` in [Verify the fix](#verify-the-fix). This redeploys the
-current `main` build and is safe to run at any time.
-
-## Correct CloudFlare DNS layout
-
-| Type  | Name                             | Value                                                 | Proxy  |
-| ----- | -------------------------------- | ----------------------------------------------------- | ------ |
-| A     | `@`                              | `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` | orange |
-| AAAA  | `@`                              | `2606:50c0:8000::153` … `8003::153` (optional)        | orange |
-| CNAME | `www`                            | `cacack.github.io`                                    | orange |
-| TXT   | `_github-pages-challenge-cacack` | `<token from Step 1>`                                 | n/a    |
+Or repo **Actions → Deploy to GitHub Pages → Run workflow → main**. Then
+[verify](#verify-the-fix). This redeploys the current `main` build and is safe
+to run at any time.
 
 ## `www` → apex redirect
 
-`www.waterforge.app` 301-redirects to the apex `https://waterforge.app/`. This
-redirect is issued by **GitHub Pages itself**, not CloudFlare: because the repo's
-custom domain is the apex, GitHub treats the apex as canonical and automatically
-redirects the `www` host to it. The `www` `CNAME → cacack.github.io` exists so
-the request reaches GitHub Pages and the redirect can fire (proxied through
-CloudFlare).
+`www.waterforge.app` 301-redirects to the apex `https://waterforge.app/`. GitHub
+Pages issues this redirect itself: because the repo's custom domain is the apex,
+GitHub treats the apex as canonical and redirects the `www` host to it. The
+`www` `CNAME → cacack.github.io` exists so the request reaches GitHub Pages and
+the redirect can fire.
 
-No CloudFlare redirect rule or page rule is needed, and the `CNAME` target should
-stay `cacack.github.io` — a CNAME controls name resolution, not redirects, so
-repointing it would not change the redirect behaviour. Verify:
+No Cloudflare redirect rule or page rule is needed, and the `CNAME` target
+should stay `cacack.github.io`. A CNAME controls name resolution, not
+redirects, so repointing it would not change the redirect behaviour. Verify:
 
 ```sh
 curl -sI https://www.waterforge.app | grep -i -E 'http/|location'
@@ -288,37 +187,47 @@ Expect `HTTP/2 301` and `location: https://waterforge.app/`.
 curl -sI https://waterforge.app | grep -i -E 'http/|server|x-github'
 ```
 
-A `200` means GitHub recognizes the host again. A persistent GitHub 404 means
-the repo's custom-domain field was cleared again — Step 1 (account verification)
-is what prevents that recurring.
+Expect `200` with `server: GitHub.com`. A GitHub 404 means the custom domain
+was cleared or the deployment deactivated; see
+["Site not found"](#symptom-site-not-found-with-settings-that-look-correct).
 
 ## Monitoring
 
 [`site-health.yml`](../../.github/workflows/site-health.yml) runs daily and opens
 an issue (deduplicated by title, auto-closed on recovery) when any check fails:
 
-| Check                                   | Catches                                                               |
-| --------------------------------------- | --------------------------------------------------------------------- |
-| Pages certificate state is `approved`   | A wedged renewal (`bad_authz`) ~30 days before it becomes an outage   |
-| Origin certificate has >21 days left    | Renewal that silently stopped running                                 |
-| `https://waterforge.app/` returns `200` | Everything else — the 404 auto-unset, a 526, a deactivated deployment |
+| Check                                   | Catches                                                                      |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| Pages certificate state is `approved`   | A wedged renewal (`bad_authz`) ~30 days before it becomes an outage          |
+| Origin certificate has >21 days left    | Renewal that silently stopped running                                        |
+| DNS points at GitHub Pages              | A re-proxied or repointed apex or `www` record, before renewal wedges        |
+| `https://waterforge.app/` returns `200` | Everything else, such as a cleared custom domain or a deactivated deployment |
 
-The first check gives the earliest warning, but reading the Pages API depends on
-`GITHUB_TOKEN` having access; if that read fails the workflow logs a warning
-rather than filing an issue. The origin-certificate check is the backstop — it
-needs no API access and still fires roughly 21 days before an outage, because
-GitHub renews at ~30 days and a wedged renewal shows up as a shrinking window.
+Of the certificate checks, the state check gives the earliest warning, but
+reading the Pages API depends on `GITHUB_TOKEN` having access; if that read fails the workflow
+logs a warning rather than filing an issue. The origin-certificate check is the
+backstop. It needs no API access and still fires roughly 21 days before an
+outage, because GitHub renews at ~30 days and a wedged renewal shows up as a
+shrinking window.
+
+## History
+
+Until 2026-11-08 the apex and `www` were proxied through Cloudflare (CDN and
+WAF), with SSL/TLS set to Full (strict). Pages could not renew its certificate
+through the proxy, so every ~60-day renewal wedged in `bad_authz`. That caused
+the 2026-09-05 outage, and the 2026-11 renewal hit the same wedge
+([#336](https://github.com/cacack/waterforge/issues/336)). Recovery each time
+meant taking the proxy off. On 2026-11-08 it came off for good;
+[ADR 0025](../decisions/0025-cloudflare-dns-only.md) records why, and which
+alternatives were rejected.
+
+The proxy was also what injected the Web Analytics beacon
+([ADR 0018](../decisions/0018-client-side-analytics-scope.md)) and supplied the
+edge counts in [traffic-baseline.md](./traffic-baseline.md). The beacon is now
+added by the official deploy build. The edge counts end on 2026-11-08.
 
 ## Notes
 
-- The `public/CNAME` file (`waterforge.app`) re-asserts the domain on each
-  deploy and should stay in the repo; it does **not** prevent the auto-unset on
-  its own.
-- This is entirely a GitHub-settings + CloudFlare-dashboard fix; no code change
-  is required.
-- The same proxy is what makes the site measurable. See
-  [traffic-baseline.md](./traffic-baseline.md) for what it actually receives and
-  [ADR 0018](../decisions/0018-client-side-analytics-scope.md) for the one
-  client-side script CloudFlare still injects here (Web Analytics). Bot Fight
-  Mode injected a second one until
-  [ADR 0019](../decisions/0019-bot-fight-mode-off.md) turned it off.
+- The `public/CNAME` file (`waterforge.app`) stays in the repo.
+- This is entirely a GitHub-settings and Cloudflare-dashboard runbook; no code
+  change is required for any recovery here.

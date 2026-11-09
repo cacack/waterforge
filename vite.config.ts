@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath, URL } from 'node:url'
 import { readFileSync } from 'node:fs'
 import { renderUsageGuide } from './scripts/usage-guide.mjs'
+import { analyticsBeaconPlugin } from './scripts/analytics-beacon.mjs'
 
 // Source the app version from package.json at build time so the footer stays
 // in lockstep with release-please's version bump (no hardcoded literal).
@@ -51,6 +52,9 @@ export default defineConfig({
     tailwindcss(),
     svelte(),
     usageGuidePlugin(),
+    // Cloudflare Web Analytics beacon, official deploy only (#338, ADR 0025):
+    // only deploy.yml sets CF_BEACON_TOKEN; without it the HTML is untouched.
+    analyticsBeaconPlugin(process.env.CF_BEACON_TOKEN),
     // Installable + offline (#26). The app is a static client-side SPA, so the
     // service worker just precaches the built shell — including the hashed JS/
     // CSS/font bundles, which Workbox enumerates automatically. Icons are the
