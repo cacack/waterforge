@@ -9,6 +9,15 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.13.1](https://github.com/cacack/waterforge/compare/v1.13.0...v1.13.1) (2026-11-12)
+
+
+### Bug Fixes
+
+* **deps:** bump @tailwindcss/vite from 4.3.3 to 4.3.5 ([f822a7a](https://github.com/cacack/waterforge/commit/f822a7a592749a3b0d6f8271ed6026429b4c61e2))
+* **deps:** bump bits-ui from 2.19.5 to 2.20.6 ([97cdf10](https://github.com/cacack/waterforge/commit/97cdf103a15b4680a784b40dd5b59f5478d0b367))
+* **deps:** bump vite from 8.3.5 to 8.3.6 ([f7f7b8e](https://github.com/cacack/waterforge/commit/f7f7b8e30145ee65f3481a61429073735772b393))
+
 ## [1.13.0](https://github.com/cacack/waterforge/compare/v1.12.1...v1.13.0) (2026-11-09)
 
 
