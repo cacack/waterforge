@@ -9,6 +9,13 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.13.2](https://github.com/cacack/waterforge/compare/v1.13.1...v1.13.2) (2026-11-21)
+
+
+### Bug Fixes
+
+* **deps:** bump @lucide/svelte from 1.66.0 to 1.73.0 ([7512005](https://github.com/cacack/waterforge/commit/7512005d6b8aff0b31118ef621ecda3ba1d47cc4))
+
 ## [1.13.1](https://github.com/cacack/waterforge/compare/v1.13.0...v1.13.1) (2026-11-12)
 
 
