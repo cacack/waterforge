@@ -9,6 +9,15 @@ From the next release onward, this changelog is maintained automatically by
 [release-please](https://github.com/googleapis/release-please) from
 conventional-commit messages on `main`.
 
+## [1.13.2](https://github.com/cacack/waterforge/compare/v1.13.1...v1.13.2) (2026-11-28)
+
+
+### Bug Fixes
+
+* **deps:** bump @lucide/svelte from 1.66.0 to 1.73.0 ([7512005](https://github.com/cacack/waterforge/commit/7512005d6b8aff0b31118ef621ecda3ba1d47cc4))
+* **deps:** bump bits-ui from 2.20.6 to 2.22.0 ([b9165c7](https://github.com/cacack/waterforge/commit/b9165c7152805ced0b964d30a7ca60861aae1c24))
+* **deps:** bump svelte from 5.57.2 to 5.59.1 ([e35b5db](https://github.com/cacack/waterforge/commit/e35b5db2d8b3af8effd9b7768b516c6675b3cf02))
+
 ## [1.13.1](https://github.com/cacack/waterforge/compare/v1.13.0...v1.13.1) (2026-11-12)
 
 
